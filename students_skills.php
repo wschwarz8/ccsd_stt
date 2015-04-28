@@ -1,5 +1,5 @@
 <?php
-$g_link = mysql_connect('localhost', 'techmod', 'QbKrlIpdB');
+$g_link = mysql_connect('localhost', 'techmod', 'QbKrlIpdB'); //TODO use a persistant database connection
 
 $query = "SELECT `skills`.*, `students`.*, `studentsxskills`.`stid`
 FROM `studentsxskills`, `skills`, `students`
@@ -12,10 +12,13 @@ if (!$result) {
     die('Invalid query: ' . mysql_error());
 }
 
-while ($row = mysql_fetch_assoc($result)) {
+// prints one row at a time, the results from the database.
+while ($row = mysql_fetch_assoc($result)) { // TODO format to look better
     echo $row["name"];
     echo $row["class"];
     echo $row["skillName"];
     
 }
+
+mysql_close($g_link);
 ?>
