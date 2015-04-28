@@ -1,5 +1,5 @@
 <?php
-if($POST)
+if($_POST['skillName'])
 {
 		
 }
