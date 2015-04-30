@@ -1,5 +1,5 @@
 <?php
-if($_POST['skillName'])
+if($POST)
 {
 	$g_link = mysql_connect('localhost', 'techmod', 'QbKrlIpdB');
 	
@@ -9,16 +9,7 @@ if($_POST['skillName'])
 	
 	mysql_close($g_link);
 }
-else {
-?>
-Enter a new skill<BR><BR>
-<table>
-<form name='theForm' method='POST'>
-<tr><td>Skill name</td><td><input type='text' name='skillName'></td></tr>
-<tr><td colspan=2><input type='submit'></td></tr>
-</tr>
-</form>
-</table>
-<?php
+else
+{
+		
 }
-?>
