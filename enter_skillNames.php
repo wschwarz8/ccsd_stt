@@ -5,7 +5,7 @@ if($POST)
 	
 	mysql_select_db('stt', $g_link);
 	
-	INSERT INTO `stt`.`skills` (`id`, `skillName`, `skillcatid`) VALUES (NULL, 'Computer database design', '1');	
+	$query = "INSERT INTO `stt`.`skills` (`id`, `skillName`, `skillcatid`) VALUES (NULL, 'Computer database design', '1')";
 	
 	mysql_close($g_link);
 }
