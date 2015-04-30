@@ -1,5 +1,5 @@
 <?php
-if($POST)
+if($_POST)
 {
 	$g_link = mysql_connect('localhost', 'techmod', 'QbKrlIpdB');
 	
@@ -11,5 +11,14 @@ if($POST)
 }
 else
 {
-		
+?>
+Enter a skill here.<BR>
+<form method=post name=theform>
+<table>
+<tr><td>Skill Name:</td><td><input type=text name=skillName></td></tr>
+<tr><td colspan=2><input type="submit"></td></tr>
+</table>
+</form>
+<?php
 }
+?>
