@@ -12,6 +12,7 @@ if($_POST)
 else
 {
 ?>
+<DOCTYPE
 Enter a skill here.<BR>
 <form method=post name=theform>
 <table>
