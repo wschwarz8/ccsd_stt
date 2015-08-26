@@ -1,7 +1,7 @@
 <?php
 if($_POST)
 {
-	$g_link = mysql_connect('localhost', 'techmod', 'QbKrlIpdB');
+	$g_link = mysql_connect('localhost', 'root', '');
 	
 	mysql_select_db('stt', $g_link);
 	

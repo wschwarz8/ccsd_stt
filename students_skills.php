@@ -1,5 +1,5 @@
 <?php
-$g_link = mysql_connect('localhost', 'techmod', 'QbKrlIpdB'); //TODO use a persistant database connection
+$g_link = mysql_connect('localhost', 'root', ''); //TODO use a persistant database connection
 
 $query = "SELECT `skills`.*, `students`.*, `studentsxskills`.`stid`
 FROM `studentsxskills`, `skills`, `students`
