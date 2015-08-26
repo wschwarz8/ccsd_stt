@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 26, 2015 at 12:57 PM
+-- Generation Time: Aug 26, 2015 at 01:26 PM
 -- Server version: 5.5.44-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.11
 
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `stt`
 --
+CREATE DATABASE IF NOT EXISTS `stt` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `stt`;
 
 -- --------------------------------------------------------
 
