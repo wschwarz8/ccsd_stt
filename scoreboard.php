@@ -23,8 +23,13 @@ while ($row = mysql_fetch_assoc($result)) { // TODO format to look better
 
 mysql_close($g_link);
 
+arsort($scoreboard);
+
+echo "<table><tr><td>";
+echo "<tr><td>Student</td><td>Score</td>";
 foreach ($scoreboard as $key => $value) {
-    echo "Student: $key &nbsp&nbsp&nbsp&nbsp&nbsp Points: $value<BR>";
+    echo "<tr><td>$key</td><td>$value</td></tr>";
 }
+echo "</table>";
 
 ?>
