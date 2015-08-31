@@ -5,7 +5,7 @@ $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a per
 
 $query = "SELECT a.name, a.description, b.category, a.points, c.name
 FROM jobs a, skillcategories b, students c
-WHERE a.skillcatid=b.id AND a.status=1 AND (a.claimedby=c.id OR a.claimedby='');
+WHERE a.skillcatid=b.id AND a.status=1 AND (a.claimedby=c.id OR (a.claimedby=0 AND c.id=9))";
 
 mysql_select_db('stt', $g_link);
 	
