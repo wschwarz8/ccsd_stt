@@ -1,5 +1,7 @@
 <?php
-$g_link = mysql_connect('localhost', 'root', ''); //TODO use a persistant database connection
+require_once 'config.php';
+
+$g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 
 $query = "SELECT `skills`.*, `students`.*, `studentsxskills`.`stid`
 FROM `studentsxskills`, `skills`, `students`

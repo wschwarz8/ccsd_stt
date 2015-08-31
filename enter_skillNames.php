@@ -1,7 +1,9 @@
 <?php
+require_once 'config.php';
+
 if($_POST)
 {
-	$g_link = mysql_connect('localhost', 'root', '');
+	$g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 	
 	mysql_select_db('stt', $g_link);
 	
