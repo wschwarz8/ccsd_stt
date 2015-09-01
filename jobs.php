@@ -18,7 +18,7 @@ if (!$result) {
 echo "<table border=1>";
 echo "<tr><td>Job</td><td>Description</td><td>Points</td><td>Category</td><td>Claimed By</td></tr>";
 while ($row = mysql_fetch_assoc($result)) { // TODO format to look better
-    echo "<tr><td>".$row['name']."</td><td>".$row['description']."</td><td>".$row['points']."</td><td>".$row['category']."</td><td>";
+    echo "<tr><td>".$row['sname']."</td><td>".$row['description']."</td><td>".$row['points']."</td><td>".$row['category']."</td><td>";
     if($row['name'] != 'Steavie'){
          echo $row['name']."</td></tr>";
     }
