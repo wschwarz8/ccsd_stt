@@ -20,7 +20,7 @@ mysql_select_db('stt', $g_link);
 		
 <?php
 
-if($_POST)
+if($_POST && $_POST['code']=='')
 {
 	$query = "INSERT INTO `stt`.`points` (`job_id`, `student_id`, `points`, `category_id`) VALUES ('".$_POST['job_id']."', '".$_POST['student_id']."', '".$_POST['points']."', '".$_POST['category_id']."')";
     $result = mysql_query($query);
