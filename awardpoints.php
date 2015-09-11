@@ -19,10 +19,13 @@ mysql_select_db('stt', $g_link);
 	<BODY>
 		
 <?php
-
 if($_POST && $_POST['code']=='')
 {
-	$query = "INSERT INTO `stt`.`points` (`job_id`, `student_id`, `points`, `category_id`) VALUES ('".$_POST['job_id']."', '".$_POST['student_id']."', '".$_POST['points']."', '".$_POST['category_id']."')";
+	if($_POST['override'])
+		$jobid=$_POST['override'];
+	else
+		$jobid=$_POST['job_id'];
+	$query = "INSERT INTO `stt`.`points` (`job_id`, `student_id`, `points`, `category_id`) VALUES ('".$jobid."', '".$_POST['student_id']."', '".$_POST['points']."', '".$_POST['category_id']."')";
     $result = mysql_query($query);
 	if($result) {echo $_POST['points']." points added.<BR>";}
 	else {echo mysql_error($g_link);}
@@ -67,7 +70,8 @@ echo $categoryarray;
 echo "
 </script>";
 ?>
-</td></tr>
+<input type="text" name="override" id="override"></td></tr>
+<tr><td><input type=checkbox name="resolve" id="resolve" value="resolve">Resolve job?</td></tr>
 <tr><td>Points</td><td><input type="text" name="points" id="points"></td></tr>
 <tr><td>Point Category</td><td><input type="text" name="category_id" id="category_id" value="1"></td></tr>
 	<tr><td>secret code</td><td><input type="text" name="code" id="code" value=""></td></tr>
