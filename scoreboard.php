@@ -8,6 +8,9 @@ $label = 'now';
 if($_GET['type']=='lastweek'){
    $type = 'lastweek';
 }
+else if($_GET['type']=='all'){
+   $type = 'all';
+}
 else{
    $type = 'thisweek';
 }
