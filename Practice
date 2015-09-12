@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>About Myself</title>
+       
+    </head>
+
+    <body bgcolor="#696969">
+         <h1 style="color:red; font-size:64px; font-family:Harrington;">My Name Is <strong>Ethan George</strong></h1>
+         <p style="font-color: green" id="demo">About me.</p>
+
+<button type="button" onclick="myFunction()">Click Here</button>
+   <script>
+function myFunction() {
+    document.getElementById("demo").innerHTML = "Hello, STT. My name is Ethan George. Curently I am an advaning programmer planning on learning every basic language and learnng my own way to do things. I understand that I'm not well known for any of the work I have done, but that is perfectly fine by me. Some of my work is just simply for viewing pleasure and I hope I can show you what I can do in the future. For now we need to work together to make the school the best we can, which is my reason for joining this course..";
+}
+</script>
+
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>Skills I Can Contribute</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="color:green">
+                    <td>Programming</td>
+                    <td>I know basic Html, CSS, Java, and very little Python and MySQL</td>
+                </tr>
+                <tr style="color:green">
+                    <td style="color:green">Software Development</td>
+                    <td>I tend to creare my own software to accompllish my needs.</td>
+                </tr>
+                <tr style="color:green">
+                    <td>Technology Repair</td>
+                    <td>I have a nack for tearing apart and putting electronics back together if I have ever seen them before hand.</td>
+                <tr style="color:green">
+                    <td>Workaholic</td>
+                    <td>I work on anything I need done until its done, and don't give up until its completed.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="georgeethan@ccsd.k12.ia.us">
+            <img src="http://thumb7.shutterstock.com/display_pic_with_logo/253597/230705509/stock-photo-programming-code-abstract-screen-of-software-developer-computer-script-230705509.jpg" />
+        </a>
+        <p style="font-size:32px; font-family:Harrington; color:Blue;">Email me at georgeethan@ccsd.k12.ia.us, or steelersprobowl@gmail.com if you require my assistace what-so-ever. Thank you for letting me be a part of this wonderful teaam.</p>
+    
+    </body>
+
+</html>
