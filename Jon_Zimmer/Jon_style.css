@@ -1,5 +1,42 @@
-p
-{
-	color:gold;
-	font-family: syncopate
+.nav a {
+  color: #5a5a5a;
+  font-size: 20px;
+  font-weight: bold;
+  font-family: Syncopate;
+}
+
+.jumbotron {
+  background-image:url('http://designrfix.com/wp-content/uploads/2010/04/after-effects-tutorials-211.jpg');
+  height: 500px;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.jumbotron .container {
+  position: relative;
+  top:100px;
+}
+
+.jumbotron  {
+  color: #fff;
+  font-size: 48px;  
+  font-weight: bold;
+}
+
+.jumbotron p {
+  font-size: 20px;
+  color: #fff;
+}
+
+.learn-more {
+  background-color: #f7f7f7;
+}
+
+.learn-more {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.learn-more a {
+  color: #00b0ff;
 }
