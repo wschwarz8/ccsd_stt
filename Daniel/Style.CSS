@@ -1,0 +1,14 @@
+p {
+  color: #22FF04;
+  font-size: 15px;
+  font-weight: bold;
+  padding-bottom: 14px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 14px;
+  text-transform: uppercase;
+}
+.jumbotron {
+    background-image: url('https://content.halocdn.com/media/Default/games/halo-3/media/h3_010-68adc78167c54528b438982a40ff04a7.jpg');
+    height: 500px;
+}
