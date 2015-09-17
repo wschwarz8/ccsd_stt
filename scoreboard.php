@@ -59,6 +59,15 @@ arsort($scoreboard);
 </head>
 <body>
 <?php
+if($type=='thisweek') echo "thisWeek";
+else echo "<a href='scoreboard.php?type=thisweek'>thisWeek</a>";
+echo " | ";
+if($type=='lastweek') echo "lastWeek";
+else echo "<a href='scoreboard.php?type=lastweek'>lastWeek</a>";
+echo " | ";
+if($type=='all') echo "all";
+else echo "<a href='scoreboard.php?type=all'>all</a>";
+
 echo "<h3>Scores for $label</h3>";
 echo "<table><tr><td>";
 echo "<tr><td>Student</td><td>Score</td>";
