@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Mr. Walter Schwarz</title>
+    	<link href="style.css" rel="stylesheet">
+		<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript" SRC="chat.js"></SCRIPT>
+		<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript" SRC="chatdata.js"></SCRIPT>
+		<SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript">
+<!--
+
+var eliza = new ElizaBot();
+var elizaLines = new Array();
+
+var displayCols = 60;
+var displayRows = 20;
+
+function elizaReset() {
+	eliza.reset();
+	elizaLines.length = 0;
+	elizaStep();
+}
+
+function elizaStep() {
+	var f = document.forms.e_form;
+	var userinput = f.e_input.value;
+	if (eliza.quit) {
+		f.e_input.value = '';
+		if (confirm("This session is over.\nStart over?")) elizaReset();
+		f.e_input.focus();
+		return;
+	}
+	else if (userinput != '') {
+		var usr = 'YOU:   ' + userinput;
+		var rpl ='Walter: ' + eliza.transform(userinput);
+		elizaLines.push(usr);
+		elizaLines.push(rpl);
+		// display nicely
+		// (fit to textarea with last line free - reserved for extra line caused by word wrap)
+		var temp  = new Array();
+		var l = 0;
+		for (var i=elizaLines.length-1; i>=0; i--) {
+			l += 1 + Math.floor(elizaLines[i].length/displayCols);
+			if (l >= displayRows) break
+			else temp.push(elizaLines[i]);
+		}
+		elizaLines = temp.reverse();
+		f.e_display.value = elizaLines.join('\n');
+	}
+	else if (elizaLines.length == 0) {
+		// no input and no saved lines -> output initial
+		var initial = 'ELIZA: ' + eliza.getInitial();
+		elizaLines.push(initial);
+		f.e_display.value = initial + '\n';
+	}
+	f.e_input.value = '';
+	f.e_input.focus();
+}
+
+//-->
+		</SCRIPT>
+    </head>
+    <body background="tileFIRST.jpg">
+		<table border=0>
+			<tr><td width=10%>&nbsp;</td><td width=80%>&nbsp;</td><td width=10%>&nbsp;</td></tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+					<div class="triangle-rounded left">
+<TABLE BORDER="0" CELLSPACING="10" CELLPADDING="0">
+<TR><TD COLSPAN=2><FORM NAME="e_form" onsubmit="elizaStep();return false">
+<TEXTAREA style="display: inline;" NAME="e_display" COLS="60" ROWS="20"></TEXTAREA></TD></TR>
+<TR VALIGN="middle">
+	<TD><INPUT style="display: inline;" TYPE="text" NAME="e_input" SIZE="50"></TD>
+	<TD ALIGN="right"><INPUT style="display: inline;" TYPE="submit" VALUE="&nbsp;Talk&nbsp;"> <INPUT TYPE="reset" VALUE="Reset" onClick="window.setTimeout('elizaReset()',100)"></TD>
+</TR>
+</FORM>
+</TABLE>
+					</div>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+				<td>&nbsp;</td>
+				<td><img align=left src="https://lh3.googleusercontent.com/-QrkLIvV79Qs/Um_9T6h77HI/AAAAAAAAAaY/hVUQWEG_rkM/w140-h140-p/wschwaz03_square.jpg"></td>
+				<td>&nbsp;</td>
+			<tr>
+				<td>&nbsp;</td>
+				<td><p>I am the Technology Director for Chereokee Community School District.  I started this job in 2012 and before that I managed a group of 6 programmers at the 
+					University of Nebraska.  Prior to that I worked as a systems administrator for the University of Nebraska, University of Kansas, and University of Minnesota.  
+					I also was employed as a web developer working with php, jsp, and C#.  I also spent 6 years in the Army National Guard where I worked on military electronics and was 
+					stationed at Fort Leonard Wood, Redstone Arsenal, Fort McCoy, Camp Ripley, and Fort Riley.
+				</p></td>
+				<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+					<p>My passions include teaching technology to others, my young daughter, outdoors, and FIRST robotics.</p>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+	</body>
+</html>
