@@ -15,7 +15,7 @@ else{
    $type = 'thisweek';
 }
 
-$query = "SELECT a.name, b.points, c.category
+$query = "SELECT a.id, a.name, b.points, c.category
 FROM students a, points b, skillcategories c
 WHERE a.id=b.student_id AND b.category_id=c.id";
 
@@ -41,11 +41,13 @@ if (!$result) {
 
 // prints one row at a time, the results from the database.
 $scoreboard=array();
+$names = array();
 while ($row = mysql_fetch_assoc($result)) { // TODO format to look better
-	if(isset($scoreboard[$row['name']]))
-		$scoreboard[$row['name']] = $scoreboard[$row['name']] + $row['points'];
+	$names[$row['id']]=$row['name'];
+	if(isset($scoreboard[$row['id']]))
+		$scoreboard[$row['id']] = $scoreboard[$row['id']] + $row['points'];
 	else
-		$scoreboard[$row['name']] = $row['points'];
+		$scoreboard[$row['id']] = $row['points'];
 }
 
 mysql_close($g_link);
@@ -72,7 +74,7 @@ echo "<h3>Scores for $label</h3>";
 echo "<table><tr><td>";
 echo "<tr><td>Student</td><td>Score</td>";
 foreach ($scoreboard as $key => $value) {
-    echo "<tr><td>$key</td><td>$value</td></tr>";
+    echo "<tr><td><a href='studentJobs.php?id=$key'>".$names[$key]."</td><td>$value</td></tr>";
 }
 echo "</table>";
 
