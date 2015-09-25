@@ -40,3 +40,18 @@ echo "</table>";
 mysql_close($g_link);
 
 ?>
+
+<html>
+	<head>
+		<body>
+			<select name="Jobs" id="Jobs">
+					<option value="hardware">"Computer Hardware"</option>
+					<option value="software">Computer Software</option>
+					<option value="programming">Programming</option>
+					<option value="unclassified">Unclassified</option>
+					<option value="documentation">Training/Documentation</option>
+			</select>
+		</body>
+	</head>
+</html>
+
