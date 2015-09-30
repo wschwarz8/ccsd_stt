@@ -1,11 +1,11 @@
 alert("Hello! This page belongs to Jonathan Zimmer!");
-prompt("Do you want to play a game? YES or NO");
-	if(Yes)
-			var harpies = prompt("You're walking through the forest, minding your own business, and you run into harpies! Do you FIGHT them, PAY them, or RUN?").toUpperCase();
+var answer = prompt("Do you want to play a game? YES or NO");
+	if(answer=='YES')
+var harpies = prompt("You're walking through the forest, minding your own business, and you run into harpies! Do you FIGHT them, PAY them, or RUN?").toUpperCase();
 
 switch(harpies) {
   case 'FIGHT':
-    var strong = prompt("You are bole! Are you strong (YES or NO)?").toUpperCase();
+    var strong = prompt("You are bold! Are you strong (YES or NO)?").toUpperCase();
     var smart = prompt("Are you smart?").toUpperCase();
 	var weapon = prompt("Do you have a sword of celestial bronze?").toUpperCase();
     if(strong === 'YES' || smart === 'YES' || weapon=== 'YES') {
@@ -35,5 +35,6 @@ switch(harpies) {
   default:
     console.log("I didn't understand your choice. Hit Run and try again, this time picking FIGHT, PAY, or RUN!");
 }
-if("NO")
-	console.log("Okay, have a nice day!");
+	if(answer=='NO')
+				console.log("Okay, have a nice day!");
+		confirm("Are you sure you want to leave my page?");
