@@ -1,5 +1,5 @@
+
 function myGame() {
-	alert("Hello! This page belongs to Jonathan Zimmer!");
 	var answer = prompt("Do you want to play a game? YES or NO");
 		if(answer=='YES')
 	var harpies = prompt("You're walking through the forest, minding your own business, and you run into harpies! Do you FIGHT them, PAY them, or RUN?").toUpperCase();
