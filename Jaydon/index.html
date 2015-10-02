@@ -1,4 +1,28 @@
 <!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Tickle Meh.</p>
+
+<button onclick="myFunction()">Press Meh</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+    var person = prompt("Please enter your name", "Bruh");
+    
+    if (person != null) {
+        document.getElementById("demo").innerHTML =
+        "Hey " + person + "! Whats Guchiii?";
+    }
+}
+</script>
+
+</body>
+</html>
+
 <html>
 	<head>
 		<link href="style.css" rel="stylesheet">
@@ -10,3 +34,95 @@
 hit clips daily, and I also do YouTube with Mason Hill or "Gee".  I like to watch movies on the weekends.  My favorite movie series is
 The Fast and the Furious and my favorite one out of the 7 movies is Furious 7.  I play basketball as a sport it is by far my favorite
 sport to play.</p>
+<SCRIPT LANGUAGE="JavaScript">
+	alert("Welcome To My Bio or Game")
+<!-- ;
+// numberguess is by Lancer - written 4 Jan 1999
+// lancer@kp.planet.gen.nz
+
+var guessme=Math.round(Math.random()*(99)+1);
+var speech='Guess my Random Number (from 1 to 100)';
+
+function process(mystery) {
+var guess=document.forms.guessquiz.guess.value;
+var speech='"'+guess+ '" does not make any sense... try again.';
+document.forms.guessquiz.guess.value='';
+
+if (guess==mystery)
+{
+document.forms.guessquiz.prompt.value='Wow You Think You Are Cool! '+mystery+' is correct!';
+alert ('Well done smarty- the mystery number is '+mystery+'! \n\nPress this button to reload the page for another game.');
+speech='';
+document.location=document.location;
+}
+
+if (mystery<guess)
+{
+speech='Less Than Boys '+ guess;
+}
+
+if (mystery>guess)
+{
+speech='Greater that'+ guess;
+}
+
+if (guess=='')
+{
+speech='You didn\'t guess anything!'
+}
+
+document.forms.guessquiz.prompt.value=speech; document.forms.guessquiz.guess.focus();
+
+}
+
+// end hide -->
+</SCRIPT>
+
+<FORM onSubmit="" NAME="guessquiz">
+<CENTER>
+<TABLE ALIGN="CENTER" BGCOLOR="#888888" BORDER="3" CELLPADDING="5">
+<TR>
+<TD BGCOLOR="#004080">
+<FONT COLOR="#ffffff" FACE="Arial"><B>GUESS MY NUMBER (1 - 100)</B></FONT>
+</TD>
+</TR>
+<TR>
+<TD>
+<CENTER>
+<INPUT TYPE="text" NAME="prompt" SIZE="31" MAXLENGTH="40" VALUE="Guess my number (from 1 to 100)"><BR>
+<INPUT TYPE="text" NAME="guess" SIZE="3" MAXLENGTH="3" VALUE="">
+<INPUT TYPE="button" VALUE="Guess" onClick='process(guessme)'>
+</CENTER>
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+</FORM>
+	Thank you for Playing My Number!  See you soon!- Jaydon L.
+	<!DOCTYPE html>
+<html>																		
+<body>
+
+<p>Click to help and play.</p>
+
+<button onclick="myFunction()">Try it</button>
+
+<p id="demo"></p>
+
+<script>
+function myFunction() {
+    var x;
+    if (confirm("Press One Of The Buttons!") == true) {
+        x = "You pressed OK!";
+    } else {
+        x = "You pressed Cancel Boy!";
+    }
+    document.getElementById("demo").innerHTML = x;
+}
+</script>
+
+</body>
+</html>
+<div id="hideaway" style="display:none;">I bet I can make these go away.</div>
+<a href="javascript:;" onClick="document.getElementById('hideaway').style.display='block';">Wow Hidden Content</a>	
+<a href="javascript:;" onClick="document.getElementById('hideaway').style.display='none';">I Hid this content again HAHA</a>	
