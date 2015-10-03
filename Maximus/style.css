@@ -48,6 +48,17 @@ div{
 	padding-right: 2%;
 }
 
+.coolsection{
+    background: black;
+    text-align: left;
+    color: white;
+    opacity: 0.9;
+	float:left;
+	padding:1%;
+	margin: 1% 1% 1% 1%;
+	width:96%;
+}
+
 .bottombar{
     margin: 1% 1% 1% 1%;
     width: 98%;
