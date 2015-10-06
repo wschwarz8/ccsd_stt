@@ -32,8 +32,8 @@ div{
 
 .leftbar div img{
   display: inline-block;
-  width: 60%;
-  height: 40%;
+  width: 70%;
+  height: 50%;
   border-radius: 10px;
   margin: 1%;
 }
@@ -57,6 +57,13 @@ div{
 	padding:1%;
 	margin: 1% 1% 1% 1%;
 	width:96%;
+}
+
+.sitecontrol {
+	background-color: White;
+	opacity:1;
+	color:Black;
+	padding:5px;
 }
 
 .bottombar{
