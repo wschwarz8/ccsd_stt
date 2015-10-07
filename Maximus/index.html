@@ -3,7 +3,7 @@
 <html>
 <header>
 	<link href="style.css" rel="stylesheet">
-	<script type="text/javascript" src="script.js"></script>
+	<script language="javascript" type="text/javascript" src="code.js"></script>
 </header>
 
 <body class="body">
@@ -39,35 +39,21 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="coolsection">
-		<h1>
+		<h1 id="test">
 			Javascript Stuff
 		</h1>
-		<div class="sitecontrol">
-			<h3>
-				Site Controls
-			</h3>
-			<h5>
-				Background Color
-			</h5>
-			<select name="backgroundSelector">
-				<option value="Default">Default</option>
-				<option value="Red">Red</option>
-				<option value="Orange">Orange</option>
-				<option value="Yellow">Yellow</option>
-				<option value="Green">Green</option>
-				<option value="Blue">Blue</option>
-				<option value="Purple">Purple</option>
-			</select>
+		<div class="ButtonStuff">
+			<input id = "btn1" type="button" onclick="firstButtonPressed()" value="Press me">
 			<br>
-			<h5>
-				Enable Fun Mode?
-			</h5>
-			<input type="radio" name="funmodeToggle" value="Yes">Yes
+			<input id = "btn2" type="button" onclick="secondButtonPressed()" value="No press me">
 			<br>
-			<input type="radio" name="funmodeToggle" value="No">No
+			<input id = "btn3" type="button" onclick="thirdButtonPressed()" value="Press me I am the best">
 			<br>
+			<p id="tbct">
+				
+			</p>
 		</div>
 	</div>
 
@@ -76,5 +62,10 @@
 	</div>
 
 </body>
-
+	
 </html>
+
+
+
+
+
