@@ -20,7 +20,14 @@ mysql_select_db('stt', $g_link);
 	<BODY>
 		
 <?php
-if($_POST && $_POST['code']=='')
+$studentarray = array();
+$query = "SELECT name, id FROM students WHERE active=1";
+$result = mysql_query($query);
+while ($row = mysql_fetch_assoc($result)) {
+	$studentarray[$row['id']]=$row['name'];
+}	
+
+if($_POST && $_POST['code']=='a')
 {
 	$jobid=$_POST['job_id'];
 	if(isset($_POST['resolve'])){
@@ -31,7 +38,7 @@ if($_POST && $_POST['code']=='')
 	}
 	$query = "INSERT INTO `stt`.`points` (`job_id`, `student_id`, `points`, `category_id`) VALUES ('".$jobid."', '".$_POST['student_id']."', '".$_POST['points']."', '".$_POST['category_id']."')";
     $result = mysql_query($query);
-	if($result) {echo $_POST['points']." points added.<BR>";}
+	if($result) {echo $_POST['points']." points added for student ".$studentarray[$_POST['student_id']].".<BR>";}
 	else {echo mysql_error($g_link);}
 }
 else
@@ -45,11 +52,8 @@ else
    <select name=student_id>
 	   <option value=''>---</option>
 <?php
-$query = "SELECT name, id FROM students WHERE active=1";
-$result = mysql_query($query);
-	print_r($result);
-while ($row = mysql_fetch_assoc($result)) {
-	echo "<option value=".$row['id'].">".$row['name']."</option>";
+foreach ($studentarray as $key=>$value){
+	echo "<option value=".$key.">".$value."</option>";
 }	
 ?>
    </select>
