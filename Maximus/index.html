@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-
+   
 <html>
 <header>
 	<link href="style.css" rel="stylesheet">
 	<script language="javascript" type="text/javascript" src="code.js"></script>
 </header>
 
-<body class="body">
+<body class="body" onclick="changecolors()">
 
 	<div class="topbar">
-		<h1>Maxwell A. DeVos</h1>
+		<h1 id="title">Maxwell A. DeVos</h1>
+		<div class="welcomebox">
+			<h2 id="Welcometext">Welcome to my Website</h2>
+		</div>
 	</div>
 
 	<div class="middlesec">
@@ -51,9 +54,19 @@
 			<br>
 			<input id = "btn3" type="button" onclick="thirdButtonPressed()" value="Press me I am the best">
 			<br>
-			<p id="tbct">
-				
+			<p id="hidetexts">
+				Hey can you figure out how to <a href="javascript:;" onclick="hidetext()">hide</a> this text?
 			</p>
+		</div>
+	</div>
+	<div class="survey">
+		<h2>
+			Survey Results
+		</h2>
+		<div>
+			<p>
+			todo - make a table that compares yours and mine favorite things here from a prompt on page load
+		</p>
 		</div>
 	</div>
 
