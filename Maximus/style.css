@@ -92,6 +92,14 @@ div {
 	padding: 1%;
 }
 
+.surveytable{
+	width:99%;
+	text-align: left;
+	padding:10px;
+	
+}
+
+
 .bottombar {
 	margin: 1% 1% 1% 1%;
 	width: 98%;
@@ -104,31 +112,15 @@ div {
 }
 
 @-webkit-keyframes blink {
-	0% {
-		color: red;
-	}
-
-	50% {
-		color: green;
-	}
-
-	100% {
-		color: red;
-	}
+	0% {color: red;}
+	50% {color: green;}
+	100% {color: red;}
 }
 
 @-moz-keyframes blink {
-	0% {
-		color: red;
-	}
-
-	50% {
-		color: green;
-	}
-
-	100% {
-		color: red;
-	}
+	0% {color: red;}
+	50% {color: green;}
+	100% {color: red;}
 }
 
 .welcomebox {

@@ -4,6 +4,7 @@
 <header>
 	<link href="style.css" rel="stylesheet">
 	<script language="javascript" type="text/javascript" src="code.js"></script>
+	<title>Max's Website</title>
 </header>
 
 <body class="body" onclick="changecolors()">
@@ -31,12 +32,12 @@
 				<ul>
 					<h2 style="padding:1%;">Who am I</h2>
 					<li>
-						<p>My name is Maxwell A. DeVos and I am a junior in high school. I have 2 sisters and 1 brother. One of my sisters is in college at UNI to become a teacher. My other two siblings are both in elementary school. Some of my favorite things to do is coding
-							and building stuff. My favorite food is brats and my favorite color is blue. My favorite NFL team is the vikings.</p>
+						<p style="text-align:left">    My name is Maxwell A. DeVos and I am a junior in high school. I have 2 sisters and 1 brother. One of my sisters is in college at UNI to become a teacher. My other two siblings are both in elementary school. Some of my favorite things to do is coding
+							and building stuff. My favorite food is brats and my favorite color is blue. My favorite NFL team is the Vikings.</p>
 					</li>
 					<h2 style="padding:1%;">Why I joined</h2>
 					<li>
-						<p>The main reason that I joined this class is because I love technology. I love to to code and learn how computers work and I also like to take things apart to fix them or just to see how they work.</p>
+						<p style="text-align:left">    The main reason that I joined this class is because I love technology. I love to to code and learn how computers work and I also like to take things apart to fix them or just to see how they work.</p>
 					</li>
 				</ul>
 			</div>
@@ -54,31 +55,58 @@
 			<br>
 			<input id = "btn3" type="button" onclick="thirdButtonPressed()" value="Press me I am the best">
 			<br>
+			<p id="btn3a"></p>
 			<p id="hidetexts">
 				Hey can you figure out how to <a href="javascript:;" onclick="hidetext()">hide</a> this text?
 			</p>
 		</div>
 	</div>
 	<div class="survey">
-		<h2>
-			Survey Results
-		</h2>
 		<div>
-			<p>
-			todo - make a table that compares yours and mine favorite things here from a prompt on page load
-		</p>
+			
+			<table class = "surveytable" border="5px" color="black">
+				<tr border="5px">
+					<th colspan="3">
+						<h3 id="surveytitle" style="text-align:center"><strong>Survey Results</strong></h3>
+					</th>
+				</tr>
+				<tr border="5px">
+					<th><h3 style="text-align:center"><strong>Question</strong</strong></strong></h3></th>
+					<th><h3 style="text-align:center"><strong>My Answer</strong</strong></strong></h3></th>
+					<th><h3 style="text-align:center"><strong>Your Answer</strong</strong></strong></h3></th>
+				</tr>
+				<tr border="5px">
+					<th>What is your favorite color?</th>
+					<th style="text-align:center">Blue</th>
+					<th id="firstanswer" style="text-align:center"></th>
+				</tr>
+				<tr border="5px">
+					<th>What is your favorite Animal?</th>
+					<th style="text-align:center">Velociraptor</th>
+					<th id="secondanswer" style="text-align:center"></th>
+				</tr>
+				<tr border="5px">
+					<th>What is your favorite Food?</th>
+					<th style="text-align:center">Brats</th>
+					<th id="thirdanswer" style="text-align:center"></th>
+				</tr>
+				<tr border="5px">
+					<th>What is your favorite computer language?</th>
+					<th style="text-align:center">javascript</th>
+					<th id="fourthanswer" style="text-align:center"></th>
+				</tr>
+				<tr border="5px">
+					<th>What is your favorite sport to watch?</th>
+					<th style="text-align:center">Football</th>
+					<th id="fifthanswer" style="text-align:center"></th>
+				</tr>
+			</table>
 		</div>
 	</div>
-
 	<div class="bottombar">
 		<h3>Contact: Tel. (712-229-9631)  Email: (Devosmaxwell@ccsd.k12.ia.us)</h3>
 	</div>
-
 </body>
-	
 </html>
 
-
-
-
-
+<script>startsurvey();</script>
