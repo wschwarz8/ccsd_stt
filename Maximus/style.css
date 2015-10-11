@@ -76,6 +76,22 @@ div {
 	margin: 10px;
 }
 
+#colorcircle{
+	background-color:red;
+	margin:10px;
+	border-radius:75px;
+	width:150px;
+	height:150px;
+	text-align:center;
+	padding:5px;
+}
+#colorcircle p{
+	margin-top:37%;
+	margin-left:5px;
+	margin-right:5px;
+	
+}
+
 .survey {
 	background: white;
 	text-align: center;

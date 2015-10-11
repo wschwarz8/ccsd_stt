@@ -1,5 +1,18 @@
 //any variables that need iniatiated at start place here
-var testnumber1 = 1;
+var testnumber1 = 0;
+var colornum = 0;
+var color = ["red","orange","yellow","green","blue","purple"];
+
+
+var colorcirclefunc = function(){
+	
+	if (colornum > 4){
+		colornum = 0;
+	}else{
+		colornum++;
+	}
+		document.getElementById("colorcircle").style.backgroundColor = color[colornum];
+};
 
 var startsurvey = function() {
 	var decision1 = confirm("Would you like to take a Survey");

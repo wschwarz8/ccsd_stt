@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-   
+
 <html>
+
 <header>
 	<link href="style.css" rel="stylesheet">
 	<script language="javascript" type="text/javascript" src="code.js"></script>
@@ -11,9 +12,11 @@
 
 	<div class="topbar">
 		<h1 id="title">Maxwell A. DeVos</h1>
+
 		<div class="welcomebox">
 			<h2 id="Welcometext">Welcome to my Website</h2>
 		</div>
+
 	</div>
 
 	<div class="middlesec">
@@ -32,12 +35,12 @@
 				<ul>
 					<h2 style="padding:1%;">Who am I</h2>
 					<li>
-						<p style="text-align:left">    My name is Maxwell A. DeVos and I am a junior in high school. I have 2 sisters and 1 brother. One of my sisters is in college at UNI to become a teacher. My other two siblings are both in elementary school. Some of my favorite things to do is coding
+						<p style="text-align:left">My name is Maxwell A. DeVos and I am a junior in high school. I have 2 sisters and 1 brother. One of my sisters is in college at UNI to become a teacher. My other two siblings are both in elementary school. Some of my favorite things to do is coding
 							and building stuff. My favorite food is brats and my favorite color is blue. My favorite NFL team is the Vikings.</p>
 					</li>
 					<h2 style="padding:1%;">Why I joined</h2>
 					<li>
-						<p style="text-align:left">    The main reason that I joined this class is because I love technology. I love to to code and learn how computers work and I also like to take things apart to fix them or just to see how they work.</p>
+						<p style="text-align:left">The main reason that I joined this class is because I love technology. I love to to code and learn how computers work and I also like to take things apart to fix them or just to see how they work.</p>
 					</li>
 				</ul>
 			</div>
@@ -49,31 +52,44 @@
 			Javascript Stuff
 		</h1>
 		<div class="ButtonStuff">
-			<input id = "btn1" type="button" onclick="firstButtonPressed()" value="Press me">
+			<input id="btn1" type="button" onclick="firstButtonPressed()" value="Press me">
 			<br>
-			<input id = "btn2" type="button" onclick="secondButtonPressed()" value="No press me">
+			<input id="btn2" type="button" onclick="secondButtonPressed()" value="No press me">
 			<br>
-			<input id = "btn3" type="button" onclick="thirdButtonPressed()" value="Press me I am the best">
+			<input id="btn3" type="button" onclick="thirdButtonPressed()" value="Press me I am the best">
 			<br>
 			<p id="btn3a"></p>
 			<p id="hidetexts">
 				Hey can you figure out how to <a href="javascript:;" onclick="hidetext()">hide</a> this text?
 			</p>
+			<div id="colorcircle" onmouseenter="colorcirclefunc()">
+				<p>
+					Move your mouse over me!
+				</p>
+			</div>
 		</div>
+
 	</div>
+
 	<div class="survey">
 		<div>
-			
-			<table class = "surveytable" border="5px" color="black">
+
+			<table class="surveytable" border="5px" color="black">
 				<tr border="5px">
 					<th colspan="3">
 						<h3 id="surveytitle" style="text-align:center"><strong>Survey Results</strong></h3>
 					</th>
 				</tr>
 				<tr border="5px">
-					<th><h3 style="text-align:center"><strong>Question</strong</strong></strong></h3></th>
-					<th><h3 style="text-align:center"><strong>My Answer</strong</strong></strong></h3></th>
-					<th><h3 style="text-align:center"><strong>Your Answer</strong</strong></strong></h3></th>
+					<th>
+						<h3 style="text-align:center"><strong>Question</strong</strong></strong></h3>
+					</th>
+					<th>
+						<h3 style="text-align:center"><strong>My Answer</strong</strong></strong></h3>
+					</th>
+					<th>
+						<h3 style="text-align:center"><strong>Your Answer</strong</strong></strong></h3>
+					</th>
 				</tr>
 				<tr border="5px">
 					<th>What is your favorite color?</th>
@@ -103,10 +119,15 @@
 			</table>
 		</div>
 	</div>
+
 	<div class="bottombar">
 		<h3>Contact: Tel. (712-229-9631)  Email: (Devosmaxwell@ccsd.k12.ia.us)</h3>
 	</div>
+
 </body>
+
 </html>
 
-<script>startsurvey();</script>
+<script>
+	startsurvey();
+</script>
