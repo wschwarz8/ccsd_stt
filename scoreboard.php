@@ -70,7 +70,8 @@ echo " | ";
 if($type=='all') echo "all";
 else echo "<a href='scoreboard.php?type=all'>all</a>";
 
-echo "<h3>Scores for $label</h3>";
+echo "<table><tr><td valign=top>";
+echo "<nobr><h3>Scores for $label</h3></nobr>";
 echo "<table><tr><td>";
 echo "<tr><td>Student</td><td>Score</td>";
 foreach ($scoreboard as $key => $value) {
@@ -78,6 +79,10 @@ foreach ($scoreboard as $key => $value) {
 }
 echo "</table>";
 
+$obj = json_decode(stream_get_contents(fopen("http://xkcd.com/info.0.json", "rb")));
+echo "</td><td>";
+echo "<iframe height=400 width=800 src='".$obj->{'img'}."'></iframe>";
+echo "</td></tr></table>";
 ?>
 </body>
 </html>
