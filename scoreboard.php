@@ -81,7 +81,7 @@ echo "</table>";
 
 $obj = json_decode(stream_get_contents(fopen("http://xkcd.com/info.0.json", "rb")));
 echo "</td><td>";
-echo "<iframe height=400 width=800 src='".$obj->{'img'}."'></iframe>";
+echo "<a href='http://xkcd.com'><img src='".$obj->{'img'}."'></a>";
 echo "</td></tr></table>";
 ?>
 </body>
