@@ -1,7 +1,10 @@
 <?php
-if(false)
+
+
+if(isset($_POST["username"]) || isset($_POST["password"]))
 {
 			require_once '../config.php';
+			require_once 'login.js';
 
 			$g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 
@@ -11,37 +14,36 @@ if(false)
 
 			if(!$g_link)
 				 {
-				 die("Connection failed: " . mysqli_connect_error());
+				 die("Connection failed: " . mysql_connect_error());
 				 }
-
-			$result = mysql_query($query);
-			if (mysql_num_rows($result) > 0)
-			{
-				 // output data of each row
-				 while($row = mysql_fetch_assoc($result))
-				{
-					echo "id: " . $row["id"]. " - Name: " . $row["username"]. " " . $row["password"]. "<br>";
-				}
-			}
-			else
-			{
-				echo "0 results";
-			}
-
+	
+		$query = "SELECT * FROM `students` WHERE 1";
+		$result = mysql_query($query);
+		$row = mysql_fetch_assoc($result);
+	
+		if($_POST["username"] === $row["username"])
+		{
+			header('location:10.1.50.69');
+		}
+	
+		if($_POST["username"] !== $row["username"])
+		{
+			echo"You did a bad";
+		}
 
 			mysql_close($g_link);
 
 }
 
 else
-?>
 {
+?>
 	<html>
 	<head>
 		<titlePlease type your Username and Password... </title>
 			<script language="JavaScript" type="text/JavaScript" src="login.js"></script>
 	<body background= "http://www.pptwallpapers.com/uploads/abstract-blue-grid-backgrounds-powerpoint.jpg">
-		<form>
+		<form name="LogMeIn" method="post">
 			<br>
 			<center>
 				Username:
@@ -57,4 +59,5 @@ else
 	</body>
 	</head>
 	</html>
+<?php
 }
