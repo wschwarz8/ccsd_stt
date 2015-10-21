@@ -3,12 +3,14 @@
 <html>
 
 <header>
-	<link href="style.css" rel="stylesheet">
+	<link href="css_files/commonCSS.css" rel="stylesheet">
+	<link href="css_files/MainPage.css" rel="stylesheet">
 	<script language="javascript" type="text/javascript" src="code.js"></script>
+
 	<title>Max's Website</title>
 </header>
 
-<body class="body" onclick="changecolors()">
+<body class="body" onload="startsurvey()">
 
 	<div class="topbar">
 		<h1 id="title">Maxwell A. DeVos</h1>
@@ -16,10 +18,19 @@
 		<div class="welcomebox">
 			<h2 id="Welcometext">Welcome to my Website</h2>
 		</div>
+		
+		<a href="test.php">
+			<div class="phpsitebutton">
+				<p style="color:black;text-align:center">
+					My PHP Site
+				</p> 
+			</div>
+		</a>
 
 	</div>
 
 	<div class="middlesec">
+		
 		<div class="leftbar">
 			<h2>Pictures</h2>
 			<div>
@@ -127,7 +138,3 @@
 </body>
 
 </html>
-
-<script>
-	startsurvey();
-</script>

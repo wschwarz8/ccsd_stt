@@ -1,0 +1,144 @@
+/*main page css*/
+
+.topbar {
+	margin: -20px 1% 1% 1%;
+	padding: 1%;
+	background: linear-gradient(to right, silver, grey, grey,grey, silver);
+	text-align: center;
+	color: white;
+	opacity: 0.96;
+}
+
+.welcomebox {
+	background: black;
+	color: red;
+}
+
+.phpsitebutton {
+	background:yellow;
+	padding:10px;
+	width:200px;
+	height:50px;
+}
+.middlesec {
+	text-align: center;
+	width: 100%;
+}
+
+.leftbar {
+	background: black;
+	color: white;
+	width: 15%;
+	height: 400px;
+	margin-left: 1%;
+	text-align: center;
+	float: left;
+}
+
+.leftbar div img {
+	display: inline-block;
+	width: 70%;
+	height: 50%;
+	border-radius: 10px;
+	margin: 1%;
+}
+
+.rightbar {
+	background: white;
+	float: right;
+	width: 80%;
+	height: 400px;
+	margin-right: 1%;
+	opacity: 0.9;
+	padding-right: 2%;
+}
+
+.coolsection {
+	background: black;
+	text-align: left;
+	color: white;
+	opacity: 0.9;
+	float: left;
+	padding: 1%;
+	margin: 1% 1% 1% 1%;
+	width: 96%;
+}
+
+.ButtonStuff {
+	background-color: White;
+	opacity: 1;
+	color: Black;
+	padding: 5px;
+}
+
+.ButtonStuff input {
+	margin: 10px;
+}
+
+#colorcircle{
+	background-color:red;
+	margin:10px;
+	border-radius:75px;
+	width:150px;
+	height:150px;
+	text-align:center;
+	padding:5px;
+}
+#colorcircle p{
+	margin-top:37%;
+	margin-left:5px;
+	margin-right:5px;
+	
+}
+
+.survey {
+	background: white;
+	text-align: center;
+	opacity: 0.9;
+	float: left;
+	padding: 1%;
+	margin: 1% 1% 1% 1%;
+	width: 96%;
+}
+
+.survey div {
+	color: black;
+	margin: 1%;
+	padding: 1%;
+}
+
+.surveytable{
+	width:99%;
+	text-align: left;
+	padding:10px;
+	
+}
+
+
+.bottombar {
+	margin: 1% 1% 1% 1%;
+	width: 98%;
+	background: linear-gradient(to right, silver, grey, grey,grey, silver);
+	text-align: center;
+	color: #000000;
+	bottom: -20px;
+	opacity: 0.96;
+	float: left;
+}
+
+@-webkit-keyframes blink {
+	0% {color: red;}
+	50% {color: green;}
+	100% {color: red;}
+}
+
+@-moz-keyframes blink {
+	0% {color: red;}
+	50% {color: green;}
+	100% {color: red;}
+}
+
+.welcomebox {
+	-webkit-animation: blink 1s infinite;
+	-moz-animation: blink 1s infinite;
+}
