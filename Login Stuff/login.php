@@ -1,38 +1,61 @@
 <?php
-
+session_start();
 
 if(isset($_POST["username"]) || isset($_POST["password"]))
 {
-			require_once '../config.php';
-			require_once 'login.js';
+		require_once '../config.php';
+		require_once 'login.js';
+	
+		$g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 
-			$g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
+		mysql_select_db('stt', $g_link);
 
-			mysql_select_db('stt', $g_link);
+		$query = "SELECT * FROM `students` WHERE 1";
 
-			$query = "SELECT * FROM `students` WHERE 1";
-
-			if(!$g_link)
-				 {
-				 die("Connection failed: " . mysql_connect_error());
-				 }
+	
+		if(!$g_link)
+		 {
+			 die("Connection failed: " . mysql_connect_error());
+		 }
+		
 	
 		$query = "SELECT * FROM `students` WHERE 1";
 		$result = mysql_query($query);
 		$row = mysql_fetch_assoc($result);
+		
+		
 	
-		if($_POST["username"] === $row["username"])
+		if($_POST["username"] !== $row["username"] && $_POST["password"] !== $row["password"])
 		{
-			header('location:10.1.50.69');
+			echo "<script>window.location.href='login.php';alert('The password and Username you have entered are incorrect, try again!');</script>";
 		}
 	
-		if($_POST["username"] !== $row["username"])
+	
+		elseif($_POST["username"] !== $row["username"])
 		{
-			echo"You did a bad";
+			echo "<script>window.location.href='login.php';alert('The Username you have entered is incorrect, try again!');</script>";
 		}
-
+	
+	
+		elseif($_POST["password"] !== $row["password"])
+		{
+			echo "<script>window.location.href='login.php';alert('The password you have entered is incorrect, try again!');</script>";
+		}
+	
+	
+		else
+		{
+			header('location:../index.html');
+			$_SESSION['loginid']=$_POST['username'];
+        	echo $_SESSION['loginid'];
+			die;
+			
+		}
+		
+	
+		
 			mysql_close($g_link);
-
+		
 }
 
 else
