@@ -1,3 +1,3 @@
 <?php
-echo "γειά σου κόσμος";
+echo "Hello world";
 ?>
