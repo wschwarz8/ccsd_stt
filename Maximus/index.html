@@ -1,25 +1,40 @@
 <!DOCTYPE html>
-
+<!-- main page/home page -->
 <html>
 
 <header>
-	<link href="style.css" rel="stylesheet">
-	<script language="javascript" type="text/javascript" src="code.js"></script>
+	<link href="css_files/commonCSS.css" rel="stylesheet">
+	<link href="css_files/MainPage.css" rel="stylesheet">
+	<script language="javascript" type="text/javascript" src="javascript_files/mainPage.js"></script>
+
 	<title>Max's Website</title>
 </header>
 
-<body class="body" onclick="changecolors()">
+<body class="body">
 
 	<div class="topbar">
 		<h1 id="title">Maxwell A. DeVos</h1>
 
-		<div class="welcomebox">
-			<h2 id="Welcometext">Welcome to my Website</h2>
+		<div style="padding-left:50%">
+			<div class="welcomebox">
+				<h2 id="Welcometext">Welcome to my Website</h2>
+			</div>
+		</div>
+		<br>
+		<div style="padding-left:50%">
+			<a href="test.php">
+				<div class="phpsitebutton">
+					<h2>
+						My PHP Site
+					</h2>
+				</div>
+			</a>
 		</div>
 
 	</div>
 
 	<div class="middlesec">
+
 		<div class="leftbar">
 			<h2>Pictures</h2>
 			<div>
@@ -77,7 +92,10 @@
 			<table class="surveytable" border="5px" color="black">
 				<tr border="5px">
 					<th colspan="3">
-						<h3 id="surveytitle" style="text-align:center"><strong>Survey Results</strong></h3>
+						<h3 id="surveytitle" style="text-align:center"><strong>Survey Results <a href="javascript:;" onclick="startsurvey()"><h3>Take Survey Here!!</h3>
+						</a>
+						</strong>
+						</h3>
 					</th>
 				</tr>
 				<tr border="5px">
@@ -127,7 +145,3 @@
 </body>
 
 </html>
-
-<script>
-	startsurvey();
-</script>

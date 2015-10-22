@@ -1,0 +1,12 @@
+/* things that are applied all the time */
+
+body {
+	background-image: url(http://goo.gl/JrYNZX);
+}
+   
+div {
+	border-radius: 10px;
+	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+}
+
+/* Maximus/css_files/commonCSS.css Maximus/css_files/MainPage.css Maximus/css_files/phpPage.css Maximus/javascript_files/mainPage.js Maximus/index.html Maximus/test.php */
