@@ -3,16 +3,8 @@
 		<head>
 			<body>
 				<?php
-				$page = rand(0,1)
+						echo "Is this even SEEN????";
 ?>
-				<script>
-				if $page=0{
-					echo "This is my boring page!!"
-				}
-				</script>
 			</body>
 	</head>
-</html><?php
-	
-	}
-?>
+</html>
