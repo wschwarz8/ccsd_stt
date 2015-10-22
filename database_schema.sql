@@ -115,6 +115,18 @@ CREATE TABLE IF NOT EXISTS `skillcategories` (
   UNIQUE KEY `category` (`category`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
+
+--
+-- Dumping data for table `skillcategories`
+--
+
+INSERT INTO `skillcategories` (`id`, `category`, `suit`, `Theme`) VALUES
+(1, 'Unclassified', 'Joker', NULL),
+(2, 'Computer Software', 'Spade', 'Scifi'),
+(3, 'Programming', 'Diamond', 'Technology'),
+(4, 'Training/Documentation', 'Heart', 'Medieval'),
+(5, 'Computer Hardware', 'Club', 'Steampunk');
+
 -- --------------------------------------------------------
 
 --
