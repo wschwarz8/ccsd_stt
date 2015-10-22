@@ -10,15 +10,20 @@
 }
 
 .welcomebox {
+	text-align:center;
 	background: black;
 	color: red;
+	width:350px;
+	height:25px;
+	margin-left:-175px;
 }
 
 .phpsitebutton {
 	background:yellow;
-	padding:10px;
+	text-align:center;
 	width:200px;
-	height:50px;
+	height:25px;
+	margin-left:-100px;
 }
 .middlesec {
 	text-align: center;
