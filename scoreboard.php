@@ -1,6 +1,12 @@
 <?php
 require_once 'config.php';
 
+function weekdiff($date1, $date2) {
+   if($date1 > $date2) return weekdiff($date2, $date1);
+    $first = DateTime::createFromFormat('m/d/Y', $date1);
+    $second = DateTime::createFromFormat('m/d/Y', $date2);
+    return floor($first->diff($second)->days/7);
+}
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 
 $label = 'now';
@@ -30,6 +36,13 @@ else if($type=='lastweek'){ // If this is a weekly score and not a total score
     $last_last_sunday = date('Y-m-d H:i_s', strtotime('-2 weeks Sunday'));
     $query .= " AND b.timestamp < '$last_sunday'";
     $query .= " AND b.timestamp > '$last_last_sunday'";
+}
+else if($type=='all'){
+    $maxpoints = 100 - floor(100/20 * (weekdiff('1/8/2016', date("m/d/Y"))));
+    $label='now<BR><BR>(Out of '.$maxpoints.' points)';
+}
+else { // This shouldn't happen
+    $label='ERROR';
 }
 
 mysql_select_db('stt', $g_link);
