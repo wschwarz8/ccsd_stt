@@ -10,23 +10,33 @@ $result = mysql_query($query);
 while ($row = mysql_fetch_assoc($result)) {
 	$studentarray[$row['id']]=$row['name'];
 }	
-
-
+print_r($_GET);
+if(isset($_GET["Student"])){
+	echo "hgnrjefioesndgj";
+}
 
 ?>
 <html>
 	<head>
 		<script>
-	function claimjobfunction(jobid, student) {
-		student=prompt('What is your name?')
+	function claimjobfunction(jobid) {
+		//student=prompt("Whats your name?")
 		//alert(jobid+student)
-		alert(document.Theform.Jobid)
-		document.Theform.Jobid.value=jobid
-		alert(document.Theform.Student)
-		document.Theform.Student.value=student
-		document.getElementById("Theform").submit();
-		document.getElementById("button").innerHTML = student
+		student=document.UncleGreg.ClaimedBy.value
+		if (student==0){
+			alert("You need to select your name.")
 		}
+		else {
+			document.getElementById("button").innerHTML=student;
+			alert(document.Theform.Jobid)
+			document.Theform.Jobid.value=jobid
+			document.Theform.Student.value=student
+			alert(document.Theform.Student)
+			document.Theform.Student.value=student
+			document.getElementById("Theform").submit();
+
+		}
+	}	
 	</script>
 	</head>
 	<body>
@@ -93,29 +103,17 @@ mysql_close($g_link);
 				<option value="documentation">Training/Documentation</option>
 		</select>
 		
-
+		<form name="UncleGreg">
 		<?php
-			echo "<select name='Claimed By' id='ClamiedBy'>";
-			
+			echo "<select name='ClaimedBy' id='ClamiedBy'>";
+			echo "<option value=0>------</option>";
 			foreach($studentarray as $id=>$name){
 				//print_r($names);
-				echo "<option>$name</option>";
+				echo "<option value=$id>$name</option>";
 			}
 			echo "</select>";
 ?>
-		<select name="Claimed By" id="ClamiedBy">
-				<option>"Austin Hamilton"</option>
-				<option>"Britton Ankrum"</option>
-				<option>"Crystal Guthridge"</option>
-				<option>"D.J. Phillips"</option>
-				<option>"Ethan George"</option>
-				<option>"Jaydon Lane"</option>
-				<option>"Jonathan Zimmer"</option>
-				<option>"Mason 'gee' Hill"</option>
-				<option>"Max DeVoss"</option>
-				<option>"McKayla Benson"</option>
-				<option>"Steavie"</option>
-		</select>
+		</form>
 		</dev>
 	</body>
 </html>
