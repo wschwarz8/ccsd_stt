@@ -19,5 +19,5 @@ Visit <a href="Login%20Stuff/login.php"> here</a> for the login page.<BR><BR>
 
 	
 <?php
-	makefooter("Contact Max for any questions about the Header or Footer functions at devosmaxwell@ccsd.k12.ia.us",0);
+	makefooter("Look in the functions.php file for any questions about the Header or Footer functions.",0);
 ?>
