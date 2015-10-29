@@ -1,6 +1,6 @@
 <?php
 	require_once "functions.php";
-	makeHeader("STT HOME","STT HOME",1);
+	makeHeader("STT HOME","Student Technology Team Home",1);
 ?>
 
 <BR>

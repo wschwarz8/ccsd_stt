@@ -15,7 +15,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle){
 		</header>
 		<body>
 			<div class='header'>
-				<h1 id='headerTitle'>". $ptitle . "</h1>
+				<a href='index.php'><h1 id='headerTitle'>". $ptitle . "</h1><a>
 			</div>
 	");
 }
@@ -40,51 +40,33 @@ function styleChoice($styleNum){
 	switch($styleNum){
 		case 1://basic style with some bare structure
 		return $styleText= "
-			html{
-		margin:0;
-		padding:0;
-		background:Black;
-		color:White;
-		}
+		html{margin:0;padding:0;background:Black;color:White;}
 		
-		body{
-		margin: 0 10% 0 10%;
-		padding: 0 1% 0 1%;
-		background:Orange;
-		color:white;
-		font-size: 20px;
-		}
+		body{margin: 0 10% 0 10%;padding: 0 1% 0 1%;background:gold;color:black;font-size: 20px;}
 		
-		.header{
-		position:absolute
-		width:78%;
-		height:75px;
-		background:Red;
-		color:black;
-		margin-top:0;
-		border-radius: 0 0 10px 10px;
-		}
-		#headerTitle{
-		text-align: Center;
-		}
+		.header{position:absolutewidth:78%;height:75px;background:black;color:White;margin-top:0;border-radius: 0 0 10px 10px;}
 		
-		.footer{
-		position:absolute;
-    	bottom:0;
-   		width:78%;
-    	height:75px;
-    	background:Red;
-    	color:black;
-		border-radius: 10px 10px 0 0;
-		}
+		#headerTitle{text-align: Center;color:white;border-bottom:0;}
 		
-		#footerMessage{
-		text-align: Center;
-		}
+		.footer{position:absolute;bottom:0;width:78%;height:75px;background:black;color:white;border-radius: 10px 10px 0 0;}
+		
+		#footerMessage{text-align: Center;}
 		";
 		break;
 		case 2://moderately complex
+		return $styleText="
+		html{margin:0;padding:0;background:Black;color:White;}
 		
+		body{margin: 0 10% 0 10%;padding: 0 1% 0 1%;background:gold;color:black;font-size: 20px;opacity:0.8;}
+		
+		.header{position:absolutewidth:78%;height:75px;background:black;color:White;margin-top:0;border-radius: 0 0 10px 10px;}
+		
+		#headerTitle{text-align: Center;}
+		
+		.footer{position:absolute;bottom:0;width:78%;height:75px;background:black;color:white;border-radius: 10px 10px 0 0;}
+		
+		#footerMessage{text-align: Center;}
+		";
 		break;
 		case 3://very complex and fancy 
 		
