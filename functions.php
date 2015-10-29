@@ -5,13 +5,14 @@
 //call this function by declaring 
 //makeHeader(string: "tabbar title here",string: "page title here", Int: style#);
 //style can be either 0,1,2, or 3 where 0 is default and the other three are more detailed premade styles
-function makeHeader($tbtitle,$ptitle,$pstyle){
-	
+function makeHeader($tbtitle,$ptitle=false,$pstyle=0,$hhtml=""){
+	if(!$ptitle)$ptitle=$tbtitle;	
 	echo("
 	<html>
 		<header>
 			<title>". $tbtitle . "</title>
 			<style>". styleChoice($pstyle) . "</style>
+			$hhtml
 		</header>
 		<body>
 			<div class='header'>
@@ -38,6 +39,9 @@ function makeFooter($footermessage,$pstyle){
 }
 function styleChoice($styleNum){
 	switch($styleNum){
+		case 0:
+		
+		break;
 		case 1:
 		
 		break;
