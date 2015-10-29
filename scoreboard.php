@@ -1,5 +1,8 @@
 <?php
+require_once "functions.php";
 require_once 'config.php';
+
+makeHeader("STT HOME","STT HOME",0);
 
 function weekdiff($date1, $date2) {
    if($date1 > $date2) return weekdiff($date2, $date1);
@@ -96,6 +99,6 @@ $obj = json_decode(stream_get_contents(fopen("http://xkcd.com/info.0.json", "rb"
 echo "</td><td>";
 echo "<a href='http://xkcd.com'><img src='".$obj->{'img'}."'></a>";
 echo "</td></tr></table>";
+
+	makefooter("",0);
 ?>
-</body>
-</html>
