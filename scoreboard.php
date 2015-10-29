@@ -70,7 +70,7 @@ mysql_close($g_link);
 
 arsort($scoreboard);
 
-makeHeader("Scoreboard for $label",false,0,"<meta http-equiv='refresh' content='60'>");
+makeHeader("Scoreboard for $label","Scoreboard for $label",1,"<meta http-equiv='refresh' content='60'>");
 
 //<meta http-equiv="refresh" content="60">
 if($type=='thisweek') echo "thisWeek";
@@ -96,5 +96,5 @@ echo "</td><td>";
 echo "<a href='http://xkcd.com'><img src='".$obj->{'img'}."'></a>";
 echo "</td></tr></table>";
 
-	makefooter("",0);
+	makefooter("",1);
 ?>

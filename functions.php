@@ -5,14 +5,13 @@
 //call this function by declaring 
 //makeHeader(string: "tabbar title here",string: "page title here", Int: style#);
 //style can be either 0,1,2, or 3 where 0 is default and the other three are more detailed premade styles
-function makeHeader($tbtitle,$ptitle=false,$pstyle=0,$hhtml=""){
-	if(!$ptitle)$ptitle=$tbtitle;	
+function makeHeader($tbtitle,$ptitle,$pstyle){
+	
 	echo("
 	<html>
 		<header>
 			<title>". $tbtitle . "</title>
 			<style>". styleChoice($pstyle) . "</style>
-			$hhtml
 		</header>
 		<body>
 			<div class='header'>
@@ -26,7 +25,7 @@ function makeHeader($tbtitle,$ptitle=false,$pstyle=0,$hhtml=""){
 //leave style as 0 if you want to keep the style from the makeHeader functions
 function makeFooter($footermessage,$pstyle){
 	echo("
-		<style>".styleChoice($pstyle) ."</style>
+		<style>". styleChoice($pstyle) ."</style>
 			
 				<div class='footer'>
 					<h3 id='footerMessage'>". $footermessage . "</h3>
@@ -39,21 +38,9 @@ function makeFooter($footermessage,$pstyle){
 }
 function styleChoice($styleNum){
 	switch($styleNum){
-		case 0:
-		
-		break;
-		case 1:
-		
-		break;
-		case 2:
-		
-		break;
-		case 3:
-		
-		break;
-		default:
-		return $styleText = "
-		html{
+		case 1://basic style with some bare structure
+		return $styleText= "
+			html{
 		margin:0;
 		padding:0;
 		background:Black;
@@ -95,6 +82,15 @@ function styleChoice($styleNum){
 		text-align: Center;
 		}
 		";
+		break;
+		case 2://moderately complex
+		
+		break;
+		case 3://very complex and fancy 
+		
+		break;
+		default://select this style if you want to have our own style. Just have your <style> tags be your first line of code between the header and footer functions
+		return $styleText = "";
 	}
 }
 ?>

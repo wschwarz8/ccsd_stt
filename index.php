@@ -1,6 +1,6 @@
 <?php
 	require_once "functions.php";
-	makeHeader("STT HOME","STT HOME",0);
+	makeHeader("STT HOME","STT HOME",1);
 ?>
 
 <BR>
@@ -13,11 +13,11 @@ Visit <a href="students_skills.php">here</a> for a list of Students and Skills.<
 Visit <a href="enter_skillNames.php">here</a> for entering skill names.<BR><BR>
 Visit <a href="scoreboard.php">here</a> for the scoreboard.<BR><BR>
 Visit <a href="jobs.php">here</a> for the Job List.<BR><BR>
-Visit <a href="team.html">here</a> for the team page.<BR><BR>
+Visit <a href="team.php">here</a> for the team page.<BR><BR>
 Visit <a href="Login%20Stuff/login.php"> here</a> for the login page.<BR><BR>
 	
 
 	
 <?php
-	makefooter("Look in the functions.php file for any questions about the Header or Footer functions.",0);
+	makefooter("",1);
 ?>
