@@ -1,6 +1,6 @@
 <?php
 	require_once "functions.php";
-	makeHeader("STT HOME","Student Technology Team Home",1);
+	makeHeader("STT HOME","Student Technology Team Home",3);
 ?>
 
 <BR>
@@ -19,5 +19,5 @@ Visit <a href="Login%20Stuff/login.php"> here</a> for the login page.<BR><BR>
 
 	
 <?php
-	makefooter("",1);
+	makefooter("",3);
 ?>

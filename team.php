@@ -1,6 +1,6 @@
 <?php
 	require_once "functions.php";
-	makeHeader("Team Pages", "Team Pages", 1);
+	makeHeader("Team Pages", "Team Pages", 3);
 ?>
 
 <br>
@@ -27,5 +27,5 @@
 <a href="Wyatt">Wyatt</a>
 	
 <?php
-	makeFooter("", 1);
+	makeFooter("", 3);
 ?>

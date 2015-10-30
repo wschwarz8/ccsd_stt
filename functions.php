@@ -46,6 +46,10 @@ function styleChoice($styleNum){
 		
 		.header{position:absolutewidth:78%;height:75px;background:black;color:White;margin-top:0;border-radius: 0 0 10px 10px;}
 		
+		.header a{text-decoration:none;}
+		
+		.header a:hover{text-decoration:underline;}
+		
 		#headerTitle{text-align: Center;color:white;border-bottom:0;}
 		
 		.footer{position:absolute;bottom:0;width:78%;height:75px;background:black;color:white;border-radius: 10px 10px 0 0;}
@@ -57,21 +61,41 @@ function styleChoice($styleNum){
 		return $styleText="
 		html{margin:0;padding:0;background:Black;color:White;}
 		
-		body{margin: 0 10% 0 10%;padding: 0 1% 0 1%;background:gold;color:black;font-size: 20px;opacity:0.8;}
+		body{margin: 0 10% 0 10%;padding: 0 1% 0 1%;background:gold;color:black;font-size: 20px;}
 		
-		.header{position:absolutewidth:78%;height:75px;background:black;color:White;margin-top:0;border-radius: 0 0 10px 10px;}
+		.header a{text-decoration:none;}
 		
-		#headerTitle{text-align: Center;}
+		.header a:hover{text-decoration:underline;}
 		
-		.footer{position:absolute;bottom:0;width:78%;height:75px;background:black;color:white;border-radius: 10px 10px 0 0;}
+		.header{position:absolutewidth:78%;height:75px;background: linear-gradient(to right, black, black, grey,black, black);color:gold;margin-top:0;border-radius: 0 0 10px 10px;opacity:0.9;}
+		
+		#headerTitle{text-align: Center;color: gold;opacity:1;}
+		
+		.footer{position:absolute;bottom:0;width:78%;height:75px;color:white;border-radius: 10px 10px 0 0; opacity:0.9;background: linear-gradient(to right, black, black, grey,black, black);}
 		
 		#footerMessage{text-align: Center;}
 		";
 		break;
 		case 3://very complex and fancy 
+		return $styleText = "
+		html{margin:0;padding:0;background:Black;color:White;}
 		
+		body{margin: 0 10% 0 10%;padding: 0 1% 0 1%;background:gold;color:black;font-size: 20px;}
+		
+		.header a{text-decoration:none;}
+		
+		.header a:hover{text-decoration:underline;}
+		
+		.header{position:absolutewidth:78%;height:75px;background: linear-gradient(to right, black, black, grey,black, black);color:gold;margin-top:0;border-radius: 0 0 10px 10px;opacity:0.9;}
+		
+		#headerTitle{text-align: Center;color: gold;opacity:1;}
+		
+		.footer{position:absolute;bottom:0;width:78%;height:75px;color:white;border-radius: 10px 10px 0 0; opacity:0.9;background: linear-gradient(to right, black, black, grey,black, black);}
+		
+		#footerMessage{text-align: Center;}
+		";
 		break;
-		default://select this style if you want to have our own style. Just have your <style> tags be your first line of code between the header and footer functions
+		default://select this style if you want to have your own style. Just have your <style> or <link> tags be your first line of code between the header and footer functions
 		return $styleText = "";
 	}
 }
