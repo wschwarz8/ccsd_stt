@@ -216,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `students` (
 INSERT INTO `students` (`id`, `name`, `class`, `active`) VALUES
 (1, 'Student 1', '2001', 1),
 (2, 'Student 2', '2002', 1),
-(3, 'Student 3', '2004', 1);
+(3, 'Student 3', '2004', 1),
 (9, 'Steavie', '2020', 1);
 
 -- --------------------------------------------------------
