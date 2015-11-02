@@ -99,4 +99,16 @@ function styleChoice($styleNum){
 		return $styleText = "";
 	}
 }
+
+
+
+function promptLogin()
+{
+	//stuff
+}
+?>
+{
+	//stuff
+}
+?>
 ?>
