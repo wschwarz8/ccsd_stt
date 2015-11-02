@@ -107,8 +107,3 @@ function promptLogin()
 	//stuff
 }
 ?>
-{
-	//stuff
-}
-?>
-?>
