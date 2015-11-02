@@ -1,6 +1,10 @@
 <?php
+<<<<<<< HEAD
+//require_once 'config.php';
+=======
 require_once "functions.php";
 require_once 'config.php';
+>>>>>>> f1df4c71b66cc2abed3c223c2db7dce237d7859f
 
 
 function weekdiff($date1, $date2) {
@@ -9,6 +13,10 @@ function weekdiff($date1, $date2) {
     $second = DateTime::createFromFormat('m/d/Y', $date2);
     return floor($first->diff($second)->days/7);
 }
+
+$g_username ="Hamdog";
+$g_password ="superhacker";
+
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 
 $label = 'now';
