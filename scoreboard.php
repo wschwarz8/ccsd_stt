@@ -83,7 +83,7 @@ if($type=='all') echo "all";
 else echo "<a href='scoreboard.php?type=all'>all</a>";
 
 echo "<table><tr><td valign=top>";
-    $label='now<BR><BR>(Out of '.$maxpoints.' points)';
+if($label=='now') echo '<BR>(Out of '.$maxpoints.' points)';
 echo "<table><tr><td>";
 echo "<tr><td><nobr>Student</nobr></td><td>Score</td>";
 foreach ($scoreboard as $key => $value) {
