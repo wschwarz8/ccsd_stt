@@ -5,13 +5,15 @@
 //call this function by declaring 
 //makeHeader(string: "tabbar title here",string: "page title here", Int: style#);
 //style can be either 0,1,2, or 3 where 0 is default and the other three are more detailed premade styles
-function makeHeader($tbtitle,$ptitle,$pstyle){
-	
+function makeHeader($tbtitle,$ptitle,$pstyle, $hhtml=""){
+	if(!$ptitle)$ptitle=$tbtitle;	
 	echo("
 	<html>
 		<header>
 			<title>". $tbtitle . "</title>
-			<style>". styleChoice($pstyle) . "</style>
+			<style>". styleChoice($pstyle) . "</style>");
+	echo $hhtml;
+	echo("
 		</header>
 		<body>
 			<div class='header'>
