@@ -1,5 +1,5 @@
 <?php
-require_once 'config.php';
+//require_once 'config.php';
 
 function weekdiff($date1, $date2) {
    if($date1 > $date2) return weekdiff($date2, $date1);
@@ -7,6 +7,10 @@ function weekdiff($date1, $date2) {
     $second = DateTime::createFromFormat('m/d/Y', $date2);
     return floor($first->diff($second)->days/7);
 }
+
+$g_username ="Hamdog";
+$g_password ="superhacker";
+
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 
 $label = 'now';
