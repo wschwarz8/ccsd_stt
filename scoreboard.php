@@ -1,10 +1,6 @@
 <?php
-<<<<<<< HEAD
-//require_once 'config.php';
-=======
 require_once "functions.php";
 require_once 'config.php';
->>>>>>> f1df4c71b66cc2abed3c223c2db7dce237d7859f
 
 
 function weekdiff($date1, $date2) {
