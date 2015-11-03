@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-require_once 'functions.php';//not sure where to add the header/footer functions without messing stuff up
+require_once 'functions.php';
 
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 
@@ -11,35 +11,33 @@ $result = mysql_query($query);
 while ($row = mysql_fetch_assoc($result)) {
 	$studentarray[$row['id']]=$row['name'];
 }	
-print_r($_GET);
 if(isset($_GET["Student"])){
 	echo "hgnrjefioesndgj";
 }
 
-?>
-<html>
-	<head>
+$script = "
 		<script>
 	function claimjobfunction(jobid) {
-		//student=prompt("Whats your name?")
+		//student=prompt('Whats your name?')
 		//alert(jobid+student)
 		student=document.UncleGreg.ClaimedBy.value
 		if (student==0){
-			alert("You need to select your name.")
+			alert('You need to select your name.')
 		}
 		else {
-			document.getElementById("button").innerHTML=student;
+			document.getElementById('button').innerHTML=student;
 			alert(document.Theform.Jobid)
 			document.Theform.Jobid.value=jobid
 			document.Theform.Student.value=student
 			alert(document.Theform.Student)
 			document.Theform.Student.value=student
-			document.getElementById("Theform").submit();
+			document.getElementById('Theform').submit();
 
 		}
 	}	
-	</script>
-	</head>
+	</script>";
+makeHeader("Job List","Job List",3,$script);
+?>
 	<body>
 		<form name="Theform" id="Theform">
 			<input type="text" name="Jobid">
@@ -109,7 +107,6 @@ mysql_close($g_link);
 			echo "<select name='ClaimedBy' id='ClamiedBy'>";
 			echo "<option value=0>------</option>";
 			foreach($studentarray as $id=>$name){
-				//print_r($names);
 				echo "<option value=$id>$name</option>";
 			}
 			echo "</select>";
@@ -117,5 +114,5 @@ mysql_close($g_link);
 		</form>
 		</dev>
 	</body>
-</html>
-
+<?
+makefooter("",3);
