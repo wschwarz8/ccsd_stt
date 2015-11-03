@@ -1,5 +1,3 @@
-<!--max devos made this -->
-
 <?php
 //header function to set up the beginning of the webpage
 //call this function by declaring 
@@ -8,6 +6,7 @@
 function makeHeader($tbtitle,$ptitle,$pstyle, $hhtml=""){
 	if(!$ptitle)$ptitle=$tbtitle;	
 	echo("
+	<!--max devos made this -->
 	<html>
 		<header>
 			<title>". $tbtitle . "</title>
@@ -27,6 +26,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle, $hhtml=""){
 //leave style as 0 if you want to keep the style from the makeHeader functions
 function makeFooter($footermessage,$pstyle){
 	echo("
+	<!--max devos made this -->
 		<style>". styleChoice($pstyle) ."</style>
 			
 				<div class='footer'>
