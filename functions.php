@@ -1,17 +1,18 @@
-<!--max devos made this -->
-
 <?php
 //header function to set up the beginning of the webpage
 //call this function by declaring 
 //makeHeader(string: "tabbar title here",string: "page title here", Int: style#);
 //style can be either 0,1,2, or 3 where 0 is default and the other three are more detailed premade styles
-function makeHeader($tbtitle,$ptitle,$pstyle){
-	
+function makeHeader($tbtitle,$ptitle,$pstyle, $hhtml=""){
+	if(!$ptitle)$ptitle=$tbtitle;	
 	echo("
+	<!--max devos made this -->
 	<html>
 		<header>
 			<title>". $tbtitle . "</title>
-			<style>". styleChoice($pstyle) . "</style>
+			<style>". styleChoice($pstyle) . "</style>");
+	echo $hhtml;
+	echo("
 		</header>
 		<body>
 			<div class='header'>
@@ -25,6 +26,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle){
 //leave style as 0 if you want to keep the style from the makeHeader functions
 function makeFooter($footermessage,$pstyle){
 	echo("
+	<!--max devos made this -->
 		<style>". styleChoice($pstyle) ."</style>
 			
 				<div class='footer'>
@@ -98,5 +100,12 @@ function styleChoice($styleNum){
 		default://select this style if you want to have your own style. Just have your <style> or <link> tags be your first line of code between the header and footer functions
 		return $styleText = "";
 	}
+}
+
+
+
+function promptLogin()
+{
+	//stuff
 }
 ?>

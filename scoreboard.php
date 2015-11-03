@@ -9,6 +9,7 @@ function weekdiff($date1, $date2) {
     $second = DateTime::createFromFormat('m/d/Y', $date2);
     return floor($first->diff($second)->days/7);
 }
+
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 
 $label = 'now';
@@ -83,7 +84,7 @@ if($type=='all') echo "all";
 else echo "<a href='scoreboard.php?type=all'>all</a>";
 
 echo "<table><tr><td valign=top>";
-    $label='now<BR><BR>(Out of '.$maxpoints.' points)';
+if($label=='now') echo '<BR>(Out of '.$maxpoints.' points)';
 echo "<table><tr><td>";
 echo "<tr><td><nobr>Student</nobr></td><td>Score</td>";
 foreach ($scoreboard as $key => $value) {
