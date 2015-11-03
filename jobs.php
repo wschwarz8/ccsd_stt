@@ -31,12 +31,14 @@ function printjobs($result) {
     else if($row['repeatable']){
 	echo "all</td></tr>";
     }
-    echo 
+    else {
+	echo 
 		"<button type='button' id='button' onclick='claimjobfunction(".$row['id'].")'>
 		Claim Job
 	</button>
 	
 	</td></tr>";
+    }
   } // End While
 }
 	
@@ -44,18 +46,13 @@ function printjobs($result) {
 $script = "
 		<script>
 	function claimjobfunction(jobid) {
-		//student=prompt('Whats your name?')
-		//alert(jobid+student)
 		student=document.UncleGreg.ClaimedBy.value
 		if (student==0){
-			alert('You need to select your name.')
+			alert('You need to select your name below to claim a job.')
 		}
 		else {
 			document.getElementById('button').innerHTML=student;
-			alert(document.Theform.Jobid)
 			document.Theform.Jobid.value=jobid
-			document.Theform.Student.value=student
-			alert(document.Theform.Student)
 			document.Theform.Student.value=student
 			document.getElementById('Theform').submit();
 
@@ -66,8 +63,8 @@ makeHeader("Job List","Job List",3,$script);
 ?>
 	<body>
 		<form name="Theform" id="Theform">
-			<input type="text" name="Jobid">
-			<input type="text" name="Student">
+			<input type="hidden" name="Jobid">
+			<input type="hidden" name="Student">
 		</form>
 <?php
 
@@ -105,15 +102,6 @@ mysql_close($g_link);
 
 ?>
 
-	<dev id=dev>
-		<select name="Jobs" id="Jobs">
-				<option value="hardware">"Computer Hardware"</option>
-				<option value="software">Computer Software</option>
-				<option value="programming">Programming</option>
-				<option value="unclassified">Unclassified</option>
-				<option value="documentation">Training/Documentation</option>
-		</select>
-		
 		<form name="UncleGreg">
 		<?php
 			echo "<select name='ClaimedBy' id='ClamiedBy'>";
@@ -124,7 +112,6 @@ mysql_close($g_link);
 			echo "</select>";
 ?>
 		</form>
-		</dev>
 	</body>
 <?
 makefooter("",3);
