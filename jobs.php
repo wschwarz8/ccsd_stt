@@ -12,7 +12,8 @@ while ($row = mysql_fetch_assoc($result)) {
 	$studentarray[$row['id']]=$row['name'];
 }	
 if(isset($_GET["Student"])){
-	echo "UPDATE  `jobs` SET  `claimedby` =9 WHERE id =2";
+	$query = "UPDATE  `jobs` SET  `claimedby` =".$_GET["Student"]." WHERE id =".$_GET["Jobid"];
+	echo $query;
 }
 
 function printjobs($result) {
