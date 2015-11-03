@@ -13,7 +13,7 @@ while ($row = mysql_fetch_assoc($result)) {
 }	
 print_r($_GET);
 if(isset($_GET["Student"])){
-	echo "hgnrjefioesndgj";
+	echo "UPDATE  `jobs` SET  `claimedby` =9 WHERE id =2";
 }
 
 ?>
