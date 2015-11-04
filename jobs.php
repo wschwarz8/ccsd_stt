@@ -13,7 +13,9 @@ while ($row = mysql_fetch_assoc($result)) {
 }	
 if(isset($_GET["Student"])){
 	$query = "UPDATE  `jobs` SET  `claimedby` =".$_GET["Student"]." WHERE id =".$_GET["Jobid"];
-	echo $query;
+	$result = mysql_query($query);
+	if($result) echo "McKayla should put a message here.<BR>";
+	else echo "ERROR: McKayla should put a message here.<BR>";
 }
 
 function printjobs($result, $claimable) {
