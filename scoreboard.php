@@ -97,5 +97,5 @@ echo "</td><td>";
 echo "<a href='http://xkcd.com'><img src='".$obj->{'img'}."'></a>";
 echo "</td></tr></table>";
 
-	makefooter("",3);
+//	makefooter("",3);
 ?>
