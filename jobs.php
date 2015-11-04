@@ -16,7 +16,7 @@ if(isset($_GET["Student"])){
 	echo $query;
 }
 
-function printjobs($result) {
+function printjobs($result, $claimable) {
   while ($row = mysql_fetch_assoc($result)) { // TODO format to look better
     if($row['priority']>7)
 	echo "<tr bgcolor='red'>";
@@ -31,7 +31,7 @@ function printjobs($result) {
     else if($row['repeatable']){
 	echo "all</td></tr>";
     }
-    else {
+    else if($claimable){
 	echo 
 		"<button type='button' id='button' onclick='claimjobfunction(".$row['id'].")'>
 		Claim Job
@@ -92,8 +92,8 @@ if (!$result) {
 // prints one row at a time, the results from the database.
 echo "<table border=1>";
 echo "<tr><td>Job</td><td>Description</td><td>Points</td><td>Category</td><td>Claimed By</td></tr>";
-printjobs($result2);
-printjobs($result);
+printjobs($result2, false);
+printjobs($result, true);
 	
 echo "</table>";
 
