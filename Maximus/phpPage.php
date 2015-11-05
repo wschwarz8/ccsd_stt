@@ -1,26 +1,16 @@
-<?php  require_once '../config.php';  ?>
+<?php  
+require_once '../config.php';
+require_once '../functions.php';
 
-<!DOCTYPE html>
-<html class="mainelement">
+makeHeader("PHP Page", "My PHP Page", 0 , '<link href="css_files/commonCSS.css" rel="stylesheet">
+	<link href="css_files/phpPage.css" rel="stylesheet">');
+?>
 
-<header>
-	<title>PHP Fun</title>
-	<link href="css_files/commonCSS.css" rel="stylesheet">
-	<link href="css_files/phpPage.css" rel="stylesheet">
-	<script language="javascript" type="text/javascript" src="javascript_files/commonJS.js"></script>
-</header>
 
-<body>
-	<div class="back" onload="onpageloads()">
-		<div class="header">
-			<h1 id="title">
-				<?php echo"My PHP Page"; ?>
-			</h1>
-		</div>
 		<div class= "bodyarea" id="theme1">
 			<div class="phpbox" id="theme2">
 				<h1>
-					<?php echo"PHP Query Test 1"; ?>
+					PHP Query Test 1
 				</h1>
 				<div class="phpcodebox" id="theme1">
 					<?php
@@ -38,13 +28,10 @@
 						$conn->close();
 					?>
 				</div>
-			</div>
-			
-			<!--add more stuff here that is not php -->
-			
-			
+			</div>	
 		</div>
-	</div>
-</body>
 
-</html>
+
+<?php
+//makefooter("");
+?>

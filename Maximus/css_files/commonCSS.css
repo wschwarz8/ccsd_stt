@@ -9,17 +9,13 @@ body {
 	margin:0 10% 10%;
 	padding:0;
 	margin-bottom:0;
-}
-
-.back{
 	background-color:black;
 	background-image: url(http://goo.gl/JrYNZX);
 	background-repeat: no-repeat;
 	height:1575px;
 	border-radius:0;
-	margin-bottom:0;
-	
 }
+
 div {
 	border-radius: 10px;
 	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
