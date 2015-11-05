@@ -15,7 +15,7 @@ Visit <a href="scoreboard.php">here</a> for the scoreboard.<BR><BR>
 Visit <a href="jobs.php">here</a> for the Job List.<BR><BR>
 Visit <a href="team.php">here</a> for the team page.<BR><BR>
 Visit <a href="login/login.php"> here</a> for the login page.<BR><BR>
-	
+Visit <a href="DisplayBroken.php"> here</a> for a list of broken chromebooks.<BR><BR>
 
 	
 <?php
