@@ -33,5 +33,5 @@ makeHeader("PHP Page", "My PHP Page", 0 , '<link href="css_files/commonCSS.css" 
 
 
 <?php
-//makefooter("");
+makefooter("",0,"false");
 ?>

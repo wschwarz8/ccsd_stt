@@ -16,7 +16,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle, $hhtml=""){
 		</header>
 		<body>
 			<div class='header'>
-				<a href='index.php'><h1 id='headerTitle'>". $ptitle . "</h1><a>
+				<a href='../index.php'><h1 id='headerTitle'>". $ptitle . "</h1><a>
 			</div>
 	");
 }
@@ -24,17 +24,21 @@ function makeHeader($tbtitle,$ptitle,$pstyle, $hhtml=""){
 //call this function by declaring
 //makeFooter(String: "message", Int style#);
 //leave style as 0 if you want to keep the style from the makeHeader functions
-function makeFooter($footermessage,$pstyle){
+function makeFooter($footermessage,$pstyle,$footerbox=""){
 	echo("
 	<!--max devos made this -->
 		<style>". styleChoice($pstyle) ."</style>
-			
+			");
+			 if ($footerbox === "false"){
+			 }else{
+				echo ("
 				<div class='footer'>
 					<h3 id='footerMessage'>". $footermessage . "</h3>
 				</div>
-			
+				");
+			 }
+			 echo ("
 		<body>
-			
 	<html>
 	");
 }
