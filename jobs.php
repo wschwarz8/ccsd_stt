@@ -78,14 +78,7 @@ FROM jobs a, skillcategories b, students c
 WHERE status<4 AND a.skillcatid=b.id AND a.status=1 AND (a.claimedby=c.id OR (a.claimedby=0 AND c.id=9))
 ORDER BY priority DESC, category";
 
-$query2 = "SELECT owner as sname, problem as description, 'Computer Hardware' as category, point_value as points, b.name, 1 as priority, 0 as repeatable, a.id 
-FROM devices a, students b 
-WHERE status_id < 6 AND (a.assignedto_id = b.id OR (a.assignedto_id=0 AND b.id=9))
-ORDER BY status_id";
-	
 $result = mysql_query($query);
-
-$result2 = mysql_query($query2);
 
 if (!$result) {
     die('Invalid query: ' . mysql_error());
@@ -94,7 +87,6 @@ if (!$result) {
 // prints one row at a time, the results from the database.
 echo "<table border=1>";
 echo "<tr><td>Job</td><td>Description</td><td>Points</td><td>Category</td><td>Claimed By</td></tr>";
-printjobs($result2, false);
 printjobs($result, true);
 	
 echo "</table>";
