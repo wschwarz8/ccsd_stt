@@ -2,11 +2,12 @@
 require_once "../functions.php";
 require_once "../config.php";
 makeHeader("Color Mixer", "Color Mixer", 0,'<link href="css_files/phpGamePage.css" rel="stylesheet"><link href="css_files/commonCSS.css" rel="stylesheet"><link href="css_files/phpPage.css" rel="stylesheet"><script src="javascript_files/phpGamePage.js"></script>');
+Echo("add site view counter here soon for testing");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         echo ("user= " . $g_username . " and pass= ". $g_password) . " ;)";
 ?>
 
   <div class="gameframe" style="background:black;opacity:0.9;margin:5px 1% 5px 1%;padding:5px;">
 
-    <div class="colorBox" style="background:white;height:175px;">
+    <div class="colorBox" style="background:white;height:175px;text-align:center;">
 
       <h1 id="colorBoxText" style="text-align:center; color:Black;">Color Choices</h1>
 
@@ -52,7 +53,9 @@ makeHeader("Color Mixer", "Color Mixer", 0,'<link href="css_files/phpGamePage.cs
     </div>
     <div class="playArea">
       <div class="canvas" id="drawingSpace">
-        test
+        
+        <!--this is the drawing area -->
+        
         </div
     </div>
   </div>
