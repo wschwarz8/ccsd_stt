@@ -17,6 +17,9 @@ function makeHeader($tbtitle,$ptitle,$pstyle, $hhtml=""){
 		<body>
 			<div class='header'>
 				<a href='../index.php'><h1 id='headerTitle'>". $ptitle . "</h1><a>
+				<div class='buttonRow'>
+					<a href='index.php'><div class='buttons'>Home</div><a><a href='jobs.php'><div class='buttons'>Jobs</div><a><a href='scoreboard.php'><div class='buttons'>Scoreboard</div><a><a href='team.php'><div class='buttons'>Team Pages</div><a><a href='login/login.php'><div class='buttons'>Login</div><a>
+				</div>
 			</div>
 	");
 }
@@ -92,9 +95,13 @@ function styleChoice($styleNum){
 		
 		.header a:hover{text-decoration:underline;}
 		
-		.header{position:absolutewidth:78%;height:75px;background: linear-gradient(to right, black, black, grey,black, black);color:gold;margin-top:0;border-radius: 0 0 10px 10px;opacity:0.9;}
+		.header{position:absolutewidth:78%;height:125px;background: linear-gradient(to right, black, black, grey,black, black);color:gold;margin-top:0;border-radius: 0 0 10px 10px;opacity:0.9;}
 		
 		#headerTitle{text-align: Center;color: gold;opacity:1;}
+		
+		.buttonRow{width:100%;text-align:center;}
+		
+		.buttons{width:120px;height:30px;display:inline-block;background:yellow;color:black;margin-left:40px;border-radius:8px;padding-top:3px;}
 		
 		.footer{position:absolute;bottom:0;width:78%;height:75px;color:white;border-radius: 10px 10px 0 0; opacity:0.9;background: linear-gradient(to right, black, black, grey,black, black);}
 		
