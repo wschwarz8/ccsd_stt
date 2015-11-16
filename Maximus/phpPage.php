@@ -15,15 +15,18 @@ makeHeader("PHP Page", "My PHP Page", 0 , '<link href="css_files/commonCSS.css" 
 				<div class="phpcodebox" id="theme1">
 					<?php
 						echo "test 1.2.3.4...";
-						
+					
 						// Create connection
 						$conn = new mysqli("localhost", $g_username, $g_password);
-
+						
 						// Check connection
 						if ($conn->connect_error) {
  						   die("Connection failed: " . $conn->connect_error);
 						} 
 						echo "Connected successfully";
+					
+						
+					
 
 						$conn->close();
 					?>
@@ -33,5 +36,5 @@ makeHeader("PHP Page", "My PHP Page", 0 , '<link href="css_files/commonCSS.css" 
 
 
 <?php
-makefooter("",0,"false");
+makeFooter("",0,"false");
 ?>

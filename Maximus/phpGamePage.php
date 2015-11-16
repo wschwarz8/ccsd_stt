@@ -13,7 +13,7 @@ Echo("add site view counter here soon for testing");                            
 
       <div class="colorChoice" style="background:black;height:105px;margin:5px 1% 5px 1%;padding-top:5px;">
 
-        <div class="CircleColor" id="redDiv" draggable="true">
+        <div class="CircleColor" id="red" draggable="true">
           <p>
             Red
           </p>
