@@ -77,7 +77,7 @@ while ($row = mysql_fetch_assoc($result)) {
 <select name=secondjob onchange="jobchange(this.value)">
 	   <option value=''>---</option>
 <?php
-$query = "SELECT name, id, points, skillcatid FROM jobs WHERE status>1 AND status<4";
+$query = "SELECT name, id, points, skillcatid FROM jobs WHERE status>1 AND repeatable=1";
 $result = mysql_query($query);
 while ($row = mysql_fetch_assoc($result)) {
 	$pointarray.="points[".$row['id']."]=".$row['points'].";";
