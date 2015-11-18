@@ -5,22 +5,36 @@ $g_link = mysql_connect('localhost', $g_username, $g_password);
 
 mysql_select_db('stt', $g_link);
 
+if(!isset($_GET['badabing'])){
+  echo "You fail.";
+  die;
+}
+
 $potato=$_GET['badabing'];
-        
 
 $query="SELECT * FROM `students` WHERE id=$potato";
 $result = mysql_query($query);
 $NewBox=mysql_fetch_assoc($result);
-
-echo $NewBox;
-
-
 
 $Name=$NewBox['name'];
 $Class=$NewBox['class'];
 $Active=$NewBox['active'];
 $Bio=$NewBox['bio'];
 
+$jobs = array();
+$query = "SELECT * from jobs where claimedby=$potato";
+$result = mysql_query($query);
+while($row=mysql_fetch_assoc($result)){
+  $jobs[$potato]=$row['name'];
+}
+
+$awards = array();
+$query = "SELECT * from awards where stid=$potato";
+$result = mysql_query($query);
+while($row=mysql_fetch_assoc($result)){
+  $awards[$potato]=$row['name'];
+}
+   
 ?>
 
 <html>
@@ -60,6 +74,9 @@ $Bio=$NewBox['bio'];
       <div class="col-md-4">
         <h3></h3>
         <p></p>
+        This student's jobs are: <?php print_r($jobs); ?>
+        <p></p>
+        This student's awards are: <?php print_r($awards); ?>
         <p></p>
       </div>
     </div>
