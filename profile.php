@@ -27,13 +27,6 @@ $result = mysql_query($query);
 while($row=mysql_fetch_assoc($result)){
   $jobs[$potato]=$row['name'];
 }
-
-$awards = array();
-$query = "SELECT * from awards where stid=$potato";
-$result = mysql_query($query);
-while($row=mysql_fetch_assoc($result)){
-  $awards[$potato]=$row['name'];
-}
    
 ?>
 
@@ -74,9 +67,8 @@ while($row=mysql_fetch_assoc($result)){
       <div class="col-md-4">
         <h3></h3>
         <p></p>
-        This student's jobs are: <?php print_r($jobs); ?>
+        This student's claimed jobs are: <?php print_r($jobs); ?>
         <p></p>
-        This student's awards are: <?php print_r($awards); ?>
         <p></p>
       </div>
     </div>
