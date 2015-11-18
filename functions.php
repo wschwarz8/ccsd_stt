@@ -53,7 +53,7 @@ function styleChoice($styleNum){
 		
 		body{margin: 0 10% 0 10%;padding: 0 1% 0 1%;background:gold;color:black;font-size: 20px;}
 		
-		.header{position:absolutewidth:78%;height:75px;background:black;color:White;margin-top:0;border-radius: 0 0 10px 10px;}
+		.header{position:absolute;width:78%;height:75px;background:black;color:White;margin-top:0;border-radius: 0 0 10px 10px;}
 		
 		.header a{text-decoration:none;}
 		
@@ -66,23 +66,28 @@ function styleChoice($styleNum){
 		#footerMessage{text-align: Center;}
 		";
 		break;
-		case 2://moderately complex
+		case 2://coding theme
 		return $styleText="
-		html{margin:0;padding:0;background:Black;color:White;}
+		html{background:grey;margin-bottom:0;}
 		
-		body{margin: 0 10% 0 10%;padding: 0 1% 0 1%;background:gold;color:black;font-size: 20px;}
+		body {margin:0 10% 0 10%;padding:0 1% 0 1%;background-color:black;background-image: url(http://goo.gl/JrYNZX);background-repeat: no-repeat;border-radius:0;}
 		
-		.header a{text-decoration:none;}
+		.header{background:white;margin-top: 0;margin-left:10px;margin-right:10px;border-radius: 0 0 10px 10px;opacity: 0.9;padding:5px;}
+		
+		.header a{text-decoration:none;color:Black;}
 		
 		.header a:hover{text-decoration:underline;}
 		
-		.header{position:absolutewidth:78%;height:75px;background: linear-gradient(to right, black, black, grey,black, black);color:gold;margin-top:0;border-radius: 0 0 10px 10px;opacity:0.9;}
+		#headerTitle{text-align: center;}
 		
-		#headerTitle{text-align: Center;color: gold;opacity:1;}
+		.buttonRow{width:100%;text-align:center;}
 		
-		.footer{position:absolute;bottom:0;width:78%;height:75px;color:white;border-radius: 10px 10px 0 0; opacity:0.9;background: linear-gradient(to right, black, black, grey,black, black);}
+		.buttons{width:120px;height:30px;display:inline-block;background:black;color:white;margin-left:40px;border-radius:8px;padding-top:3px;}
+		
+		.footer{position:absolute;bottom:0;width:78%;height:75px;color:black;border-radius: 10px 10px 0 0; opacity:0.9;background:white;opacity:0.9;}
 		
 		#footerMessage{text-align: Center;}
+		
 		";
 		break;
 		case 3://very complex and fancy 
