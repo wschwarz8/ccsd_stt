@@ -5,18 +5,21 @@ $g_link = mysql_connect('localhost', $g_username, $g_password);
 
 mysql_select_db('stt', $g_link);
 
-$query="SELECT * FROM `students` WHERE 1";
+$potato=$_GET['badabing'];
+        
+
+$query="SELECT * FROM `students` WHERE id=$potato";
+$result = mysql_query($query);
+$NewBox=mysql_fetch_assoc($result);
+
+echo $NewBox;
 
 
 
-
-
-
-$Name="Britton";
-$Jobs="Jobs";
-$STT="Student Tech Team";
-$Biography="Biography and Info";
-$Rewards="Rewards";
+$Name=$NewBox['name'];
+$Class=$NewBox['class'];
+$Active=$NewBox['active'];
+$Bio=$NewBox['bio'];
 
 ?>
 
@@ -46,16 +49,16 @@ $Rewards="Rewards";
   </div>
   <div class="Hobbies">
     <div class="container">
-      <h2><?php echo $Jobs; ?></h2>
+      <h2><?php echo $Class; ?></h2>
       <div class "col-md-4">
-        <h3><?php echo $STT; ?></h3>
+        <h3><?php echo $Active; ?></h3>
       </div>
       <div class="col-md-4">
-        <h3><?php echo $Biography; ?></h3>
+        <h3><?php echo $Bio; ?></h3>
         <p></p>
       </div>
       <div class="col-md-4">
-        <h3><?php echo $Rewards; ?></h3>
+        <h3></h3>
         <p></p>
         <p></p>
       </div>
