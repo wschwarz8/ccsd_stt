@@ -5,19 +5,29 @@ $g_link = mysql_connect('localhost', $g_username, $g_password);
 
 mysql_select_db('stt', $g_link);
 
-$query="SELECT * FROM `students` WHERE 1";
+if(!isset($_GET['badabing'])){
+  echo "You fail.";
+  die;
+}
 
+$potato=$_GET['badabing'];
 
+$query="SELECT * FROM `students` WHERE id=$potato";
+$result = mysql_query($query);
+$NewBox=mysql_fetch_assoc($result);
 
+$Name=$NewBox['name'];
+$Class=$NewBox['class'];
+$Active=$NewBox['active'];
+$Bio=$NewBox['bio'];
 
-
-
-$Name="Britton";
-$Jobs="Jobs";
-$STT="Student Tech Team";
-$Biography="Biography and Info";
-$Rewards="Rewards";
-
+$jobs = array();
+$query = "SELECT * from jobs where claimedby=$potato";
+$result = mysql_query($query);
+while($row=mysql_fetch_assoc($result)){
+  $jobs[$potato]=$row['name'];
+}
+   
 ?>
 
 <html>
@@ -46,16 +56,18 @@ $Rewards="Rewards";
   </div>
   <div class="Hobbies">
     <div class="container">
-      <h2><?php echo $Jobs; ?></h2>
+      <h2><?php echo $Class; ?></h2>
       <div class "col-md-4">
-        <h3><?php echo $STT; ?></h3>
+        <h3><?php echo $Active; ?></h3>
       </div>
       <div class="col-md-4">
-        <h3><?php echo $Biography; ?></h3>
+        <h3><?php echo $Bio; ?></h3>
         <p></p>
       </div>
       <div class="col-md-4">
-        <h3><?php echo $Rewards; ?></h3>
+        <h3></h3>
+        <p></p>
+        This student's claimed jobs are: <?php print_r($jobs); ?>
         <p></p>
         <p></p>
       </div>
