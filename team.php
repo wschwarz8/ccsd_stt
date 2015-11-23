@@ -2,7 +2,6 @@
 	require_once "functions.php";
 	makeHeader("Team Pages", "Team Pages", 2,"<style>.meat{position:absolute;width:50%;background:black;color:White;margin-top:3%; margin-left:15%;border-radius:10px;padding:5px;opacity:0.9;}</style>");
 ?>
-<div class="meat">
 
 	<BR>
 	<section style="float:left;width:50%">
@@ -161,10 +160,10 @@
 					</ul>
 				</div>
 			</a>
-				
+
 			<BR>
-				
-				<a href="#">
+
+			<a href="#">
 				<div class="personBox" id="Steavie">
 					<h2 id="toph2" style="background:purple;">Steavie</h2>
 					<ul>
@@ -175,52 +174,57 @@
 					</ul>
 				</div>
 			</a>
-				
-				<BR>
+
+			<BR>
 	</center>
 	</section>
-</div>
-				</center>
 	<style>
+		
 		* {
-			margin:0;
-			padding:0;
+			margin: 0;
+			padding: 0;
 		}
-	.personBox {
- 		background: #fff;
-  	width: 200px; 
-		border-radius:3px;
-		text-align:center;
-		display:block;
-}
-		.personBox h2{
- 			color: #fff;
-  		font-weight: 500;
-  		padding: 7px 12px;
-			border-radius:3px;
+		
+		.personBox {
+			background: #fff;
+			width: 200px;
+			border-radius: 3px;
+			text-align: center;
+			display: block;
 		}
-		.toph2{
-			border-radius:3px;
+		
+		.personBox h2 {
+			color: #fff;
+			font-weight: 500;
+			padding: 7px 12px;
+			border-radius: 3px;
 		}
-		a{
-  		text-decoration: none;
+		
+		.toph2 {
+			border-radius: 3px;
 		}
-		p{
-			color:black;
+		
+		a {
+			text-decoration: none;
 		}
-		.personBox ul{
-			list-style-type:none;
-			overflow:hidden;
-			padding:0;
-			height:0px;
-			
+		
+		p {
+			color: black;
+		}
+		
+		.personBox ul {
+			list-style-type: none;
+			overflow: hidden;
+			padding: 0;
+			height: 0px;
 			-webkit-transition: height 1s ease;
 		}
-		.personBox:hover ul{
-			height:150px;
+		
+		.personBox:hover ul {
+			height: 150px;
 		}
 	</style>
-	
-<?php
-	makeFooter("New name buttons with expandable descriptions!!!! To change your description(make this short) go into team.php and edit the p element. images can be added if they are square and urls are shortened at <a href='https://goo.gl/'>here</a>.", 2);
+
+	<?php
+	makeFooter("New name buttons with expandable descriptions!!!! To change your description(make this short) go into team.php and edit the p element. images can be added if they are square and urls are shortened at <a href='https://goo.gl/'>here</a>.", 0);
 ?>

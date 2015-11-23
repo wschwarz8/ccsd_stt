@@ -8,12 +8,12 @@ function makeHeader($tbtitle,$ptitle,$pstyle, $hhtml=""){
 	echo("
 	<!--max devos made this -->
 	<html>
-		<header>
+		<head>
 			<title>". $tbtitle . "</title>
 			<style>". styleChoice($pstyle) . "</style>");
 	echo $hhtml;
 	echo("
-		</header>
+		</head>
 		<body>
 			<div class='header'>
 				<a href='../index.php'><h1 id='headerTitle'>". $ptitle . "</h1><a>
@@ -21,6 +21,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle, $hhtml=""){
 					<a href='index.php'><div class='buttons'>Home</div></a><a href='jobs.php'><div class='buttons'>Jobs</div></a> <a href='scoreboard.php'><div class='buttons'>Scoreboard</div></a> <a href='team.php'><div class='buttons'>Team Pages</div></a> <a href='DisplayBroken.php'><div class='buttons'>Broken</div></a> <a href='login/login.php'><div class='buttons'>Login</div></a> 
 				</div>
 			</div>
+			<div class='meat'>
 	");
 }
 //footer function to set up the end of a webpage easier
@@ -30,6 +31,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle, $hhtml=""){
 function makeFooter($footermessage,$pstyle,$footerbox=""){
 	echo("
 	<!--max devos made this -->
+	</div>
 		<style>". styleChoice($pstyle) ."</style>
 			");
 			 if ($footerbox === "false"){
@@ -61,6 +63,10 @@ function styleChoice($styleNum){
 		
 		#headerTitle{text-align: Center;color:white;border-bottom:0;}
 		
+		.buttonRow{width:100%;text-align:center;}
+		
+		.buttons{width:120px;height:30px;display:inline-block;background:yellow;color:black;margin-left:40px;border-radius:8px;padding-top:3px;}
+		
 		.footer{position:absolute;bottom:0;width:78%;height:75px;background:black;color:white;border-radius: 10px 10px 0 0;}
 		
 		#footerMessage{text-align: Center;}
@@ -83,6 +89,8 @@ function styleChoice($styleNum){
 		.buttonRow{width:100%;text-align:center;}
 		
 		.buttons{width:120px;height:30px;display:inline-block;background:black;color:white;margin-left:40px;border-radius:8px;padding-top:3px;}
+		
+		.meat{position:absolute;width:77%;background:black;color:White;margin-top:5px;border-radius:10px;padding:5px;opacity:0.9;}
 		
 		.footer{position:absolute;bottom:0;width:78%;height:75px;color:black;border-radius: 10px 10px 0 0; opacity:0.9;background:white;opacity:0.9;}
 		

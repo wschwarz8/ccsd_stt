@@ -1,7 +1,7 @@
 <?php
 require_once "../functions.php";
 require_once "../config.php";
-makeHeader("Color Mixer", "Color Mixer", 0,'<link href="css_files/phpGamePage.css" rel="stylesheet"><link href="css_files/commonCSS.css" rel="stylesheet"><link href="css_files/phpPage.css" rel="stylesheet"><script src="javascript_files/phpGamePage.js"></script>');
+makeHeader("Color Mixer", "Color Mixer", 2);
 Echo("add site view counter here soon for testing");                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         echo ("user= " . $g_username . " and pass= ". $g_password) . " ;)";
 ?>
 
