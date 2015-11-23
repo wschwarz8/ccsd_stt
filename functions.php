@@ -88,7 +88,7 @@ function styleChoice($styleNum){
 		
 		.buttonRow{width:100%;text-align:center;}
 		
-		.buttons{width:120px;height:30px;display:inline-block;background:black;color:white;margin-left:40px;border-radius:8px;padding-top:3px;}
+		.buttons{width:15%;height:30px;display:inline-block;background:black;color:white;border-radius:8px;padding-top:3px;margin-left:1.0%;}
 		
 		.meat{position:absolute;width:77%;background:black;color:White;margin-top:5px;border-radius:10px;padding:5px;opacity:0.9;}
 		
