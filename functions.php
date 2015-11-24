@@ -19,7 +19,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle, $hhtml=""){
 			<div class='header'>
 				<a href='../index.php'><h1 id='headerTitle'>". $ptitle . "</h1><a>
 				<div class='buttonRow'>
-					<a href='index.php'><div class='buttons'>Home</div></a><a href='jobs.php'><div class='buttons'>Jobs</div></a> <a href='scoreboard.php'><div class='buttons'>Scoreboard</div></a> <a href='team.php'><div class='buttons'>Team Pages</div></a> <a href='DisplayBroken.php'><div class='buttons'>Broken</div></a> <a href='login/login.php'><div class='buttons'>Login</div></a> 
+					<a href='../index.php'><div class='buttons'>Home</div></a><a href='../jobs.php'><div class='buttons'>Jobs</div></a> <a href='../scoreboard.php'><div class='buttons'>Scoreboard</div></a> <a href='../team.php'><div class='buttons'>Team Pages</div></a> <a href='../DisplayBroken.php'><div class='buttons'>Broken</div></a> <a href='../login/login.php'><div class='buttons'>Login</div></a> 
 				</div>
 			</div>
 			<div class='meat'>
