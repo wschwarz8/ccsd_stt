@@ -122,6 +122,11 @@ function styleChoice($styleNum){
 
 function promptLogin()
 {
-	//stuff
+	session_start();
+	
+	if(!$_SESSION['loginid'])
+	{
+		header('location:login/login.php?reason=1');
+	}
 }
 ?>
