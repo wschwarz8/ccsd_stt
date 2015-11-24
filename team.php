@@ -99,9 +99,9 @@
 					<h2 id="toph2" style="background:red;">Jon</h2>
 					<ul>
 						<li>
-							<p>add a few words that describe yourself here</p>
+							<p>I love to read and write code!!!</p>
 						</li>
-						<li><img class="personPic" src="http://goo.gl/zBA0Gk" height="100px" width="100px"></li>
+						<li><img class="personPic" src="http://goo.gl/WiDxal" height="100px" width="100px"></li>
 					</ul>
 				</div>
 			</a>
