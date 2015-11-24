@@ -1,6 +1,7 @@
 <?php  
 require_once '../config.php';
 require_once '../functions.php';
+echo $_SERVER('PHP_SELF');
 
 makeHeader("PHP Page", "My PHP Page", 2);
 ?>
