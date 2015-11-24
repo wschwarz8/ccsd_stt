@@ -1,8 +1,7 @@
 <?php
 	require_once "functions.php";
-	makeHeader("STT HOME","Student Technology Team Home",2, "<style>.meat{position:absolute;width:77%;background:black;color:White;margin-top:5px;border-radius:10px;padding:5px;opacity:0.9;}</style>");
+	makeHeader("STT HOME","Student Technology Team Home",2);
 ?>
-	<div class = "meat">
 
 		<BR> Welcome to the site.
 		<BR>
@@ -23,8 +22,6 @@
 		<BR> Visit <a href="DisplayBroken.php"> here</a> for a list of broken chromebooks.
 		<BR>
 		<BR>
-
-	</div>
 
 	<?php
 	makefooter("",2);

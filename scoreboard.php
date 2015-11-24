@@ -71,7 +71,7 @@ mysql_close($g_link);
 
 arsort($scoreboard);
 
-makeHeader("Scoreboard for $label","Scoreboard for $label",3,"<meta http-equiv='refresh' content='60'>");
+makeHeader("Scoreboard for $label","Scoreboard for $label",2,"<meta http-equiv='refresh' content='60'>");
 
 //<meta http-equiv="refresh" content="60">
 if($type=='thisweek') echo "thisWeek";
