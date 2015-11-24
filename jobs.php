@@ -60,8 +60,13 @@ $script = "
 
 		}
 	}	
-	</script>";
-makeHeader("Job List","Job List",3,$script);
+	</script>
+	<style>
+	td{
+		color:white;
+	}
+	</style>";
+makeHeader("Job List","Job List",2,$script);
 ?>
 	<body>
 		<form name="Theform" id="Theform">
@@ -108,4 +113,4 @@ mysql_close($g_link);
 		</form>
 	</body>
 <?
-makefooter("",3);
+makefooter("",0);
