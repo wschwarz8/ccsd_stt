@@ -1,9 +1,9 @@
 <?php  
 require_once '../config.php';
 require_once '../functions.php';
+echo $_SERVER('PHP_SELF');
 
-makeHeader("PHP Page", "My PHP Page", 0 , '<link href="css_files/commonCSS.css" rel="stylesheet">
-	<link href="css_files/phpPage.css" rel="stylesheet">');
+makeHeader("PHP Page", "My PHP Page", 2);
 ?>
 
 
