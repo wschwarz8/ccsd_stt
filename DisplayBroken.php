@@ -23,7 +23,7 @@ $result = mysql_query($devicequery);
 if (!$result) {
     die('Invalid query: ' . mysql_error());
 }
-makeHeader("STT HOME","Broken Chromebooks",3);
+makeHeader("STT HOME","Broken Chromebooks",2,"<style>td{color:white;}</style>");
 // prints one row at a time, the results from the database.
 echo "<table border=1>";
 echo "<tr><td>Owner</td><td>Assigned To</td><td>Received</td><td>Problem</td><td>Resolution</td><td>Notes</td><td>Repaired</td><td>Returned</td><td>Last Update</td><td>Received By</td><td>Serial Number</td>
