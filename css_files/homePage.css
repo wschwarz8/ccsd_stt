@@ -3,6 +3,7 @@ nav{
   width:25%;
   border:solid 1px white;
   border-radius:10px;
+  height:525px;
 }
 nav p {
   display:block;
@@ -20,4 +21,17 @@ nav p {
   color:black;
   float:right;
   border-radius:10px;
+}
+.viewingFrame{
+  background:black;
+  color:white;
+  height:400px;
+  width:75%;
+  border-radius:10px;
+  
+}
+
+.centeringFrame h2{
+  display:inline-block;
+  margin-left:20px;
 }

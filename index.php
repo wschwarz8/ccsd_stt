@@ -1,6 +1,6 @@
 <?php
 	require_once "functions.php";
-	makeHeader("STT HOME","Student Technology Team Home",2,'<link href="/css_files/homePage.css" rel="stylesheet";>');
+	makeHeader("STT HOME","Student Technology Team Home",2,'<link href="/css_files/homePage.css" rel="stylesheet";><script language="javascript" type="text/javascript" src="javascript_files/homePage.js"></script>');
 ?>
 	<nav>
 		<center>
@@ -32,9 +32,21 @@
 		</center>
 	</nav>
 	<section class="newsDisplay">
-		<div>
-			News display here soon
-		</div>
+			<center>
+			<div class="centeringFrame">
+				<h1>News</h1>
+				<div class="viewingFrame">
+					<?php
+						
+					?>
+				</div>
+				
+				<a href="#" onclick="leftClick()"><h2> <<< </h2></a>
+				
+				<a href="#" onclick="rightClick()"><h2> >>> </h2></a>
+					
+				</div>
+			</center>
 	</section>
 
 
