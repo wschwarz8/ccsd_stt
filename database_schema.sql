@@ -25,6 +25,21 @@ USE `stt`;
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `news`
+--
+
+CREATE TABLE IF NOT EXISTS `news` (
+  `article_id` int(4) NOT NULL AUTO_INCREMENT,
+  `title` varchar(30) NOT NULL,
+  `message` varchar(500) NOT NULL,
+  `image_url` varchar(30) NOT NULL,
+  `date` date NOT NULL,
+  PRIMARY KEY (`article_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `devicecategories`
 --
 
