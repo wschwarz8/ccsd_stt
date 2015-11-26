@@ -121,7 +121,7 @@
 
 			<BR>
 
-			<a href="Practice">
+			<a href="Ethan">
 				<div class="personBox" id="Ethan">
 					<h2 id="toph2" style="background:Yellow;">Ethan</h2>
 					<ul>

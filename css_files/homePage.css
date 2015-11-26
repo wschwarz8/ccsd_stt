@@ -1,0 +1,37 @@
+nav{
+  float:left;
+  width:25%;
+  border:solid 1px white;
+  border-radius:10px;
+  height:525px;
+}
+nav p {
+  display:block;
+  background:white;
+  color:black;
+  margin:0;
+  height:45px;
+  border:solid 1px grey;
+  padding-top:10px
+}
+.newsDisplay{
+  width:74%;
+  height:525px;
+  background:white;
+  color:black;
+  float:right;
+  border-radius:10px;
+}
+.viewingFrame{
+  background:black;
+  color:white;
+  height:400px;
+  width:75%;
+  border-radius:10px;
+  
+}
+
+.centeringFrame h2{
+  display:inline-block;
+  margin-left:20px;
+}
