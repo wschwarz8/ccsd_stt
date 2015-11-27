@@ -22,7 +22,7 @@ nav p {
   float:right;
   border-radius:10px;
 }
-.viewingFrame{
+#viewingFrame{
   background:black;
   color:white;
   height:400px;

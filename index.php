@@ -32,13 +32,12 @@
 		</center>
 	</nav>
 	<section class="newsDisplay">
-			<center>
+		<center>
 			<div class="centeringFrame">
 				<h1>News</h1>
-				<div class="viewingFrame">
+				<div id="viewingFrame">
 					<?php
 						//make a query that stores each part of a news segment into a seperate variables
-					function getArticles(){
 						
 						//get username and password
 						require_once "config.php";
@@ -66,8 +65,12 @@
 							$article_part = 3;
 							$article_array[$useful_info['article_id']][$article_part]=$useful_info['image_url'];
 							$article_part = 4;
-						 $article_array[$useful_info['article_id']][$article_part]=$useful_info['date'];
+						 	$article_array[$useful_info['article_id']][$article_part]=$useful_info['date'];
+							
+							//takes on the last articles id giving total amount of articles
+							$article_count = $useful_info['article_id'];
 						}
+					
 					
 					/* variables to access the article
 					$article_array[1][0];  --contains article id
@@ -79,47 +82,72 @@
 						
 					//close connection
 					mysql_close($conn);
+					
+					
+					echo("
+					<script>
+						//store all php variables into javascript for use later
+						var articleCount = " . $article_count . ";
 						
-						echo('
-							<style>
-							.viewingFrame{
-								opacity:1.0;
-								background-image: url(' . $article_array[1][3] . ');
-								background-size:100%;
-								background-repeat: no-repeat;
-							}
-							.newsHeader{
-								margin:0 0 5px 0;
-								width:100%;
-								height:5%;
-								background:black;
-								opacity:0.5;
-								
-							}
-							</style>
-							<div class=¨newsHeader¨><h1>' . $article_array[1][1] . '</h1></div>
-							');
-						
-					//display the first article
-					//showArticle(1);
+						var article_id = [];
+						var article_title = [];
+						var article_message = [];
+						var article_img = [];
+						var article_date = [];
+						var current_article;
+					</script>
+					");
+					
+					for ($i = 1; $i < $article_count + 1;$i = $i + 1){
+						echo ('
+						<script>
+							article_id[' .$i . '] = ' . $article_array[$i][0] . ';
+							article_title[' .$i . '] = "' . $article_array[$i][1] . '";
+							article_message[' .$i . '] = "' . $article_array[$i][2] . '";
+							article_img[' .$i . '] = "' . $article_array[$i][3]. '";
+							article_date[' .$i . '] = "' . $article_array[$i][4] . '";
+						</script>
+						');
 					}
 					
-					function showArticle($article_Num){
-							
-						}
-						
-					getArticles();
-					
 					?>
+					
+					<script>
+
+		
+	//function to show articles
+	//this is some scary code woops
+	function showNews(article_num){
+		
+		if(article_num > 0 && article_num < (articleCount + 1)){
+			current_article = article_num;
+		}else{
+			current_article = 1;
+		}
+		
+		var newsFrame = document.getElementById("viewingFrame");
+		
+		var part1 = "<style>#viewingFrame {opacity: 1.0;background-image: url(";
+		var part2 = ");background-size: 100% ;background-repeat: no-repeat ;padding: 0;}.newsHeader {margin:0; top: 0;width: 100%; color: white; border-radius: 10px 10px 0 0; opacity: 0.9; background:black; padding-top: 10px; padding-bottom: 10px;}.newsHeader h1{opacity: 1;color: white; margin: 0;} .messageBody{margin-bottom: 65px;position: absolute; bottom: 0;width: 54.9%;height: 75px; color: white; border-radius: 0 0 10px 10px; opacity: 0.9; background: black;padding: 0;}.messageBody p{padding: 5px;margin: 0;} </style><div class='newsHeader'><h1>";
+		var part3 = "</h1></div><div class='messageBody'><p>";
+		var part4 = " </p><p>Article created on ";
+		var part5 = " </p></div>";
+
+		newsFrame.innerHTML = part1 + article_img[current_article] + part2 + article_title[current_article] + part3 + article_message[current_article] + part4 + article_date[current_article] + part5;
+	}
+	
+	showNews(1);
+</script>
 				</div>
+			
 				
 				<!--these will cycle through stories-->
-				<a href="#" onclick="leftClick()"><h2> <<< </h2></a>
+				<a href="#" onclick="showNews(current_article = current_article - 1)"><h2> <<< </h2></a>
+
+				<a href="#" onclick="showNews(current_article = current_article + 1)"><h2> >>> </h2></a>
 				
-				<a href="#" onclick="rightClick()"><h2> >>> </h2></a>
-					
-				</div>
-			</center>
+			</div>
+		</center>
 	</section>
 
 
