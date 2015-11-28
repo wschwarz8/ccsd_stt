@@ -35,3 +35,7 @@ nav p {
   display:inline-block;
   margin-left:20px;
 }
+.centeringFrame a{
+  text-decoration:none;
+  color:black;
+}

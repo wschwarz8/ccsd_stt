@@ -2,7 +2,7 @@
 require_once 'config.php';
 require_once "functions.php";
 
-makeHeader("Student Jobs", "Student Jobs",3,'<meta http-equiv="refresh" content="60">');
+makeHeader("Student Jobs", "Student Jobs",2,'<meta http-equiv="refresh" content="60">');
 
 if(isset($_GET['id'])){
 
@@ -40,6 +40,6 @@ else{
    echo "You forgot to tell me which student to show.<BR><BR><img src='http://storage.googleapis.com/chromeos-mgmt/0gjdgxs0jovce3/ChromeOsWallpaper/f5aac6c6-025d-4cc9-b8f5-da49114ca310'>";
 }
 
-makefooter("",3);
+makefooter("",2);
 
 ?>
