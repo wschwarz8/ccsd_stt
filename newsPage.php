@@ -2,16 +2,15 @@
   require_once "functions.php";
   require_once "config.php";
 	makeHeader("News","News Page",2, "<link href='css_files/newsPage.css' rel='stylesheet'>");
+	
+	$article_count = 0;
 
 	$conn = mysql_connect("localhost", $g_username, $g_password);
 			
 	mysql_select_db('stt', $conn);
-
 	$query = "SELECT * FROM news";
-
 	//commence query
 	$info = mysql_query($query);
-
 	//store info from query into an array
 	while($useful_info = mysql_fetch_assoc($info)){
 		$article_part = 0;
@@ -24,19 +23,21 @@
 		$article_array[$useful_info['article_id']][$article_part]=$useful_info['image_url'];
 		$article_part = 4;
 		$article_array[$useful_info['article_id']][$article_part]=$useful_info['date'];
-
 		//takes on the last articles id giving total amount of articles
 		$article_count = $useful_info['article_id'];
 	}
-
 ?>
 
 	<section class="newNews">
 		
 		<?php
 		
-		if ($_POST && $_POST['password'] == 'password'){
+		if ($_POST && $_POST['password'] == 'password1'){
+			
+			$_POST['password'] = "dfgsdfsdfsd";
+			
 			$article_count = $article_count + 1;
+			
 			$article_array[$article_count][0] = $article_count;
 			$article_array[$article_count][1] = $_POST['title'];
 			$article_array[$article_count][2] = $_POST['message'];
@@ -47,8 +48,40 @@
 			
 			mysql_query($queryinfo);
 			
-			mysql_close($conn);
-		} 
+
+		} else if ($_POST && $_POST['password'] == 'password2'){
+			
+			$_POST['password'] = "tyerterte";
+			
+			//change how many articles their are now
+			$oldArticle_count = $article_count;
+			$article_count = $article_count - 1;
+			
+			//update still present articles to new article id's
+			if ($article_count != 0){
+				//move stories up behind id that will be removed
+				for ($i = $_POST['articleId']; $i <= $oldArticle_count - 1; $i = $i + 1){
+		
+					$article_array[$i][0] = $article_array[$i][0];
+					$article_array[$i][1] = $article_array[$i+1][1];
+					$article_array[$i][2] = $article_array[$i+1][2];
+					$article_array[$i][3] = $article_array[$i+1][3];
+					$article_array[$i][4] = $article_array[$i+1][4];
+					
+					$updateQuery ="UPDATE `news` SET `article_id`=". $article_array[$i][0] .",`title`='" . $article_array[$i][1] . "',`message`='" . $article_array[$i][2] . "',`image_url`='',`date`='' WHERE article_id=".$i; 
+					
+					mysql_query($updateQuery);
+				}
+			}
+			
+			//make query to delete selected article
+			$removeQuery = "DELETE FROM `news` WHERE article_id=" . $oldArticle_count;
+			
+			//remove last uncessary article
+			mysql_query($removeQuery);
+			
+
+		}
 		
 		?>
 		<center>
@@ -85,7 +118,7 @@
 						<tr>
 							<td>Authorization Code:</td>
 							<td>
-								<input type="password" name="password" placeholder="password:)">
+								<input type="password" name="password" placeholder="password1">
 							</td>
 						</tr>
 					</table>
@@ -109,10 +142,17 @@
 					}
 					?>
 				</table>
+				<p>Remove an Article?</p>
+				<form method="post" name="deleteArticle">
+					<input type="text" name="articleId" placeholder="Article Id">
+					<input type="password" name="password" placeholder="password2">
+					<input type="Submit" value="Submit">
+				</form>
 			</div>
 		</center>
 	</section>
 
 	<?php
   makeFooter("",0,"false");
+			mysql_close($conn);
 ?>
