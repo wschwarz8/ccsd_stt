@@ -32,7 +32,7 @@
 		
 		<?php
 		
-		if ($_POST && $_POST['password'] == 'password1'){
+		if ($_POST && $_POST['password'] == 'password1'){//password is password1
 			
 			$article_count = $article_count + 1;
 			
@@ -47,7 +47,7 @@
 			mysql_query($queryinfo);
 			
 
-		} else if ($_POST && $_POST['password'] == 'password2'){
+		} else if ($_POST && $_POST['password'] == 'password2'){//password is password2
 			
 			
 			//change how many articles their are now
