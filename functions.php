@@ -67,8 +67,6 @@ function styleChoice($styleNum){
 	}
 }
 
-
-
 function promptLogin()
 {
 	session_start();
