@@ -8,104 +8,72 @@ function makeHeader($tbtitle,$ptitle,$pstyle, $hhtml=""){
 	echo("
 	<!--max devos made this -->
 	<html>
-		<header>
+		<head>
 			<title>". $tbtitle . "</title>
-			<style>". styleChoice($pstyle) . "</style>");
+			". styleChoice($pstyle)
+			);
 	echo $hhtml;
 	echo("
-		</header>
+		</head>
 		<body>
 			<div class='header'>
-				<a href='index.php'><h1 id='headerTitle'>". $ptitle . "</h1><a>
+				<a href='../index.php'><h1 id='headerTitle'>". $ptitle . "</h1><a>
+				<div class='buttonRow'>
+					<a href='../index.php'><div class='buttons'>Home</div></a><a href='../jobs.php'><div class='buttons'>Jobs</div></a> <a href='../scoreboard.php'><div class='buttons'>Scoreboard</div></a> <a href='../team.php'><div class='buttons'>Team Pages</div></a> <a href='../DisplayBroken.php'><div class='buttons'>Broken</div></a> <a href='../login/login.php'><div class='buttons'>Login</div></a> 
+				</div>
 			</div>
+			<div class='meat'>
 	");
 }
 //footer function to set up the end of a webpage easier
 //call this function by declaring
 //makeFooter(String: "message", Int style#);
 //leave style as 0 if you want to keep the style from the makeHeader functions
-function makeFooter($footermessage,$pstyle){
+function makeFooter($footermessage,$pstyle,$footerbox=""){
 	echo("
 	<!--max devos made this -->
+	</div>
 		<style>". styleChoice($pstyle) ."</style>
-			
+			");
+			 if ($footerbox === "false"){
+			 }else{
+				echo ("
 				<div class='footer'>
 					<h3 id='footerMessage'>". $footermessage . "</h3>
 				</div>
-			
+				");
+			 }
+			 echo ("
 		<body>
-			
 	<html>
 	");
 }
+
+
+//stores desired theme into a variable
 function styleChoice($styleNum){
 	switch($styleNum){
 		case 1://basic style with some bare structure
-		return $styleText= "
-		html{margin:0;padding:0;background:Black;color:White;}
-		
-		body{margin: 0 10% 0 10%;padding: 0 1% 0 1%;background:gold;color:black;font-size: 20px;}
-		
-		.header{position:absolutewidth:78%;height:75px;background:black;color:White;margin-top:0;border-radius: 0 0 10px 10px;}
-		
-		.header a{text-decoration:none;}
-		
-		.header a:hover{text-decoration:underline;}
-		
-		#headerTitle{text-align: Center;color:white;border-bottom:0;}
-		
-		.footer{position:absolute;bottom:0;width:78%;height:75px;background:black;color:white;border-radius: 10px 10px 0 0;}
-		
-		#footerMessage{text-align: Center;}
-		";
+		return $styleText = '<link href="/css_files/headerStyle1.css" rel="stylesheet">';                     
 		break;
-		case 2://moderately complex
-		return $styleText="
-		html{margin:0;padding:0;background:Black;color:White;}
-		
-		body{margin: 0 10% 0 10%;padding: 0 1% 0 1%;background:gold;color:black;font-size: 20px;}
-		
-		.header a{text-decoration:none;}
-		
-		.header a:hover{text-decoration:underline;}
-		
-		.header{position:absolutewidth:78%;height:75px;background: linear-gradient(to right, black, black, grey,black, black);color:gold;margin-top:0;border-radius: 0 0 10px 10px;opacity:0.9;}
-		
-		#headerTitle{text-align: Center;color: gold;opacity:1;}
-		
-		.footer{position:absolute;bottom:0;width:78%;height:75px;color:white;border-radius: 10px 10px 0 0; opacity:0.9;background: linear-gradient(to right, black, black, grey,black, black);}
-		
-		#footerMessage{text-align: Center;}
-		";
+		case 2://coding theme
+		return $styleText = '<link href="/css_files/headerStyle2.css" rel="stylesheet">';
 		break;
-		case 3://very complex and fancy 
-		return $styleText = "
-		html{margin:0;padding:0;background:Black;color:White;}
-		
-		body{margin: 0 10% 0 10%;padding: 0 1% 0 1%;background:gold;color:black;font-size: 20px;}
-		
-		.header a{text-decoration:none;}
-		
-		.header a:hover{text-decoration:underline;}
-		
-		.header{position:absolutewidth:78%;height:75px;background: linear-gradient(to right, black, black, grey,black, black);color:gold;margin-top:0;border-radius: 0 0 10px 10px;opacity:0.9;}
-		
-		#headerTitle{text-align: Center;color: gold;opacity:1;}
-		
-		.footer{position:absolute;bottom:0;width:78%;height:75px;color:white;border-radius: 10px 10px 0 0; opacity:0.9;background: linear-gradient(to right, black, black, grey,black, black);}
-		
-		#footerMessage{text-align: Center;}
-		";
+		case 3://braves theme
+		return $styleText = '<link href="/css_files/headerStyle3.css" rel="stylesheet";>';
 		break;
 		default://select this style if you want to have your own style. Just have your <style> or <link> tags be your first line of code between the header and footer functions
 		return $styleText = "";
 	}
 }
 
-
-
 function promptLogin()
 {
-	//stuff
+	session_start();
+	
+	if(!$_SESSION['loginid'])
+	{
+		header('location:login/login.php?reason=1');
+	}
 }
 ?>

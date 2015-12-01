@@ -60,8 +60,13 @@ $script = "
 
 		}
 	}	
-	</script>";
-makeHeader("Job List","Job List",3,$script);
+	</script>
+	<style>
+	td{
+		color:white;
+	}
+	</style>";
+makeHeader("Job List","Job List",2,$script);
 ?>
 	<body>
 		<form name="Theform" id="Theform">
@@ -83,6 +88,7 @@ else if (false ) {
 $query= $query .	" order by points"; 
 }
 
+<<<<<<< HEAD
 else {  /// order by default 
 
 $query = $query . " ORDER BY priority DESC, category";
@@ -101,9 +107,9 @@ FROM devices a, students b
 WHERE status_id < 6 AND (a.assignedto_id = b.id OR (a.assignedto_id=0 AND b.id=9))
 ORDER BY status_id";
 	
+=======
+>>>>>>> 8f84ded39713278bc2edfb9bf61b5ebf1fc6cdf3
 $result = mysql_query($query);
-
-$result2 = mysql_query($query2);
 
 if (!$result) {
     die('Invalid query: ' . mysql_error());
@@ -111,8 +117,12 @@ if (!$result) {
 
 // prints one row at a time, the results from the database.
 echo "<table border=1>";
+<<<<<<< HEAD
 echo "<tr><td>Job</td><td>Description</td><td>Points</td><td><a href=''>Category</a></td><td>Claimed By</td></tr>";
 printjobs($result2, false);
+=======
+echo "<tr><td>Job</td><td>Description</td><td>Points</td><td>Category</td><td>Claimed By</td></tr>";
+>>>>>>> 8f84ded39713278bc2edfb9bf61b5ebf1fc6cdf3
 printjobs($result, true);
 	
 echo "</table>";
@@ -134,4 +144,4 @@ mysql_close($g_link);
 		</form>
 	</body>
 <?
-makefooter("",3);
+makefooter("",0);

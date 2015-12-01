@@ -1,15 +1,15 @@
 
 
 .header{
-	background:silver;
+	background:white;
 	margin-top: 0;
 	margin-left:10px;
 	margin-right:10px;
 	border-radius: 0 0 10px 10px;
-	opacity: 0.8;
+	opacity: 0.9;
 	padding:5px;
 }
-#title{
+#headerTitle{
 	text-align: center;
 	
 }
