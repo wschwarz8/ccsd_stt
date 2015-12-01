@@ -73,11 +73,29 @@ makeHeader("Job List","Job List",3,$script);
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 mysql_select_db('stt', $g_link);
 
-$query = "SELECT a.name as sname, a.description, b.category, a.points, c.name, a.priority, a.repeatable, a.id
-FROM jobs a, skillcategories b, students c
-WHERE status<4 AND a.skillcatid=b.id AND a.status=1 AND (a.claimedby=c.id OR (a.claimedby=0 AND c.id=9))
-ORDER BY priority DESC, category";
+	$query = "SELECT a.name as sname, a.description, b.category, a.points, c.name, a.priority, a.repeatable, a.id
+	FROM jobs a, skillcategories b, students c
+	WHERE status<4 AND a.skillcatid=b.id AND a.status=1 AND (a.claimedby=c.id OR (a.claimedby=0 AND c.id=9))";
+	if (true) {///order by category 
+	$query = $query ." ORDER BY category";
+}
+else if (false ) { 
+$query= $query .	" order by points"; 
+}
 
+else {  /// order by default 
+
+$query = $query . " ORDER BY priority DESC, category";
+}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 $query2 = "SELECT owner as sname, problem as description, 'Computer Hardware' as category, point_value as points, b.name, 1 as priority, 0 as repeatable, a.id 
 FROM devices a, students b 
 WHERE status_id < 6 AND (a.assignedto_id = b.id OR (a.assignedto_id=0 AND b.id=9))
@@ -93,7 +111,7 @@ if (!$result) {
 
 // prints one row at a time, the results from the database.
 echo "<table border=1>";
-echo "<tr><td>Job</td><td>Description</td><td>Points</td><td>Category</td><td>Claimed By</td></tr>";
+echo "<tr><td>Job</td><td>Description</td><td>Points</td><td><a href=''>Category</a></td><td>Claimed By</td></tr>";
 printjobs($result2, false);
 printjobs($result, true);
 	
