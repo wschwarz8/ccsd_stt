@@ -34,8 +34,6 @@
 		
 		if ($_POST && $_POST['password'] == 'password1'){
 			
-			$_POST['password'] = "dfgsdfsdfsd";
-			
 			$article_count = $article_count + 1;
 			
 			$article_array[$article_count][0] = $article_count;
@@ -51,7 +49,6 @@
 
 		} else if ($_POST && $_POST['password'] == 'password2'){
 			
-			$_POST['password'] = "tyerterte";
 			
 			//change how many articles their are now
 			$oldArticle_count = $article_count;
@@ -68,7 +65,7 @@
 					$article_array[$i][3] = $article_array[$i+1][3];
 					$article_array[$i][4] = $article_array[$i+1][4];
 					
-					$updateQuery ="UPDATE `news` SET `article_id`=". $article_array[$i][0] .",`title`='" . $article_array[$i][1] . "',`message`='" . $article_array[$i][2] . "',`image_url`='',`date`='' WHERE article_id=".$i; 
+					$updateQuery ="UPDATE `news` SET `article_id`=". $article_array[$i][0] .",`title`='" . $article_array[$i][1] . "',`message`='" . $article_array[$i][2] . "',`image_url`='". $article_array[$i][3] ."',`date`='". $article_array[$i][4] ."' WHERE article_id=".$i; 
 					
 					mysql_query($updateQuery);
 				}
