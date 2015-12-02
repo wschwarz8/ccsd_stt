@@ -60,8 +60,13 @@ $script = "
 
 		}
 	}	
-	</script>";
-makeHeader("Job List","Job List",3,$script);
+	</script>
+	<style>
+	td{
+		color:white;
+	}
+	</style>";
+makeHeader("Job List","Job List",2,$script);
 ?>
 	<body>
 		<form name="Theform" id="Theform">
@@ -73,11 +78,37 @@ makeHeader("Job List","Job List",3,$script);
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 mysql_select_db('stt', $g_link);
 
-$query = "SELECT a.name as sname, a.description, b.category, a.points, c.name, a.priority, a.repeatable, a.id
-FROM jobs a, skillcategories b, students c
-WHERE status<4 AND a.skillcatid=b.id AND a.status=1 AND (a.claimedby=c.id OR (a.claimedby=0 AND c.id=9))
-ORDER BY priority DESC, category";
+	$query = "SELECT a.name as sname, a.description, b.category, a.points, c.name, a.priority, a.repeatable, a.id
+	FROM jobs a, skillcategories b, students c
+	WHERE status<4 AND a.skillcatid=b.id AND a.status=1 AND (a.claimedby=c.id OR (a.claimedby=0 AND c.id=9))";
+	if (true) {///order by category 
+	$query = $query ." ORDER BY category";
+}
+else if (false ) { 
+$query= $query .	" order by points"; 
+}
 
+<<<<<<< HEAD
+else {  /// order by default 
+
+$query = $query . " ORDER BY priority DESC, category";
+}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+$query2 = "SELECT owner as sname, problem as description, 'Computer Hardware' as category, point_value as points, b.name, 1 as priority, 0 as repeatable, a.id 
+FROM devices a, students b 
+WHERE status_id < 6 AND (a.assignedto_id = b.id OR (a.assignedto_id=0 AND b.id=9))
+ORDER BY status_id";
+	
+=======
+>>>>>>> 8f84ded39713278bc2edfb9bf61b5ebf1fc6cdf3
 $result = mysql_query($query);
 
 if (!$result) {
@@ -86,7 +117,12 @@ if (!$result) {
 
 // prints one row at a time, the results from the database.
 echo "<table border=1>";
+<<<<<<< HEAD
+echo "<tr><td>Job</td><td>Description</td><td>Points</td><td><a href=''>Category</a></td><td>Claimed By</td></tr>";
+printjobs($result2, false);
+=======
 echo "<tr><td>Job</td><td>Description</td><td>Points</td><td>Category</td><td>Claimed By</td></tr>";
+>>>>>>> 8f84ded39713278bc2edfb9bf61b5ebf1fc6cdf3
 printjobs($result, true);
 	
 echo "</table>";
@@ -108,4 +144,4 @@ mysql_close($g_link);
 		</form>
 	</body>
 <?
-makefooter("",3);
+makefooter("",0);

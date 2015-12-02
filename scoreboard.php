@@ -1,7 +1,7 @@
 <?php
 require_once "functions.php";
 require_once 'config.php';
-
+promptlogin();
 
 function weekdiff($date1, $date2) {
    if($date1 > $date2) return weekdiff($date2, $date1);
@@ -71,7 +71,7 @@ mysql_close($g_link);
 
 arsort($scoreboard);
 
-makeHeader("Scoreboard for $label","Scoreboard for $label",3,"<meta http-equiv='refresh' content='60'>");
+makeHeader("Scoreboard for $label","Scoreboard for $label",2,"<meta http-equiv='refresh' content='60'><style>table{color:white;}a{color:white;}</style>");
 
 //<meta http-equiv="refresh" content="60">
 if($type=='thisweek') echo "thisWeek";
@@ -97,5 +97,5 @@ echo "</td><td>";
 echo "<a href='http://xkcd.com'><img src='".$obj->{'img'}."'></a>";
 echo "</td></tr></table>";
 
-//	makefooter("",3);
+makefooter("",0,"false");
 ?>

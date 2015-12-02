@@ -1,0 +1,38 @@
+.newNews{
+  float:left;
+  width:37%;
+  margin:0;
+  padding:0;
+}
+.newNews table{
+  border:white 1px solid;
+  text-align:center;
+}
+.newNews td{
+   border:white 1px solid;
+}
+.newNews a {
+  color:white;
+}
+
+.currentNews{
+  float:right;
+  width:60%;
+  margin:0;
+  padding:0;
+}
+.currentArticles{
+  color:white;
+  
+}
+.currentArticles table{
+  border:white 1px solid;
+  text-align:center;
+  
+}
+.currentArticles td{
+  border:white 1px solid;
+  color:white;
+  padding-left:3px;
+  padding-right:3px;
+}
