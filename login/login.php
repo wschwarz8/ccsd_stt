@@ -30,13 +30,12 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 		
 		$cost = 10;
 		
-		$salt = strtr(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM), '+', '.' );
-	
-		//$salt = sprintf("$2a$%02d$", $cost) . $salt;
-	
-echo $salt;
-	die;
+		$salt = "E0hKDlY5A7HrmatD9vcSMg==";
+
+		$salt = sprintf("$2a$%02d$", $cost). $salt;
+
 		$hash = crypt($_POST["password"], $salt);
+
 
 		if($_POST["username"] !== $row["username"] && $_POST["password"] !== $row["password"])
 		{
