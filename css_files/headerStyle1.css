@@ -1,0 +1,68 @@
+html {
+  margin: 0;
+  padding: 0;
+  background: Black;
+  color: White;
+}
+
+body {
+  margin: 0 10% 0 10%;
+  padding: 0 1% 0 1%;
+  background: gold;
+  color: black;
+  font-size: 20px;
+}
+
+.header {
+  position: absolute;
+  width: 78%;
+  height: 75px;
+  background: black;
+  color: White;
+  margin-top: 0;
+  border-radius: 0 0 10px 10px;
+}
+
+.header a {
+  text-decoration: none;
+}
+
+.header a:hover {
+  text-decoration: underline;
+}
+
+#headerTitle {
+  text-align: Center;
+  color: white;
+  border-bottom: 0;
+}
+
+.buttonRow {
+  width: 100%;
+  text-align: center;
+}
+
+.buttons {
+  width: 120px;
+  height: 30px;
+  display: inline-block;
+  background: yellow;
+  color: black;
+  margin-left: 40px;
+  border-radius: 8px;
+  padding-top: 3px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 78%;
+  height: 75px;
+  background: black;
+  color: white;
+  border-radius: 10px 10px 0 0;
+}
+
+#footerMessage {
+  text-align: Center;
+}

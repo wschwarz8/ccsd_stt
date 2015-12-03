@@ -1,0 +1,69 @@
+html {
+  margin: 0;
+  padding: 0;
+  background: Black;
+  color: White;
+}
+
+body {
+  margin: 0 10% 0 10%;
+  padding: 0 1% 0 1%;
+  background: gold;
+  color: black;
+  font-size: 20px;
+}
+
+.header a {
+  text-decoration: none;
+}
+
+.header a:hover {
+  text-decoration: underline;
+}
+
+.header {
+  position: absolutewidth: 78%;
+  height: 125px;
+  background: linear-gradient(to right, black, black, grey, black, black);
+  color: gold;
+  margin-top: 0;
+  border-radius: 0 0 10px 10px;
+  opacity: 0.9;
+}
+
+#headerTitle {
+  text-align: Center;
+  color: gold;
+  opacity: 1;
+}
+
+.buttonRow {
+  width: 100%;
+  text-align: center;
+}
+
+.buttons {
+  width: 120px;
+  height: 30px;
+  display: inline-block;
+  background: yellow;
+  color: black;
+  margin-left: 40px;
+  border-radius: 8px;
+  padding-top: 3px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 78%;
+  height: 75px;
+  color: white;
+  border-radius: 10px 10px 0 0;
+  opacity: 0.9;
+  background: linear-gradient(to right, black, black, grey, black, black);
+}
+
+#footerMessage {
+  text-align: Center;
+}

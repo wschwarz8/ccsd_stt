@@ -1,5 +1,10 @@
 <?php
 session_start();
+//if($_GET='reason')
+	
+//{
+	//echo"<script>alert('You need to login to view this page!');</script>";
+//}
 
 if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone has attempted a login
 {
@@ -25,10 +30,12 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 		
 		$cost = 10;
 		
-		$salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.' );
-
-		$salt = sprintf("$2a$%02d$", $cost) . $salt;
-		
+		$salt = strtr(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM), '+', '.' );
+	
+		//$salt = sprintf("$2a$%02d$", $cost) . $salt;
+	
+echo $salt;
+	die;
 		$hash = crypt($_POST["password"], $salt);
 
 		if($_POST["username"] !== $row["username"] && $_POST["password"] !== $row["password"])
@@ -51,11 +58,8 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 	
 		else
 		{
-			header('location:../index.html');
 			$_SESSION['loginid']=$_POST['username'];
-			echo $hash;
-			die;
-			
+			header('location:../index.php');	
 		}
 		
 	
