@@ -1,0 +1,65 @@
+.header a{
+  text-decoration:none;
+  color:Black;
+}
+		
+.header a:hover{
+  text-decoration:underline;
+}
+
+.circleColor{
+  width:100px;
+  height:100px;
+  display:inline-block;
+  border-radius:100%;
+}
+.circleColor p{
+  margin:40px 0 0 0;
+}
+#red{
+  background:red;
+ 	width:100px;
+  height:100px;
+ 	border-radius:100%;
+	position:absolute;
+}
+#redDiv1{
+  background:red;
+ 	width:100px;
+  height:100px;
+ 	border-radius:100%;
+	position:absolute;
+}
+#orange{
+  background:orange;
+}
+#yellow{
+  background:yellow;
+}
+#green{
+  background:green;
+}
+#blue{
+  background:blue;
+}
+#purple{
+  background:purple;
+}
+
+
+
+.playArea{
+  margin:5px 0 0 0;
+  height:350px;
+  background:White;
+}
+.canvas{
+	height:350px;
+	position:initial;
+}
+
+
+
+
+
+

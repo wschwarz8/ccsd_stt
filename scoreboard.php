@@ -1,5 +1,14 @@
 <?php
+require_once "functions.php";
 require_once 'config.php';
+promptlogin();
+
+function weekdiff($date1, $date2) {
+   if($date1 > $date2) return weekdiff($date2, $date1);
+    $first = DateTime::createFromFormat('m/d/Y', $date1);
+    $second = DateTime::createFromFormat('m/d/Y', $date2);
+    return floor($first->diff($second)->days/7);
+}
 
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 
@@ -14,6 +23,7 @@ else if($_GET['type']=='all'){
 else{
    $type = 'thisweek';
 }
+
 
 $query = "SELECT a.id, a.name, b.points, c.category
 FROM students a, points b, skillcategories c
@@ -30,6 +40,13 @@ else if($type=='lastweek'){ // If this is a weekly score and not a total score
     $last_last_sunday = date('Y-m-d H:i_s', strtotime('-2 weeks Sunday'));
     $query .= " AND b.timestamp < '$last_sunday'";
     $query .= " AND b.timestamp > '$last_last_sunday'";
+}
+else if($type=='all'){
+    $maxpoints = 100 - floor(100/20 * (weekdiff('1/8/2016', date("m/d/Y"))));
+    $label='now';
+}
+else { // This shouldn't happen
+    $label='ERROR';
 }
 
 mysql_select_db('stt', $g_link);
@@ -54,13 +71,9 @@ mysql_close($g_link);
 
 arsort($scoreboard);
 
-?>
-<html>
-<head>
-<meta http-equiv="refresh" content="60">
-</head>
-<body>
-<?php
+makeHeader("Scoreboard for $label","Scoreboard for $label",2,"<meta http-equiv='refresh' content='60'><style>table{color:white;}a{color:white;}</style>");
+
+//<meta http-equiv="refresh" content="60">
 if($type=='thisweek') echo "thisWeek";
 else echo "<a href='scoreboard.php?type=thisweek'>thisWeek</a>";
 echo " | ";
@@ -71,11 +84,11 @@ if($type=='all') echo "all";
 else echo "<a href='scoreboard.php?type=all'>all</a>";
 
 echo "<table><tr><td valign=top>";
-echo "<nobr><h3>Scores for $label</h3></nobr>";
+if($label=='now') echo '<BR>(Out of '.$maxpoints.' points)';
 echo "<table><tr><td>";
-echo "<tr><td>Student</td><td>Score</td>";
+echo "<tr><td><nobr>Student</nobr></td><td>Score</td>";
 foreach ($scoreboard as $key => $value) {
-    echo "<tr><td><a href='studentJobs.php?id=$key'>".$names[$key]."</td><td>$value</td></tr>";
+    echo "<tr><td><nobr><a href='studentJobs.php?id=$key'>".$names[$key]."</nobr></td><td>$value</td></tr>";
 }
 echo "</table>";
 
@@ -83,6 +96,6 @@ $obj = json_decode(stream_get_contents(fopen("http://xkcd.com/info.0.json", "rb"
 echo "</td><td>";
 echo "<a href='http://xkcd.com'><img src='".$obj->{'img'}."'></a>";
 echo "</td></tr></table>";
+
+makefooter("",0,"false");
 ?>
-</body>
-</html>

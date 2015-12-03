@@ -1,0 +1,78 @@
+html {
+  background: grey;
+  margin-bottom: 0;
+}
+
+body {
+  margin: 0 10% 0 10%;
+  padding: 0 1% 0 1%;
+  background-color: black;
+  background-image: url(http://goo.gl/JrYNZX);
+  background-repeat: no-repeat;
+  border-radius: 0;
+}
+
+.header {
+  background: white;
+  margin-top: 0;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 0 0 10px 10px;
+  opacity: 0.9;
+  padding: 5px;
+}
+
+.header a {
+  text-decoration: none;
+  color: Black;
+}
+
+.header a:hover {
+  text-decoration: underline;
+}
+
+#headerTitle {
+  text-align: center;
+}
+
+.buttonRow {
+  width: 100%;
+  text-align: center;
+}
+
+.buttons {
+  width: 15%;
+  height: 30px;
+  display: inline-block;
+  background: black;
+  color: white;
+  border-radius: 8px;
+  padding-top: 3px;
+  margin-left: 1.0%;
+}
+
+.meat {
+  position: absolute;
+  width: 77%;
+  background: black;
+  color: White;
+  margin-top: 5px;
+  border-radius: 10px;
+  padding: 5px;
+  opacity: 0.9;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 78%;
+  height: 75px;
+  color: black;
+  border-radius: 10px 10px 0 0;
+  opacity: 0.9;
+  background: white;
+}
+
+#footerMessage {
+  text-align: Center;
+}
