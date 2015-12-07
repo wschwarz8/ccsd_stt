@@ -1,10 +1,12 @@
 <?php
 session_start();
-//if($_GET='reason')
+
+if(isset($_GET["reason"]))
 	
-//{
-	//echo"<script>alert('You need to login to view this page!');</script>";
-//}
+{
+	echo"<script>alert('You need to login to view this page!');</script>";
+	
+}
 
 if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone has attempted a login
 {
@@ -29,16 +31,14 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 		$row = mysql_fetch_assoc($result);	
 		
 		$cost = 10;
-		
-		$salt = strtr(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM), '+', '.' );
-	
-		//$salt = sprintf("$2a$%02d$", $cost) . $salt;
-	
-echo $salt;
-	die;
+
+
+		$salt = sprintf("$2a$%02d$", $cost). $salt;
+
 		$hash = crypt($_POST["password"], $salt);
 
-		if($_POST["username"] !== $row["username"] && $_POST["password"] !== $row["password"])
+
+		if($_POST["username"] !== $row["username"] && $hash !== $row["password"])
 		{
 			echo "<script>window.location.href='login.php';alert('The password and Username you have entered are incorrect, try again!');</script>";
 		}
@@ -50,7 +50,7 @@ echo $salt;
 		}
 	
 	
-		elseif($_POST["password"] !== $row["password"])
+		elseif($hash !== $row["password"])
 		{
 			echo "<script>window.location.href='login.php';alert('The password you have entered is incorrect, try again!');</script>";
 		}

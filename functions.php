@@ -68,9 +68,7 @@ function styleChoice($styleNum){
 }
 
 function promptLogin()
-{
-	session_start();
-	
+{	
 	if(!$_SESSION['loginid'])
 	{
 		header('location:login/login.php?reason=1');

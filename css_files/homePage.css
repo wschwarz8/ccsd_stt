@@ -39,3 +39,20 @@ nav p {
   text-decoration:none;
   color:black;
 }
+.directionButts{
+  border: 0;
+  background: black;
+  border-radius: 4px;
+  box-shadow: 0 5px 0 grey;
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  margin: 10px 0 0 0;
+  outline: 0;
+  padding: 5px 5px;
+  transition: all .1s linear;
+}
+.directionButts:active{
+  box-shadow: 0 2px 0 grey;
+  transform: translateY(3px)
+}
