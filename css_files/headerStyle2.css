@@ -49,6 +49,17 @@ body {
   border-radius: 8px;
   padding-top: 3px;
   margin-left: 1.0%;
+  margin-bottom:3px;
+  border: 0;
+  box-shadow: 0 5px 0 grey;
+  cursor: pointer;
+  font: inherit;
+  outline: 0;
+  transition: all .1s linear;
+}
+.buttons:active{
+  box-shadow: 0 2px 0 grey;
+  transform: translateY(3px)
 }
 
 .meat {

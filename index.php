@@ -140,10 +140,8 @@
 				
 				
 			<!--these will cycle through stories-->
-			<a href="#" onclick="showNews(current_article = current_article - 1)"><h2> <<< </h2></a>
-				
-			<a href="#" onclick="showNews(current_article = current_article + 1)"><h2> >>> </h2></a>
-				
+				<button class="directionButts" onclick="showNews(current_article = current_article - 1)"> <<< </button>
+				<button class="directionButts" onclick="showNews(current_article = current_article + 1)"> >>> </button>
 			</div>
 		</center>
 	</section>
