@@ -28,6 +28,7 @@ USE `stt`;
 -- Table structure for table `pageviews`
 --
 
+DROP TABLE IF EXISTS `pageviews`;
 CREATE TABLE IF NOT EXISTS `pageviews` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `filename` varchar(32) DEFAULT NULL,
@@ -41,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `pageviews` (
 -- Table structure for table `news`
 --
 
+DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `article_id` int(4) NOT NULL AUTO_INCREMENT,
   `title` varchar(30) NOT NULL,

@@ -43,7 +43,7 @@ else if($type=='lastweek'){ // If this is a weekly score and not a total score
     $query .= " AND b.timestamp > '$last_last_sunday'";
 }
 else if($type=='all'){
-    $maxpoints = 100 - floor(100/20 * (weekdiff('1/8/2016', date("m/d/Y"))));
+    $maxpoints = 85 - floor(85/19 * (weekdiff('12/23/2015', date("m/d/Y"))));
     $label='now';
 }
 else { // This shouldn't happen
