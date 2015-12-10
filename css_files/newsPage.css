@@ -35,4 +35,8 @@
   color:white;
   padding-left:3px;
   padding-right:3px;
+  word-wrap: break-word;
+}
+.currentArticles p {
+  word-wrap: break-word;
 }

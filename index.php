@@ -120,27 +120,42 @@
 				<script>
 					//function to show articles
 					function showNews(article_num) {
-						if (article_archive[article_num] == 1){
-							article_num++;
-							if (article_archive[article_num] == 1){
-								article_num++;
-							}
-						}
+						
 							if (article_num > 0 && article_num < (articleCount + 1)) {
 								current_article = article_num;
 							} else {
 								current_article = 1;
 							}
+						 
+						//check if article is archived
+							if (article_archive[current_article] == 1){
+								//if article is archived the do this atleast once
+								do{
+									
+									//increment 1 article up
+									current_article = current_article + 1;
+									
+									//check if article id is valid
+									if (current_article > 0 && current_article < (articleCount + 1)) {
+										//leaving this cuz im lazy
+									} else {
+										current_article = 1;
+									}
+									
+									//check if the new article is still archived and if not start again
+								}while (article_archive[current_article] == 1)
+							}
+							
 							var newsFrame = document.getElementById("viewingFrame");
 
 							var part1 = "<style>#viewingFrame {opacity: 1.0;background-image: url(";
-							var part2 = ");background-size: 100% ;background-repeat: no-repeat ;padding: 0;}.newsHeader {margin:0; top: 0;width: 100%; color: white; border-radius: 10px 10px 0 0; opacity: 0.9; background:black; padding-top: 10px; padding-bottom: 10px;}.newsHeader h1{opacity: 1;color: white; margin: 0;} .messageBody{margin-bottom: 65px;position: absolute; bottom: 0;width: 54.9%;height: 75px; color: white; border-radius: 0 0 10px 10px; opacity: 0.9; background: black;padding: 0;}.messageBody p{padding: 5px;margin: 0;} </style><div class='newsHeader'><h1>";
+							var part2 = ");background-size: 100% ;background-repeat: no-repeat ;padding: 0;}.newsHeader {margin:0; top: 0;width: 100%; color: white; border-radius: 10px 10px 0 0; opacity: 0.9; background:black; padding-top: 10px; padding-bottom: 10px;}.newsHeader h1{opacity: 1;color: white; margin: 0;} .messageBody{transition: all .3s linear;margin-bottom: 65px;position: absolute; bottom: 0;width: 54.9%;height: 75px; color: white; border-radius: 0 0 10px 10px; opacity: 0.9; background: black;padding: 0;overflow:hidden;}.messageBody p{word-wrap: break-word;padding: 5px;margin: 0;}.messageBody:hover{height:300px;} </style><div class='newsHeader'><h1>";
 							var part3 = "</h1></div><div class='messageBody'><p>";
 							var part4 = " </p><p>Article created on ";
 							var part5 = " </p></div>";
 
 							newsFrame.innerHTML = part1 + article_img[current_article] + part2 + article_title[current_article] + part3 + article_message[current_article] + part4 + article_date[current_article] + part5;
-					}
+						}
 
 					showNews(1);
 				</script>
