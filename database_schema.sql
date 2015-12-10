@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `message` varchar(500) NOT NULL,
   `image_url` varchar(30) NOT NULL,
   `date` date NOT NULL,
+  `archive` int(3) NOT NULL,
   PRIMARY KEY (`article_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -56,8 +57,8 @@ CREATE TABLE IF NOT EXISTS `news` (
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`article_id`, `title`, `message`, `image_url`, `date`) VALUES
-(1, 'News is Here!', 'Finally the Student Tech Team has a news reel on the front page! It will help spread around all the important information of the class faster!', 'http://goo.gl/nIaQj6', '2015-11-25');
+INSERT INTO `news` (`article_id`, `title`, `message`, `image_url`, `date`, `archive`) VALUES
+(1, 'News is Here!', 'Finally the Student Tech Team has a news reel on the front page! It will help spread around all the important information of the class faster!', 'http://goo.gl/nIaQj6', '2015-11-25',0);
 
 -- --------------------------------------------------------
 
