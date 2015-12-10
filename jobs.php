@@ -38,7 +38,6 @@ function printjobs($result, $claimable) {
 		"<button type='button' id='button' onclick='claimjobfunction(".$row['id'].")'>
 		Claim Job
 	</button>
-	<style>a{color:white;}</style>
 	</td></tr>";
     }
   } // End While
@@ -65,6 +64,7 @@ $script = "
 	td{
 		color:white;
 	}
+	a{color:white;}
 	</style>";
 makeHeader("Job List","Job List",2,$script);
 ?>
@@ -84,7 +84,7 @@ mysql_select_db('stt', $g_link);
 	if ($_GET['sortby']=='category') {///order by category 
 	$query = $query ." ORDER BY category";
 }
-else if ($_GET['sortby']=='points') { 
+else if ($_GET['sortby']=='points') {
 $query= $query ."order by points"; 
 }
 
