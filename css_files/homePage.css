@@ -1,7 +1,7 @@
 nav{
   float:left;
   width:25%;
-  border:solid 1px white;
+  border:solid 2px white;
   border-radius:10px;
   height:525px;
 }
@@ -10,9 +10,17 @@ nav p {
   background:white;
   color:black;
   margin:0;
-  height:45px;
+  height:10%;
   border:solid 1px grey;
   padding-top:10px
+}
+nav h2{
+  height:10%;
+}
+.container{
+  margin:0;
+  padding:0;
+  height:80%;
 }
 .newsDisplay{
   width:74%;
@@ -55,4 +63,11 @@ nav p {
 .directionButts:active{
   box-shadow: 0 2px 0 grey;
   transform: translateY(3px)
+}
+nav a{
+  color:black;
+  text-decoration:none;
+}
+nav p:hover{
+  background:gray;
 }

@@ -46,7 +46,7 @@ DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `article_id` int(4) NOT NULL AUTO_INCREMENT,
   `title` varchar(30) NOT NULL,
-  `message` varchar(500) NOT NULL,
+  `message` varchar(1000) NOT NULL,
   `image_url` varchar(30) NOT NULL,
   `date` date NOT NULL,
   `archive` int(3) NOT NULL,

@@ -5,31 +5,49 @@
 	<nav>
 		<center>
 			<h2>Welcome to the site.</h2>
-			<p>
-				Visit <a href="phpmyadmin">here</a> for php MyAdmin.
-			</p>
-			<p>
-				Visit <a href="students_skills.php">here</a> for a list of Students and Skills.
-			</p>
-			<p>
-				Visit <a href="enter_skillNames.php">here</a> for entering skill names.
-			</p>
-			<p>
-				Visit <a href="scoreboard.php">here</a> for the scoreboard.
-			</p>
-			<p>
-				Visit <a href="jobs.php">here</a> for the Job List.
-			</p>
-			<p>
-				Visit <a href="team.php">here</a> for the team page.
-			</p>
-			<p>
-				Visit <a href="DisplayBroken.php"> here</a> for a list of broken chromebooks.
-			</p>
-			<p>
-				Visit <a href="login/login.php"> here</a> for the login page.
-			</p>
-		</center>
+			<div class="container">
+				 <a href="phpmyadmin">
+					<p>
+						Visit here for php MyAdmin.
+					</p>
+				</a>
+				<a href="students_skills.php">
+					<p>
+						Visit here for a list of Students and Skills.
+					</p>
+				</a>
+				<a href="enter_skillNames.php">
+					<p>
+						Visit here for entering skill names.
+					</p>
+				</a>
+				<a href="scoreboard.php">
+					<p>
+						Visit here for the scoreboard.
+					</p>
+				</a>
+				<a href="jobs.php">
+					<p>
+						Visit here for the Job List.
+					</p>
+				</a>
+				<a href="team.php">
+					<p>
+					Visit here for the team page.
+					</p>
+				</a>
+				<a href="DisplayBroken.php">
+					<p>
+					Visit here for a list of broken chromebooks.
+					</p>
+				</a>
+				<a href="login/login.php">
+					<p>
+					Visit here for the login page.
+					</p>
+				</a>
+			</div>
+		</center>	
 	</nav>
 	<section class="newsDisplay">
 		<center>
