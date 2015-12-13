@@ -30,6 +30,30 @@
 	}
 ?>
 
+<section class="currentNews">
+		<center>
+			<div class="currentArticles">
+			<h1>
+				Current News Articles
+			</h1>
+				<table>
+					<tr><td>Article ID</td><td>Title</td><td>Message</td><td>Image</td><td>Date</td></tr>
+					<?php
+					for ($i = 1;$i < $article_count + 1; $i = $i + 1){
+						if ($article_array[$i][5] == 1){
+							echo("<style>.article".$i."{background:red;}</style>");
+						}else{
+							echo("<style>.article".$i."{background:green;}</style>");
+						}
+						echo("<tr class='article".$i."'><td><p>" . $article_array[$i][0] . "</td><td><p>" . $article_array[$i][1] . "</p></td><td><p>" . $article_array[$i][2] . "</p></td><td><img src='" . $article_array[$i][3] . "' style='width:45px;height:45px;'></td><td><p>" . $article_array[$i][4] . "</p></td></tr>");
+					}
+					?>
+				</table>
+				
+			</div>
+		</center>
+	</section>
+
 	<section class="newNews">
 		
 		<?php
@@ -115,36 +139,22 @@
 		</center>
 	</section>
 
-	<section class="currentNews">
-		<center>
-			<div class="currentArticles">
-			<h1>
-				Current News Articles
-			</h1>
+<section class="articleStatus">
+	<center>
+		<h2>Change Archive Status</h2>
+			<form method="post" name="deleteArticle">
 				<table>
-					<tr><td>Article ID</td><td>Title</td><td>Message</td><td>Image</td><td>Date</td></tr>
-					<?php
-					for ($i = 1;$i < $article_count + 1; $i = $i + 1){
-						if ($article_array[$i][5] == 1){
-							echo("<style>.article".$i."{background:red;}</style>");
-						}else{
-							echo("<style>.article".$i."{background:green;}</style>");
-						}
-						echo("<tr class='article".$i."'><td><p>" . $article_array[$i][0] . "</td><td><p>" . $article_array[$i][1] . "</p></td><td><p>" . $article_array[$i][2] . "</p></td><td><img src='" . $article_array[$i][3] . "' style='width:45px;height:45px;'></td><td><p>" . $article_array[$i][4] . "</p></td></tr>");
-					}
-					?>
+					<tr><td>Article Id to Change:  </td><td><input type="text" name="articleId" placeholder="Article Id"></td></tr>
+					<tr><td>Authorization code: </td><td><input type="password" name="password" placeholder="password2"></td></tr>
 				</table>
-				<p>Change a article archive status</p>
-				<form method="post" name="deleteArticle">
-					<input type="text" name="articleId" placeholder="Article Id">
-					<input type="password" name="password" placeholder="password2">
-					<input type="Submit" value="Submit">
-				</form>
-			</div>
+				<input type="Submit" value="Submit">
+			</form>
 		</center>
 	</section>
 
+	
+	
 	<?php
-  makeFooter("",0,"false");
+  makeFooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 			mysql_close($conn);
 ?>

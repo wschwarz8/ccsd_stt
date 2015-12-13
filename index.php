@@ -1,6 +1,6 @@
 <?php
 	require_once "functions.php";
-	makeHeader("STT HOME","Student Technology Team Home",2,'<link href="/css_files/homePage.css" rel="stylesheet";><script language="javascript" type="text/javascript" src="javascript_files/homePage.js"></script>');
+	makeHeader("STT HOME","Student Technology Team Home",2,'<link href="/css_files/homePage.css" rel="stylesheet";><script language="javascript" type="text/javascript" src="secret.js"></script>');
 ?>
 	<nav>
 		<center>
@@ -188,5 +188,5 @@
 
 
 	<?php
-	makefooter("",0,"false");
+	makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 ?>

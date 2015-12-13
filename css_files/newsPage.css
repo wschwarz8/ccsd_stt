@@ -1,6 +1,6 @@
 .newNews{
   float:left;
-  width:37%;
+  width:50%;
   margin:0;
   padding:0;
 }
@@ -16,8 +16,8 @@
 }
 
 .currentNews{
-  float:right;
-  width:60%;
+  float:left;
+  width:100%;
   margin:0;
   padding:0;
 }
@@ -39,4 +39,19 @@
 }
 .currentArticles p {
   word-wrap: break-word;
+}
+.articleStatus{
+  float:right;
+  width:50%;
+  margin:0;
+  padding:0;
+}
+ .articleStatus td{
+  color:white;
+  border:white solid 1px;
+}
+.articleStatus table{
+  color:white;
+  border:white solid 1px;
+  margin-bottom: 3px;
 }

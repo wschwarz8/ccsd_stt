@@ -226,5 +226,5 @@
 	</style>
 
 	<?php
-	makeFooter("New name buttons with expandable descriptions!!!! To change your description(make this short) go into team.php and edit the p element. images can be added if they are square and urls are shortened at <a href='https://goo.gl/'>here</a>.", 0);
+	makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 ?>

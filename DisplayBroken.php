@@ -46,4 +46,5 @@ while ($row = mysql_fetch_assoc($result)) { // TODO format to look better
 }
 echo "</table>";
 mysql_close($g_link);
+makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 ?>

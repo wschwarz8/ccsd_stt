@@ -98,5 +98,5 @@ echo "</td><td>";
 echo "<a href='http://xkcd.com'><img src='".$obj->{'img'}."'></a>";
 echo "</td></tr></table>";
 
-makefooter("",0,"false");
+makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 ?>

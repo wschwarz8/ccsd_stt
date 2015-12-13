@@ -73,19 +73,21 @@ body {
   opacity: 0.9;
 }
 
-.footer {
+#footer {
   position: absolute;
-  bottom: 0;
-  width: 78%;
-  height: 75px;
+  width: 0;
+  height: 0;
   color: black;
-  border-radius: 10px 10px 0 0;
+  border-radius: 5px 5px 0 0;
   opacity: 0.9;
   background: white;
+  padding:0;
 }
 
 #footerMessage {
   text-align: Center;
+  padding:0;
+  margin:1px;
 }
 button{
   border: 0;
