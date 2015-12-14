@@ -1,13 +1,82 @@
-<?php
-require_once "../functions.php";
-makeHeader("Color Mixer", "Color Mixer", 2);
-?>
-<canvas id="mainSheet" height="400px" width="600px">get a htm5 compatible browser gosh dang it!!!</canvas>
- 
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>Canvas Drag and Drop Test</title>
+</head>
+<body>
+<section>
 
+<div>
+<canvas id="canvas" width="800" height="800">
+This text is displayed if your browser does not support HTML5 Canvas.
+</canvas>
+</div>
 
+<script type="text/javascript">
 
-  <?php
+var canvas;
+var ctx;
+var x = 75;
+var y = 50;
+var WIDTH = 800;
+var HEIGHT = 800;
+var dragok = false;
 
-makeFooter("",0,"false");
-?>
+function rect(x,y,w,h) {
+ ctx.beginPath();
+ ctx.rect(x,y,w,h);
+ ctx.closePath();
+ ctx.fill();
+}
+
+function clear() {
+ ctx.clearRect(0, 0, WIDTH, HEIGHT);
+}
+
+function init() {
+ canvas = document.getElementById("canvas");
+ ctx = canvas.getContext("2d");
+ return setInterval(draw, 10);
+}
+
+function draw() {
+ clear();
+ ctx.fillStyle = "#FAF7F8";
+ rect(0,0,WIDTH,HEIGHT);
+ ctx.fillStyle = "#444444";
+ rect(x - 15, y - 15, 30, 30);
+}
+
+function myMove(e){
+ if (dragok){
+  x = e.pageX - canvas.offsetLeft;
+  y = e.pageY - canvas.offsetTop;
+ }
+}
+
+function myDown(e){
+ if (e.pageX < x + 15 + canvas.offsetLeft && e.pageX > x - 15 +
+ canvas.offsetLeft && e.pageY < y + 15 + canvas.offsetTop &&
+ e.pageY > y -15 + canvas.offsetTop){
+  x = e.pageX - canvas.offsetLeft;
+  y = e.pageY - canvas.offsetTop;
+  dragok = true;
+  canvas.onmousemove = myMove;
+ }
+}
+
+function myUp(){
+ dragok = false;
+ canvas.onmousemove = null;
+}
+
+init();
+canvas.onmousedown = myDown;
+canvas.onmouseup = myUp;
+
+</script>
+
+</section>
+</body>
+</html>
