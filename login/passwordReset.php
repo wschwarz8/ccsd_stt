@@ -1,7 +1,7 @@
 <?php
 
 
-if(isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password2"]) && ($_POST['secret']=='1')) // Happens if someone has attempted account reset
+if(isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password2"]) && ($_POST['secret']==1)) // Happens if someone has attempted account reset
 {
 		require_once '../config.php';
 		require_once 'login.js';
@@ -14,30 +14,27 @@ if(isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["passw
 
 		mysql_select_db('stt', $g_link);
 
-
-	
-
+		if($pass1 !== $pass2)
+		{
+			echo "<script>window.location.href='passwordReset.php';alert('The passwords do not match! Please Re-enter your passwords and try again!');</script>";
+			
+		}
 	
 		if(!$g_link)
 		 {
 			 die("Connection failed: " . mysql_connect_error());
 		 }
 		
-	
-		
 		$cost = 10;
 	
 		$salt = sprintf("$2a$%02d$", $cost). $salt;
 
-		$hash = crypt($_POST["password"], $salt);
+		$hash = crypt($pass2, $salt);
 
 		$query = "UPDATE `students` SET `password`='$hash'  WHERE username ='$user'";
-   		$result = mysql_query($query);
-		if($result) {echo "Set password for ".$user."<BR>";}
-		else {echo mysql_error($g_link);}
-
+	
 }
-if(true)
+else
 {
 	?>
 	<html>
