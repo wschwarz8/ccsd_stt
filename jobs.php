@@ -85,13 +85,13 @@ mysql_select_db('stt', $g_link);
 	$query = $query ." ORDER BY category";
 }
 else if ($_GET['sortby']=='points') {
-$query= $query ."order by points"; 
+$query= $query ."order by points DESC"; 
 }
 
 
 else {  /// order by default 
 
-$query = $query . " ORDER BY priority DESC, category";
+$query = $query . " ORDER BY priority DESC, points";
 }	
 	
 	
@@ -146,5 +146,5 @@ mysql_close($g_link);
 ?>
 		</form>
 <?php
-makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a><a href='../create_jobs.php'>Create Jobs</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
+makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a><a href='create_jobs.php'>Create Job</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 ?>
