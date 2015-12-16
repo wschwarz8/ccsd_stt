@@ -1,6 +1,6 @@
 <?php
 	require_once "functions.php";
-	makeHeader("STT HOME","Student Technology Team Home",2,'<link href="/css_files/homePage.css" rel="stylesheet";><script language="javascript" type="text/javascript" src="secret.js"></script>');
+	makeHeader("STT HOME","Student Technology Team Home",2,'<link href="/css_files/homePage.css" rel="stylesheet"><script language="javascript" type="text/javascript" src="secret.js"></script>');
 ?>
 	<nav>
 		<center>
