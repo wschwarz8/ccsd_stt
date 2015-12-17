@@ -88,8 +88,12 @@ echo "<table><tr><td valign=top>";
 if($label=='now') echo '<BR>(Out of '.$maxpoints.' points)';
 echo "<table><tr><td>";
 echo "<tr><td><nobr>Student</nobr></td><td>Score</td>";
+$count=0;
 foreach ($scoreboard as $key => $value) {
-    echo "<tr><td><nobr><a href='studentJobs.php?id=$key'>".$names[$key]."</nobr></td><td>$value</td></tr>";
+//    if(($count++ < 5) || $_SESSION['id']==$key || $type!='all'){
+    if(($count++ < 5) || true || $type!='all'){
+	echo "<tr><td><nobr><a href='studentJobs.php?id=$key'>".$names[$key]."</nobr></td><td>$value</td></tr>";
+    }
 }
 echo "</table>";
 
