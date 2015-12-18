@@ -34,7 +34,7 @@
       <tr><td>Job Points</td><td><input type="text" name="jPoints" value="1" placeholder="Points"></td></tr>
       <tr><td>Job Claim</td>
         <td>
-          <select name="jClaim">
+          <select name="jClaim" value="0">
 						<option value="0">No one</option>
             <?php
 						//start connection
@@ -71,7 +71,7 @@
   </form>
 		<?php
 
-	 if ($_POST && $_POST['jPass'] == "pass"){
+	 if ($_POST && $_POST['jPass'] == "pass"){//password is pass
 		 
 		 //make query
 		 $queryinsertjob = "INSERT INTO `jobs`( `name`, `description`, `skillcatid`, `status`, `points`, `claimedby`, `priority`) VALUES ('".$_POST['jName']."','".$_POST['jDesc']."', ".$_POST['jSkill'].", ".$_POST['jStatus'].", ".$_POST['jPoints'].", ".$_POST['jClaim'].", ".$_POST['jPriority'].")";
@@ -82,6 +82,15 @@
 		 echo"Job Created :)";
 		 
 		 mysql_close($conn);
+		 
+		 //clear old variables
+		 $_POST['jName'] = "";
+		 $_POST['jDesc'] = "";
+		 $_POST['jSkill'] = "";
+		 $_POST['jStatus'] = "";
+		 $_POST['jPoints'] = "";
+		 $_POST['jClaim'] = "";
+		 $_POST['jPriority'] = "";
 	 }
 		?>
 	</div>

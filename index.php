@@ -67,11 +67,14 @@
 						mysql_select_db('stt', $conn);
 						
 						//store query command in a variable
-						$query = "SELECT * FROM news";
+						$query = "SELECT * FROM news;";
 						
+					
 						//commence query
 						$info = mysql_query($query);
 						
+						echo"im here";
+					
 						//store info from query into an array
 						while($useful_info = mysql_fetch_assoc($info)){
 							$article_part = 0;
@@ -89,6 +92,8 @@
 							
 							//takes on the last articles id giving total amount of articles
 							$article_count = $useful_info['article_id'];
+							
+							echo"here too";
 						}
 					
 					
