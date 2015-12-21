@@ -43,7 +43,7 @@ else if($type=='lastweek'){ // If this is a weekly score and not a total score
     $query .= " AND b.timestamp > '$last_last_sunday'";
 }
 else if($type=='all'){
-    $maxpoints = 100 - floor(100/20 * (weekdiff('1/8/2016', date("m/d/Y"))));
+    $maxpoints = 85 - floor(85/19 * (weekdiff('12/23/2015', date("m/d/Y"))));
     $label='now';
 }
 else { // This shouldn't happen
@@ -88,8 +88,12 @@ echo "<table><tr><td valign=top>";
 if($label=='now') echo '<BR>(Out of '.$maxpoints.' points)';
 echo "<table><tr><td>";
 echo "<tr><td><nobr>Student</nobr></td><td>Score</td>";
+$count=0;
 foreach ($scoreboard as $key => $value) {
-    echo "<tr><td><nobr><a href='studentJobs.php?id=$key'>".$names[$key]."</nobr></td><td>$value</td></tr>";
+//    if(($count++ < 5) || $_SESSION['id']==$key || $type!='all'){
+    if(($count++ < 5) || true || $type!='all'){
+	echo "<tr><td><nobr><a href='studentJobs.php?id=$key'>".$names[$key]."</nobr></td><td>$value</td></tr>";
+    }
 }
 echo "</table>";
 
@@ -98,5 +102,5 @@ echo "</td><td>";
 echo "<a href='http://xkcd.com'><img src='".$obj->{'img'}."'></a>";
 echo "</td></tr></table>";
 
-makefooter("",0,"false");
+makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 ?>

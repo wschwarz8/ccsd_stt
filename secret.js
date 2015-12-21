@@ -107,7 +107,7 @@
 				"stroke-width": 1,
 				target: "_blank",
 				"text-anchor": "middle",
-				title: "Raphael", //Dig the name Rapheal
+				title: "Raphael", 
 				translation: "0 0",
 				width: 0,
 				x: 0,

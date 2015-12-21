@@ -1,36 +1,54 @@
 <?php
 	require_once "config.php";
 	require_once "functions.php";
-	makeHeader("STT HOME","Student Technology Team Home",2,'<link href="/css_files/homePage.css" rel="stylesheet";><script language="javascript" type="text/javascript" src="javascript_files/homePage.js"></script>');
+	makeHeader("STT HOME","Student Technology Team Home",2,'<link href="/css_files/homePage.css" rel="stylesheet"><script language="javascript" type="text/javascript" src="secret.js"></script>');
 ?>
 	<nav>
 		<center>
 			<h2>Welcome to the site.</h2>
-			<p>
-				Visit <a href="phpmyadmin">here</a> for php MyAdmin.
-			</p>
-			<p>
-				Visit <a href="students_skills.php">here</a> for a list of Students and Skills.
-			</p>
-			<p>
-				Visit <a href="enter_skillNames.php">here</a> for entering skill names.
-			</p>
-			<p>
-				Visit <a href="scoreboard.php">here</a> for the scoreboard.
-			</p>
-			<p>
-				Visit <a href="jobs.php">here</a> for the Job List.
-			</p>
-			<p>
-				Visit <a href="team.php">here</a> for the team page.
-			</p>
-			<p>
-				Visit <a href="DisplayBroken.php"> here</a> for a list of broken chromebooks.
-			</p>
-			<p>
-				Visit <a href="login/login.php"> here</a> for the login page.
-			</p>
-		</center>
+			<div class="container">
+				 <a href="phpmyadmin">
+					<p>
+						Visit here for php MyAdmin.
+					</p>
+				</a>
+				<a href="students_skills.php">
+					<p>
+						Visit here for a list of Students and Skills.
+					</p>
+				</a>
+				<a href="enter_skillNames.php">
+					<p>
+						Visit here for entering skill names.
+					</p>
+				</a>
+				<a href="scoreboard.php">
+					<p>
+						Visit here for the scoreboard.
+					</p>
+				</a>
+				<a href="jobs.php">
+					<p>
+						Visit here for the Job List.
+					</p>
+				</a>
+				<a href="team.php">
+					<p>
+					Visit here for the team page.
+					</p>
+				</a>
+				<a href="DisplayBroken.php">
+					<p>
+					Visit here for a list of broken chromebooks.
+					</p>
+				</a>
+				<a href="login/login.php">
+					<p>
+					Visit here for the login page.
+					</p>
+				</a>
+			</div>
+		</center>	
 	</nav>
 	<section class="newsDisplay">
 		<center>
@@ -50,11 +68,14 @@
 						mysql_select_db('stt', $conn);
 						
 						//store query command in a variable
-						$query = "SELECT * FROM news";
+						$query = "SELECT * FROM news;";
 						
+					
 						//commence query
 						$info = mysql_query($query);
 						
+						echo"im here";
+					
 						//store info from query into an array
 						while($useful_info = mysql_fetch_assoc($info)){
 							$article_part = 0;
@@ -67,9 +88,13 @@
 							$article_array[$useful_info['article_id']][$article_part]=$useful_info['image_url'];
 							$article_part = 4;
 						 	$article_array[$useful_info['article_id']][$article_part]=$useful_info['date'];
+							$article_part = 5;
+							$article_array[$useful_info['article_id']][$article_part]=$useful_info['archive'];
 							
 							//takes on the last articles id giving total amount of articles
 							$article_count = $useful_info['article_id'];
+							
+							echo"here too";
 						}
 					
 					
@@ -95,11 +120,13 @@
 						var article_message = [];
 						var article_img = [];
 						var article_date = [];
+						var article_archive = [];
 						var current_article;
 					</script>
 					");
 					
 					for ($i = 1; $i < $article_count + 1;$i = $i + 1){
+						
 						echo ('
 						<script>
 							article_id[' .$i . '] = ' . $article_array[$i][0] . ';
@@ -107,34 +134,52 @@
 							article_message[' .$i . '] = "' . $article_array[$i][2] . '";
 							article_img[' .$i . '] = "' . $article_array[$i][3]. '";
 							article_date[' .$i . '] = "' . $article_array[$i][4] . '";
+							article_archive[' . $i . '] = ' . $article_array[$i][5] . ';
 						</script>
 						');
 					}
 					
 					?>
 					
-					<script>
-						
+				<script>
 					//function to show articles
 					function showNews(article_num) {
-						
-						if (article_num > 0 && article_num < (articleCount + 1)) {
-							current_article = article_num;
-						} else {
-							current_article = 1;
+							if (article_num > 0 && article_num < (articleCount + 1)) {
+								current_article = article_num;
+							} else {
+								current_article = 1;
+							}
+						 
+						//check if article is archived
+							if (article_archive[current_article] == 1){
+								//if article is archived the do this atleast once
+								do{
+									
+									//increment 1 article up
+									current_article = current_article + 1;
+									
+									//check if article id is valid
+									if (current_article > 0 && current_article < (articleCount + 1)) {
+										//leaving this cuz im lazy
+									} else {
+										current_article = 1;
+									}
+									
+									//check if the new article is still archived and if not start again
+								}while (article_archive[current_article] == 1)
+							}
+							
+							var newsFrame = document.getElementById("viewingFrame");
+
+							var part1 = "<style>#viewingFrame {opacity: 1.0;background-image: url(";
+							var part2 = ");background-size: contain ;background-repeat: no-repeat ;padding: 0;}.newsHeader {margin:0; top: 0;width: 100%; color: white; border-radius: 10px 10px 0 0; opacity: 0.9; background:black; padding-top: 10px; padding-bottom: 10px;}.newsHeader h1{opacity: 1;color: white; margin: 0;} .messageBody{transition: all .3s linear;margin-bottom: 65px;position: absolute; bottom: 0;width: 54.9%;height: 75px; color: white; border-radius: 0 0 10px 10px; opacity: 0.9; background: black;padding: 0;overflow:hidden;}.messageBody p{word-wrap: break-word;padding: 5px;margin: 0;}.messageBody:hover{height:300px;} </style><div class='newsHeader'><h1>";
+							var part3 = "</h1></div><div class='messageBody'><p>";
+							var part4 = " </p><p>Article created on ";
+							var part5 = " </p></div>";
+
+							newsFrame.innerHTML = part1 + article_img[current_article] + part2 + article_title[current_article] + part3 + article_message[current_article] + part4 + article_date[current_article] + part5;
 						}
-						
-						var newsFrame = document.getElementById("viewingFrame");
-						
-						var part1 = "<style>#viewingFrame {opacity: 1.0;background-image: url(";
-						var part2 = ");background-size: 100% ;background-repeat: no-repeat ;padding: 0;}.newsHeader {margin:0; top: 0;width: 100%; color: white; border-radius: 10px 10px 0 0; opacity: 0.9; background:black; padding-top: 10px; padding-bottom: 10px;}.newsHeader h1{opacity: 1;color: white; margin: 0;} .messageBody{margin-bottom: 65px;position: absolute; bottom: 0;width: 54.9%;height: 75px; color: white; border-radius: 0 0 10px 10px; opacity: 0.9; background: black;padding: 0;}.messageBody p{padding: 5px;margin: 0;} </style><div class='newsHeader'><h1>";
-						var part3 = "</h1></div><div class='messageBody'><p>";
-						var part4 = " </p><p>Article created on ";
-						var part5 = " </p></div>";
-						
-						newsFrame.innerHTML = part1 + article_img[current_article] + part2 + article_title[current_article] + part3 + article_message[current_article] + part4 + article_date[current_article] + part5;
-					}
-					
+
 					showNews(1);
 				</script>
 			</div>
@@ -150,5 +195,5 @@
 viewsofpage("index.php");
 	?>
 	<?php
-	makefooter("",0,"false");
+	makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 ?>

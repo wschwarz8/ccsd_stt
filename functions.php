@@ -15,7 +15,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle, $hhtml=""){
 	echo $hhtml;
 	echo("
 		</head>
-		<body>
+		<body onload='calculateStuff();'>
 			<div class='header'>
 				<a href='../index.php'><h1 id='headerTitle'>". $ptitle . "</h1><a>
 				<div class='buttonRow'>
@@ -35,17 +35,35 @@ function makeFooter($footermessage,$pstyle,$footerbox=""){
 	</div>
 		<style>". styleChoice($pstyle) ."</style>
 			");
-			 if ($footerbox === "false"){
+			 if ($footerbox == "false"){
 			 }else{
 				echo ("
-				<div class='footer'>
-					<h3 id='footerMessage'>". $footermessage . "</h3>
+				<div id='footer'>
+					<p id='footerMessage'>". $footermessage . "</p>
 				</div>
 				");
 			 }
 			 echo ("
 		<body>
 	<html>
+	<script>
+	
+	function calculateStuff(){
+	
+		var body = document.body, html = document.documentElement;
+		
+		var footer = document.getElementById('footer');
+
+		var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight ) + 25;
+		
+		body.style.height = height;
+		
+		footer.style.width = '78%';
+		footer.style.height= '25px';
+		footer.style.top = height - 25;
+	}
+	
+	</script>
 	");
 }
 
@@ -69,7 +87,7 @@ function styleChoice($styleNum){
 
 function promptLogin()
 {	
-	if(!$_SESSION['loginid'])
+	if(false && !$_SESSION['loginid'])
 	{
 		header('location:login/login.php?reason=1');
 	}

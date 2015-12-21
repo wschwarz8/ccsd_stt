@@ -73,17 +73,36 @@ body {
   opacity: 0.9;
 }
 
-.footer {
+#footer {
   position: absolute;
-  bottom: 0;
-  width: 78%;
-  height: 75px;
+  width: 0;
+  height: 0;
   color: black;
-  border-radius: 10px 10px 0 0;
+  border-radius: 5px 5px 0 0;
   opacity: 0.9;
   background: white;
+  padding:0;
 }
 
 #footerMessage {
   text-align: Center;
+  padding:0;
+  margin:1px;
+}
+button{
+  border: 0;
+  background: black;
+  border-radius: 4px;
+  box-shadow: 0 5px 0 grey;
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  margin: 10px 0 0 0;
+  outline: 0;
+  padding: 5px 5px;
+  transition: all .1s linear;
+}
+button:active{
+  box-shadow: 0 2px 0 grey;
+  transform: translateY(3px)
 }

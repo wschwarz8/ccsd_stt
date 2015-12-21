@@ -23,10 +23,36 @@
 		$article_array[$useful_info['article_id']][$article_part]=$useful_info['image_url'];
 		$article_part = 4;
 		$article_array[$useful_info['article_id']][$article_part]=$useful_info['date'];
+		$article_part = 5;
+		$article_array[$useful_info['article_id']][$article_part]=$useful_info['archive'];
 		//takes on the last articles id giving total amount of articles
 		$article_count = $useful_info['article_id'];
 	}
 ?>
+
+<section class="currentNews">
+		<center>
+			<div class="currentArticles">
+			<h1>
+				Current News Articles
+			</h1>
+				<table>
+					<tr><td>Article ID</td><td>Title</td><td>Message</td><td>Image</td><td>Date</td></tr>
+					<?php
+					for ($i = 1;$i < $article_count + 1; $i = $i + 1){
+						if ($article_array[$i][5] == 1){
+							echo("<style>.article".$i."{background:red;}</style>");
+						}else{
+							echo("<style>.article".$i."{background:green;}</style>");
+						}
+						echo("<tr class='article".$i."'><td><p>" . $article_array[$i][0] . "</td><td><p>" . $article_array[$i][1] . "</p></td><td><p>" . $article_array[$i][2] . "</p></td><td><img src='" . $article_array[$i][3] . "' style='width:45px;height:45px;'></td><td><p>" . $article_array[$i][4] . "</p></td></tr>");
+					}
+					?>
+				</table>
+				
+			</div>
+		</center>
+	</section>
 
 	<section class="newNews">
 		
@@ -41,42 +67,30 @@
 			$article_array[$article_count][2] = $_POST['message'];
 			$article_array[$article_count][3] = $_POST['imageUrl'];
 			$article_array[$article_count][4] = $_POST['date'];
+			$article_array[$article_count][5] = 0;
 			
-			$queryinfo = "INSERT INTO `news`(`article_id`, `title`, `message`, `image_url`, `date`) VALUES (" . $article_array[$article_count][0] . ",'" . $article_array[$article_count][1] . "','" . $article_array[$article_count][2] . "','" . $article_array[$article_count][3] . "','". $article_array[$article_count][4] ."')";
+			$queryinfo = "INSERT INTO `news`(`article_id`, `title`, `message`, `image_url`, `date`, `archive`) VALUES (" . $article_array[$article_count][0] . ",'" . $article_array[$article_count][1] . "','" . $article_array[$article_count][2] . "','" . $article_array[$article_count][3] . "','". $article_array[$article_count][4] ."', ". $article_array[$article_count][5] .")";
 			
 			mysql_query($queryinfo);
 			
 
 		} else if ($_POST && $_POST['password'] == 'password2'){//password is password2
 			
+			echo $article_array[$_POST['articleId']][5];
 			
-			//change how many articles their are now
-			$oldArticle_count = $article_count;
-			$article_count = $article_count - 1;
-			
-			//update still present articles to new article id's
-			if ($article_count != 0){
-				//move stories up behind id that will be removed
-				for ($i = $_POST['articleId']; $i <= $oldArticle_count - 1; $i = $i + 1){
-		
-					$article_array[$i][0] = $article_array[$i][0];
-					$article_array[$i][1] = $article_array[$i+1][1];
-					$article_array[$i][2] = $article_array[$i+1][2];
-					$article_array[$i][3] = $article_array[$i+1][3];
-					$article_array[$i][4] = $article_array[$i+1][4];
-					
-					$updateQuery ="UPDATE `news` SET `article_id`=". $article_array[$i][0] .",`title`='" . $article_array[$i][1] . "',`message`='" . $article_array[$i][2] . "',`image_url`='". $article_array[$i][3] ."',`date`='". $article_array[$i][4] ."' WHERE article_id=".$i; 
-					
-					mysql_query($updateQuery);
-				}
+			if ($article_array[$_POST['articleId']][5] != 0){
+				$archive_var = 0;
+				
+			}else{
+				$archive_var = 1;
 			}
 			
-			//make query to delete selected article
-			$removeQuery = "DELETE FROM `news` WHERE article_id=" . $oldArticle_count;
+			$article_array[$_POST['articleId']][5] = $archive_var;
 			
-			//remove last uncessary article
-			mysql_query($removeQuery);
+			$archiveQuery = "UPDATE `news` SET `archive`= ". $archive_var ." WHERE article_id = ". $article_array[$_POST['articleId']][0];
 			
+			//change article archive status
+			mysql_query($archiveQuery);
 
 		}
 		
@@ -125,31 +139,22 @@
 		</center>
 	</section>
 
-	<section class="currentNews">
-		<center>
-			<div class="currentArticles">
-			<h1>
-				Current News Articles
-			</h1>
+<section class="articleStatus">
+	<center>
+		<h2>Change Archive Status</h2>
+			<form method="post" name="deleteArticle">
 				<table>
-					<tr><td>Article ID</td><td>Title</td><td>Message</td><td>Image</td><td>Date</td></tr>
-					<?php
-					for ($i = 1;$i < $article_count + 1; $i = $i + 1){
-						echo("<tr><td>" . $article_array[$i][0] . "</td><td>" . $article_array[$i][1] . "</td><td>" . $article_array[$i][2] . "</td><td><img src='" . $article_array[$i][3] . "' style='width:45px;height:45px;'></td><td>" . $article_array[$i][4] . "</td></tr>");
-					}
-					?>
+					<tr><td>Article Id to Change:  </td><td><input type="text" name="articleId" placeholder="Article Id"></td></tr>
+					<tr><td>Authorization code: </td><td><input type="password" name="password" placeholder="password2"></td></tr>
 				</table>
-				<p>Remove an Article?</p>
-				<form method="post" name="deleteArticle">
-					<input type="text" name="articleId" placeholder="Article Id">
-					<input type="password" name="password" placeholder="password2">
-					<input type="Submit" value="Submit">
-				</form>
-			</div>
+				<input type="Submit" value="Submit">
+			</form>
 		</center>
 	</section>
 
+	
+	
 	<?php
-  makeFooter("",0,"false");
+  makeFooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 			mysql_close($conn);
 ?>
