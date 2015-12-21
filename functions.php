@@ -74,4 +74,26 @@ function promptLogin()
 		header('location:login/login.php?reason=1');
 	}
 }
+function viewsofpage($uncletony)
+{
+	global $g_username,$g_password;
+	$g_link = mysql_connect('localhost', $g_username, $g_password);
+
+	mysql_select_db('stt', $g_link);
+	
+	$query = "SELECT views FROM `pageviews` WHERE filename='$uncletony'";
+	$result = mysql_query($query);
+	($result = mysql_fetch_assoc($result));
+	$variable = ($result['views'] + 1);
+		print_r($result);
+		if($variable>1){
+						$query = "UPDATE `pageviews` SET `views`=" . ($variable) . " WHERE `filename`= '$uncletony'";
+						$result = mysql_query($query);
+		}
+		else{
+				$query = "INSERT INTO `pageviews`(`filename`, `views`) VALUES ('$uncletony',1)";
+				$result = mysql_query($query);
+		}
+		echo "<BR><BR>This is how many views this page has: " . $variable . "<BR>";
+}
 ?>

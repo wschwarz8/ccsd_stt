@@ -1,4 +1,5 @@
 <?php
+	require_once "config.php";
 	require_once "functions.php";
 	makeHeader("STT HOME","Student Technology Team Home",2,'<link href="/css_files/homePage.css" rel="stylesheet";><script language="javascript" type="text/javascript" src="javascript_files/homePage.js"></script>');
 ?>
@@ -145,8 +146,9 @@
 			</div>
 		</center>
 	</section>
-
-
+<?php
+viewsofpage("index.php");
+	?>
 	<?php
 	makefooter("",0,"false");
 ?>
