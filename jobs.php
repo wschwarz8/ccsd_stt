@@ -159,8 +159,7 @@ mysql_close($g_link);
 				echo "<option value=$id>$name</option>";
 			}
 			echo "</select>";
-?>
-		</form>
-<?php
+	viewsofpage("jobs.php");
+	echo "</form>";
 makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a><a href='create_jobs.php'>Create Job</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 ?>
