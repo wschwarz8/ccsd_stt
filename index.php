@@ -1,7 +1,10 @@
 <?php
 	require_once "config.php";
 	require_once "functions.php";
+
 	makeHeader("STT HOME","Student Technology Team Home",2,'<link href="/css_files/homePage.css" rel="stylesheet"><script language="javascript" type="text/javascript" src="secret.js"></script>');
+echo dirname();
+
 ?>
 	<nav>
 		<center>
@@ -179,8 +182,7 @@
 
 							newsFrame.innerHTML = part1 + article_img[current_article] + part2 + article_title[current_article] + part3 + article_message[current_article] + part4 + article_date[current_article] + part5;
 						}
-
-					showNews(1);
+						showNews(1);
 				</script>
 			</div>
 				
