@@ -103,7 +103,6 @@ function viewsofpage($uncletony)
 	$result = mysql_query($query);
 	($result = mysql_fetch_assoc($result));
 	$variable = ($result['views'] + 1);
-		print_r($result);
 		if($variable>1){
 						$query = "UPDATE `pageviews` SET `views`=" . ($variable) . " WHERE `filename`= '$uncletony'";
 						$result = mysql_query($query);
