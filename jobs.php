@@ -102,11 +102,7 @@ if ($_GET['order']=='DESC'){
 }
 
 	
-	
-print_r($_GET);	
-		echo $_GET['sortby'];
-print_r($_GET);
-	echo $_GET['order'];
+
 	
 	
 	
