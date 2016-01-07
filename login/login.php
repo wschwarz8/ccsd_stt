@@ -89,6 +89,7 @@ else
 			</center>
 			<br>
 		</form>
+<a href="forgotPassword.php">Forgot Password? (or don't have one yet)</a>
 	</body>
 	</head>
 	</html>
