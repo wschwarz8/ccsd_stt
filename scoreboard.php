@@ -85,13 +85,14 @@ if($type=='all') echo "all";
 else echo "<a href='scoreboard.php?type=all'>all</a>";
 
 echo "<table><tr><td valign=top>";
-if($label=='now') echo '<BR>(Out of '.$maxpoints.' points)';
+if($label=='now') echo '<BR>Top 5<BR>(Out of '.$maxpoints.' points)';
 echo "<table><tr><td>";
 echo "<tr><td><nobr>Student</nobr></td><td>Score</td>";
 $count=0;
 foreach ($scoreboard as $key => $value) {
 //    if(($count++ < 5) || $_SESSION['id']==$key || $type!='all'){
-    if(($count++ < 5) || true || $type!='all'){
+    if(($count++ < 5) || false|| $type!='all'){
+//    if(($count++ < 5) || true|| $type!='all'){
 	echo "<tr><td><nobr><a href='studentJobs.php?id=$key'>".$names[$key]."</nobr></td><td>$value</td></tr>";
     }
 }
