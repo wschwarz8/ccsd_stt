@@ -2,8 +2,7 @@
 	require_once "config.php";
 	require_once "functions.php";
 
-	makeHeader("STT HOME","Student Technology Team Home",2,'<link href="/css_files/homePage.css" rel="stylesheet"><script language="javascript" type="text/javascript" src="secret.js"></script>');
-echo dirname();
+	makeHeader("STT HOME","Student Technology Team Home",2,"index.php",'<link href="/css_files/homePage.css" rel="stylesheet">');
 
 ?>
 	<nav>
@@ -76,8 +75,6 @@ echo dirname();
 					
 						//commence query
 						$info = mysql_query($query);
-						
-						echo"im here";
 					
 						//store info from query into an array
 						while($useful_info = mysql_fetch_assoc($info)){
@@ -96,8 +93,7 @@ echo dirname();
 							
 							//takes on the last articles id giving total amount of articles
 							$article_count = $useful_info['article_id'];
-							
-							echo"here too";
+						
 						}
 					
 					
@@ -192,10 +188,7 @@ echo dirname();
 				<button class="directionButts" onclick="showNews(current_article = current_article + 1)"> >>> </button>
 			</div>
 		</center>
-	</section>
-<?php
-viewsofpage("index.php");
-	?>
+		</section>
 	<?php
-	makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
+	makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='#'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 ?>

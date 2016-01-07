@@ -1,12 +1,13 @@
 <?php
+	require_once "config.php";
 	require_once "functions.php";
-	makeHeader("Team Pages", "Team Pages", 2,"<style>.meat{position:absolute;width:50%;background:black;color:White;margin-top:3%; margin-left:15%;border-radius:10px;padding:5px;opacity:0.9;}</style>");
+	makeHeader("Team Pages", "Team Pages", 2,"team.php","<style>.meat{position:absolute;width:50%;background:black;color:White;margin-top:3%; margin-left:15%;border-radius:10px;padding:5px;opacity:0.9;}</style>");
 ?>
 
 	<BR>
 	<section style="float:left;width:50%">
 		<center>
-			<a href='walter'>
+			<a href='students/walter'>
 				<div class="personBox" id="walter">
 					<h2 id="toph2" style="background:red;">Walter</h2>
 					<ul>
@@ -20,7 +21,7 @@
 
 			<BR>
 
-			<a href='Jaydon'>
+			<a href='students/Jaydon'>
 				<div class="personBox" id="Jayden">
 					<h2 id="toph2" style="background:orange;">Jayden</h2>
 					<ul>
@@ -34,7 +35,7 @@
 
 			<BR>
 
-			<a href='Mason'>
+			<a href='students/Mason'>
 				<div class="personBox" id="Mason">
 					<h2 id="toph2" style="background:yellow;">Mason</h2>
 					<ul>
@@ -48,7 +49,7 @@
 
 			<BR>
 
-			<a href='mckayla'>
+			<a href='students/mckayla'>
 				<div class="personBox" id="Mckayla">
 					<h2 id="toph2" style="background:green;">Mckayla</h2>
 					<ul>
@@ -62,7 +63,7 @@
 
 			<BR>
 
-			<a href='Daniel'>
+			<a href='students/Daniel'>
 				<div class="personBox" id="Daniel">
 					<h2 id="toph2" style="background:blue;">Daniel</h2>
 					<ul>
@@ -76,7 +77,7 @@
 
 			<BR>
 
-			<a href='britton'>
+			<a href='students/britton'>
 				<div class="personBox" id="Britton">
 					<h2 id="toph2" style="background:purple;">Britton</h2>
 					<ul>
@@ -93,7 +94,7 @@
 	</section>
 	<center>
 		<section style="float:right;width:50%">
-			<a href="Jon_Zimmer">
+			<a href="students/Jon_Zimmer">
 				<div class="personBox" id="Jon">
 					<h2 id="toph2" style="background:red;">Jon</h2>
 					<ul>
@@ -107,7 +108,7 @@
 
 			<BR>
 
-			<a href="Hamdawg">
+			<a href="students/Hamdawg">
 				<div class="personBox" id="Austin">
 					<h2 id="toph2" style="background:orange;">Austin</h2>
 					<ul>
@@ -121,7 +122,7 @@
 
 			<BR>
 
-			<a href="Ethan">
+			<a href="students/Ethan">
 				<div class="personBox" id="Ethan">
 					<h2 id="toph2" style="background:Yellow;">Ethan</h2>
 					<ul>
@@ -135,7 +136,7 @@
 
 			<BR>
 
-			<a href="Maximus">
+			<a href="students/Maximus">
 				<div class="personBox" id="Max">
 					<h2 id="toph2" style="background:green;">Max</h2>
 					<ul>
@@ -149,7 +150,7 @@
 
 			<BR>
 
-			<a href="Wyatt">
+			<a href="students/Wyatt">
 				<div class="personBox" id="Wyatt">
 					<h2 id="toph2" style="background:blue;">Wyatt</h2>
 					<ul>

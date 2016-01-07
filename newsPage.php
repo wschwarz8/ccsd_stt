@@ -1,7 +1,7 @@
 <?php
   require_once "functions.php";
   require_once "config.php";
-	makeHeader("News","News Page",2, "<link href='css_files/newsPage.css' rel='stylesheet'>");
+	makeHeader("News","News Page",2,"newsPage.php" ,"<link href='css_files/newsPage.css' rel='stylesheet'>");
 	
 	$article_count = 0;
 

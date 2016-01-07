@@ -1,9 +1,9 @@
 <?php
-//header function to set up the beginning of the webpage
-//call this function by declaring 
-//makeHeader(string: "tabbar title here",string: "page title here", Int: style#);
+//header function to set up at the beginning of the webpage
+//call this function by declaring
+//makeHeader(string: "tabbar title here",string: "page title here", Int: style#);             <--- needs updated
 //style can be either 0,1,2, or 3 where 0 is default and the other three are more detailed premade styles
-function makeHeader($tbtitle,$ptitle,$pstyle, $hhtml=""){
+function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 	if(!$ptitle)$ptitle=$tbtitle;	
 	echo("
 	<!--max devos made this -->
@@ -17,11 +17,23 @@ function makeHeader($tbtitle,$ptitle,$pstyle, $hhtml=""){
 		</head>
 		<body onload='calculateStuff();'>
 			<div class='header'>
-				<a href='../index.php'><h1 id='headerTitle'>". $ptitle . "</h1><a>
+				<a href='../index.php'><h1 id='headerTitle'>". $ptitle . "</h1></a>
+			
+				");
+		
+		echo viewsofpage($fileName);
+	
+		echo("
+		
 				<div class='buttonRow'>
-					<a href='../index.php'><div class='buttons'>Home</div></a><a href='../jobs.php'><div class='buttons'>Jobs</div></a> <a href='../scoreboard.php'><div class='buttons'>Scoreboard</div></a> <a href='../team.php'><div class='buttons'>Team Pages</div></a> <a href='../DisplayBroken.php'><div class='buttons'>Broken</div></a> <a href='../login/login.php'><div class='buttons'>Login</div></a> 
+					<a href='../index.php'><div class='buttons'>Home</div></a>
+					<a href='../jobs.php'><div class='buttons'>Jobs</div></a>
+					<a href='../scoreboard.php'><div class='buttons'>Scoreboard</div></a>
+					<a href='../team.php'><div class='buttons'>Team Pages</div></a>
+					<a href='../DisplayBroken.php'><div class='buttons'>Broken</div></a>
+					<a href='../login/login.php'><div class='buttons'>Login</div></a> 
 				</div>
-			</div>
+		
 			<div class='meat'>
 	");
 }
@@ -92,25 +104,51 @@ function promptLogin()
 		header('location:login/login.php?reason=1');
 	}
 }
-function viewsofpage($uncletony)
-{
+
+
+function viewsofpage($uncletony){
+	
+	//init pass
 	global $g_username,$g_password;
+	
+	//create conection
 	$g_link = mysql_connect('localhost', $g_username, $g_password);
 
+	//select database
 	mysql_select_db('stt', $g_link);
 	
+	//make query
 	$query = "SELECT views FROM `pageviews` WHERE filename='$uncletony'";
+	
+	//start and store query
 	$result = mysql_query($query);
+	
+	//store into an array
 	($result = mysql_fetch_assoc($result));
+	
+	//get variable ready for manipulation
 	$variable = ($result['views'] + 1);
+		
+	//check if their are views already or not
 		if($variable>1){
+				//add a view to the page table
 						$query = "UPDATE `pageviews` SET `views`=" . ($variable) . " WHERE `filename`= '$uncletony'";
 						$result = mysql_query($query);
 		}
 		else{
+			//add a table for the file
 				$query = "INSERT INTO `pageviews`(`filename`, `views`) VALUES ('$uncletony',1)";
 				$result = mysql_query($query);
 		}
-		echo "<BR><BR>This is how many views this page has: " . $variable . "<BR>";
+	
+	//print views to screen
+		echo ("
+		<div class='viewCount'>
+			<div class='viewBox'>
+				<h3 class='countLeft'>Views: </h3>
+				<h3 class='countRight'> ". $variable ." </h3>
+			</div>
+		</div>
+		");
 }
 ?>

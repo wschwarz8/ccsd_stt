@@ -72,7 +72,7 @@ mysql_close($g_link);
 
 arsort($scoreboard);
 
-makeHeader("Scoreboard for $label","Scoreboard for $label",2,"<meta http-equiv='refresh' content='60'><style>table{color:white;}a{color:white;}</style>");
+makeHeader("Scoreboard for $label","Scoreboard for $label",2,"scoreboard.php","<meta http-equiv='refresh' content='60'><style> .meat a{color:white;} .meat{color:silver;}.meat table{color:white;}</style>");
 
 //<meta http-equiv="refresh" content="60">
 if($type=='thisweek') echo "thisWeek";
@@ -102,5 +102,5 @@ echo "</td><td>";
 echo "<a href='http://xkcd.com'><img src='".$obj->{'img'}."'></a>";
 echo "</td></tr></table>";
 
-makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
+makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black;} #footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 ?>

@@ -1,7 +1,7 @@
 <?php
   require_once "functions.php";
 	require_once "config.php";
-	makeHeader("Incident Report", "Make an Incident Report", 2, '<link href="/css_files/create_jobs.css" rel="stylesheet">')
+	makeHeader("Incident Report", "Make an Incident Report", 2,"incedent_report.php", '<link href="/css_files/create_jobs.css" rel="stylesheet">')
 ?>
 
 <center>
