@@ -1,7 +1,6 @@
 <?php
 require_once "functions.php";
 require_once "config.php";
-
 promptLogin();
 
 function weekdiff($date1, $date2) {
