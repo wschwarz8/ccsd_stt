@@ -57,7 +57,7 @@ while($row=mysql_fetch_assoc($result)){
   <div class="Hobbies">
     <div class="container">
       <h2><?php echo $Class; ?></h2>
-      <div class "col-md-4">
+      <div class="col-md-4">
         <h3><?php echo $Active; ?></h3>
       </div>
       <div class="col-md-4">

@@ -14,17 +14,17 @@ body {
 
 .header {
   background: white;
-  margin-top: 0;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin: 0 10px 0 10px;
+  padding: 5px 5px 1px 5px;
   border-radius: 0 0 10px 10px;
   opacity: 0.9;
-  padding: 5px;
 }
 
 .header a {
   text-decoration: none;
   color: Black;
+  margin:0;
+  padding:0;
 }
 
 .header a:hover {
@@ -33,11 +33,15 @@ body {
 
 #headerTitle {
   text-align: center;
+  margin:15px 0 0 0;
+  padding:0;
+   
 }
 
 .buttonRow {
   width: 100%;
   text-align: center;
+  padding-bottom:5px;
 }
 
 .buttons {
@@ -53,9 +57,10 @@ body {
   border: 0;
   box-shadow: 0 5px 0 grey;
   cursor: pointer;
-  font: inherit;
+  font-size: 19px;
   outline: 0;
   transition: all .1s linear;
+  text-align:center;
 }
 .buttons:active{
   box-shadow: 0 2px 0 grey;
@@ -105,4 +110,41 @@ button{
 button:active{
   box-shadow: 0 2px 0 grey;
   transform: translateY(3px)
+}
+.viewCount{
+  margin:0;
+  padding:0 0 5px 0;
+  height:30px;
+  width:100%;
+}
+.viewBox{
+  margin:0 3%;
+  padding:0;
+  float:right;
+  width:10%;
+  height: 25px;
+  background:silver;
+  border-radius:5px;
+  border: solid black 1px
+}
+.countLeft{
+  margin:0;
+  padding:0;
+  float:left;
+  width:58%;
+  height:inherit;
+  text-align:center;
+}
+
+.countRight{
+  margin:0;
+  padding:0;
+  float:right;
+  width:42%;
+  height:inherit;
+  text-align:center;
+  background:black;
+  color:white;
+  border-radius:4px;
+  
 }

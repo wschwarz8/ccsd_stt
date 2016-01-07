@@ -60,13 +60,19 @@ $script = "
 		}
 	}	
 	</script>
+	
 	<style>
-	td{
+	
+	.meat td{
 		color:white;
 	}
-	a{color:white;}
+	
+	.meat a{
+	color:white;
+	}
+	
 	</style>";
-makeHeader("Job List","Job List",2,$script);
+makeHeader("Job List","Job List",2,"jobs.php",$script);
 ?>
 	<body>
 		<form name="Theform" id="Theform">
@@ -159,7 +165,7 @@ mysql_close($g_link);
 				echo "<option value=$id>$name</option>";
 			}
 			echo "</select>";
-	viewsofpage("jobs.php");
+			
 	echo "</form>";
 makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a><a href='create_jobs.php'>Create Job</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 ?>
