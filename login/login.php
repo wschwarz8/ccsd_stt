@@ -17,16 +17,13 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 
 		mysql_select_db('stt', $g_link);
 
-		$query = "SELECT * FROM `students` WHERE 1";
-
-	
 		if(!$g_link)
 		 {
 			 die("Connection failed: " . mysql_connect_error());
 		 }
 		
 	
-		$query = "SELECT * FROM `students` WHERE 1";
+		$query = "SELECT * FROM `students` WHERE username='".$_POST['username']."'";
 		$result = mysql_query($query);
 		$row = mysql_fetch_assoc($result);	
 		
@@ -36,7 +33,6 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 		$salt = sprintf("$2a$%02d$", $cost). $salt;
 
 		$hash = crypt($_POST["password"], $salt);
-
 
 		if($_POST["username"] !== $row["username"] && $hash !== $row["password"])
 		{

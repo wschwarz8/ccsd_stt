@@ -1,7 +1,7 @@
 <?php
 
 
-if(isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password2"]) && ($_POST['secret']==1)) // Happens if someone has attempted account reset
+if(isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password2"]) && ($_POST['secret']=='W')) // Happens if someone has attempted account reset
 {
 		require_once '../config.php';
 		require_once 'login.js';
@@ -32,6 +32,12 @@ if(isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["passw
 		$hash = crypt($pass2, $salt);
 
 		$query = "UPDATE `students` SET `password`='$hash'  WHERE username ='$user'";
+
+   		$result = mysql_query($query);
+		if($result) {echo "Password set for ".$user.".<BR>";}
+		else {echo mysql_error($g_link);}
+
+
 	
 }
 else

@@ -23,14 +23,20 @@ if(isset($_POST["email"]))
 
 $to      = $email;
 $subject = 'Reset your STT password';
-$message = 'Use this link to reset your password:<BR><a href="10.1.50.69/login/resetPassword.php?user='.$user.'&key='$key;
+$message = 'Use this link to reset your password:<BR><a href="10.1.50.69/login/resetPassword.php?user='.$user.'&key='.$key;
 $headers = 'From: wschwarz@ccsd.k12.ia.us' . "\r\n" .
     'Reply-To: wschwarz@ccsd.k12.ia.us' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
 // TODO configure sendmail on the server so this actually works
-mail($to, $subject, $message, $headers);
-		
-echo "An email has been sent with further instructions.";
+$result = mail($to, $subject, $message, $headers);
+if($reuslt)
+	echo "An email has been sent with further instructions.";
+else
+	echo "The email was not sent, an error occurred.";
+
+
+
+
 }
 else
 {
