@@ -22,6 +22,31 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `stt` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `stt`;
 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `incidents`
+--
+
+DROP TABLE IF EXISTS `incidents`;
+CREATE TABLE IF NOT EXISTS `incidents` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `date` date NOT NULL,
+  `owner` varchar(64) NOT NULL,
+  `status` varchar(128) NOT NULL,
+  `laptopserial` varchar(64) NOT NULL,
+  `chargerserial` varchar(64) NOT NULL,
+  `laptoptaken` tinyint(1) NOT NULL,
+  `chargertaken` tinyint(1) NOT NULL,
+  `newlaptop` tinyint(1) NOT NULL,
+  `newlaptopserial` varchar(64) NOT NULL,
+  `newchargerserial` varchar(64) NOT NULL,
+  `explanation` varchar(256) NOT NULL,
+  `receviedby` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
 -- --------------------------------------------------------
 
 --
