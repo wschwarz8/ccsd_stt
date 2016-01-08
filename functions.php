@@ -103,7 +103,8 @@ function promptLogin()
 
 	if(!$_SESSION['loginid'])
 	{
-		header('location:login/login.php?reason=1');
+		// uncomment this to require logins
+		//header('location:login/login.php?reason=1');
 	}
 }
 
