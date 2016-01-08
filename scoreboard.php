@@ -42,7 +42,7 @@ else if($type=='lastweek'){ // If this is a weekly score and not a total score
     $query .= " AND b.timestamp > '$last_last_sunday'";
 }
 else if($type=='all'){
-    $maxpoints = 85 - floor(85/19 * (weekdiff('12/23/2015', date("m/d/Y"))));
+    $maxpoints = 100 - floor(100/20 * (weekdiff('05/27/2016', date("m/d/Y"))));
     $label='now';
 }
 else { // This shouldn't happen
@@ -89,9 +89,7 @@ echo "<table><tr><td>";
 echo "<tr><td><nobr>Student</nobr></td><td>Score</td>";
 $count=0;
 foreach ($scoreboard as $key => $value) {
-//    if(($count++ < 5) || $_SESSION['id']==$key || $type!='all'){
-    if(($count++ < 5) || false|| $type!='all'){
-//    if(($count++ < 5) || true|| $type!='all'){
+    if(($count++ < 5) || $type!='all'){
 	echo "<tr><td><nobr><a href='studentJobs.php?id=$key'>".$names[$key]."</nobr></td><td>$value</td></tr>";
     }
 }
