@@ -1,6 +1,7 @@
 <?php
   require_once "functions.php";
 	require_once "config.php";
+promptLogin();
 	makeHeader("Create Jobs","Create a job",2,"create_jobs.php",'<link href="/css_files/create_jobs.css" rel="stylesheet">');
 ?>
 
@@ -71,7 +72,7 @@
   </form>
 		<?php
 
-	 if ($_POST && $_POST['jPass'] == "pass"){//password is pass
+	 if ($_POST && $_POST['jPass'] == "J"){//password is pass
 		 
 		 //make query
 		 $queryinsertjob = "INSERT INTO `jobs`( `name`, `description`, `skillcatid`, `status`, `points`, `claimedby`, `priority`) VALUES ('".$_POST['jName']."','".$_POST['jDesc']."', ".$_POST['jSkill'].", ".$_POST['jStatus'].", ".$_POST['jPoints'].", ".$_POST['jClaim'].", ".$_POST['jPriority'].")";

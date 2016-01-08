@@ -1,6 +1,8 @@
 <?php
 	require_once "config.php";
-	require_once "functions.php";
+require_once "functions.php";
+
+promptLogin();
 	makeHeader("Team Pages", "Team Pages", 2,"team.php","<style>.meat{position:absolute;width:50%;background:black;color:White;margin-top:3%; margin-left:15%;border-radius:10px;padding:5px;opacity:0.9;}</style>");
 ?>
 

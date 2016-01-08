@@ -1,5 +1,8 @@
 <?php
 require_once 'config.php';
+require_once "functions.php";
+
+promptLogin();
 
 if($_POST)
 {

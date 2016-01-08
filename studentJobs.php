@@ -2,6 +2,8 @@
 require_once 'config.php';
 require_once "functions.php";
 
+promptLogin();
+
 makeHeader("Student Jobs", "Student Jobs",2,"studentJobs.php",'<meta http-equiv="refresh" content="60"><style>td{color:white;}</style>');
 
 if(isset($_GET['id'])){

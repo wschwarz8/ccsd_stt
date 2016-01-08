@@ -1,5 +1,8 @@
 <?php
 require_once 'config.php';
+require_once 'functions.php';
+
+promptLogin();
 
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 
@@ -27,7 +30,7 @@ while ($row = mysql_fetch_assoc($result)) {
 	$studentarray[$row['id']]=$row['name'];
 }	
 
-if($_POST && $_POST['code']=='a')
+if($_POST && $_POST['code']=='F')
 {
 	$jobid=$_POST['job_id'];
 	if(isset($_POST['resolve'])){

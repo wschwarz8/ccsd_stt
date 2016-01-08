@@ -1,6 +1,8 @@
 <?php
-  require_once "functions.php";
 	require_once "config.php";
+require_once "functions.php";
+
+promptLogin();
 	makeHeader("Incident Report", "Make an Incident Report", 2,"incedent_report.php", '<link href="/css_files/create_jobs.css" rel="stylesheet">')
 ?>
 
