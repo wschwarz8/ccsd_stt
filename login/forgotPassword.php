@@ -5,7 +5,10 @@ if(isset($_POST["email"]))
 {
 		require_once '../config.php';
 		require_once 'login.js';
-	
+	if($_GET['key']) {
+		echo "not done yet"; // TODO This is where the password should actually be reset
+	}
+	else {	
 		$email = $_POST['email'];
 	
 		$g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
@@ -32,10 +35,10 @@ $result = mail($to, $subject, $message, $headers);
 if($reuslt)
 	echo "An email has been sent with further instructions.";
 else
-	echo "The email was not sent, an error occurred.";
+	echo "I think the email was sent but I'm not sure, check your spam folder. The googles don't like my mail.";
 
 
-
+	}
 
 }
 else
