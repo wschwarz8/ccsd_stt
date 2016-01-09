@@ -94,12 +94,12 @@ promptLogin();
 		.$_POST['jStatus'].", "
 		.$_POST['jLaptopNumber'].", "
 		.$_POST['jChargerNumber'].", "
+		.$_POST['jLaptopTaken'].", "
 		.$_POST['jChargerTaken'].", "
 		.$_POST['jNewLaptop'].", "
 		.$_POST['jNewNumber'].", "
 		.$_POST['jExplanation'].", "
-		.$_POST['jRecivedBy'].", "
-		.$_POST['jLaptopTaken'].")";
+		.$_POST['jRecievedBy'].")";
 
 
 
