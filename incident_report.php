@@ -85,10 +85,15 @@ promptLogin();
 		.$_POST['jOwner']."', "
 		.$_POST['jStatus'].", "
 		.$_POST['jStatus'].", "
-		.$_POST['jPoints'].", "
-		.$_POST['jClaim'].", "
-		.$_POST['jPriority'].")";
-		 
+		.$_POST['jLaptopNumber'].", "
+		.$_POST['jChargerNumber'].", "
+		.$_POST['jLaptopTaken'].")";
+		.$_POST['jChargerTaken'].", "
+		.$_POST['jNewLaptop'].", "
+		.$_POST['jNewNumber'].", "
+		.$_POST['jExplanation'].", "
+		.$_POST['jRecivedBy'].", "
+
 
 
 		 //commence query
@@ -105,7 +110,7 @@ promptLogin();
 		 $_POST['jNewLaptop'] = "";
 		 $_POST['jNewNumber'] = "";
 		 $_POST['jExplanation'] = "";
-		 $_POST['jRecieved'] = "";
+		 $_POST['jRecievedBy'] = "";
 
 		?>
 	</div>
