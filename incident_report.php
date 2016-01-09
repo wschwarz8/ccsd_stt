@@ -85,19 +85,6 @@ promptLogin();
 						//access correct database
 						mysql_select_db('stt', $conn);
 						
-						//query students
-						$studentQuery = "SELECT name, id FROM students WHERE active=1";
-						
-						$studentz = mysql_query($studentQuery);
-						
-						while ($row = mysql_fetch_assoc($studentz)) {
-							$students[$row['id']]=$row['name'];
-						}	
-						
-						foreach($students as $id=>$name){
-							echo "<option value=$id>$name</option>";
-						}
-						
 						
 		 //make query
 				 $queryinsertincident = "INSERT INTO `incidents`( `id`, `date`, `owner`, `status`, `laptopserial`, `chargerserial`, `laptoptaken`, `chargertaken`, `newlaptop`, `newlaptopserial`, `newchargerserial`, `explanation`, `receviedby`) VALUES ('"
