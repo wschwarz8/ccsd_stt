@@ -31,12 +31,15 @@ promptLogin();
       </tr>
 			
       </tr>
-      <!-- Problem input field -->
- 			<tr><td>Serial Number of Laptop and/or Charger</td><td><textarea name="jNumber" placeholder="Serial Number"></textarea></td></tr>
+      <!-- Laptop serial input field -->
+ 			<tr><td>Serial Number of Laptop</td><td><textarea name="jLaptopNumber" placeholder="Laptop Serial Number"></textarea></td></tr>
+		  <!-- Charger serial input field -->
+ 			<tr><td>Serial Number of Charger</td><td><textarea name="jChargerNumber" placeholder="Charger Serial Number"></textarea></td></tr>
+
 		  <!-- Laptop taken input field -->		 
 			<tr><td>Laptop taken from student?</td>
         <td>
-          <select name="jTaken">
+          <select name="jLaptopTaken">
             <!-- replace options with a query later -->
             <option value="1">Yes</option>
             <option value="2">No</option>
@@ -46,7 +49,7 @@ promptLogin();
   		  <!-- Charger taken input field -->		 
 			<tr><td>Charger taken from student?</td>
         <td>
-          <select name="jTaken2">
+          <select name="jChargerTaken">
             <!-- replace options with a query later -->
             <option value="1">Yes</option>
             <option value="2">No</option>
@@ -59,17 +62,16 @@ promptLogin();
           <select name="jNewLaptop">
             <!-- replace options with a query later -->
             <option value="1">No loaner given to student</option>
-            <option value="2">Loaner given to student</option>
-						<option value="3">Replacement given to student</option>
+            <option value="2">Loaner/Replacement given to student</option>
           </select>
         </td>
       </tr>
 			<!-- Serial Number input field -->
-			<tr><td>Serial Number of new laptop and/or charger</td><td><textarea name="jNewNumber" placeholder="New Serial Number"></textarea></td></tr>
+			<tr><td>Serial Number of new laptop</td><td><textarea name="jNewNumber" placeholder="New Serial Number"></textarea></td></tr>
 			<!-- Explanation input field -->
 			<tr><td>Explanation of incident</td><td><textarea name="jExplanation" placeholder="Explanation of incident"></textarea></td></tr>
 			<!-- Recieved by input field -->
-      <tr><td>Recieved by</td><td><input type="text" name="jRecieved" placeholder="Recieved by"></textarea></td></tr>
+      <tr><td>Recieved by</td><td><input type="text" name="jRecievedBy" placeholder="Recieved by"></textarea></td></tr>
 
   
       <tr><td colspan="2" style="text-align:center;"><input type="submit"></td></tr>
@@ -78,12 +80,19 @@ promptLogin();
 		<?php
 		 
 		 //make query
-		 $queryinsert = "INSERT INTO `devices`( `owner`, 'recieved', 'recievedby', 'problem', 'notes', 'serial') VALUES ('".$_POST['jName']."','".$_POST['jDesc']."', ".$_POST['jSkill'].", ".$_POST['jStatus'].", ".$_POST['jPoints'].", ".$_POST['jClaim'].", ".$_POST['jPriority'].")";
+				 $queryinsertincident = "INSERT INTO `incidents`( `id`, `date`, `owner`, `status`, `laptopserial`, `chargerserial`, `laptoptaken`, `chargertaken`, `newlaptop`, `newlaptopserial`, `newchargerserial`, `explanation`, `receviedby`) VALUES ('"
+		.$_POST['jDate']."','"
+		.$_POST['jOwner']."', "
+		.$_POST['jStatus'].", "
+		.$_POST['jStatus'].", "
+		.$_POST['jPoints'].", "
+		.$_POST['jClaim'].", "
+		.$_POST['jPriority'].")";
 		 
+
+
 		 //commence query
-//		 mysql_query($queryinsertjob);
-		 
-		 mysql_close($conn);
+		 mysql_query($queryinsertincident);
 		 
 		 //clear old variables
 		 $_POST['jDate'] = "";
@@ -103,4 +112,10 @@ promptLogin();
 
 <?php
   makeFooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
+		 mysql_close($conn);
+// the three things this needs to do:
+// first: put all data into incident table
+// second: if laptop was taken, put data into divices table
+// third: if laptop was taken, make a job to diagnose the laptop
 ?>
+
