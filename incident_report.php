@@ -78,7 +78,27 @@ promptLogin();
     </table>
   </form>
 		<?php
-		 
+		             
+						//start connection
+						$conn = mysql_connect("localhost", $g_username, $g_password);
+
+						//access correct database
+						mysql_select_db('stt', $conn);
+						
+						//query students
+						$studentQuery = "SELECT name, id FROM students WHERE active=1";
+						
+						$studentz = mysql_query($studentQuery);
+						
+						while ($row = mysql_fetch_assoc($studentz)) {
+							$students[$row['id']]=$row['name'];
+						}	
+						
+						foreach($students as $id=>$name){
+							echo "<option value=$id>$name</option>";
+						}
+						
+						
 		 //make query
 				 $queryinsertincident = "INSERT INTO `incidents`( `id`, `date`, `owner`, `status`, `laptopserial`, `chargerserial`, `laptoptaken`, `chargertaken`, `newlaptop`, `newlaptopserial`, `newchargerserial`, `explanation`, `receviedby`) VALUES ('"
 		.$_POST['jDate']."','"
@@ -87,12 +107,12 @@ promptLogin();
 		.$_POST['jStatus'].", "
 		.$_POST['jLaptopNumber'].", "
 		.$_POST['jChargerNumber'].", "
-		.$_POST['jLaptopTaken'].")";
 		.$_POST['jChargerTaken'].", "
 		.$_POST['jNewLaptop'].", "
 		.$_POST['jNewNumber'].", "
 		.$_POST['jExplanation'].", "
 		.$_POST['jRecivedBy'].", "
+		.$_POST['jLaptopTaken'].")";
 
 
 
@@ -118,7 +138,7 @@ promptLogin();
 
 <?php
   makeFooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
-		 mysql_close($conn);
+	//	 mysql_close($conn);
 // the three things this needs to do:
 // first: put all data into incident table
 // second: if laptop was taken, put data into divices table
