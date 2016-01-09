@@ -21,9 +21,9 @@
 						Visit here for a list of Students and Skills.
 					</p>
 				</a>
-				<a href="enter_skillNames.php">
+				<a href="incident_report.php">
 					<p>
-						Visit here for entering skill names.
+						Visit here for entering incident reports.
 					</p>
 				</a>
 				<a href="scoreboard.php">
