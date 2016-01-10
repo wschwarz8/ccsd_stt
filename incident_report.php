@@ -41,16 +41,8 @@
 					</select>
         </td>
       </tr>
-			
-      </tr>
-      <!-- Laptop serial input field -->
- 			<tr><td>Serial Number of Laptop</td><td><textarea name="jLaptopNumber" placeholder="Laptop Serial Number"></textarea></td></tr>
 		
-		  <!-- Charger serial input field -->
- 			<tr><td>Serial Number of Charger</td><td><textarea name="jChargerNumber" placeholder="Charger Serial Number"></textarea></td></tr>
-		
-
-		  <!-- Laptop taken input field -->		 
+			  <!-- Laptop taken input field -->		 
 			<tr><td>Laptop taken from student?</td>
         <td>
           <select name="jLaptopTaken">
@@ -60,8 +52,11 @@
           </select>
         </td>
       </tr>
-		
-  		  <!-- Charger taken input field -->		 
+			
+			<!-- Laptop serial input field -->
+ 			<tr><td>Serial Number of Laptop</td><td><textarea name="jLaptopNumber" placeholder="Laptop Serial Number"></textarea></td></tr>
+			
+			<!-- Charger taken input field -->		 
 			<tr><td>Charger taken from student?</td>
         <td>
           <select name="jChargerTaken">
@@ -71,6 +66,13 @@
           </select>
         </td>
       </tr>
+			
+		  <!-- Charger serial input field -->
+ 			<tr><td>Serial Number of Charger</td><td><textarea name="jChargerNumber" placeholder="Charger Serial Number"></textarea></td></tr>
+		
+
+	
+ 
 		
 		  <!-- New Laptop input field -->
 		  <tr><td>Did you give a new laptop to the student?</td>
@@ -115,34 +117,98 @@
 		$queryinsertincident = "INSERT INTO `incidents`(`date`, `owner`, `status`, `laptopserial`, `chargerserial`, `laptoptaken`, `chargertaken`, `newlaptop`, `newlaptopserial`, `newchargerserial`, `explanation`, `receviedby`) VALUES ('". $_POST['jDate'] ."','". $_POST['jOwner'] ."','". $_POST['jStatus'] ."','". $_POST['jLaptopNumber'] ."','". $_POST['jChargerNumber'] ."', ". $_POST['jLaptopTaken'] .", ". $_POST['jChargerTaken'] .", ". $_POST['jNewLaptop'] .",'". $_POST['jNewNumber'] . "', '". $_POST['jNewNumberCharger'] ."','". $_POST['jExplanation'] ."',". $_POST['jRecievedBy'] .")";
 	
 		//commence query to add an incident
-		 mysql_query($queryinsertincident);
+		 $result = mysql_query($queryinsertincident);
 		
-		//announce success
-		echo "New Incident Reported!<br>";
+		//announce if the incident was recorded
+		if(!$result){
+			echo"Incident failed to report";
+			die('Invalid query: ' . mysql_error());
+			$fail = "True";
+		}else{
+			echo "New Incident Reported!<br>";
+			$fail = "False";
+		}
+		
+		//
+		//add a job for incident
+		//
 		
 		//make a job now if needed and add it to devices table
 		if ($_POST['jLaptopTaken'] = 1){
-			//make a job now and add it to devices table
 			
-			//figure out some of the info for what the job will say
+			//check what is wrong with laptop
+			switch($_POST["whatsWrong"]){
+				case 1:
+						$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a broken screen.";
+						$jobPoints = 5;//change these to appropriate points later
+						$jobPriority = 1;//change later maybe
+						$jobSkill = 5;
+				break;
+				case 2:
+					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to not turn on.";
+					$jobPoints = 5;//change these to appropriate points later
+					$jobPriority = 1;//change later maybe
+					$jobSkill = 5;
+					break;
+				case 3:
+					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a not connect to the wifi.";
+					$jobPoints = 5;//change these to appropriate points later
+					$jobPriority = 1;//change later maybe
+					$jobSkill = 2;
+					break;
+				case 4:
+					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a broken keyboard.";
+					$jobPoints = 5;//change these to appropriate points later
+					$jobPriority = 1;//change later maybe
+					$jobSkill = 5;
+					break;
+				case 5:
+					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a broken mousepad.";
+					$jobPoints = 5;//change these to appropriate points later
+					$jobPriority = 1;//change later maybe
+					$jobSkill = 5;
+					break;
+				default:
+					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is not known what is wrong with it.";
+					$jobPoints = 5;//change these to appropriate points later
+					$jobPriority = 1;//change later maybe
+					$jobSkill = 1;
+			}
 			
+			//all jobs are named laptop repair???? if not add this variable with a specific name to each case above
+			$jobName = "Laptop Repair";
 			
 			//make a query to add a job
-			$makeJobQuery = "INSERT INTO `jobs`(`id`, `name`, `description`, `skillcatid`, `status`, `points`, `repeatable`, `limitone`, `claimedby`, `priority`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10])";
+			$makeJobQuery = "INSERT INTO `jobs`(`name`, `description`, `skillcatid`, `status`, `points`, `repeatable`, `limitone`, `claimedby`, `priority`) VALUES ('".$jobName."','".$jobMessage."',".$jobSkill.",1,".$jobPoints.",0,0,0,".$jobPriority.")";
 			
-			//commence query
-			mysql_query($makeJobQuery);
+			//commence query if it fails it returns false
+			$result = mysql_query($makeJobQuery);
 			
-			//announce success
-			echo "New Job Created!";
+			//announce whether a job was created and query was successful
+			if (!$result){
+				echo "Job Creation Failed<BR><BR>";
+				die('Invalid query: ' . mysql_error());
+			}else{
+				echo "New Job Created!<BR>";
+			}
 			
+			//
 			//add this device to the devices table below
+			//
 			
 			//make query to add to devices table
-			$makeDevicesQuery = "INSERT INTO `devices`(`id`, `owner`, `assignedto_id`, `received`, `problem`, `resolution`, `notes`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `point_value`, `status_id`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13],[value-14])";
+			$makeDevicesQuery = "INSERT INTO `devices`(`owner`, `assignedto_id`, `received`, `problem`, `resolution`, `notes`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `point_value`, `status_id`) VALUES ([value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13],[value-14])";
 			
-			//commence query
-			mysql_query($makeDevicesQuery);
+			//commence query and returns false if query failed
+			$result = mysql_query($makeDevicesQuery);
+			
+			//announce whether a job was created and query was successful
+			if (!$result){
+				echo "Device Failed to be added to devices table<BR><BR>";
+				die('Invalid query: ' . mysql_error());
+			}else{
+				echo "Device added to devices table!<br>";
+			}
 			
 		}	
 		
@@ -154,7 +220,7 @@
 
 <?php
   makeFooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
-	//	 mysql_close($conn);
+	mysql_close($conn);
 // the three things this needs to do:
 // first: put all data into incident table
 // second: if laptop was taken, put data into devices table
