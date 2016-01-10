@@ -3,7 +3,7 @@
 	require_once "functions.php";
 
 	promptLogin();
-
+//editing from github.com
 	makeHeader("STT HOME","Student Technology Team Home",2,"index.php",'<link href="/css_files/homePage.css" rel="stylesheet">');
 ?>
 	<nav>
