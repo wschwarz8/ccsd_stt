@@ -1,7 +1,7 @@
 <?php
 require_once "functions.php";
 require_once "config.php";
-promptLogin();
+//promptLogin(); // Don't need to log in for this page
 
 function weekdiff($date1, $date2) {
    if($date1 > $date2) return weekdiff($date2, $date1);
