@@ -3,9 +3,8 @@
 	require_once "functions.php";
 
 	promptLogin();
-
+//editing from github.com
 	makeHeader("STT HOME","Student Technology Team Home",2,"index.php",'<link href="/css_files/homePage.css" rel="stylesheet">');
-
 ?>
 	<nav>
 		<center>
@@ -21,9 +20,9 @@
 						Visit here for a list of Students and Skills.
 					</p>
 				</a>
-				<a href="enter_skillNames.php">
+				<a href="incident_report.php">
 					<p>
-						Visit here for entering skill names.
+						Visit here for entering incident reports.
 					</p>
 				</a>
 				<a href="scoreboard.php">
