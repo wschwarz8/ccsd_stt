@@ -31,7 +31,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 					<a href='../scoreboard.php?type=all'><div class='buttons'>Scoreboard</div></a>
 					<a href='../team.php'><div class='buttons'>Team Pages</div></a>
 					<a href='../DisplayBroken.php'><div class='buttons'>Broken</div></a>
-					<a href='../login/login.php'><div class='buttons'>Login</div></a> 
+					<a href='../login/login.php?logout=1'><div class='buttons'>Log Out</div></a> 
 				</div>
 		
 			<div class='meat'>
@@ -104,7 +104,7 @@ function promptLogin()
 	if(!$_SESSION['loginid'])
 	{
 		// uncomment this to require logins
-		//header('location:login/login.php?reason=1');
+		header('location:login/login.php?reason=1');
 	}
 }
 
