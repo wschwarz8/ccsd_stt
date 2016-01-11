@@ -17,7 +17,7 @@ while ($row = mysql_fetch_assoc($result)) {
 if(isset($_GET["Jobid"]) && isset($_SESSION['loginid'])){
 	$StudentID = $_SESSION['loginid'];
 	$numjobs = 0;
-	$query = "SELECT COUNT(*) as count FROM jobs WHERE STATUS<4 && claimedby='".$StudentID."'";
+	$query = "SELECT COUNT(*) as count FROM jobs WHERE STATUS<3 && bypassLimit=0 && claimedby='".$StudentID."'";
 	$result = mysql_query($query);
 	$row = mysql_fetch_assoc($result);
 	
