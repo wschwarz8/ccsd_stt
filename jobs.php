@@ -38,7 +38,7 @@ if(isset($_GET["Jobid"]) && isset($_SESSION['loginid'])){
 	}
 }
 
-function printjobs($result, $claimable) {
+function printjobs($result, $claimable, $showall) {
   while ($row = mysql_fetch_assoc($result)) { // TODO format to look better
     if($row['priority']>7)
 	echo "<tr bgcolor='red'>";
@@ -105,8 +105,14 @@ makeHeader("Job List","Job List",2,"jobs.php",$script);
 			<input type="hidden" name="Unclaim">
 		</form>
 <?php
-
 $showall=false;
+if($_GET['all']) $showall=true;
+
+
+if(!$showall)
+	echo "<BR><a href='jobs.php?all=1'>Show All</a><BR>";
+else
+	echo "<BR><a href='jobs.php'>Show Mine</a><BR>";
 
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 mysql_select_db('stt', $g_link);
@@ -152,21 +158,23 @@ if (!$result) {
 
 // prints one row at a time, the results from the database.
 echo "<table border=1>";
+$all="";
+if($showall) $all="&all=1";
 if ($_GET['order']=='ASC') {
 echo "<tr><td>Job</td><td>Description</td><td>
-<a  href='jobs.php?sortby=points&order=DESC'>Points</a> v</td><td>
+<a  href='jobs.php?sortby=points&order=DESC$all'>Points</a> v</td><td>
 <a href='jobs.php?sortby=category'>Category</a></td><td>Claimed By</td></tr>";
 }
 		
 else if ($_GET['order']=='DESC') {
 echo "<tr><td>Job</td><td>Description</td><td>
-<a  href='jobs.php?sortby=points&order=ASC'>Points</a> ^</td><td>
-<a href='jobs.php?sortby=category'>Category</a></td><td>Claimed By</td></tr>";
+<a  href='jobs.php?sortby=points&order=ASC'$all>Points</a> ^</td><td>
+<a href='jobs.php?sortby=category'$all>Category</a></td><td>Claimed By</td></tr>";
 }	
 		else {
 			echo "<tr><td>Job</td><td>Description</td><td>
-<a  href='jobs.php?sortby=points&order=ASC'>Points</a></td><td>
-<a href='jobs.php?sortby=category'>Category</a></td><td>Claimed By</td></tr>";
+<a  href='jobs.php?sortby=points&order=ASC$all'>Points</a></td><td>
+<a href='jobs.php?sortby=category$all'>Category</a></td><td>Claimed By</td></tr>";
 }	
 		
 		
@@ -174,7 +182,7 @@ echo "<tr><td>Job</td><td>Description</td><td>
 
 ///echo "<tr><td>Job</td><td>Description</td><td>Points</td><td>Category</td><td>Claimed By</td></tr>";
 
-printjobs($result, true);
+printjobs($result, true, $showall);
 	
 echo "</table>";
 
