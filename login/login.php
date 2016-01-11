@@ -54,7 +54,7 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 	
 		else
 		{
-			$_SESSION['loginid']=$_POST['username'];
+			$_SESSION['loginid']=$row['id'];
 			header('location:../index.php');	
 		}
 		
