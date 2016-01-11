@@ -93,6 +93,9 @@ promptLogin();
 		 $_POST['jClaim'] = "";
 		 $_POST['jPriority'] = "";
 	 }
+	else if($_POST) {
+		echo "ERROR: Job not created";
+	}
 		?>
 	</div>
 </center>
