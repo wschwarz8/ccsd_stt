@@ -62,7 +62,7 @@ foreach ($studentarray as $key=>$value){
    </select>
 </td></tr>
 <tr><td>Job</td><td>
-   <select name=firstjob onchange="jobchange(this.value)">
+   Incomplete Jobs:<select name=firstjob onchange="jobchange(this.value)">
 	   <option value=''>---</option>
 <?php
 $query = "SELECT name, id, points, skillcatid FROM jobs WHERE status=1";
@@ -77,10 +77,23 @@ while ($row = mysql_fetch_assoc($result)) {
 ?>
 </select>
 	<BR>
-<select name=secondjob onchange="jobchange(this.value)">
+Complete Jobs:<select name=secondjob onchange="jobchange(this.value)">
 	   <option value=''>---</option>
 <?php
-$query = "SELECT name, id, points, skillcatid FROM jobs WHERE status>1 AND repeatable=1";
+$query = "SELECT name, id, points, skillcatid FROM jobs WHERE status=3";
+$result = mysql_query($query);
+while ($row = mysql_fetch_assoc($result)) {
+	$pointarray.="points[".$row['id']."]=".$row['points'].";";
+	$categoryarray.="category[".$row['id']."]=".$row['skillcatid'].";";
+	echo "<option value=".$row['id'].">".$row['name']."</option>";
+}	
+?>
+</select>
+	<BR>
+Repeatable Jobs:<select name=thirdjob onchange="jobchange(this.value)">
+	   <option value=''>---</option>
+<?php
+$query = "SELECT name, id, points, skillcatid FROM jobs WHERE status<4 AND repeatable=1";
 $result = mysql_query($query);
 while ($row = mysql_fetch_assoc($result)) {
 	$pointarray.="points[".$row['id']."]=".$row['points'].";";
