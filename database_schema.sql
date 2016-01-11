@@ -279,22 +279,24 @@ CREATE TABLE IF NOT EXISTS `skills` (
 DROP TABLE IF EXISTS `students`;
 CREATE TABLE IF NOT EXISTS `students` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(64) NOT NULL,
   `name` varchar(40) NOT NULL,
   `class` varchar(4) NOT NULL,
   `active` tinyint(4) NOT NULL DEFAULT '1',
   `bio` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `students`
 --
 
 INSERT INTO `students` (`id`, `name`, `class`, `active`) VALUES
-(1, 'Student 1', '2001', 1),
-(2, 'Student 2', '2002', 1),
-(3, 'Student 3', '2004', 1),
-(9, 'Steavie', '2020', 1);
+(1, 'student1', '', 'Student 1', '2001', 1),
+(2, 'student2', '', 'Student 2', '2002', 1),
+(3, 'student3', '', 'Student 3', '2004', 1),
+(9, 'steavie', '', 'Steavie', '2020', 1);
 
 -- --------------------------------------------------------
 
