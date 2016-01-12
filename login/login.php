@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if(isset($_GET['logout'])){
+	unset($_SESSION['loginid']);
+}
+
 if(isset($_GET["reason"]))
 	
 {
