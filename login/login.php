@@ -72,7 +72,7 @@ else
 		<titlePlease type your Username and Password... </title>
 			<script language="JavaScript" type="text/JavaScript" src="login.js"></script>
 	<body background= "http://www.pptwallpapers.com/uploads/abstract-blue-grid-backgrounds-powerpoint.jpg">
-		<form name="LogMeIn" method="post">
+		<form onkeydown="(function(event,form){if(event.keyCode == 13){form.submit();}})(event,this)" name="LogMeIn" action="" method="post">
 			<br>
 			<center>
 				Username:
