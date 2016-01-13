@@ -23,7 +23,14 @@ $result = mysql_query($query);
 if (!$result) {
     die('Invalid query: ' . mysql_error());
 }
-echo "<h3>Recent jobs for [Student Name]</h3>";
+	
+	$nameQuery = "SELECT * FROM `students` WHERE id=". $_GET['id'];
+	$results = mysql_query($nameQuery);
+	while ($info= mysql_fetch_assoc($results)) { // TODO format to look better
+			$namePart = $info['name'];
+    }
+	
+echo "<h3>Recent jobs for ". $namePart ."</h3>";
 echo "<table border=1>";
 echo "<tr><td>Student</td><td>Date</td><td>Job</td><td>Points</td>";
 
