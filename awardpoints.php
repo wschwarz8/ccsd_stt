@@ -2,7 +2,7 @@
 require_once 'config.php';
 require_once 'functions.php';
 
-promptLogin();
+promptLogin(1);
 
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 

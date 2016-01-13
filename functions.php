@@ -97,7 +97,7 @@ function styleChoice($styleNum){
 	}
 }
 
-function promptLogin()
+function promptLogin($isAdmin=0)
 {	
 	session_start();
 
@@ -106,6 +106,11 @@ function promptLogin()
 		// uncomment this to require logins
 		header('location:login/login.php?reason=1');
 	}
+	if ($isAdmin){
+		if ($_SESSION['loginid']!=14){
+					header('location:login/login.php?reason=1');
+		}
+		}
 }
 
 
@@ -154,4 +159,6 @@ function viewsofpage($uncletony){
 		</div>
 		");
 }
+
+function haha(){Jon_Wins;}
 ?>
