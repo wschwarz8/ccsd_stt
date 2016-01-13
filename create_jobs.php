@@ -1,7 +1,7 @@
 <?php
   require_once "functions.php";
 	require_once "config.php";
-promptLogin();
+promptLogin(1);
 	makeHeader("Create Jobs","Create a job",2,"create_jobs.php",'<link href="/css_files/create_jobs.css" rel="stylesheet">');
 ?>
 
@@ -65,22 +65,22 @@ promptLogin();
       <!-- job repeatable input field -->
       <tr><td>Priority</td><td><input type="text" name="jPriority" value="1" placeholder="Priority"></td></tr>
       <!-- job repeatable input field -->
-      <tr><td>Authorization Code</td><td><input type="password" name="jPass"  placeholder="Password"></td></tr>
       
       <tr><td colspan="2" style="text-align:center;"><input type="submit"></td></tr>
     </table>
   </form>
 		<?php
 
-	 if ($_POST && $_POST['jPass'] == "J"){//password is pass
+	 if ($_POST){
 		 
 		 //make query
 		 $queryinsertjob = "INSERT INTO `jobs`( `name`, `description`, `skillcatid`, `status`, `points`, `claimedby`, `priority`) VALUES ('".$_POST['jName']."','".$_POST['jDesc']."', ".$_POST['jSkill'].", ".$_POST['jStatus'].", ".$_POST['jPoints'].", ".$_POST['jClaim'].", ".$_POST['jPriority'].")";
-		 
+
 		 //commence query
-		 mysql_query($queryinsertjob);
+		 $rsp = mysql_query($queryinsertjob);
 		 
-		 echo"Job Created :)";
+		 if($rsp) echo"Job Created :)";
+		 else echo "ERROR";
 		 
 		 mysql_close($conn);
 		 

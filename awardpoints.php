@@ -30,7 +30,7 @@ while ($row = mysql_fetch_assoc($result)) {
 	$studentarray[$row['id']]=$row['name'];
 }	
 
-if($_POST && $_POST['code']=='F')
+if($_POST)
 {
 	$jobid=$_POST['job_id'];
 	if(isset($_POST['resolve'])){
@@ -111,7 +111,6 @@ echo "
 <tr><td><input type=checkbox name="resolve" id="resolve" value="resolve">Resolve job?</td></tr>
 <tr><td>Points</td><td><input type="text" name="points" id="points"></td></tr>
 <tr><td>Point Category</td><td><input type="text" name="category_id" id="category_id" value="1"></td></tr>
-	<tr><td>secret code</td><td><input type="text" name="code" id="code" value=""></td></tr>
 <tr><td colspan=2><input type="submit"></td></tr>
 </table>
 </form>
