@@ -8,7 +8,7 @@ $result = mysql_query($rewardsquery);
 if (!$result) {
     die('Invalid query: ' . mysql_error());
 }
-makeHeader("STT HOME","Broken Chromebooks",2,"DisplayBroken.php","<style>td{color:white;}</style>");
+makeHeader("STT HOME","ALL DA REWARDS",2,"DisplayRewards.php","<style>td{color:white;}</style>");
 // prints one row at a time, the results from the database.
 echo "<table border=1>";
 echo "<tr><td>Reward</td><td>Description</td><td>Category of Reward</td><td>Points</td></tr>";
