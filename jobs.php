@@ -22,19 +22,50 @@ if(isset($_GET["Jobid"]) && isset($_SESSION['loginid'])){
 	$row = mysql_fetch_assoc($result);
 	
 	if(isset($_GET['Unclaim']) && $_GET['Unclaim']){
-		$query = "UPDATE  `jobs` SET  `claimedby` =0 WHERE id =".$_GET["Jobid"];
-		$result = mysql_query($query);
-		if($result) echo "<font color=white>You have UNclaimed a job successfully.</font><BR>";
-		else echo "<font color=white>ERROR: Something went wrong you have not UNclaimed a job.</font><BR>";
-	}
-	else if($row['count']>2){ // If you already have a job you are working on
+		
+		if ($_GET['Unclaim'] == 1){
+			$query = "UPDATE  `jobs` SET  `claimedby` =0 WHERE id =".$_GET["Jobid"];
+			$result = mysql_query($query);
+			if($result) {
+				echo "<font color=white>You have Unclaimed a job successfully.</font><BR>";
+			}else {
+				echo "<font color=white>ERROR: Something went wrong you have not Unclaimed a job.</font><BR>";
+				die('Invalid query: ' . mysql_error());
+			}
+			
+		}else if ($_GET['Unclaim'] == 2){
+			
+			$querys = "UPDATE  `jobs` SET  `status` = 3 WHERE id =".$_GET["Jobid"];
+			$results = mysql_query($querys);
+			$queryAgain = "SELECT `id`, `skillcatid`, `points`, `claimedby` FROM `jobs` WHERE id = ".$_GET['Jobid'];
+			$resultss = mysql_query($queryAgain);
+			while ($info= mysql_fetch_assoc($resultss)) {
+			$name = $info['claimedby'];
+			$points = $info['points'];
+			$category = $info['skillcatid'];
+    }
+			$addPointsQuery = "INSERT INTO `points`(`job_id`, `student_id`, `points`, `category_id`) VALUES (".$_GET['Jobid'].", ".$name.",".$points.",".$category.")";
+			$results = mysql_query($addPointsQuery);
+			if($results) {
+				echo "<font color=white>You have resolved a job successfully.</font><BR>";
+				
+			}else {
+				echo "<font color=white>ERROR: Something went wrong you have not resolved a job.</font><BR>";
+				die('Invalid query: ' . mysql_error());
+		}
+		}
+	}else if($row['count']>2){ // If you already have a job you are working on
 		echo"<font color=white>You can't claim this job, you are already working on ".$row['count']." jobs.</font>";
-	}
-	else { // You don't have a job you are working on
+	}else { // You don't have a job you are working on
+		
 		$query = "UPDATE  `jobs` SET  `claimedby` =".$StudentID." WHERE id =".$_GET["Jobid"];
 		$result = mysql_query($query);
-		if($result) echo "<font color=white>You have claimed a job successfully.</font><BR>";
-		else echo "<font color=white>ERROR: Something went wrong you have not claimed a job.</font><BR>";
+		
+		if($result){
+			echo "<font color=white>You have claimed a job successfully.</font><BR>";
+		}else {
+			echo "<font color=white>ERROR: Something went wrong you have not claimed a job.</font><BR>";
+		}
 	}
 }
 
@@ -56,7 +87,7 @@ function printjobs($result, $claimable, $showall) {
 		"<button type='button' id='button' onclick='claimjobfunction(".$row['id'].", 1)'>
 		UNclaim Job
 		</button>
-		<button type='button' id='button' onclick='resolvejobfunction(".$row['id'].", 1)'>
+		<button type='button' id='button' onclick='claimjobfunction(".$row['id'].", 2)'>
 		Resolve Job
 		</button>
 		</td></tr>";
@@ -83,7 +114,7 @@ $script = "
 		document.Theform.Jobid.value=jobid
 		document.Theform.Unclaim.value=unclaim
 		document.getElementById('Theform').submit();
-	}	
+	}
 	</script>
 	
 	<style>
@@ -106,7 +137,7 @@ makeHeader("Job List","Job List",2,"jobs.php",$script);
 		</form>
 <?php
 $showall=false;
-if($_GET['all']) $showall=true;
+if(isset($_GET['all'])) $showall=true;
 
 
 if(!$showall)
