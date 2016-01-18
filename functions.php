@@ -47,7 +47,7 @@ function makeFooter($footermessage,$pstyle,$footerbox=""){
 	</div>
 		<style>". styleChoice($pstyle) ."</style>
 			");
-			 if ($footerbox == "false"){
+			 if ($footerbox == "False"){
 			 }else{
 				echo ("
 				<div id='footer'>
