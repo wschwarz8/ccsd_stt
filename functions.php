@@ -27,7 +27,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 		
 				<div class='buttonRow'>
 					<a href='../index.php'><div class='buttons'>Home</div></a>
-					<a href='../jobs.php?sortby=points&order=ASC'><div class='buttons'>Jobs</div></a>
+					<a href='../rewriteJobs.php?sortby=points&order=ASC'><div class='buttons'>Jobs</div></a>
 					<a href='../scoreboard.php?type=all'><div class='buttons'>Scoreboard</div></a>
 					<a href='../team.php'><div class='buttons'>Team Pages</div></a>
 					<a href='../DisplayBroken.php'><div class='buttons'>Broken</div></a>

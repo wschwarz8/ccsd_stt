@@ -1,6 +1,8 @@
 <?php
 //todo
 //fix header issue   <--fixed
+//add claimable all jobs
+//add ignore jobs -- needs a 3 column table
 //add working sort by logic
 //add alert message for when claiming,unclaiming, and resolving a job
 
@@ -121,10 +123,12 @@ function formCheckFunc(){
 			}	
 			$addPointsQuery = "INSERT INTO `points`(`job_id`, `student_id`, `points`, `category_id`) VALUES (".$jobdata['id'].",".$_SESSION['loginid'].",".$jobdata['points'].",".$jobdata['skillcatid'].")";
 			queryFunc($addPointsQuery);
+			
+		}else if($_POST['claimStatButt'] == 4){
+			//ignore a job
+			$ignoreJobQuery = "INSERT INTO `ignorejobs`(`studentname`, `jobid`) VALUES (".$_SESSION['loginid'].",".$_POST['formIdentifier'].")";
+			queryFunc($ignoreJobQuery);
 		}
-
-		//update screen
-		header('location:rewriteJobs.php');
 	}
 }
 
