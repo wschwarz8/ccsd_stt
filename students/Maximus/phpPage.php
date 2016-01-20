@@ -61,10 +61,10 @@ makeHeader("PHP Object-oriented Programing Practice", "PHP Object-oriented Progr
 	echo "<h2>Create a new object from the student class</h2><br>";
 	$cat = new student("Max","DeVos","867-5309",348,11,2017,"Chemistry");
 
-	echo "<h2>Run a test function</h2><br>";
+	echo "<h2>Run a test method</h2><br>";
 	$cat->test();
 
-	echo "<h2>Run a printall function for a student</h2><br>";
+	echo "<h2>Run a printall method for a student</h2><br>";
 	$cat->printall();
 
 	echo "<h2>Try to print the student object as text</h2><br>";

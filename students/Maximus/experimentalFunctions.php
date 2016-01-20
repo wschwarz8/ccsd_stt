@@ -14,7 +14,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 		</head>
 		<body onload='calculateStuff();'>
 			<div class='header'>
-				<a href='../index.php'><h1 id='headerTitle'>". $ptitle . "</h1></a>
+				<a href='index.php'><h1 id='headerTitle'>". $ptitle . "</h1></a>
 			
 				");
 		

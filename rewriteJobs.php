@@ -1,7 +1,13 @@
 <?php
+//todo
+//fix header issue   <--fixed
+//add working sort by logic
+//add alert message for when claiming,unclaiming, and resolving a job
+
 //get access to proper files
 require_once 'config.php';
 require_once "functions.php";
+require_once "Classes/jobsClass.php";
 
 //check for login
 promptLogin();//can this be put into functions.php?
@@ -12,160 +18,13 @@ $conn = mysql_connect('localhost', $g_username, $g_password); //TODO use a persi
 //select a correct database
 mysql_select_db('stt', $conn);
 
+//check for any forms submitted
+formCheckFunc();
+
 //set up the base of the page
 makeHeader('Jobs List','Jobs List',2,"jobs2.php","<link href='css_files/jobs.css' rel='stylesheet'>");
 
-//jobs class
-class jobs{
-  
-  //init any properties below for jobs info
-  public $job_Id;
-  public $job_Name;
-  public $job_Description;
-  public $job_Category;
-  public $job_Status;
-  public $job_Points;
-  public $job_Repeatable;
-  public $job_limitOne;
-  public $job_ClaimedBy;
-  public $job_Priority;
-  public $job_BypassLimit;
-  
-  //contruct each property when a object is made
-  function __construct($jid,$jna,$jde,$jca,$jst,$jpo,$jre,$jli,$jcl,$jpr,$jby){
-    $this->job_Id = $jid;
-    $this->job_Name = $jna;
-    $this->job_Description = $jde;
-    $this->job_Category = $jca;
-    $this->job_Status = $jst;
-    $this->job_Points = $jpo;
-    $this->job_Repeatable = $jre;
-    $this->job_limitOne = $jli;
-    $this->job_ClaimedBy = $jcl;
-    $this->job_Priority = $jpr;
-    $this->job_BypassLimit = $jby;
-  }
-  
-  //do something if the object is called as a string
-  function __toString(){
-    return "this is not string dude its an object!";
-  }
-  
-  //do something if a job was destroyed
-  function __destruct(){//this is acting funny\/\/\/ update-> i think it is because of a </div> missing somehow or a rogue quotation mark possibly in functions.php in makeheader() but thats just an idea
-    //echo "The job object ". $this->job_Name ." was destroyed!!";
-  }
-  
-  function printJob(){
-		
-		//process some data
-		$jobPriority = $this->jobPriorityFunc();
-		
-		if ($this->job_Status == 1){
-			echo("
-				<tr style='".$jobPriority."height:45px;'>
-					<td style='width:10%;'>". $this->job_Name ."</td>
-					<td style='width:50%;'>". $this->job_Description ."</td>
-					<td style='width:10%;'>". $this->job_Points ."</td>
-					<td style='width:10%;'>". $this->jobCategoryAndNameFunc(1) ."</td>
-					<td style='width:10%;'><form method='post' name='claimStatForm'>". $this->jobClaimButtsFunc() ."</form></td>
-				</tr>
-			");
-			}
-  }
-  
-	//determine job priority
-	function jobPriorityFunc(){
-		//determine the background color of the row for priority
-		if ($this->job_Priority > 7){//important jobs are red
-			return "background:red;";
-		}else if($this->job_Priority > 3){//moderately important jobs are orange
-			return "background:orange;";
-		}else{//not very important
-			return "";
-		}
-	}
-	
-  //logic for when to have claim, unclaim, and resolve buttons go here
-  function jobClaimButtsFunc(){
-		if ($this->job_ClaimedBy == 0 ){
-			return("
-			<button type='submit' name='claimStatButt' value='1'>claim</button>
-			<input type='hidden' name='formIdentifier' value='".$this->job_Id."'>
-			");
-		}else if ($this->job_ClaimedBy == $_SESSION['loginid']){
-			return("
-			<button type='submit' name='claimStatButt' value='2'>Unclaim</button>
-			<button type='submit' name='claimStatButt' value='3'>Resolve</button>
-			<input type='hidden' name='formIdentifier' value='".$this->job_Id."'>
-			");
-		}else{
-			return $this->jobCategoryAndNameFunc(2);
-		}
-  }
-	
-	//logic for job claim,unclaim, and resolve logic
-	function claimUnclaimResolveFunc(){
-		if ($_POST['claimStatButt'] == 1){
-			//make a query to claim a job
-			$claimStatQuery = "UPDATE `jobs` SET `claimedby`=".$_SESSION['loginid']." WHERE id=" . $this->job_Id;
-			$this->job_ClaimedBy = $_SESSION['loginid'];
-			$this->queryFunc($claimStatQuery);
-
-		}else if($_POST['claimStatButt'] == 2){
-			//make a query to unclaim a job
-			$claimStatQuery = "UPDATE `jobs` SET `claimedby`=0 WHERE id=" . $this->job_Id;
-			$this->job_ClaimedBy = 0;
-			$this->queryFunc($claimStatQuery);
-
-		}else if($_POST['claimStatButt'] == 3){
-			//make a query to resolve a job
-			$resolveQuery = "UPDATE `jobs` SET `status`=3 WHERE id=" . $this->job_Id;
-			$this->queryFunc($resolveQuery);
-			$addPointsQuery = "INSERT INTO `points`(`job_id`, `student_id`, `points`, `category_id`) VALUES (".$this->job_Id.",".$_SESSION['loginid'].",".$this->job_Points.",".$this->job_Category.")";
-			$this->queryFunc($addPointsQuery);
-		}
-
-		//update screen?? might be a better way but this works
-		header('location:rewriteJobs.php');
-	}
-	
-	//query function
-	function queryFunc($query){
-		//commence query
-		return $queryResult = mysql_query($query);
-
-		//check if query was succsesful
-		if (!$queryResult) {
-   	 die('Invalid query: ' . mysql_error());
-		}
-	}
-	
-	//turn the category num into text
-  function jobCategoryAndNameFunc($type){
-		
-		//determine what to query
-		if ($type == 1){
-		//make a query for category name
-		$jobcategoryAndNameQuery = "SELECT `category` FROM `skillcategories` WHERE id=" . $this->job_Category;
-		$placeholder = "category";
-		}else{
-			//make a query for persons name
-		$jobcategoryAndNameQuery = "SELECT `name` FROM `students` WHERE id=" . $this->job_ClaimedBy;
-		$placeholder = "name";
-		}
-		
-		//do query and process it
-		while ($data = mysql_fetch_assoc($this->queryFunc($jobcategoryAndNameQuery))) {
-			 return $data[$placeholder];
-		}
-	}
-	
-}//end of jobs class
-
-
-
-//do setup here and navigates most of the logic
+//do setup here
 function main(){
   
   //add the job display buttons to the screen
@@ -222,26 +81,52 @@ function main(){
 		
   }
   //commence query
-  $result = mysql_query($jobQuery);
+  $jobQueryResult = mysql_query($jobQuery);
   
   //make a table
   echo"<center><table style='width:100%;'><tr><td>Job Name</td><td>Job Description</td><td>Job Points</td><td>Job Category</td><td>Claim Status</td></tr>";
   
   //create an object for every job
-  while ($jobdata = mysql_fetch_assoc($result)) {
+  while ($jobdata = mysql_fetch_assoc($jobQueryResult)) {
 	$job[$jobdata['id']] = new jobs($jobdata['id'],$jobdata['name'],$jobdata['description'],$jobdata['skillcatid'],$jobdata['status'],$jobdata['points'],$jobdata['repeatable'],$jobdata['limitone'],$jobdata['claimedby'],$jobdata['priority'],$jobdata['bypassLimit']);
   $job[$jobdata['id']]->printJob();//print the row for a job
 }	
   //finish the table
   echo"</table></center>";
-	
-	//claim logic
-	if (isset($_POST['formIdentifier'])){
-		$job[$_POST['formIdentifier']]->claimUnclaimResolveFunc();
-	}
   
 }//end of main function
 
+//check if a claim button was pressed
+function formCheckFunc(){
+	//check if any of the forms were submitted
+	if (isset($_POST['formIdentifier'])){
+		//logic for job claim,unclaim, and resolve logic
+		if ($_POST['claimStatButt'] == 1){
+			//make a query to claim a job
+			$claimStatQuery = "UPDATE `jobs` SET `claimedby`=".$_SESSION['loginid']." WHERE id=" . $_POST['formIdentifier'];
+			queryFunc($claimStatQuery);
+
+		}else if($_POST['claimStatButt'] == 2){
+			//make a query to unclaim a job
+			$claimStatQuery = "UPDATE `jobs` SET `claimedby`=0 WHERE id=" . $_POST['formIdentifier'];
+			queryFunc($claimStatQuery);
+
+		}else if($_POST['claimStatButt'] == 3){
+			//make a query to resolve a job
+			$resolveQuery = "UPDATE `jobs` SET `status`=3 WHERE id=" . $_POST['formIdentifier'];
+			queryFunc($resolveQuery);
+			$jobInfoQuery = "SELECT * FROM `jobs` WHERE id=" . $_POST['formIdentifier'];
+			while ($jobdata = mysql_fetch_assoc($jobInfoQuery)) {
+				$job[$jobdata['id']] = new jobs($jobdata['id'],$jobdata['name'],$jobdata['description'],$jobdata['skillcatid'],$jobdata['status'],$jobdata['points'],$jobdata['repeatable'],$jobdata['limitone'],$jobdata['claimedby'],$jobdata['priority'],$jobdata['bypassLimit']);
+			}	
+			$addPointsQuery = "INSERT INTO `points`(`job_id`, `student_id`, `points`, `category_id`) VALUES (".$jobdata['id'].",".$_SESSION['loginid'].",".$jobdata['points'].",".$jobdata['skillcatid'].")";
+			queryFunc($addPointsQuery);
+		}
+
+		//update screen
+		header('location:rewriteJobs.php');
+	}
+}
 
 //call main function
 main();
