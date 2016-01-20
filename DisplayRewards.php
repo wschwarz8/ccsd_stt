@@ -4,9 +4,11 @@ require_once 'config.php';
 
 
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
+mysql_select_db('stt', $g_link);
 
 
-$query = "SELECT `id`, `title`, `category`, `points`, `description` FROM `Rewards` WHERE 1";
+$query = "SELECT title, skillcategories.category, points, description FROM `Rewards`, `skillcategories` WHERE Rewards.category=skillcategories.id";
+$result = mysql_query($query);
 
 
 if ($_GET['sortby']=='category') {///order by category 
@@ -22,10 +24,10 @@ else {  /// order by default
 if ($_GET['order']=='DESC'){ 
 	$query= $query ." DESC";		 
 }
-mysql_select_db('stt', $g_link);
+	
 
 
-$result = mysql_query($query);
+
 
 
 
@@ -42,35 +44,34 @@ makeHeader("Got some points?","ALL DA REWARDS",2,"DisplayRewards.php","<style>td
 // prints one row at a time, the results from the database.
 echo "<table border=1>";
 
-echo "<tr><td>Reward</td><td>Description</td><td>Points</td><td>Category of Reward</td></tr>";
+//echo "<tr><td>Reward</td><td>Description</td><td>Category of Reward</td><td>Points</td></tr>";
 
-while ($row = mysql_fetch_assoc($result)) { // TODO format to look better
-//	print_r($row);die;
-    echo "<tr><td>".$row['title'].
-			"</td><td>".$row['description'].
-			"</td><td>".$row['points'].
-			"</td><td>".$rewardsarray[$row['category']]."</td></tr>";
-}
 
-echo "</table>";
+//echo "</table>";
 
 
 
 if ($_GET['order']=='ASC') {
-echo "<tr><td>Reward</td><td>Description</td><td>
-<a  href='DisplayRewards.php?sortby=points&order=DESC'>Points</a> v</td><td>
-<a href='DisplayRewards.php?sortby=category'>Category of Reward</a></td>";
+echo "<tr><td>Reward</td><td>Description</td>
+<td><a href='DisplayRewards.php?sortby=category'><font color=white>Category of Reward</font></a>
+<td><a href='DisplayRewards.php?sortby=points&order=DESC'><font color=white>Points</a> v</font></td></td>";
 }
 		
-else if ($_GET['order']=='DESC') {
-echo "<tr><td>Reward</td><td>Description</td><td>
-<a  href='DisplayRewards.php?sortby=points&order=ASC'>Points</a> ^</td><td>
-<a href='DisplayRewards.php?sortby=category'>Category of Reward</a></td>";
+ else if ($_GET['order']=='DESC') {
+echo "<tr><td>Reward</td><td>Description</td>
+<td><a href='DisplayRewards.php?sortby=category'><font color=white>Category of Reward</font></a>
+<td><a  href='DisplayRewards.php?sortby=points&order=ASC'><font color=white>Points</a> ^</font></td></td>";
 }	
-		else {
-			echo "<tr><td>Reward</td><td>Description</td><td>
-<a  href='DisplayRewards.php?sortby=points&order=ASC'>Points</a></td><td>
-<a href='DisplayRewards.php?sortby=category'>Category</a></td>";
+		else{
+			echo "<tr><td>Reward</td><td>Description</td>
+			<td><a href='DisplayRewards.php?sortby=category'><font color=white>Category</font></a>
+			<td><a  href='DisplayRewards.php?sortby=points&order=ASC'><font color=white>Points</font></a></td></td>";
 }	
+while ($row = mysql_fetch_assoc($result)) { // TODO format to look better
+    echo "<tr><td>".$row['title'].
+			"</td><td>".$row['description'].
+			"</td><td>".$row['category'].
+			"</td><td>".$row['points']."</td></tr>";
+}
 mysql_close($g_link);
 ?>
