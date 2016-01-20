@@ -114,7 +114,9 @@
 	if ($_POST){
 
 		//make query to add an incident
-		$queryinsertincident = "INSERT INTO `incidents`(`date`, `owner`, `status`, `laptopserial`, `chargerserial`, `laptoptaken`, `chargertaken`, `newlaptop`, `newlaptopserial`, `newchargerserial`, `explanation`, `receviedby`) VALUES ('". $_POST['jDate'] ."','". $_POST['jOwner'] ."','". $_POST['jStatus'] ."','". $_POST['jLaptopNumber'] ."','". $_POST['jChargerNumber'] ."', ". $_POST['jLaptopTaken'] .", ". $_POST['jChargerTaken'] .", ". $_POST['jNewLaptop'] .",'". $_POST['jNewNumber'] . "', '". $_POST['jNewNumberCharger'] ."','". $_POST['jExplanation'] ."',". $_POST['jRecievedBy'] .")";
+		$queryinsertincident = "INSERT INTO `incidents`
+			(`date`, `owner`, `status`, `laptopserial`, `chargerserial`, `laptoptaken`, `chargertaken`, `newlaptop`, `newlaptopserial`, `newchargerserial`, `explanation`, `receviedby`) VALUES 
+			('". $_POST['jDate'] ."','". $_POST['jOwner'] ."','". $_POST['jStatus'] ."','". $_POST['jLaptopNumber'] ."','". $_POST['jChargerNumber'] ."', ". $_POST['jLaptopTaken'] .", ". $_POST['jChargerTaken'] .", ". $_POST['jNewLaptop'] .",'". $_POST['jNewNumber'] . "', '". $_POST['jNewNumberCharger'] ."','". $_POST['jExplanation'] ."','". $_POST['jRecievedBy'] ."')";
 	
 		//commence query to add an incident
 		 $result = mysql_query($queryinsertincident);
@@ -140,38 +142,38 @@
 			switch($_POST["whatsWrong"]){
 				case 1:
 						$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a broken screen.";
-						$jobPoints = 5;//change these to appropriate points later
-						$jobPriority = 1;//change later maybe
+						$jobPoints = 1;//change these to appropriate points later
+						$jobPriority = 5;//change later maybe
 						$jobSkill = 5;
 				break;
 				case 2:
 					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to not turn on.";
 					$jobPoints = 5;//change these to appropriate points later
-					$jobPriority = 1;//change later maybe
+					$jobPriority = 5;//change later maybe
 					$jobSkill = 5;
 					break;
 				case 3:
 					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a not connect to the wifi.";
 					$jobPoints = 5;//change these to appropriate points later
-					$jobPriority = 1;//change later maybe
+					$jobPriority = 2;//change later maybe
 					$jobSkill = 2;
 					break;
 				case 4:
 					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a broken keyboard.";
 					$jobPoints = 5;//change these to appropriate points later
-					$jobPriority = 1;//change later maybe
+					$jobPriority = 3;//change later maybe
 					$jobSkill = 5;
 					break;
 				case 5:
 					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a broken mousepad.";
 					$jobPoints = 5;//change these to appropriate points later
-					$jobPriority = 1;//change later maybe
+					$jobPriority = 3;//change later maybe
 					$jobSkill = 5;
 					break;
 				default:
 					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is not known what is wrong with it.";
 					$jobPoints = 5;//change these to appropriate points later
-					$jobPriority = 1;//change later maybe
+					$jobPriority = 5;//change later maybe
 					$jobSkill = 1;
 			}
 			
