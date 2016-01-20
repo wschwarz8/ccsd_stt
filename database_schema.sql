@@ -192,6 +192,17 @@ CREATE TABLE IF NOT EXISTS `jobstatus` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
+--
+-- Dumping data for table `jobstatus`
+--
+
+INSERT INTO `jobstatus` (`id`, `name`) VALUES
+(1, 'New'),
+(2, 'In Progress'),
+(3, 'Finished'),
+(4, 'Resolved'),
+(5, 'Error');
+
 -- --------------------------------------------------------
 
 --
