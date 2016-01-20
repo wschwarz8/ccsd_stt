@@ -294,7 +294,8 @@ CREATE TABLE IF NOT EXISTS `students` (
   `password` varchar(64) NOT NULL,
   `name` varchar(40) NOT NULL,
   `class` varchar(4) NOT NULL,
-  `active` tinyint(4) NOT NULL DEFAULT '1',
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `admin` tinyint(1) NOT NULL DEFAULT '0',
   `bio` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
