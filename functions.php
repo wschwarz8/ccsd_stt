@@ -160,5 +160,15 @@ function viewsofpage($uncletony){
 		");
 }
 
-function haha(){Jon_Wins;}
+	//query function
+	function queryFunc($query){
+		//commence query
+		return $queryResult = mysql_query($query);
+
+		//check if query was succsesful
+		if (!$queryResult) {
+   	 die('Invalid query: ' . mysql_error());
+		}
+	}
+function haha(){Jon_Wins;}//?????
 ?>
