@@ -62,6 +62,24 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 			header('location:../index.php');	
 		}
 		
+		if($row['admin']==1) 
+		{
+			$_SESSION['username'] = $_POST['username'];
+			header("Location: ../index.php?admin=1"); 
+			$_SESSION['admin'] = $row['admin'];
+			exit;
+		}
+	
+		else
+		{
+			$_SESSION['username'] = $_POST['username'];
+			header("Location: ../index.php");
+			$_SESSION['admin'] = $row['admin'];
+			exit;
+			
+		}	
+	
+
 	
 		
 			mysql_close($g_link);
