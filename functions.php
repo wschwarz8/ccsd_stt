@@ -109,19 +109,6 @@ function promptLogin($isAdmin=0)
 	
 }
 
-function checkAdmin()
-{
-	if(!$_SESSION['admin'])
-	{
-		header('location:login/login.php?reason=1');
-	}
-	
-	else 
-	{
-		header('location:../index.php?admin=1');
-	}
-}
-
 
 function viewsofpage($uncletony){
 	
