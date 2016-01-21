@@ -2,7 +2,7 @@
 	require_once "config.php";
 	require_once "functions.php";
 	promptLogin();
-//print_r($_POST);die;
+
 	makeHeader("Incident Report", "Make an Incident Report", 2,"incident_report.php", '<link href="/css_files/create_jobs.css" rel="stylesheet">')
 ?>
 
