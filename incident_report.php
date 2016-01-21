@@ -2,7 +2,7 @@
 	require_once "config.php";
 	require_once "functions.php";
 	promptLogin();
-
+//print_r($_POST);die;
 	makeHeader("Incident Report", "Make an Incident Report", 2,"incident_report.php", '<link href="/css_files/create_jobs.css" rel="stylesheet">')
 ?>
 
@@ -27,7 +27,6 @@
             <option value="1">Not Usable</option>
             <option value="2">Usable but needs repairs</option>
             <option value="3">No repair needed</option>
-						<option value="4">Other:<br><input type="text" placeholder="Other"></option><!--make this line work right later-->
           </select>
 					<br><br>Whats Wrong if it needs repaired?:
 					<select name="whatsWrong">
@@ -37,7 +36,7 @@
 						<option value="4">Keyboard does not work</option>
 						<option value="5">Mouse does not work</option>
 						<option value="6">Unknown</option>
-						<option>Other:<br><input type="text" placeholder="Other"></option><!--make this line work right later-->
+						<option value="7">Other:<br><input type="text" name="otherReason" placeholder="Other"></option>
 					</select>
         </td>
       </tr>
@@ -62,7 +61,7 @@
           <select name="jChargerTaken">
             <!-- replace options with a query later -->
             <option value="1">Yes</option>
-            <option value="2">No</option>
+            <option value="2" default=1>No</option>
           </select>
         </td>
       </tr>
@@ -170,6 +169,12 @@
 					$jobPriority = 3;//change later maybe
 					$jobSkill = 5;
 					break;
+				case 7:
+					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that has the problem:".$_POST['otherReason'];
+					$jobPoints = 5;//change these to appropriate points later
+					$jobPriority = 5;//change later maybe
+					$jobSkill = 1;
+					break;
 				default:
 					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is not known what is wrong with it.";
 					$jobPoints = 5;//change these to appropriate points later
@@ -199,7 +204,7 @@
 			//
 			
 			//make query to add to devices table
-			$makeDevicesQuery = "INSERT INTO `devices`(`owner`, `assignedto_id`, `received`, `problem`, `resolution`, `notes`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `point_value`, `status_id`) VALUES ([value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13],[value-14])";
+			$makeDevicesQuery = "INSERT INTO `devices`(`owner`, `assignedto_id`, `received`, `problem`, `resolution`, `notes`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `point_value`, `status_id`) VALUES ('".$_POST['jOwner']."','','".$POST_['jReceivedBy']."','".$jobMessage."','','".$notes."','','','','','".$_POS['jLaptopNumber']."', '".$jobPoints."', 'status')";
 			
 			//commence query and returns false if query failed
 			$result = mysql_query($makeDevicesQuery);
