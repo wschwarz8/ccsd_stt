@@ -104,6 +104,14 @@ else
 				<br>
 				<input type="button" value="Login" onClick="Login(this.form);" style="background:#bfbfbf;color:#000000;border-color:#212121;" onMouseOver="this.style.color = '#404040';" onMouseOut="this.style.color = '#000000';" onFocusr="this.style.color = '#404040';"
 				onBlur="this.style.color = '#000000';">
+				<br>
+				<br>
+				<?php
+				$obj = json_decode(stream_get_contents(fopen("http://xkcd.com/info.0.json", "rb")));
+					echo "</td><td>";
+					echo "<a href='http://xkcd.com'><img src='".$obj->{'img'}."'></a>";
+					echo "</td></tr></table>";
+				?>
 			</center>
 			<br>
 		</form>
