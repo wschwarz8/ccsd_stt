@@ -123,6 +123,18 @@ INSERT INTO `devicecategories` (`id`, `name`, `description`) VALUES
 (5, 'returned', 'Device returned to owner, points awarded for returning the device.'),
 (6, 'complete', 'Points awarded, fines sent to office.');
 
+
+--
+-- Table structure for table `ignorejobs`
+--
+
+CREATE TABLE IF NOT EXISTS `ignorejobs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `studentname` int(11) NOT NULL,
+  `jobid` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+
 -- --------------------------------------------------------
 
 --

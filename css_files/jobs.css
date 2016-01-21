@@ -34,18 +34,4 @@ button{
   border-radius:0 5px 5px 0;
   margin:20px -5px 5px 0;
 }
-.ascButt{
-  background:white;
-  color:black;
-  border-radius:5px 0 0 5px;
-  margin:10px -5px 5px 0;
-}
-.desButt{
-  background:silver;
-  color:black;
-  border-radius:0 5px 5px 0;
-  margin:5px 5px 5px 0;
-}
-.setButt{
-  margin-right:10px;
-}
+

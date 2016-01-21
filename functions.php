@@ -106,7 +106,11 @@ function promptLogin($isAdmin=0)
 		// uncomment this to require logins
 		header('location:login/login.php?reason=1');
 	}
-	
+	if ($isAdmin){
+		if ($_SESSION['loginid']!=14){
+					header('location:login/login.php?reason=1');
+		}
+		}
 }
 
 
@@ -156,5 +160,15 @@ function viewsofpage($uncletony){
 		");
 }
 
-function haha(){Jon_Wins;}
+	//query function
+	function queryFunc($query){
+		//commence query
+		return $queryResult = mysql_query($query);
+
+		//check if query was succsesful
+		if (!$queryResult) {
+   	 die('Invalid query: ' . mysql_error());
+		}
+	}
+function haha(){Jon_Wins;}//?????
 ?>
