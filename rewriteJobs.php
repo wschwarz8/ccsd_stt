@@ -5,8 +5,8 @@
 //add claimable all jobs <-- finished
 //add ignore jobs -- needs a 3 column table   <--finished
 //add alert message for when claiming,unclaiming, and resolving a job   <--finished
-//get access to proper files
 
+//get access to proper files
 require_once 'config.php';
 require_once "functions.php";
 require_once "Classes/jobsClass.php";
