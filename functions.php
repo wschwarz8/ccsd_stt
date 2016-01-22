@@ -27,7 +27,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 		
 				<div class='buttonRow'>
 					<a href='../index.php'><div class='buttons'>Home</div></a>
-					<a href='../rewriteJobs.php?sortby=points&order=ASC'><div class='buttons'>Jobs</div></a>
+					<a href='../rewriteJobs.php'><div class='buttons'>Jobs</div></a>
 					<a href='../scoreboard.php?type=all'><div class='buttons'>Scoreboard</div></a>
 					<a href='../team.php'><div class='buttons'>Team Pages</div></a>
 					<a href='../DisplayBroken.php'><div class='buttons'>Broken</div></a>
@@ -100,18 +100,24 @@ function styleChoice($styleNum){
 function promptLogin($isAdmin=0)
 {	
 	session_start();
-
+	
+	//save the current url address for redirect after login
+	echo $_SESSION['redirectUrl'] = $_SERVER['REQUEST_URI'];
+	
+	
 	if(!$_SESSION['loginid'])
 	{
 		// uncomment this to require logins
 		header('location:login/login.php?reason=1');
 	}
+	
 	if ($isAdmin){
 		if ($_SESSION['loginid']!=14){
 					header('location:login/login.php?reason=1');
 		}
-		}
-}
+	}
+	
+}//end of prompt login
 
 
 function viewsofpage($uncletony){
