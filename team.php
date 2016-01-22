@@ -115,9 +115,9 @@ promptLogin();
 					<h2 id="toph2" style="background:orange;">Austin</h2>
 					<ul>
 						<li>
-							<p>add a few words that describe yourself here</p>
+							<p>Aspiring NASA Engineer</p>
 						</li>
-						<li><img class="personPic" src="http://goo.gl/zBA0Gk" height="100px" width="100px"></li>
+						<li><img class="personPic" src="https://goo.gl/Xb305d" height="100px" width="100px"></li>
 					</ul>
 				</div>
 			</a>
