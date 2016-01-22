@@ -1,0 +1,34 @@
+/* things that are applied all the time */
+
+html{
+	background:grey;
+	margin-bottom:0;
+}
+
+body {
+	margin:0 10% 10%;
+	padding:0;
+	margin-bottom:0;
+	background-color:black;
+	background-image: url(http://goo.gl/UNuaqd);
+	background-repeat: no-repeat;
+	border-radius:0;
+}
+
+div {
+	border-radius: 10px;
+	font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+}
+
+/* 
+Maximus/css_files/commonCSS.css 
+Maximus/css_files/MainPage.css 
+Maximus/css_files/phpPage.css 
+Maximus/javascript_files/mainPage.js 
+Maximus/javascript_files/phpPage.js
+Maximus/javascript_files/commonJS.js
+Maximus/index.html
+Maximus/test.php
+
+Maximus/css_files/commonCSS.css Maximus/css_files/mainPage.css Maximus/css_files/phpPage.css Maximus/javascript_files/mainPage.js Maximus/javascript_files/phpPage.js Maximus/javascript_files/commonJS.js Maximus/index.html Maximus/test.php
+*/

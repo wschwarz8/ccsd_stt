@@ -1,0 +1,150 @@
+html {
+  background: grey;
+  margin-bottom: 0;
+}
+
+body {
+  margin: 0 10% 0 10%;
+  padding: 0 1% 0 1%;
+  background-color: black;
+  background-image: url(http://wallpapercave.com/wp/1lX2HjU.jpg);
+  background-repeat: no-repeat;
+  border-radius: 0;
+}
+
+.header {
+  background: white;
+  margin: 0 10px 0 10px;
+  padding: 5px 5px 1px 5px;
+  border-radius: 0 0 10px 10px;
+  opacity: 0.9;
+}
+
+.header a {
+  text-decoration: none;
+  color: Black;
+  margin:0;
+  padding:0;
+}
+
+.header a:hover {
+  text-decoration: underline;
+}
+
+#headerTitle {
+  text-align: center;
+  margin:15px 0 0 0;
+  padding:0;
+   
+}
+
+.buttonRow {
+  width: 100%;
+  text-align: center;
+  padding-bottom:5px;
+}
+
+.buttons {
+  width: 15%;
+  height: 30px;
+  display: inline-block;
+  background: black;
+  color: white;
+  border-radius: 8px;
+  padding-top: 3px;
+  margin-left: 1.0%;
+  margin-bottom:3px;
+  border: 0;
+  box-shadow: 0 5px 0 grey;
+  cursor: pointer;
+  font-size: 19px;
+  outline: 0;
+  transition: all .1s linear;
+  text-align:center;
+}
+.buttons:active{
+  box-shadow: 0 2px 0 grey;
+  transform: translateY(3px)
+}
+
+.meat {
+  position: absolute;
+  width: 76%;
+  background: black;
+  color: White;
+  margin-top: 5px;
+  border-radius: 10px;
+  
+  opacity: 0.9;
+}
+
+#footer {
+  position: absolute;
+  width: 0;
+  height: 0;
+  color: black;
+  border-radius: 5px 5px 0 0;
+  opacity: 0.9;
+  background: white;
+  padding:0;
+}
+
+#footerMessage {
+  text-align: Center;
+  padding:0;
+  margin:1px;
+}
+button{
+  border: 0;
+  background: black;
+  border-radius: 4px;
+  box-shadow: 0 5px 0 grey;
+  color: white;
+  cursor: pointer;
+  font: inherit;
+  margin: 10px 0 0 0;
+  outline: 0;
+  padding: 5px 5px;
+  transition: all .1s linear;
+}
+button:active{
+  box-shadow: 0 2px 0 grey;
+  transform: translateY(3px)
+}
+.viewCount{
+  margin:0;
+  padding:0 0 5px 0;
+  height:30px;
+  width:100%;
+}
+.viewBox{
+  margin:0 3%;
+  padding:0;
+  float:right;
+  width:10%;
+  height: 25px;
+  background:silver;
+  border-radius:5px;
+  border: solid black 1px
+}
+.countLeft{
+  margin:0;
+  padding:0;
+  float:left;
+  width:58%;
+  height:inherit;
+  text-align:center;
+}
+
+.countRight{
+  margin:0;
+  padding:0;
+  float:right;
+  width:42%;
+  height:inherit;
+  text-align:center;
+  background:black;
+  color:white;
+  border-radius:4px;
+  
+}
