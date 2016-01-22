@@ -102,7 +102,7 @@ function promptLogin($isAdmin=0)
 	session_start();
 	
 	//save the current url address for redirect after login
-	echo $_SESSION['redirectUrl'] = $_SERVER['REQUEST_URI'];
+	$_SESSION['redirectUrl'] = $_SERVER['REQUEST_URI'];
 	
 	
 	if(!$_SESSION['loginid'])
