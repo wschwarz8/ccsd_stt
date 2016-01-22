@@ -64,6 +64,10 @@ if($_SESSION['admin'])
 					<p>
 						Admin Only to Create Jobs
 					</p>
+						<a href="AdminDisplayUser.php">
+						<p>
+							Admin Only To get user information
+						</p>
 					</a>
 					
 				</div>
