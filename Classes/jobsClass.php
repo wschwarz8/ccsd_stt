@@ -62,7 +62,9 @@ class jobs{
 					<td style='width:10%;'><form method='post' name='claimStatForm'>". $this->jobClaimButtsFunc() ."</form></td>
 				</tr>
 			");
-			}
+			}else{
+			echo"<script> ignoreCount++;</script>";
+		}
   }
   
 	//determine job priority

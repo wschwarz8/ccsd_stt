@@ -19,8 +19,8 @@ button{
 .allButt{
   background:silver;
   color:black;
-  border-radius:5px 0 0 5px;
-  margin:20px -5px 5px 10px;
+  border-radius:0 5px 5px 0;
+  margin:20px -5px 5px 0;
 }
 .unclaimedButt{
   background:silver;
@@ -31,8 +31,8 @@ button{
 .myButt{
   background:silver;
   color:black;
-  border-radius:0 5px 5px 0;
-  margin:20px -5px 5px 0;
+  border-radius:5px 0 0 5px;
+  margin:20px -5px 5px 10px;
 }
 .sortRowButts{
   padding:0;
