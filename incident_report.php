@@ -14,7 +14,7 @@
   <form method="post" name="postIt">
     <table>
 			<!-- Date Recieved input field -->
-      <tr><td>Date Recieved</td><td><input type="date" name="jDate" placeholder="Date"></td></tr>
+      <tr><td>Date Recieved</td><td><input type="date" name="jDate" placeholder="Date" value=></td></tr>
 			
       <!-- Owner input field -->
       <tr><td>Owner of Laptop</td><td><input type="text" name="jOwner" placeholder="Owner"></td></tr>
@@ -93,10 +93,6 @@
 			<!-- Explanation input field -->
 			<tr><td>Explanation of incident</td><td><textarea name="jExplanation" placeholder="Explanation of incident"></textarea></td></tr>
 			
-		<!-- Recieved by input field -->
-     	 <tr><td>Recieved by</td><td><input type="text" name="jRecievedBy" placeholder="Recieved by"></textarea></td></tr>
-
-  		
       <tr><td colspan="2" style="text-align:center;"><input type="submit"></td></tr>
     
 		</table>
@@ -115,7 +111,7 @@
 		//make query to add an incident
 		$queryinsertincident = "INSERT INTO `incidents`
 			(`date`, `owner`, `status`, `laptopserial`, `chargerserial`, `laptoptaken`, `chargertaken`, `newlaptop`, `newlaptopserial`, `newchargerserial`, `explanation`, `receviedby`) VALUES 
-			('". $_POST['jDate'] ."','". $_POST['jOwner'] ."','". $_POST['jStatus'] ."','". $_POST['jLaptopNumber'] ."','". $_POST['jChargerNumber'] ."', ". $_POST['jLaptopTaken'] .", ". $_POST['jChargerTaken'] .", ". $_POST['jNewLaptop'] .",'". $_POST['jNewNumber'] . "', '". $_POST['jNewNumberCharger'] ."','". $_POST['jExplanation'] ."','". $_POST['jRecievedBy'] ."')";
+			('". $_POST['jDate'] ."','". $_POST['jOwner'] ."','". $_POST['jStatus'] ."','". $_POST['jLaptopNumber'] ."','". $_POST['jChargerNumber'] ."', ". $_POST['jLaptopTaken'] .", ". $_POST['jChargerTaken'] .", ". $_POST['jNewLaptop'] .",'". $_POST['jNewNumber'] . "', '". $_POST['jNewNumberCharger'] ."','". $_POST['jExplanation'] ."',' ".$_SESSION['loginid']."')";
 	
 		//commence query to add an incident
 		 $result = mysql_query($queryinsertincident);
@@ -198,13 +194,17 @@
 			}else{
 				echo "New Job Created!<BR>";
 			}
+
+			// Give the student a point
+			queryFunc("INSERT INTO points (student_id, points, category_id) VALUES ('".$_SESSION['loginid']."', 1, 1)");
+			
 			
 			//
 			//add this device to the devices table below
 			//
 			
 			//make query to add to devices table
-			$makeDevicesQuery = "INSERT INTO `devices`(`owner`, `assignedto_id`, `received`, `problem`, `resolution`, `notes`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `point_value`, `status_id`) VALUES ('".$_POST['jOwner']."','','".$POST_['jReceivedBy']."','".$jobMessage."','','".$notes."','','','','','".$_POS['jLaptopNumber']."', '".$jobPoints."', 'status')";
+			$makeDevicesQuery = "INSERT INTO `devices`(`owner`, `assignedto_id`, `received`, `problem`, `resolution`, `notes`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `point_value`, `status_id`) VALUES ('".$_POST['jOwner']."','','".date('Y-m-d H:i:s)."','".$jobMessage."','','".$notes."','','','','".$_SESSION['loginid']."','".$_POS['jLaptopNumber']."', '".$jobPoints."', '1')";
 			
 			//commence query and returns false if query failed
 			$result = mysql_query($makeDevicesQuery);
