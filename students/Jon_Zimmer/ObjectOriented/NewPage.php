@@ -45,7 +45,7 @@ makeHeader("My PHP Page!!", "My PHP Page!!", 2, "NewPage.php");
 			echo $this->whatnow ." has been changed to another song<br><br>";
 		}
 
-		//this is a fail safe to prevent a error if it is printed i think
+
 		function __toString(){
 			return"This is the class object, not some text to be just printed, so it IS important<br><br>";
 		}
