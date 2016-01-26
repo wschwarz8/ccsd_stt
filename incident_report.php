@@ -204,7 +204,7 @@
 			//
 			
 			//make query to add to devices table
-			$makeDevicesQuery = "INSERT INTO `devices`(`owner`, `assignedto_id`, `received`, `problem`, `resolution`, `notes`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `point_value`, `status_id`) VALUES ('".$_POST['jOwner']."','','".date('Y-m-d H:i:s)."','".$jobMessage."','','".$notes."','','','','".$_SESSION['loginid']."','".$_POS['jLaptopNumber']."', '".$jobPoints."', '1')";
+			$makeDevicesQuery = "INSERT INTO `devices`(`owner`, `assignedto_id`, `received`, `problem`, `resolution`, `notes`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `status_id`) VALUES ('".$_POST['jOwner']."','','".date('Y-m-d H:i:s')."','".$jobMessage."','','".$notes."','','','','".$_SESSION['loginid']."','".$_POST['jLaptopNumber']."', '1')";
 			
 			//commence query and returns false if query failed
 			$result = mysql_query($makeDevicesQuery);
