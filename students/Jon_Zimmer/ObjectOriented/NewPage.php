@@ -51,19 +51,14 @@ makeHeader("My PHP Page!!", "My PHP Page!!", 2, "NewPage.php");
 		}
 	}
 
-	//echo "<h2>Create a new object from the me class</h2><br>";
 	$reminder = new me("Jonathan Richard Zimmer","March 14","Fireflies by Owl City","First Tech Challenge",2018,"my computer class","My favorite song");
 
-	//echo "<h2>Run a test?</h2><br>";
 	$reminder->test();
 
-	//echo "<h2>Run a printall method for my class</h2><br>";
 	$reminder->printall();
 
-	//echo "<h2>Try to print the class object as text</h2><br>";
 	echo $reminder;
 
-	//echo "<h2>Activate the destruct function by giving the object the text value of 'plant'</h2><br>";
 	$reminder = "plant"
 
 
