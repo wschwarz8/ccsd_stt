@@ -23,7 +23,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 		echo("
 		
 				<div class='buttonRow'>
-					<a href='../index.php'><div class='buttons'>Home</div></a>
+					<a href='../../../index.php'><div class='buttons'>Home</div></a>
 					<a href='../index.html'><div class='buttons'>Back</div></a>
 				</div>
 		

@@ -59,7 +59,7 @@ function main(){
 				if($jobdata['requirement_id']=='0') { // If they have the skill needed to do the job
 					if ($jobdata['repeatable'] != 1){
 					//make a query to claim a job
-					$claimStatQuery = "UPDATE `jobs` SET `claimedby`=".$_SESSION['loginid']." WHERE id=" . $_POST['formIdentifier'];
+					$claimStatQuery = "UPDATE `jobs` SET `status`=2 `claimedby`=".$_SESSION['loginid']." WHERE id=" . $_POST['formIdentifier'];
 					queryFunc($claimStatQuery);
 					//give a status message
 					$formMessage = "You have Successfully Claimed a Job";
@@ -91,7 +91,7 @@ function main(){
 			
 		}else if($_POST['claimStatButt'] == 2){
 			//make a query to unclaim a job
-			$claimStatQuery = "UPDATE `jobs` SET `claimedby`=0 WHERE id=" . $_POST['formIdentifier'];
+			$claimStatQuery = "UPDATE `jobs` SET `status`=1 `claimedby`=0 WHERE id=" . $_POST['formIdentifier'];
 			queryFunc($claimStatQuery);
 			$formMessage = "You have Successfully Unclaimed a Job";
 			

@@ -10,12 +10,15 @@ function myGame() {
 				} 
 					else {
 						alert("Why the HECK did you challenge the harpies if you are weak? By the way, you were ripped to SHREADS!!!")
+			break;
 					}
+			
 						if (smart == 'YES') {
 							var weapon = prompt("Do you have a sword of celestial bronze?").toUpperCase();
 							} 
 								else {
 									alert("I knew it, you are an idiot. Well, you died.")
+				break;
 									}
 										if (weapon == 'YES') {
 											alert("Good job! You have killed the harpies and you continued you trip.")
@@ -23,6 +26,7 @@ function myGame() {
 					else {
 					alert("If challenged the harpies without a weapon, you OBVIOUSLY LIED about being smart. You get sent to the Underworld")
 					}
+				break;
 				
 				
 			case 'PAY':
@@ -39,8 +43,6 @@ function myGame() {
 					else{
 						alert("You should have thought to bring some more gold. You die.")
 					}
-							default:
-				alert("I didn't understand your choice. Hit Run and try again, this time picking FIGHT, PAY, or RUN!");
 
 					break;
 				

@@ -52,7 +52,7 @@ class jobs{
 				$ignore[$this->job_Id] = $ignoredata['studentname'];
 		}	
 		
-		if ($this->job_Status == 1 && $ignore[$this->job_Id] != $_SESSION['loginid']){
+		if ($this->job_Status < 3 && $ignore[$this->job_Id] != $_SESSION['loginid']){
 			echo("
 				<tr style='".$this->jobPriorityFunc()."height:45px;'>
 					<td style='width:10%;'>". $this->job_Name ."</td>
