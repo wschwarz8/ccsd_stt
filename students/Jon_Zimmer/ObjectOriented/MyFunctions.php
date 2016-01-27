@@ -23,7 +23,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 		echo("
 		
 				<div class='buttonRow'>
-					<a href='../../../index.php'><div class='buttons'>Home</div></a>
+					<a href='../index.php'><div class='buttons'>Home</div></a>
 					<a href='../index.html'><div class='buttons'>Back</div></a>
 				</div>
 		
@@ -35,7 +35,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 //
 function makeFooter($footermessage,$pstyle,$footerbox=""){
 	echo("
-	<!--max devos made this -->
+	
 	</div>
 		<style>". styleChoice($pstyle) ."</style>
 			");
@@ -47,28 +47,6 @@ function makeFooter($footermessage,$pstyle,$footerbox=""){
 				</div>
 				");
 			 }
-			 echo ("
-		<body>
-	<html>
-	<script>
-	
-	function calculateStuff(){
-	
-		var body = document.body, html = document.documentElement;
-		
-		var footer = document.getElementById('footer');
-
-		var height = Math.max( body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight ) + 25;
-		
-		body.style.height = height;
-		
-		footer.style.width = '78%';
-		footer.style.height= '25px';
-		footer.style.top = height - 25;
-	}
-	
-	</script>
-	");
 }
 
 
@@ -89,50 +67,4 @@ function styleChoice($styleNum){
 	}
 }
 
-
-function viewsofpage($uncletony){
-	
-	//init pass
-	global $g_username,$g_password;
-	
-	//create conection
-	$g_link = mysql_connect('localhost', $g_username, $g_password);
-
-	//select database
-	mysql_select_db('stt', $g_link);
-	
-	//make query
-	$query = "SELECT views FROM `pageviews` WHERE filename='$uncletony'";
-	
-	//start and store query
-	$result = mysql_query($query);
-	
-	//store into an array
-	($result = mysql_fetch_assoc($result));
-	
-	//get variable ready for manipulation
-	$variable = ($result['views'] + 1);
-		
-	//check if their are views already or not
-		if($variable>1){
-				//add a view to the page table
-						$query = "UPDATE `pageviews` SET `views`=" . ($variable) . " WHERE `filename`= '$uncletony'";
-						$result = mysql_query($query);
-		}
-		else{
-			//add a table for the file
-				$query = "INSERT INTO `pageviews`(`filename`, `views`) VALUES ('$uncletony',1)";
-				$result = mysql_query($query);
-		}
-	
-	//print views to screen
-		echo ("
-		<div class='viewCount'>
-			<div class='viewBox'>
-				<h3 class='countLeft'>Views: </h3>
-				<h3 class='countRight'> ". $variable ." </h3>
-			</div>
-		</div>
-		");
-}
 ?>
