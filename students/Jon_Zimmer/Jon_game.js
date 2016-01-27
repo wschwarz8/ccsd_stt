@@ -47,6 +47,7 @@ function myGame() {
 					break;
 				
 				
+				
 			case 'RUN':
 				var fast = prompt("Let's book it! Are you fast (YES or NO)?").toUpperCase();
 				var headStart = prompt("Did you get a head start?").toUpperCase();
