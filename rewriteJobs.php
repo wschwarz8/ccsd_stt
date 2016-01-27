@@ -56,28 +56,33 @@ function main(){
 			$claimResult = queryFunc($claimQuery);
 			$numClaimed = mysql_fetch_assoc($claimResult);
 			if($numClaimed['count'] < 3) { // If they haven't claimed too many jobs already
-				if ($jobdata['repeatable'] != 1){
-				//make a query to claim a job
-				$claimStatQuery = "UPDATE `jobs` SET `claimedby`=".$_SESSION['loginid']." WHERE id=" . $_POST['formIdentifier'];
-				queryFunc($claimStatQuery);
-				//give a status message
-				$formMessage = "You have Successfully Claimed a Job";
+				if($jobdata['requirement_id']=='0') { // If they have the skill needed to do the job
+					if ($jobdata['repeatable'] != 1){
+					//make a query to claim a job
+					$claimStatQuery = "UPDATE `jobs` SET `claimedby`=".$_SESSION['loginid']." WHERE id=" . $_POST['formIdentifier'];
+					queryFunc($claimStatQuery);
+					//give a status message
+					$formMessage = "You have Successfully Claimed a Job";
+						
+					}else{
+					//make the duplicate job if its repeatable
+					$addDupJobQuery = "INSERT INTO `jobs`(`name`, `description`, `skillcatid`, `status`, `points`, `repeatable`, `limitone`, `claimedby`, `priority`, `bypassLimit`) VALUES ('".$jobdata['name']."','".$jobdata['description']."',".$jobdata['skillcatid'].",1 ,".$jobdata['points'].",0 ,".$jobdata['limitone'].",".$_SESSION['loginid'].",".$jobdata['priority'].",".$jobdata['bypassLimit'].")";
+					queryFunc($addDupJobQuery);	
 					
-				}else{
-				//make the duplicate job if its repeatable
-				$addDupJobQuery = "INSERT INTO `jobs`(`name`, `description`, `skillcatid`, `status`, `points`, `repeatable`, `limitone`, `claimedby`, `priority`, `bypassLimit`) VALUES ('".$jobdata['name']."','".$jobdata['description']."',".$jobdata['skillcatid'].",1 ,".$jobdata['points'].",0 ,".$jobdata['limitone'].",".$_SESSION['loginid'].",".$jobdata['priority'].",".$jobdata['bypassLimit'].")";
-				queryFunc($addDupJobQuery);	
-					
-				//ignore the original job so they cant claim it multiple times
-				$ignoreJobQuery = "INSERT INTO `ignorejobs`(`studentname`, `jobid`) VALUES (".$_SESSION['loginid'].",".$_POST['formIdentifier'].")";
- 				queryFunc($ignoreJobQuery);
-					
-				//give a status message
-				$formMessage = "You have Successfully Claimed a Repeatable Job";
+					//ignore the original job so they cant claim it multiple times
+					$ignoreJobQuery = "INSERT INTO `ignorejobs`(`studentname`, `jobid`) VALUES (".$_SESSION['loginid'].",".$_POST['formIdentifier'].")";
+	 				queryFunc($ignoreJobQuery);
+						
+					//give a status message
+					$formMessage = "You have Successfully Claimed a Repeatable Job";
+					}
+				
+					//give a status message
+					$formMessage = "You have Successfully Claimed a Job";
+				} // End if skill needed
+				else {
+					$formMessage = "You do not have the required skill to claim that job.";
 				}
-			
-				//give a status message
-				$formMessage = "You have Successfully Claimed a Job";
 			} // End if claimed too many jobs
 			else{
 				$formMessage = "<p style='color:red;'>You can't claim this job, you are already working on ".$numClaimed['count']." jobs!!!</p>";
@@ -253,7 +258,17 @@ function main(){
 
   //create an object for every job
   while ($jobdata = mysql_fetch_assoc($jobQueryResult)) {
-		$job[$jobdata['id']] = new jobs($jobdata['id'],$jobdata['name'],$jobdata['description'],$jobdata['skillcatid'],$jobdata['status'],$jobdata['points'],$jobdata['repeatable'],$jobdata['limitone'],$jobdata['claimedby'],$jobdata['priority'],$jobdata['bypassLimit']);
+		$job[$jobdata['id']] = new jobs($jobdata['id'],
+																		$jobdata['name'],
+																		$jobdata['description'],
+																		$jobdata['skillcatid'],
+																		$jobdata['status'],
+																		$jobdata['points'],
+																		$jobdata['repeatable'],
+																		$jobdata['limitone'],
+																		$jobdata['claimedby'],
+																		$jobdata['priority'],
+																		$jobdata['bypassLimit']);
 		$job[$jobdata['id']]->printJob();//print the row for a job
 		echo "<script>jobCount++;</script>";
 	}	

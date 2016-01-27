@@ -10,12 +10,15 @@ function myGame() {
 				} 
 					else {
 						alert("Why the HECK did you challenge the harpies if you are weak? By the way, you were ripped to SHREADS!!!")
+			break;
 					}
+			
 						if (smart == 'YES') {
 							var weapon = prompt("Do you have a sword of celestial bronze?").toUpperCase();
 							} 
 								else {
 									alert("I knew it, you are an idiot. Well, you died.")
+				break;
 									}
 										if (weapon == 'YES') {
 											alert("Good job! You have killed the harpies and you continued you trip.")
@@ -23,6 +26,7 @@ function myGame() {
 					else {
 					alert("If challenged the harpies without a weapon, you OBVIOUSLY LIED about being smart. You get sent to the Underworld")
 					}
+				break;
 				
 				
 			case 'PAY':
@@ -39,21 +43,25 @@ function myGame() {
 					else{
 						alert("You should have thought to bring some more gold. You die.")
 					}
-							default:
-				alert("I didn't understand your choice. Hit Run and try again, this time picking FIGHT, PAY, or RUN!");
 
 					break;
 				
 				
+				
 			case 'RUN':
 				var fast = prompt("Let's book it! Are you fast (YES or NO)?").toUpperCase();
-				var headStart = prompt("Did you get a head start?").toUpperCase();
-					if (fast=="YES" && headStart=="YES"){
-								alert("You get away! Be a bit more careful next time")
-							}
-					else{
-						alert("Aww shucks, the harpies catch you and kill you.")
+					if (fast == 'YES'){
+				var headStart = prompt("Did you get a head start?").toUpperCase();}
+				
+				else{
+						alert("You tried to run, but you are not fast. ARE YOU A FREAKING IDIOT?!?!? You die.")
 					}
+						if (headStart == 'YES'){
+							alert("You got away, be more careful next time.")
+						}
+							else{
+								alert("Even though you are fast, the harpies grab you, fly upwards with you, and drop your body from 100 meters up. You die")
+							}
 				break;
 				
 			default:

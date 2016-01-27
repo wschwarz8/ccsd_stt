@@ -88,11 +88,11 @@ INSERT INTO `news` (`article_id`, `title`, `message`, `image_url`, `date`, `arch
 -- --------------------------------------------------------
 
 --
--- Table structure for table `devicecategories`
+-- Table structure for table `devicestatuses`
 --
 
-DROP TABLE IF EXISTS `devicecategories`;
-CREATE TABLE IF NOT EXISTS `devicecategories` (
+DROP TABLE IF EXISTS `devicestatuses`;
+CREATE TABLE IF NOT EXISTS `devicestatuses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   `description` varchar(128) NOT NULL,
@@ -112,16 +112,17 @@ CREATE TABLE IF NOT EXISTS `pageviews` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 --
--- Dumping data for table `devicecategories`
+-- Dumping data for table `devicestatuses`
 --
 
-INSERT INTO `devicecategories` (`id`, `name`, `description`) VALUES
+INSERT INTO `devicestatuses` (`id`, `name`, `description`) VALUES
 (1, 'new', 'New device repair, point value not set.'),
 (2, 'unassigned', 'Device given point value but not assigned to a student.'),
 (3, 'assigned', 'Device in for repairs and assigned to a student.'),
 (4, 'repaired', 'Device repaired but not yet returned to owner.'),
-(5, 'returned', 'Device returned to owner, points awarded for returning the device.'),
-(6, 'complete', 'Points awarded, fines sent to office.');
+(5, 'processed', 'Repair verified, fines charged to office.'),
+(6, 'returned', 'Device returned to owner, points awarded for returning the device.'),
+(7, 'complete', 'Device repaire complete, record archived.');
 
 
 --
@@ -146,16 +147,15 @@ CREATE TABLE IF NOT EXISTS `devices` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `owner` varchar(64) NOT NULL,
   `assignedto_id` int(11) NOT NULL,
-  `received` date NOT NULL,
+  `received` datetime NOT NULL,
   `problem` varchar(256) NOT NULL,
   `resolution` varchar(256) NOT NULL,
   `notes` varchar(512) NOT NULL,
-  `repaired` date NOT NULL,
-  `returned` date NOT NULL,
+  `repaired` datetime NOT NULL,
+  `returned` datetime NOT NULL,
   `last_update` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `receivedby_id` int(11) NOT NULL,
-  `serial` date NOT NULL,
-  `point_value` int(11) NOT NULL,
+  `serial` varchar(64) NOT NULL,
   `status_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
