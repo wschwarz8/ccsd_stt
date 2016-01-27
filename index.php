@@ -3,7 +3,7 @@
 	require_once "functions.php";
 	promptLogin();
 //editing from github.com
-print_r($_SESSION);
+//print_r($_SESSION);
 if($_SESSION['admin'])
 {
 	
@@ -36,21 +36,6 @@ if($_SESSION['admin'])
 					<a href="jobs.php">
 						<p>
 							Visit here for the Job List.
-						</p>
-					</a>
-					<a href="team.php">
-						<p>
-						Visit here for the team page.
-						</p>
-					</a>
-					<a href="DisplayBroken.php">
-						<p>
-						Visit here for a list of broken chromebooks.
-						</p>
-					</a>
-					<a href="login/login.php">
-						<p>
-						Visit here for the login page.
 						</p>
 					</a>
 					<a href="awardpoints.php">
@@ -201,9 +186,9 @@ else
 			<center>
 				<h2>Welcome to the site.</h2>
 				<div class="container">
-					 <a href="phpmyadmin">
+					 <a href="newsPage.php">
 						<p>
-							Visit here for php MyAdmin.
+							Visit here for News.
 						</p>
 					</a>
 					<a href="students_skills.php">
@@ -221,7 +206,7 @@ else
 							Visit here for the scoreboard.
 						</p>
 					</a>
-					<a href="jobs.php">
+					<a href="rewriteJobs.php">
 						<p>
 							Visit here for the Job List.
 						</p>
@@ -236,9 +221,11 @@ else
 						Visit here for a list of broken chromebooks.
 						</p>
 					</a>
-					<a href="login/login.php">
+					<?php
+					echo "<a href='/studentJobs.php?id=".$_SESSION['loginid']."'>"
+					?>
 						<p>
-						Visit here for the login page.
+						Visit here to see your current points.
 						</p>
 					</a>
 				</div>
