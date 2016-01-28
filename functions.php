@@ -15,18 +15,9 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 	echo $hhtml;
 	echo("
 		</head>
-		
 		<body onload='calculateStuff();'>
 			<div class='header'>
 				<a href='../index.php'><h1 id='headerTitle'>". $ptitle . "</h1></a>
-			
-		
-			<div style='height:20px;position:absolute;z-index:10; top:9%;left:63%;'><!-- top or left may need ajusted with different messages -->
-				<div class='tilt'>
-					<div id='status1' class='pop'>Stop,&nbsp;hammertime!</div><!--use &nbsp; for spaces. will make it change randomly later -->
-				</div>   
-			</div>
-		
 			
 				");
 		
@@ -124,6 +115,11 @@ function promptLogin($isAdmin=0)
 		if ($_SESSION['loginid']!=14){
 					header('location:login/login.php?reason=1');
 		}
+	}
+	
+	if($_SESSION['Masquerade'] = 1)
+	{
+		echo "<br><br>You are masquerading";
 	}
 	
 }//end of prompt login
