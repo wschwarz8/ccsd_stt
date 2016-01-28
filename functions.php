@@ -131,17 +131,17 @@ function DisplayName()
 <html>
 	<div class = "boxed">
 		<style>
-			.boxed {
+			.boxed 
+			{
 				margin-left : 10px;
 				background : white;
 				width : 80px;
 				border : 1px solid green;
 				border-radius : 5px
-				
 			}
 		</style>
 		<?php
-		 echo "<h2>", $_SESSION['name'] , "</h2>";
+		 echo "<h4 style='padding:0;margin:0 0 10px 0;'>", $_SESSION['name'] , "</h4>";
 		?>
 	</div>
 </html>
