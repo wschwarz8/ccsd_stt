@@ -3,6 +3,8 @@
 	require_once "config.php";
 promptLogin(1);
 	makeHeader("Create Jobs","Create a job",2,"create_jobs.php",'<link href="/css_files/create_jobs.css" rel="stylesheet">');
+
+//$_SESSION['loginid']=12;
 ?>
 
 <center>
@@ -80,7 +82,11 @@ promptLogin(1);
 		 $rsp = mysql_query($queryinsertjob);
 		 
 		 if($rsp) echo"Job Created :)";
-		 else echo "ERROR";
+		 else {
+			echo "ERROR";
+    			die('Invalid query: ' . mysql_error());
+		}
+			
 		 
 		 mysql_close($conn);
 		 
