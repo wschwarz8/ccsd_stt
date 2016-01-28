@@ -153,7 +153,6 @@ button:active{
 #status1 {
     color: #FFFF00;
     font-size: 2em;
-    font-family:'minecraftfont';
     text-shadow:3px 3px #3F3F00;
     padding: 4px;
     position: absolute;
@@ -188,8 +187,4 @@ button:active{
     -ms-transform: rotate(-17deg);
     -webkit-transform: rotate(-17deg);
     transform: rotate(-17deg);
-}
-@font-face {
-    font-family:'minecraftfont';
-    src: url('http://design.d3x.co/demo/mcgeneric/font/minecraft_font.woff');
 }

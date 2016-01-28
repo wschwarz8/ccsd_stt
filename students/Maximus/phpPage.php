@@ -1,5 +1,6 @@
 <?php  
-require_once 'experimentalFunctions.php';
+require_once '../../functions.php';
+require_once '../../config.php';
 
 makeHeader("PHP Object-oriented Programing Practice", "PHP Object-oriented Programing Practice", 2, "phpPage.php");
 ?>

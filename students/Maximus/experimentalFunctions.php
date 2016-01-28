@@ -12,9 +12,18 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 	echo $hhtml;
 	echo("
 		</head>
+		
+		<div style = 'height:100px;width:100px;position:relative;z-index:5;'>
+			<div style='width:200px;height:200px; position:absolute;z-index:10; top:15px;left:15px;'>
+				<div class='tilt'>
+					<div id='status' class='pop'>SWEET</div><!--use &nbsp; for spaces -->
+				</div>   
+			</div>
+		</div>
+		
 		<body onload='calculateStuff();'>
 			<div class='header'>
-				<a href='index.php'><h1 id='headerTitle'>". $ptitle . "</h1></a>
+				<a href='../../index.php'><h1 id='headerTitle'>". $ptitle . "</h1></a>
 			
 				");
 		
@@ -23,12 +32,12 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 		echo("
 		
 				<div class='buttonRow'>
-					<a href='../index.php'><div class='buttons'>Home</div></a>
-					<a href='../jobs.php?sortby=points&order=ASC'><div class='buttons'>Jobs</div></a>
-					<a href='../scoreboard.php?type=all'><div class='buttons'>Scoreboard</div></a>
-					<a href='../team.php'><div class='buttons'>Team Pages</div></a>
-					<a href='../DisplayBroken.php'><div class='buttons'>Broken</div></a>
-					<a href='../login/login.php?logout=1'><div class='buttons'>Log Out</div></a> 
+					<a href='index.html'><div class='buttons'>Home</div></a>
+					<a href='../../jobs.php?sortby=points&order=ASC'><div class='buttons'>Jobs</div></a>
+					<a href='../../scoreboard.php?type=all'><div class='buttons'>Scoreboard</div></a>
+					<a href='../../team.php'><div class='buttons'>Team Pages</div></a>
+					<a href='../../DisplayBroken.php'><div class='buttons'>Broken</div></a>
+					<a href='../../login/login.php?logout=1'><div class='buttons'>Log Out</div></a> 
 				</div>
 		
 			<div class='meat'>
