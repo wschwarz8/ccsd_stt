@@ -9,7 +9,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 	<!--max devos made this -->
 	<html>
 		<head>
-			<title>". $tbtitle . "</title>
+			<title>". $tbtitle . DisplayName() . "</title>
 			". styleChoice($pstyle)
 			);
 	echo $hhtml;
@@ -123,6 +123,31 @@ function promptLogin($isAdmin=0)
 	}
 	
 }//end of prompt login
+
+function DisplayName()
+{
+	echo "<br>";
+	?>
+<html>
+	<div class = "boxed">
+		<style>
+			.boxed {
+				margin-left : 10px;
+				background : white;
+				width : 80px;
+				border : 1px solid green;
+				border-radius : 5px
+				
+			}
+		</style>
+		<?php
+		 echo "<h2>", $_SESSION['name'] , "</h2>";
+		?>
+	</div>
+</html>
+
+<?php
+}
 
 
 function viewsofpage($uncletony){
