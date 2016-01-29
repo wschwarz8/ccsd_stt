@@ -1,16 +1,19 @@
-<?php
-require_once"../../functions.php";
-require_once"../../config.php";
-promptlogin();
-
-makeHeader("Game","Game",2,"maxsGame.php",'<link href="../../css_files/create_jobs.css" rel="stylesheet">');
-?>
-
-<center>
+<html>
+  <head>
+    <title>Javascript Game</title>
+    
+    <style>
+      *{
+        margin:0;
+        padding:0;
+      }
+    </style>
+    
+  </head>
+  
   <div style='background:white;width:75%;border-radius:8px;margin:15px 0 0 0;'>
-    <canvas id='canvas'name='myCanvas' height='500px' width='600px'>If you see this you must still be in 2005!</canvas>
+    <canvas id='canvas'name='myCanvas' height='677px' width='1122px'>If you see this you must still be in 2005!</canvas>
   </div>
-</center>
 
 <script>
   //canvas variables
@@ -23,7 +26,7 @@ makeHeader("Game","Game",2,"maxsGame.php",'<link href="../../css_files/create_jo
   
   //other variables
   var drag = "False";
-  var shapeCount = 3;
+  var shapeCount = 5;
   
   
   function drawSquare(xPos,yPos,width,height,color){
@@ -40,24 +43,60 @@ makeHeader("Game","Game",2,"maxsGame.php",'<link href="../../css_files/create_jo
     canvas.fillText(text,xPos,yPos);
     
   }
-  function onClicks(e){
+  
+  function onMouseMove(e){
+    if (drag === "True"){
+      canvas.fillStyle = "white";
+      canvas.fillRect(0,0,1122,677);
+      
+      for (i=1;i < shapeCount+1;i++){
+        
+        if (clickedShapeNum === i){
+          shape[i][0] = e.clientX - 50;
+          shape[i][1] = e.clientY - 50;
+        drawSquare(shape[i][0], shape[i][1], shape[i][2], shape[i][3], shape[i][4]);
+          
+        }else{
+         drawSquare(shape[i][0], shape[i][1], shape[i][2], shape[i][3], shape[i][4]);
+          
+        }
+    }
+      
+      
+      //drawSquare(100,100,100,100,"green");
+    }
+  }
+  
+  function onMouseDown(e){
     
     //make some mouse position variables
     var x = e.clientX;
     var y = e.clientY;
+    rect = myCanvas.getBoundingClientRect();
+    console.log("left position: "+rect.left);
+    console.log(x + ", " + y);
     
     //cycle through the shapes
     for (i=1;i < shapeCount+1;i++){
       console.log("testing shape: "+i);
       
       //check each shapes bounds if the mouse is within them
-      if (x > shape[i][0] && x < shape[i][2] + shape[i][0] && y > shape[i][1] && shape[i][3] + shape[i][1]){
+      if (x > shape[i][0] && x < (shape[i][2] + shape[i][0]) && y > shape[i][1] && y < (shape[i][3] + shape[i][1])){
         console.log("shape touched!!");
+        drag = "True";
+        clickedShapeNum = i;
+        onMouseMove(e);
+        
       }else{
         console.log("shape not touched!!");
       }
     }
   }
+  
+  function onMouseUp(e){
+    drag="false";
+  }
+  
   function init(){
     
     //draw initial shapes
@@ -72,23 +111,27 @@ makeHeader("Game","Game",2,"maxsGame.php",'<link href="../../css_files/create_jo
     drawSquare(475,100,100,100,"blue",3);
     shape[3] = [475,100,100,100,"blue"];
   
+     drawSquare(675,100,100,100,"orange",3);
+    shape[4] = [675,100,100,100,"orange"];
+    
+     drawSquare(875,100,100,100,"purple",3);
+    shape[5] = [875,100,100,100,"purple"];
     //draw starting text
     drawText(100,300,"Combine the Squares!!","orange",1);
     
     //makes some event listeners
-    document.getElementById("canvas").addEventListener("click", onClicks);
-    //document.getElementById("canvas").addEventListener("click", onClicks);
+    document.getElementById("canvas").addEventListener("mousedown", onMouseDown);
+    document.getElementById("canvas").addEventListener("mouseup", onMouseUp);
+    document.getElementById("canvas").addEventListener("mousemove", onMouseMove);
 
   }
 
  
   init();
   
-  document.getElementById("canvas").addEventListener("click", onClicks);
 
-  
+
 </script>
 
-<?php
-makeFooter("blah blah blah","True");
-?>
+</html>
+  
