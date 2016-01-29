@@ -3,6 +3,8 @@ session_start();
 
 if(isset($_GET['logout'])){
 	unset($_SESSION['loginid']);
+	$_SESSION['Masquerade'] = 0;
+	unset($_SESSION['Masquerade']);
 }
 
 if(isset($_GET["reason"]))

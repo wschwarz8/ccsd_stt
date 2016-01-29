@@ -117,9 +117,28 @@ function promptLogin($isAdmin=0)
 		}
 	}
 	
-	if($_SESSION['Masquerade'] = 1)
+	if(isset($_SESSION['Masquerade']))
 	{
+		?>
+<html>
+	<div class = "box">
+		<style>
+			.box 
+			{
+				margin-left : 10px;
+				background : white;
+				width : 80px;
+				border : 1px solid green;
+				border-radius : 5px;
+			}
+		</style>
+			<?php
 		echo "<br><br>You are masquerading";
+		?>
+	</div>
+</html>
+<?php
+
 	}
 	
 }//end of prompt login

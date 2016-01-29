@@ -6,16 +6,15 @@ require_once 'login.js';
 promptLogin(1);
 
 
-print_r($_POST);
-print_r($_SESSION);
 
 if(isset($_POST['Masquerade']))
 {
 	$_SESSION['loginid'] = $_POST['Masquerade'];
+	$_SESSION['Masquerade'] = $_POST['Masquerade'];
 	$_SESSION['Masquerade'] = 1;
 }
 
-print_r($_SESSION);
+
 
 
 
