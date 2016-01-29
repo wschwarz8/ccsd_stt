@@ -30,35 +30,6 @@ promptLogin();
 		//takes on the last articles id giving total amount of articles
 		$article_count = $useful_info['article_id'];
 	}
-?>
-
-<section class="currentNews">
-		<center>
-			<div class="currentArticles">
-			<h1>
-				Current News Articles
-			</h1>
-				<table>
-					<tr><td>Article ID</td><td>Title</td><td>Message</td><td>Image</td><td>Date</td></tr>
-					<?php
-					for ($i = 1;$i < $article_count + 1; $i = $i + 1){
-						if ($article_array[$i][5] == 1){
-							echo("<style>.article".$i."{background:red;}</style>");
-						}else{
-							echo("<style>.article".$i."{background:green;}</style>");
-						}
-						echo("<tr class='article".$i."'><td><p>" . $article_array[$i][0] . "</td><td><p>" . $article_array[$i][1] . "</p></td><td><p>" . $article_array[$i][2] . "</p></td><td><img src='" . $article_array[$i][3] . "' style='width:45px;height:45px;'></td><td><p>" . $article_array[$i][4] . "</p></td></tr>");
-					}
-					?>
-				</table>
-				
-			</div>
-		</center>
-	</section>
-
-	<section class="newNews">
-		
-		<?php
 		
 		if ($_POST && $_POST['password'] == 'password1'){//password is password1
 			
@@ -97,6 +68,33 @@ promptLogin();
 		}
 		
 		?>
+
+
+<section class="currentNews">
+		<center>
+			<div class="currentArticles">
+			<h1>
+				Current News Articles
+			</h1>
+				<table>
+					<tr><td>Article ID</td><td>Title</td><td>Message</td><td>Image</td><td>Date</td></tr>
+					<?php
+					for ($i = 1;$i < $article_count + 1; $i = $i + 1){
+						if ($article_array[$i][5] == 1){
+							echo("<style>.article".$i."{background:red;}</style>");
+						}else{
+							echo("<style>.article".$i."{background:green;}</style>");
+						}
+						echo("<tr class='article".$i."'><td><p>" . $article_array[$i][0] . "</td><td><p>" . $article_array[$i][1] . "</p></td><td><p>" . $article_array[$i][2] . "</p></td><td><img src='" . $article_array[$i][3] . "' style='width:45px;height:45px;'></td><td><p>" . $article_array[$i][4] . "</p></td></tr>");
+					}
+					?>
+				</table>
+				
+			</div>
+		</center>
+	</section>
+
+	<section class="newNews">
 		<center>
 			<div class="formBox">
 				<h1>
