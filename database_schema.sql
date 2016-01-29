@@ -195,6 +195,26 @@ INSERT INTO `jobs` (`id`, `name`, `description`, `skillcatid`, `status`, `points
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `RewardsEarned`
+--
+
+DROP TABLE IF EXISTS `RewardsEarned`;
+CREATE TABLE IF NOT EXISTS `RewardsEarned` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(64) NOT NULL,
+  `reward` varchar(512) NOT NULL,
+  `PointsSpent` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+
+--
+-- Dumping data for table `RewardsEarned`
+--
+
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jobstatus`
 --
 
