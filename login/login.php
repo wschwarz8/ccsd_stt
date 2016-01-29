@@ -59,6 +59,7 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 		else
 		{
 			$_SESSION['loginid']=$row['id'];
+			$_SESSION['name']=$row['name'];
 			header('location:..' . $_SESSION['redirectUrl']);	
 		}
 		
@@ -67,6 +68,7 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 			$_SESSION['username'] = $_POST['username'];
 			header("Location: ..".$_SESSION['redirectUrl']); 
 			$_SESSION['admin'] = $row['admin'];
+			$_SESSION['name']=$row['name'];
 			exit;
 		}
 	
@@ -75,6 +77,7 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 			$_SESSION['username'] = $_POST['username'];
 			header("Location: ..".$_SESSION['redirectUrl']);
 			$_SESSION['admin'] = $row['admin'];
+			$_SESSION['name']=$row['name'];
 			exit;
 			
 		}	
