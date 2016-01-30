@@ -12,7 +12,21 @@ if(isset($_POST['Masquerade']))
 	$_SESSION['loginid'] = $_POST['Masquerade'];
 	$_SESSION['Masquerade'] = $_POST['Masquerade'];
 	$_SESSION['Masquerade'] = 1;
+	?>
+	<html>
+		<script>
+			alert('You have succesfully started masquerading!');
+			window.location.href = "../index.php?mask";
+		</script>
+		</html>
+	<?php
+	if(isset($_SESSION['Masquerade']))
+	{
+		$_SESSION['JimCarrey'] = $_SESSION['name'];
+	}
 }
+
+
 
 
 
@@ -29,7 +43,7 @@ if(isset($_POST['Masquerade']))
 		 }
 		
 	
-		$query = "SELECT * FROM `students` WHERE 1";
+		$query = "SELECT * FROM `students` WHERE `active` = 1";
     $result = mysql_query($query);
 
 
