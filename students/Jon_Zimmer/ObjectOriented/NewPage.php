@@ -1,9 +1,14 @@
 <?php  
 require_once 'MyFunctions.php';
 
-makeHeader("My PHP Page!!", "My PHP Page!!", 2, "NewPage.php");
 ?>
-
+<html>
+	<header>
+	    <link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
+    <link rel="stylesheet" href="../Jon_style.css">
+		<title>My Page</title>
+	</header>
+</html>
 <center>
 <div style="background:silver;color:black;width:50%;border-radius:8px;">
 	<?php
