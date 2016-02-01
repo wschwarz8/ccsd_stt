@@ -39,20 +39,31 @@ if($_SESSION['admin'])
 							Visit here for the Job List.
 						</p>
 					</a>
+	<?php
+	if($_SESSION['admin']){
+	?>
 					<a href="awardpoints.php">
 					<p>
-						Admin Only to Award Points
+						Award Points
 					</p>
 					</a>
 					<a href="create_jobs.php">
 					<p>
-						Admin Only to Create Jobs
+						Create Jobs
 					</p>
-						<a href="login/AdminDisplayUsers.php">
-						<p>
-							Admin Only To get user information
-						</p>
+					<a href="login/AdminDisplayUsers.php">
+					<p>
+						Masquerade
+					</p>
 					</a>
+					<a href="login/CompleteJobs.php">
+					<p>
+						Review Completed Jobs
+					</p>
+					</a>
+	<?php
+	}
+	?>
 					
 				</div>
 			</center>	
