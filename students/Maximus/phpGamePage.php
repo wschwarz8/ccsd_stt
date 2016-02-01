@@ -7,14 +7,21 @@
         margin:0;
         padding:0;
       }
+      html{
+        background:grey;
+      }
     </style>
     
   </head>
-  
-  <div style='background:white;width:75%;border-radius:8px;margin:15px 0 0 0;'>
-    <canvas id='canvas'name='myCanvas' height='677px' width='1122px'>If you see this you must still be in 2005!</canvas>
-  </div>
 
+  <div style='background:white;width:910px;border-radius:4px;margin:0 0 0 0;'>
+    <canvas id='canvas' name='myCanvas' height='600px' width='900px'>If you see this you must still be in 2005!</canvas>
+  </div>
+  <div style='background:grey;'>
+    <p>Combine the squares to create new random colored Squares!!! When you run out of squares click the add shape button.</p>
+    <button onclick='addShape()'>Add Shape</button>
+  </div>
+ 
 <script>
   //canvas variables
   var myCanvas = document.getElementById('canvas');
@@ -27,6 +34,7 @@
   //other variables
   var drag = "False";
   var shapeCount = 5;
+  var newCount = 0;
   
   
   function drawSquare(xPos,yPos,width,height,color){
@@ -60,10 +68,7 @@
          drawSquare(shape[i][0], shape[i][1], shape[i][2], shape[i][3], shape[i][4]);
           
         }
-    }
-      
-      
-      //drawSquare(100,100,100,100,"green");
+      }
     }
   }
   
@@ -93,7 +98,87 @@
     }
   }
   
+  function detectShape(e){
+    
+    //get mouse position
+    var x = event.clientX;
+    var y = event.clientY;
+    
+    //cycle through all shapes and check their positions
+    for (i=1;i < shapeCount+1;i++){
+      
+      //check each shapes bounds if the mouse is within them
+      if (x > shape[i][0] && x < (shape[i][2] + shape[i][0]) && y > shape[i][1] && y < (shape[i][3] + shape[i][1])){
+        
+        //check if the shape found is the shape being draged or not
+        if (i != clickedShapeNum){
+          
+          ////////create new shape///////
+          
+          //increment shape count
+          newCount = shapeCount + 1;
+          
+          //get color
+          newcolor = getColor();
+          
+          
+          //give new shape values
+          shape[newCount] = [shape[i][0], shape[i][1], shape[i][2], shape[i][3],newcolor];
+          
+          //set the shapes to disapear
+          shape[i] = [0,0,0,0,"white"];
+          shape[clickedShapeNum] = [0,0,0,0,"white"];
+          
+          //clear screen
+          canvas.fillStyle = "white";
+          canvas.fillRect(0,0,1122,677);
+          
+          //reprint the shape each time
+          for (c=1;c < shapeCount+2;c++){
+            
+            drawSquare(shape[c][0], shape[c][1], shape[c][2], shape[c][3], shape[c][4]);
+            
+          }
+        }
+      }
+    }
+    if (newCount > shapeCount){
+      shapeCount = newCount;
+      drawText(100,400,"Shape Combined!!", "blue");
+    }
+  }
+  function addShape(){
+
+  //increment shape count
+  shapeCount++;
+
+  //get color
+  newcolor = getColor();
+
+  shape[shapeCount] = [10,10,100,100,newcolor]
+
+  //clear screen
+  canvas.fillStyle = "white";
+  canvas.fillRect(0,0,1122,677);
+
+  //reprint the shape each time
+  for (i=1;i < shapeCount+1;i++){
+
+    drawSquare(shape[i][0], shape[i][1], shape[i][2], shape[i][3], shape[i][4]);
+
+  }
+
+  }
+  function getColor(){
+    
+    colorArray = ['#FF0000'/*red*/,'#7D0552'/*red violet*/,'#8D38C9'/*violet*/,'#342D7E'/*blue violet*/,'#0020C2'/*blue*/,'#008080'/*blue green*/,'#00FF00'/*green*/,'#B1FB17'/*yellow green*/,'#FFFF00'/*yellow*/,'#E8A317'/*yellow orange*/,'#F87217'/*orange*/,'#FF7F50'/*red orange*/];
+    randomNum = Math.floor((Math.random() * 12) + 1);
+    
+    return colorArray[randomNum];
+  }
+  
   function onMouseUp(e){
+    detectShape();
     drag="false";
   }
   
