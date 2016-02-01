@@ -66,7 +66,7 @@ function main(){
 						
 					}else{
 					//make the duplicate job if its repeatable
-					$addDupJobQuery = "INSERT INTO `jobs`(`name`, `description`, `skillcatid`, `status`, `points`, `repeatable`, `limitone`, `claimedby`, `priority`, `bypassLimit`) VALUES ('".$jobdata['name']."','".$jobdata['description']."',".$jobdata['skillcatid'].",1 ,".$jobdata['points'].",0 ,".$jobdata['limitone'].",".$_SESSION['loginid'].",".$jobdata['priority'].",".$jobdata['bypassLimit'].")";
+					$addDupJobQuery = "INSERT INTO `jobs`(`name`, `description`, `skillcatid`, `status`, `points`, `repeatable`, `limitone`, `claimedby`, `priority`, `bypassLimit`) VALUES ('".$jobdata['name']."','".$jobdata['description']."',".$jobdata['skillcatid'].",1 ,".$jobdata['points'].",1 ,".$jobdata['limitone'].",".$_SESSION['loginid'].",".$jobdata['priority'].",".$jobdata['bypassLimit'].")";
 					queryFunc($addDupJobQuery);	
 					
 					//ignore the original job so they cant claim it multiple times
@@ -90,11 +90,26 @@ function main(){
 			
 			
 		}else if($_POST['claimStatButt'] == 2){
-			//make a query to unclaim a job
-			$claimStatQuery = "UPDATE `jobs` SET `claimedby`=0 WHERE id=" . $_POST['formIdentifier'];
-			queryFunc($claimStatQuery);
-			$formMessage = "You have Successfully Unclaimed a Job";
+			//get info for processing
+			$jobInfoQuery = "SELECT * FROM `jobs` WHERE id=" . $_POST['formIdentifier'];
 			
+			//send query
+			$jobInfo = queryFunc($jobInfoQuery);
+			
+			//process query
+			$jobdata = mysql_fetch_assoc($jobInfo);
+			
+			if ($jobdata['repeatable'] == 1){
+				//make a query to unclaim a job
+				$claimStatQuery = "DELETE FROM `jobs` WHERE id=" . $_POST['formIdentifier'];
+				queryFunc($claimStatQuery);
+				$formMessage = "You have Successfully Unclaimed a Job";
+			}else{
+				//make a query to unclaim a job
+				$claimStatQuery = "UPDATE `jobs` SET `claimedby`=0 WHERE id=" . $_POST['formIdentifier'];
+				queryFunc($claimStatQuery);
+				$formMessage = "You have Successfully Unclaimed a Job";
+			}
 
 		}else if($_POST['claimStatButt'] == 3){
 			
