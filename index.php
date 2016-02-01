@@ -14,11 +14,6 @@ if($_SESSION['admin'])
 			<center>
 				<h2>Welcome to the site.</h2>
 				<div class="container">
-					 <a href="phpmyadmin">
-						<p>
-							Visit here for php MyAdmin.
-						</p>
-					</a>
 					<a href="students_skills.php">
 						<p>
 							Visit here for a list of Students and Skills.
@@ -42,6 +37,11 @@ if($_SESSION['admin'])
 	<?php
 	if($_SESSION['admin']){
 	?>
+					 <a href="phpmyadmin">
+						<p>
+							Visit here for php MyAdmin.
+						</p>
+					</a>
 					<a href="awardpoints.php">
 					<p>
 						Award Points
