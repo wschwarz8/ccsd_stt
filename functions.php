@@ -134,7 +134,7 @@ function promptLogin($isAdmin=0)
 			}
 		</style>
 			<?php
-		echo "<br><br><h4 style='padding:0;margin:0 0 10px 0;'>You are masquerading as<br>".  $_SESSION['JimCarrey'] . "</h4>";
+		echo "<br><br><h4 style='padding:0;margin:0 0 10px 0;'>You are masquerading as<br>". DisplayName() . "</h4>";
 		?>
 	</div>
 </html>
@@ -146,7 +146,15 @@ function promptLogin($isAdmin=0)
 
 function DisplayName()
 {
+	global $g_link, $g_username, $g_password;
+	
+		$g_link = mysql_connect('localhost', $g_username, $g_password); 
+		mysql_select_db('stt', $g_link);//TODO use a persistant database connections
+		$query = "SELECT * FROM `students` WHERE `id` = '". $_SESSION['loginid']."'";
+		$result = mysql_query($query);
+		$row = mysql_fetch_assoc($result);	
 	echo "<br>";
+	
 	?>
 <html>
 	<div class = "boxed">
@@ -160,8 +168,8 @@ function DisplayName()
 				border-radius : 5px
 			}
 		</style>
-		<?php
-		 echo "<h4 style='padding:0;margin:0 0 10px 0;'>", $_SESSION['name'] , "</h4>";
+		<?php		
+		 echo "<h4 style='padding:0;margin:0 0 10px 0;'>", $row['name'], "</h4>";
 		?>
 	</div>
 </html>
