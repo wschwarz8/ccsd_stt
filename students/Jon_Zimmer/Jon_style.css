@@ -1,9 +1,24 @@
-.nav a {
-  color: #5a5a5a;
-  font-size: 20px;
-  font-weight: bold;
-  font-family: Syncopate;
+body{
+				    background:url("http://designrfix.com/wp-content/uploads/2010/04/after-effects-tutorials-211.jpg");
+    color:black;
+    font-family:Ubuntu;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+			}
+			p{
+				color:silver;
+				font-family:Ubuntu;
+			}
+li{
+	color:none;
+				font-family:Ubuntu;
 }
+h2{
+	color:black
+}
+
 
 .jumbotron {
   background-image:url('http://designrfix.com/wp-content/uploads/2010/04/after-effects-tutorials-211.jpg');
@@ -30,19 +45,13 @@
 .learn-more {
   font-size: 20px;
   font-weight: bold;
+	color:black;
 }
 
 .learn-more a {
-  color: #00b0ff;
+  color: black;
 }
 
 .learn-more {
-  background-color: #f7f7f7;
-}
-.div{
-	  height: 100px;
-    width: 100px;
-    background-color: #4ECDC4;
-    border-radius: 5px;
-    display: inline-block;
+  background-color: grey;
 }
