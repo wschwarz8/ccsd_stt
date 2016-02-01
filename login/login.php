@@ -68,9 +68,11 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 		if($row['admin']==1) 
 		{
 			$_SESSION['username'] = $_POST['username'];
-			header("Location: ..".$_SESSION['redirectUrl']); 
 			$_SESSION['admin'] = $row['admin'];
 			$_SESSION['name']=$row['name'];
+			$_SESSION['JimCarrey'] = $row['name'];
+			header("Location: ..".$_SESSION['redirectUrl']); 
+
 			exit;
 		}
 	
