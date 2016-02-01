@@ -56,7 +56,7 @@ if($_SESSION['admin'])
 						Masquerade
 					</p>
 					</a>
-					<a href="login/CompleteJobs.php">
+					<a href="CompleteJobs.php">
 					<p>
 						Review Completed Jobs
 					</p>
