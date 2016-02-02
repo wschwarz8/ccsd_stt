@@ -3,13 +3,18 @@
  padding:0;
 }
 html{
-  background:grey;
+  background:#555;
 }
+
+canvas{
+  cursor: crosshair;
+}
+
 .canvasPositioningFrame{
   width:620px;
   height:520;
-  padding:10px 0 0 10px;
-  margin:10px 0 0 10px;
+  padding:10px 0 0 0;
+  margin:10px 0 0 0;
   background:white;
   border-radius:5px;
 }
@@ -18,7 +23,41 @@ html{
   width:620px;
   height:100px;
   padding:4px;
-  margin:10px 0 0 10px;
-  background:white;
+  margin:10px 0 0 0;
+  background:tan;
   border-radius:5px;
+  display: inline-block;
+}
+
+.colorButts{
+  width:50px;
+  height:30px;
+}
+.eraserButt{
+  width:40px;
+  height:90px;
+}
+.eraserFrame{
+  display: inline-block;
+ float:left;
+}
+.colorFrame{
+  margin-left:5px;
+  display: inline-block;
+  float:left;
+}
+
+.tipFrame{
+  margin-left:5px;
+  display: inline-block;
+  float:left;
+}
+.instructionFrame{
+  margin:2px 0 0 15px;
+  display: inline-block;
+  float:left;
+  border-radius:4px;
+  background:white;
+  color:black;
+  padding:3px;
 }

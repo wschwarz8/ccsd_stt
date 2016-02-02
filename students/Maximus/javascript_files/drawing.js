@@ -1,4 +1,4 @@
-//web paint v1.0
+//web paint v1.1
 //February 2, 2016
 
 function init(){
@@ -6,13 +6,14 @@ function init(){
   //set some position variables
   width = 600;
   height = 500;
-  xOffSet = 20;
+  xOffSet = screen.width/2 - 300;
   yOffSet = 20;
   
   //set some drawing variables
   draw = "False";
   tipSize = 10;
-  color = "Blue"
+  color = "red"
+  tipType = "circle"
   
   //set up the canvas
   drawingCanvas = document.getElementById('drawingCanvas');
@@ -60,16 +61,38 @@ function onMouseMove(){
 
 function drawFunc(){
   if (draw == "True"){
+    
     //tell where to draw
     x = event.clientX;
     y = event.clientY;
-
+    
     //give the drawing color
     canvas.fillStyle = color;
-    canvas.fillRect(x - (tipSize/2 + xOffSet),y - (tipSize/2 + yOffSet),tipSize,tipSize);
+    
+    if (tipType == "square"){
+      
+      //draw the square
+      canvas.fillRect(x - (tipSize/2 + xOffSet),y - (tipSize/2 + yOffSet),tipSize,tipSize);
+      
+    }else if(tipType == "circle"){
+      
+      canvas.beginPath();
+      canvas.arc(x - ((tipSize/2)/2 + xOffSet),y - yOffSet,tipSize/2,Math.PI * 2,false);
+      canvas.fill();
+      
+    }
   }
 }
 
 function changeColor(colorChange){
   color = colorChange;
+}
+
+function changeTipSize(newTipSize){
+  tipSize = newTipSize;
+  document.getElementById('tipInfo').innerHTML = "Tip Size: " + tipSize + "px";
+}
+
+function changeTipType(newTipType){
+  tipType = newTipType;
 }
