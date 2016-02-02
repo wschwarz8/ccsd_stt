@@ -1,0 +1,24 @@
+*{
+ margin:0;
+ padding:0;
+}
+html{
+  background:grey;
+}
+.canvasPositioningFrame{
+  width:620px;
+  height:520;
+  padding:10px 0 0 10px;
+  margin:10px 0 0 10px;
+  background:white;
+  border-radius:5px;
+}
+
+.controlFrame{
+  width:620px;
+  height:100px;
+  padding:4px;
+  margin:10px 0 0 10px;
+  background:white;
+  border-radius:5px;
+}
