@@ -23,7 +23,18 @@ if (isset($_POST['jobsToList'])){
 		//commence query
 		mysql_query($modifyPointsQuery);
 		
-		$changeJobStatusQuery = "UPDATE `jobs` SET `status`=2 WHERE id=".$_POST['formIdentifier'];
+		$resultz = mysql_query("SELECT * FROM `jobs` WHERE id=".$_POST['formIdentifier']);
+		
+		//make a error message
+		$jobDesc = mysql_fetch_assoc($resultz);
+		
+		$newDesc = $jobDesc['description'];
+		
+		if (isset($_POST['whatsWrong']) != ""){
+			echo $newDesc = $jobDesc['description'] ." ERROR: ".$_POST['whatsWrong'];
+		}
+		
+		$changeJobStatusQuery = "UPDATE `jobs` SET `description`='".$newDesc."', `status`=2 WHERE id=".$_POST['formIdentifier'];
 		//commence query
 		mysql_query($changeJobStatusQuery);
 		
@@ -56,9 +67,12 @@ while ($row = mysql_fetch_assoc($result)) { // TODO format to look better
 		<td>".$row['studentname']./*add a name query here*/"</td>
 		<td>
 			<form method='post' name='dostuffbutts'>
+				<center>
+				<textarea name='whatsWrong' placeholder='whats wrong with the job?' style='margin:15px 0 0 0;'></textarea>
 				<button type='submit' name='jobsToList' value='1'>Job isn't finished</button><br>
 				<button type='submit' name='jobsToList' value='2'>They finished it</button>
 				<input type='hidden' name='formIdentifier' value='".$row['id']."'>
+				</center>
 			</form>
 		</td>
 	</tr>
