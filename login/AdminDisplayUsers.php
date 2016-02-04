@@ -20,18 +20,8 @@ if(isset($_POST['Masquerade']))
 		</script>
 		</html>
 	<?php
-	if(isset($_SESSION['Masquerade']))
-	{
-		$_SESSION['JimCarrey'] = $_SESSION['name'];
-	}
+
 }
-
-
-
-
-
-
-
 
 	$g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 
@@ -45,11 +35,7 @@ if(isset($_POST['Masquerade']))
 	
 		$query = "SELECT * FROM `students` WHERE `active` = 1";
     $result = mysql_query($query);
-
-
-	
-
-    
+  
 ?>
 
 <html>
