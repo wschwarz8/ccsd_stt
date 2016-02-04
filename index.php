@@ -13,11 +13,6 @@ if($_SESSION['admin'])
 			<center>
 				<h2>Welcome to the site.</h2>
 				<div class="container">
-					 <a href="phpmyadmin">
-						<p>
-							Visit here for php MyAdmin.
-						</p>
-					</a>
 					<a href="students_skills.php">
 						<p>
 							Visit here for a list of Students and Skills.
@@ -38,20 +33,36 @@ if($_SESSION['admin'])
 							Visit here for the Job List.
 						</p>
 					</a>
+	<?php
+	if($_SESSION['admin']){
+	?>
+					 <a href="phpmyadmin">
+						<p>
+							Visit here for php MyAdmin.
+						</p>
+					</a>
 					<a href="awardpoints.php">
 					<p>
-						Admin Only to Award Points
+						Award Points
 					</p>
 					</a>
 					<a href="create_jobs.php">
 					<p>
-						Admin Only to Create Jobs
+						Create Jobs
 					</p>
-						<a href="login/AdminDisplayUsers.php">
-						<p>
-							Admin Only To get user information
-						</p>
+					<a href="login/AdminDisplayUsers.php">
+					<p>
+						Masquerade
+					</p>
 					</a>
+					<a href="CompleteJobs.php">
+					<p>
+						Review Completed Jobs
+					</p>
+					</a>
+	<?php
+	}
+	?>
 					
 				</div>
 			</center>	

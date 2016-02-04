@@ -146,23 +146,24 @@
 					$jobPoints = 5;//change these to appropriate points later
 					$jobPriority = 5;//change later maybe
 					$jobSkill = 5;
+					$requirement_id=1;
 					break;
 				case 3:
 					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a not connect to the wifi.";
-					$jobPoints = 5;//change these to appropriate points later
-					$jobPriority = 2;//change later maybe
+					$jobPoints = 2;//change these to appropriate points later
+					$jobPriority = 5;//change later maybe
 					$jobSkill = 2;
 					break;
 				case 4:
 					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a broken keyboard.";
-					$jobPoints = 5;//change these to appropriate points later
-					$jobPriority = 3;//change later maybe
+					$jobPoints = 3;//change these to appropriate points later
+					$jobPriority = 5;//change later maybe
 					$jobSkill = 5;
 					break;
 				case 5:
 					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a broken mousepad.";
-					$jobPoints = 5;//change these to appropriate points later
-					$jobPriority = 3;//change later maybe
+					$jobPoints = 3;//change these to appropriate points later
+					$jobPriority = 5;//change later maybe
 					$jobSkill = 5;
 					break;
 				case 7:
@@ -179,10 +180,10 @@
 			}
 			
 			//all jobs are named laptop repair???? if not add this variable with a specific name to each case above
-			$jobName = "Laptop Repair";
+			$jobName = "Laptop Repair for ".$_POST['jOwner'];
 			
 			//make a query to add a job
-			$makeJobQuery = "INSERT INTO `jobs`(`name`, `description`, `skillcatid`, `status`, `points`, `repeatable`, `limitone`, `claimedby`, `priority`) VALUES ('".$jobName."','".$jobMessage."',".$jobSkill.",1,".$jobPoints.",0,0,0,".$jobPriority.")";
+			$makeJobQuery = "INSERT INTO `jobs`(`name`, `description`, `skillcatid`, `status`, `points`, `repeatable`, `limitone`, `claimedby`, `priority`, `requirement_id`) VALUES ('".$jobName."','".$jobMessage."',".$jobSkill.",1,".$jobPoints.",0,0,0,".$jobPriority.",".$requirement_id.")";
 			
 			//commence query if it fails it returns false
 			$result = mysql_query($makeJobQuery);
