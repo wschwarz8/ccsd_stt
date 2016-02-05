@@ -156,6 +156,14 @@ function promptLogin($isAdmin=0)
 
 function DisplayName()
 {
+				global $g_link, $g_username, $g_password;
+	
+		$g_link = mysql_connect('localhost', $g_username, $g_password); 
+		mysql_select_db('stt', $g_link);//TODO use a persistant database connections
+		$query = "SELECT * FROM `students` WHERE `id` = '". $_SESSION['loginid']."'";
+		$result = mysql_query($query);
+		$row = mysql_fetch_assoc($result);	
+	
 	echo "<br>";
 	?>
 <html>
