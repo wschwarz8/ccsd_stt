@@ -2,16 +2,23 @@
 session_start();
 
 if(isset($_GET['logout'])){
-	unset($_SESSION['loginid']);
-	$_SESSION['Masquerade'] = 0;
-	unset($_SESSION['Masquerade']);
+	$_SESSION = array(); // unset everything in the session
+	session_destroy();
 }
 
 if(isset($_GET["reason"]))
-	
 {
-	echo"<script>alert('You need to login to view this page!');</script>";
-	
+	switch($_GET['reason']){
+		case 1:
+			echo"<script>alert('You need to login to view that page!');</script>";
+		break;
+		case 1:
+			echo"<script>alert('You need to be an admin to view that page!');</script>";
+		break;
+		default:
+			echo"<script>alert('You don't have access to view that page!');</script>";
+		break;
+	}
 }
 
 if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone has attempted a login

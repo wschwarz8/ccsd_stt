@@ -28,7 +28,7 @@ if($_SESSION['admin'])
 							Visit here for the scoreboard.
 						</p>
 					</a>
-					<a href="jobs.php">
+					<a href="rewriteJobs.php">
 						<p>
 							Visit here for the Job List.
 						</p>

@@ -12,8 +12,7 @@ if(isset($_POST['Masquerade']))
 	?>
 	<html>
 		<script>
-			alert('You have succesfully started masquerading!');
-			window.location.href = "../index.php?mask";
+			window.location.href = "/index.php";
 		</script>
 		</html>
 	<?php

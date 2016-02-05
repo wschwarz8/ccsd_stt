@@ -20,18 +20,18 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 				<a href='../index.php'><h1 id='headerTitle'>". $ptitle . "</h1></a>
 			
 				");
-		echo DisplayName();
+		DisplayName();
 		echo viewsofpage($fileName);
 	
-		echo("<BR>
+		echo("<BR><BR>
 		
 				<div class='buttonRow'>
-					<a href='../index.php'><div class='buttons'>Home</div></a>
-					<a href='../rewriteJobs.php'><div class='buttons'>Jobs</div></a>
-					<a href='../scoreboard.php?type=all'><div class='buttons'>Scoreboard</div></a>
-					<a href='../team.php'><div class='buttons'>Team Pages</div></a>
-					<a href='../DisplayBroken.php'><div class='buttons'>Broken</div></a>
-					<a href='../login/login.php?logout=1'><div class='buttons'>Log Out</div></a> 
+					<a href='/index.php'><div class='buttons'>Home</div></a>
+					<a href='/rewriteJobs.php'><div class='buttons'>Jobs</div></a>
+					<a href='/scoreboard.php?type=all'><div class='buttons'>Scoreboard</div></a>
+					<a href='/team.php'><div class='buttons'>Team Pages</div></a>
+					<a href='/DisplayBroken.php'><div class='buttons'>Broken</div></a>
+					<a href='/login/login.php?logout=1'><div class='buttons'>Log Out</div></a> 
 				</div>
 		
 			<div class='meat'>
@@ -104,7 +104,6 @@ function promptLogin($isAdmin=0)
 	//save the current url address for redirect after login
 	$_SESSION['redirectUrl'] = $_SERVER['REQUEST_URI'];
 	
-	
 	if(!$_SESSION['loginid'])
 	{
 		// uncomment this to require logins
@@ -112,59 +111,27 @@ function promptLogin($isAdmin=0)
 	}
 	
 	if ($isAdmin){
-		if ($_SESSION['loginid']!=14){
-					header('location:login.php?reason=1');
+		if (!isset($_SESSION['admin'])){
+					header('location:login.php?reason=2');
 		}
 	}
-	
-	if(isset($_SESSION['Masquerade']))
-	{
-			global $g_link, $g_username, $g_password;
-	
-		$g_link = mysql_connect('localhost', $g_username, $g_password); 
-		mysql_select_db('stt', $g_link);//TODO use a persistant database connections
-		$query = "SELECT * FROM `students` WHERE `id` = '". $_SESSION['loginid']."'";
-		$result = mysql_query($query);
-		$row = mysql_fetch_assoc($result);	
-		
-		?>
-<html>
-		<div class = "box">
-		<style>
-			.box 
-			{
-				margin-left : 10px;
-				background : white;
-				width : 200px;
-				border : 1px solid green;
-				border-radius : 5px;
-			}
-		</style>
-			<?php
-
-		echo "<br><br><h4 style='padding:0;margin:0 0 10px 0;'>You are masquerading as<br>". $row['name']. "</h4><br>";
-
-
-		?>
-	</div>
-</html>
-<?php
-
-	}
-	
 }//end of prompt login
 
 function DisplayName()
 {
-				global $g_link, $g_username, $g_password;
+		global $g_link, $g_username, $g_password;
 	
 		$g_link = mysql_connect('localhost', $g_username, $g_password); 
 		mysql_select_db('stt', $g_link);//TODO use a persistant database connections
-		$query = "SELECT * FROM `students` WHERE `id` = '". $_SESSION['loginid']."'";
+		$query = "SELECT * FROM `students` WHERE `id` = '". $_SESSION['loginid']."' OR id='".$_SESSION['Masquerade']."'";
 		$result = mysql_query($query);
-		$row = mysql_fetch_assoc($result);	
-	
-	 echo $row['name'];
+		while($row = mysql_fetch_assoc($result)){
+			$lookup[$row['id']]=$row['name'];
+		}
+	if(isset($_SESSION['Masquerade'])) {
+		echo $lookup[$_SESSION['Masquerade']] . " pretending to be ";
+	}
+	echo $lookup[$_SESSION['loginid']];
 }
 
 
