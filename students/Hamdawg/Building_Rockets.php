@@ -65,18 +65,20 @@ class RocketShip
   echo "<h2>Lets See what we have to work with on parts here then!</h2><br>";
   $build->printall();
 		
+
+	
+	echo "<h2>Now lets try to take a shortcut on the paperwork and print the Object!</h2><br>";
+	echo $build;
+	echo "<h4 style='padding:0;margin:0 0 10px 0;'>Woops! I guess there is no shortcut...</h4>";
+	
 	echo "<h2>We need to destroy that Russian Space Station for Parts, launch the payload!</h2><br>";
 	$build = " ";
 	
-	echo "<h2>Now lets try to take a shortcut on the paperwork and print the Object!</h2><br>";
-	echo "$build<br>";
-	
-	echo "<h4 style='padding:0;margin:0 0 10px 0;'>Woops! I guess there is no shortcut...</h4>";
+
 	
 	echo "<h2> Congratulations Commander, you have officially completed your first space mission with OOP in PHP</h2><br>";
 	
 	echo "Heavy Appreciation to Max DeVos to helping me figure this out, as well as giving me the outline for the page design used in this site! If you want a guideline on how to do the homework, check his site out, or read this code as it derives pretty similarly from his. Thank you!";
- //var_dump($build);
   	?>
 </div>
 </center>

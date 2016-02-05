@@ -3,8 +3,7 @@
 	require_once "functions.php";
 	promptLogin();
 //editing from github.com
-print_r($_SESSION);
-print_r($_POST);
+
 if($_SESSION['admin'])
 {
 	

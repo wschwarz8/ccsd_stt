@@ -1,11 +1,5 @@
 <?php
-//todo
-//add claim limit <-- finished
-//add working sort by logic <-- finished
-//add claimable all jobs <-- finished
-//add ignore jobs -- needs a 3 column table   <--finished
-//add alert message for when claiming,unclaiming, and resolving a job   <--finished
-//add the all page to show even ignored jobs
+//add the all page to show even ignored jobs and add check boxes for ignoring multiple jobs at once
 
 //get access to proper files
 require_once 'config.php';

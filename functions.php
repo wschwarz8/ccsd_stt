@@ -108,21 +108,28 @@ function promptLogin($isAdmin=0)
 	if(!$_SESSION['loginid'])
 	{
 		// uncomment this to require logins
-		header('location:login/login.php?reason=1');
+		header('location:login.php?reason=1');
 	}
 	
 	if ($isAdmin){
 		if ($_SESSION['loginid']!=14){
-					header('location:login/login.php?reason=1');
+					header('location:login.php?reason=1');
 		}
 	}
 	
 	if(isset($_SESSION['Masquerade']))
 	{
+			global $g_link, $g_username, $g_password;
+	
+		$g_link = mysql_connect('localhost', $g_username, $g_password); 
+		mysql_select_db('stt', $g_link);//TODO use a persistant database connections
+		$query = "SELECT * FROM `students` WHERE `id` = '". $_SESSION['loginid']."'";
+		$result = mysql_query($query);
+		$row = mysql_fetch_assoc($result);	
 		
 		?>
 <html>
-	<div class = "box">
+		<div class = "box">
 		<style>
 			.box 
 			{
@@ -134,7 +141,10 @@ function promptLogin($isAdmin=0)
 			}
 		</style>
 			<?php
-		echo "<br><br><h4 style='padding:0;margin:0 0 10px 0;'>You are masquerading as<br>".  $_SESSION['JimCarrey'] . "</h4>";
+
+		echo "<br><br><h4 style='padding:0;margin:0 0 10px 0;'>You are masquerading as<br>". $row['name']. "</h4><br>";
+
+
 		?>
 	</div>
 </html>
@@ -146,6 +156,14 @@ function promptLogin($isAdmin=0)
 
 function DisplayName()
 {
+				global $g_link, $g_username, $g_password;
+	
+		$g_link = mysql_connect('localhost', $g_username, $g_password); 
+		mysql_select_db('stt', $g_link);//TODO use a persistant database connections
+		$query = "SELECT * FROM `students` WHERE `id` = '". $_SESSION['loginid']."'";
+		$result = mysql_query($query);
+		$row = mysql_fetch_assoc($result);	
+	
 	echo "<br>";
 	?>
 <html>
@@ -155,15 +173,18 @@ function DisplayName()
 			{
 				margin-left : 10px;
 				background : white;
-				width : 80px;
+				width : 200px;
 				border : 1px solid green;
 				border-radius : 5px
 			}
 		</style>
+
+		
 		<?php
-		 echo "<h4 style='padding:0;margin:0 0 10px 0;'>", $_SESSION['name'] , "</h4>";
-		?>
-	</div>
+	 echo "<br><br><h4 style='padding:0;margin:0 0 10px 0;'>This is who you actually are... for now >:)<br>". $row['name']. "</h4><br>";
+	?>
+	</div>	
+
 </html>
 
 <?php
