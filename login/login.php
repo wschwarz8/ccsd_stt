@@ -25,7 +25,7 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 {
 		require_once '../config.php';
 		require_once 'login.js';
-	
+
 		$g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 
 		mysql_select_db('stt', $g_link);
@@ -49,19 +49,19 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 
 		if($_POST["username"] !== $row["username"] && $hash !== $row["password"])
 		{
-			echo "<script>window.location.href='login.php';alert('The password and Username you have entered are incorrect, try again!');</script>";
+			echo "<script>window.location.href='/login/login.php';alert('The password and Username you have entered are incorrect, try again!');</script>";
 		}
 	
 	
 		elseif($_POST["username"] !== $row["username"])
 		{
-			echo "<script>window.location.href='login.php';alert('The Username you have entered is incorrect, try again!');</script>";
+			echo "<script>window.location.href='/login/login.php';alert('The Username you have entered is incorrect, try again!');</script>";
 		}
 	
 	
 		elseif($hash !== $row["password"])
 		{
-			echo "<script>window.location.href='login.php';alert('The password you have entered is incorrect, try again!');</script>";
+			echo "<script>window.location.href='/login/login.php';alert('The password you have entered is incorrect, try again!');</script>";
 		}
 	
 	
@@ -69,29 +69,10 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 		{
 			$_SESSION['loginid']=$row['id'];
 			$_SESSION['name']=$row['name'];
+			$_SESSION['username'] = $_POST['username'];
+			$_SESSION['admin'] = $row['admin'];
 			header('location:..' . $_SESSION['redirectUrl']);	
 		}
-		
-		if($row['admin']==1) 
-		{
-			$_SESSION['username'] = $_POST['username'];
-			$_SESSION['admin'] = $row['admin'];
-			$_SESSION['name']=$row['name'];
-			$_SESSION['JimCarrey'] = $row['name'];
-			header("Location: ..".$_SESSION['redirectUrl']); 
-
-			exit;
-		}
-	
-		else
-		{
-			$_SESSION['username'] = $_POST['username'];
-			header("Location: ..".$_SESSION['redirectUrl']);
-			$_SESSION['admin'] = $row['admin'];
-			$_SESSION['name']=$row['name'];
-			exit;
-			
-		}	
 	
 
 	
