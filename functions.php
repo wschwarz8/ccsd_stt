@@ -9,7 +9,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 	<!--max devos made this -->
 	<html>
 		<head>
-			<title>". $tbtitle . DisplayName() . "</title>
+			<title>". $tbtitle ."</title>
 			". styleChoice($pstyle)
 			);
 	echo $hhtml;
@@ -20,10 +20,10 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 				<a href='../index.php'><h1 id='headerTitle'>". $ptitle . "</h1></a>
 			
 				");
-		
+		echo DisplayName();
 		echo viewsofpage($fileName);
 	
-		echo("
+		echo("<BR>
 		
 				<div class='buttonRow'>
 					<a href='../index.php'><div class='buttons'>Home</div></a>
@@ -164,30 +164,7 @@ function DisplayName()
 		$result = mysql_query($query);
 		$row = mysql_fetch_assoc($result);	
 	
-	echo "<br>";
-	?>
-<html>
-	<div class = "boxed">
-		<style>
-			.boxed 
-			{
-				margin-left : 10px;
-				background : white;
-				width : 200px;
-				border : 1px solid green;
-				border-radius : 5px
-			}
-		</style>
-
-		
-		<?php
-	 echo "<br><br><h4 style='padding:0;margin:0 0 10px 0;'>This is who you actually are... for now >:)<br>". $row['name']. "</h4><br>";
-	?>
-	</div>	
-
-</html>
-
-<?php
+	 echo $row['name'];
 }
 
 
@@ -247,5 +224,4 @@ function viewsofpage($uncletony){
    	 die('Invalid query: ' . mysql_error());
 		}
 	}
-function haha(){Jon_Wins;}//?????
 ?>
