@@ -82,7 +82,7 @@ if($_SESSION['admin'])
 							//access correct database
 							mysql_select_db('stt', $conn);
 							//store query command in a variable
-							$query = "SELECT * FROM news;";
+							$query = "SELECT * FROM news order by date desc;";
 							//commence query
 							$info = mysql_query($query);
 							//store info from query into an array

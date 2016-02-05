@@ -337,12 +337,12 @@ CREATE TABLE IF NOT EXISTS `students` (
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `username`, `password`, `name`, `class`, `active`, `bio`) VALUES
-(1, 'student1', '$2a$10$E0hKDlY5A7HrmatD9vcSMeC.BZjqX1Y4guKDDB5aiHelt1K9j7hrm', 'Student 1', '2001', 1, ''),
-(2, 'student2', '$2a$10$E0hKDlY5A7HrmatD9vcSMeC.BZjqX1Y4guKDDB5aiHelt1K9j7hrm', 'Student 2', '2002', 1, ''),
-(3, 'student3', '$2a$10$E0hKDlY5A7HrmatD9vcSMeC.BZjqX1Y4guKDDB5aiHelt1K9j7hrm', 'Student 3', '2004', 1, ''),
-(9, 'steavie', '', 'Steavie', '2020', 1, ''),
-(14, 'admin', '$2a$10$E0hKDlY5A7HrmatD9vcSMeC.BZjqX1Y4guKDDB5aiHelt1K9j7hrm', 'Admin', '2000', 1, '');
+INSERT INTO `students` (`id`, `username`, `password`, `name`, `class`, `active`, `bio`, `admin`) VALUES
+(1, 'student1', '$2a$10$E0hKDlY5A7HrmatD9vcSMeC.BZjqX1Y4guKDDB5aiHelt1K9j7hrm', 'Student 1', '2001', 1, '', 0),
+(2, 'student2', '$2a$10$E0hKDlY5A7HrmatD9vcSMeC.BZjqX1Y4guKDDB5aiHelt1K9j7hrm', 'Student 2', '2002', 1, '', 0),
+(3, 'student3', '$2a$10$E0hKDlY5A7HrmatD9vcSMeC.BZjqX1Y4guKDDB5aiHelt1K9j7hrm', 'Student 3', '2004', 1, '', 0),
+(9, 'steavie', '', 'Steavie', '2020', 1, '', 0),
+(14, 'admin', '$2a$10$E0hKDlY5A7HrmatD9vcSMeC.BZjqX1Y4guKDDB5aiHelt1K9j7hrm', 'Admin', '2000', 1, '', 1);
 
 -- --------------------------------------------------------
 
