@@ -15,7 +15,8 @@ $stid=$_GET['id'];
 $query = "SELECT students . * , points.points
 FROM students, points
 WHERE students.id =$stid
-AND active =1";	
+AND active =1
+AND students.id=points.student_id";	
 if(isset($stid)) {
 	mysql_select_db('stt', $g_link);
 	$result = mysql_query($query);
@@ -23,14 +24,16 @@ if(isset($stid)) {
     die('Invalid query: ' . mysql_error());
 	}
 	$row = mysql_fetch_assoc($result);
+	$name=$row['name'];
+	echo "<h3>Details for ".$name."</h3>";
+	echo "<table>";
+	echo "<tr><td>Class of ".$row['class']."</td>";
 	while ($row = mysql_fetch_assoc($result)){
 		$points= $row['points']+$row['points'];
 	}
-	echo "<h3>Details for ".$row['name']."</h3>";
-	echo "<table>";
-	echo "<tr><td>Class of ".$row['class']."</td>";
+	$me=mysql_fetch_assoc($result);
 //	echo "<tr><td>Points that ".$row['name'] . " has: ".$points. "</td>";
-	echo "<tr><td>Points that ".$row['name'] . " has: ".$points. "</td>";
+	echo "<tr><td>Points that ".$name . " has: ".$points. "</td>";
 	}
 	
 	
