@@ -1,0 +1,49 @@
+*{
+ margin:0;
+ padding:0;
+}
+html{
+  background:#555;
+}
+
+
+.canvasPositioningFrame{
+  width:620px;
+  height:520;
+  padding:10px 0 0 0;
+  margin:10px 0 0 0;
+  background:white;
+  border-radius:5px;
+}
+
+.controlFrame{
+  width:620px;
+  height:100px;
+  padding:4px;
+  margin:10px 0 0 0;
+  background:tan;
+  border-radius:5px;
+  display: inline-block;
+}
+
+.player1Box{
+  float:left;
+  display: inline-block;
+  font-size:30px;
+}
+
+.player2Box{
+  float:right;
+  display: inline-block;
+  font-size:30px;
+}
+.title{
+  width:150px;
+  display: inline-block;
+}
+.player1Name{
+  text-decoration:underline;
+}
+.player2Name{
+  text-decoration:underline;
+}
