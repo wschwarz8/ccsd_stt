@@ -21,6 +21,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 			
 				");
 		DisplayName();
+		echo " <a href='studentDetails.php?id=".$_SESSION['loginid']."'>(my points)</a>";
 		echo viewsofpage($fileName);
 	
 		echo("<BR><BR>
@@ -101,9 +102,10 @@ function promptLogin($isAdmin=0)
 {	
 	session_start();
 	
+	if($_SERVER['REQUEST_URI'] != "/login/login.php"){ // don't redirect to the login
 	//save the current url address for redirect after login
-	$_SESSION['redirectUrl'] = $_SERVER['REQUEST_URI'];
-	
+		$_SESSION['redirectUrl'] = $_SERVER['REQUEST_URI'];
+	}
 	if(!$_SESSION['loginid'])
 	{
 		// uncomment this to require logins
