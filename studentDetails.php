@@ -29,8 +29,9 @@ if(isset($stid)) {
 	echo "<table>";
 	echo "<tr><td>Class of ".$row['class']."</td>";
 	echo "<tr><td>Points that ".$row['name'] . " has: ";
+	$points=0;
 	while ($row = mysql_fetch_assoc($result)){
-		$points= $row['points']+$row['points'];
+		$points= $row['points']+$points;
 	}
 //	echo "<tr><td>Points that ".$row['name'] . " has: ".$points. "</td>";
 echo $points. "</td>";
