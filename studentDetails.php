@@ -10,9 +10,10 @@ require_once "functions.php";
 <body>
 <?php
 if(isset($_GET['id'])){
+	
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 $stid=$_GET['id'];
-$query = "SELECT students . * , points.points
+$query = "SELECT students . * , points.*
 FROM students, points
 WHERE students.id =$stid
 AND active =1
@@ -24,16 +25,15 @@ if(isset($stid)) {
     die('Invalid query: ' . mysql_error());
 	}
 	$row = mysql_fetch_assoc($result);
-	$name=$row['name'];
-	echo "<h3>Details for ".$name."</h3>";
+	echo "<h3>Details for ".$row['name']."</h3>";
 	echo "<table>";
 	echo "<tr><td>Class of ".$row['class']."</td>";
+	echo "<tr><td>Points that ".$row['name'] . " has: ";
 	while ($row = mysql_fetch_assoc($result)){
 		$points= $row['points']+$row['points'];
 	}
-	$me=mysql_fetch_assoc($result);
 //	echo "<tr><td>Points that ".$row['name'] . " has: ".$points. "</td>";
-	echo "<tr><td>Points that ".$name . " has: ".$points. "</td>";
+echo $points. "</td>";
 	}
 	
 	
