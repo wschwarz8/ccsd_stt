@@ -33,7 +33,6 @@ if(isset($stid)) {
 	while ($row = mysql_fetch_assoc($result)){
 		$points= $row['points']+$points;
 	}
-//	echo "<tr><td>Points that ".$row['name'] . " has: ".$points. "</td>";
 echo $points. "</td>";
 	}
 	
