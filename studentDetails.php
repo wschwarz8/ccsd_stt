@@ -29,7 +29,7 @@ if(isset($stid)) {
 	echo "<table>";
 	echo "<tr><td>Class of ".$row['class']."</td>";
 	echo "<tr><td>Points that ".$row['name'] . " has: ";
-	$points=0;
+	$points=$row['points'];
 	while ($row = mysql_fetch_assoc($result)){
 		$points= $row['points']+$points;
 	}
