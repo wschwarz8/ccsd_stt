@@ -107,12 +107,12 @@ function promptLogin($isAdmin=0)
 	if(!$_SESSION['loginid'])
 	{
 		// uncomment this to require logins
-		header('location:login.php?reason=1');
+		header('location:/login/login.php?reason=1');
 	}
 	
 	if ($isAdmin){
-		if (!isset($_SESSION['admin'])){
-					header('location:login.php?reason=2');
+		if (!isset($_SESSION['admin']) || ($_SESSION['admin'] != 1)){
+					header('location:/login/login.php?reason=2');
 		}
 	}
 }//end of prompt login
