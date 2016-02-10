@@ -4,12 +4,15 @@ require_once 'functions.php';
 
 promptLogin(1);
 
+makeHeader("Award points", "Award Points", 2,"awardpoints.php", '<link href="/css_files/create_jobs.css" rel="stylesheet">');
+
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
 
 mysql_select_db('stt', $g_link);
 
 ?>
 <HTML>
+	<center>
 	<HEAD>
 		<SCRIPT type="text/javascript">
 		function jobchange(id){
@@ -17,7 +20,6 @@ mysql_select_db('stt', $g_link);
 			document.getElementById("category_id").value = category[id];
 			document.getElementById("job_id").value = id;
 		}
-		
 		</SCRIPT>
 	</HEAD>
 	<BODY>
@@ -121,3 +123,4 @@ echo "
 <?php
 mysql_close($g_link);
 ?>
+		</center>
