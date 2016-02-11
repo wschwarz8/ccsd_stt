@@ -52,7 +52,7 @@ class jobs{
 				$ignore[$this->job_Id] = $ignoredata['studentname'];
 		}	
 		
-		if ($this->job_Status < 3 && $ignore[$this->job_Id] != $_SESSION['loginid'] || $this->job_Status < 3 && $_SESSION['jobsection'] == "3"){
+		if ($this->job_Status < 3 && $ignore[$this->job_Id] != $_SESSION['loginid'] || $this->job_Status < 3 && isset($_SESSION['showIgnoredJobs']) && $_SESSION['showIgnoredJobs'] == "True"){
 			echo("
 				<tr style='".$this->jobPriorityFunc()."height:45px;'>
 					<td style='width:10%;'>". $this->job_Name ."</td>
@@ -82,11 +82,35 @@ class jobs{
   //logic for when to have claim, unclaim, and resolve buttons go here
   function jobClaimButtsFunc(){
 		if ($this->job_ClaimedBy == 0 ){
-			return("
-			<button type='submit' name='claimStatButt' value='1'>claim</button>
-			<button type='submit' name='claimStatButt' value='4'>Ignore</button>
-			<input type='hidden' name='formIdentifier' value='".$this->job_Id."'>
-			");
+			
+			//make a query to check what jobs have been ignored by current student
+			
+			$ignore[$this->job_Id] = 0;
+			$ignoreCheckQuery = "SELECT * FROM `ignorejobs` WHERE jobid=" . $this->job_Id ." AND studentname=" .$_SESSION['loginid'] ;
+			$ignoreJobs = queryFunc($ignoreCheckQuery);
+		
+			while ($ignoredata = mysql_fetch_assoc($ignoreJobs)) {
+					$ignore[$this->job_Id] = $ignoredata['studentname'];
+			}	
+			
+			
+			if (isset($_SESSION['showIgnoredJobs']) && $_SESSION['showIgnoredJobs'] == "True" && $ignore[$this->job_Id] == $_SESSION['loginid'] && $_SESSION['jobsection'] == "1"){
+				//want to see ignored jobs
+				return("
+				<button type='submit' name='claimStatButt' value='5'>Unignore</button>
+				<input type='hidden' name='formIdentifier' value='".$this->job_Id."'>
+				");
+				
+			}else{
+			//did not request to see ignored jobs
+				return("
+				<button type='submit' name='claimStatButt' value='1'>claim</button>
+				<button type='submit' name='claimStatButt' value='4'>Ignore</button>
+				<input type='hidden' name='formIdentifier' value='".$this->job_Id."'>
+				");
+			}
+			
+			
 		}else if ($this->job_ClaimedBy == $_SESSION['loginid']){
 			return("
 			<button type='submit' name='claimStatButt' value='2'>Unclaim</button>
