@@ -1,5 +1,4 @@
 <?php
-//add the all page to show even ignored jobs and add check boxes for ignoring multiple jobs at once
 
 //get access to proper files
 require_once 'config.php';
@@ -326,6 +325,12 @@ function main(){
 	</form>
 	");
 
+	}else if( $_SESSION['jobsection'] != "3"){
+		echo("
+	<form name='ignoreShow' method='POST'>
+	<button type='submit' name='showIgnored' value='1'>Show Ignored Jobs</button>
+	</form>
+	");
 	}
   
 }//end of main function
