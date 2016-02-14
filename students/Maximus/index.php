@@ -67,7 +67,15 @@
 				</a>
 			</div>
 		</div>
-
+		<div style="padding-left:50%">
+				<a href="pacMan.html">
+					<div class="phpsitebutton">
+						<h2>
+						Pac Man
+					</h2>
+					</div>
+				</a>
+			</div>
 		<div class="middlesec">
 
 			<div class="leftbar">

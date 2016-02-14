@@ -1,5 +1,5 @@
 //february 13,2016
-//snake game v1.0
+//snake game v1.1
 
 
 function init() {
@@ -21,7 +21,7 @@ function init() {
   currentColor = color[colorCycle];
 
   //snake variables for start
-  segmentCount = 2;
+  segmentCount = 1;
   headLoc = 1
   tailLoc = 0
 
@@ -32,17 +32,24 @@ function init() {
 
   //other stuff
   play = "False";
-  direction = "down"
-
+  direction = "down";
+  score = 0;
+  
   //make background
   canvas.fillStyle = "grey";
   canvas.fillRect(0, 0, 600, 500);
+  
+    //first dot location
+  dot = [(Math.floor(Math.random() * 28)) , (Math.floor(Math.random() * 23)) ];
+  canvas.fillStyle = "red";
+  canvas.fillRect((dot[0] * 21), (dot[1] * 21), 20, 20);
 
   //print first 2 segments
   canvas.fillStyle = "blue";
   canvas.fillRect((segment[0][0] * 21), (segment[0][1] * 21), 20, 20);
   canvas.fillRect((segment[1][0] * 21), (segment[1][1] * 21), 20, 20);
 
+  
   startStuff();
 }
 
@@ -120,7 +127,7 @@ function keydownfunc() {
 
 
 function startStuff() {
-  timer = setInterval(gameLoop, 250);
+  timer = setInterval(gameLoop, 100);
 }
 
 function gameLoop() {
@@ -183,7 +190,7 @@ function gameLoop() {
 
 
     //give the tail location
-    if (tailLoc == segmentCount - 1) {
+    if (tailLoc == segmentCount) {
       tailLoc = 0;
     } else {
       tailLoc++;
@@ -196,7 +203,45 @@ function gameLoop() {
 function check(){
   if ((segment[tailLoc][0]*21) < 0 || (segment[tailLoc][0]*21) > frameWidth || (segment[tailLoc][1]*21) < 0 || (segment[tailLoc][1]*21) > frameHeight){
     play = "False";
+    direction = "null"
     document.getElementById("status").innerHTML = "Status: Hit a Wall";
+    
+  }else if(segment[tailLoc][0] == dot[0] && segment[tailLoc][1] == dot[1]){
+    document.getElementById("status").innerHTML = "Status: ate a dot";
+    score = score + 100;
+    document.getElementById("score").innerHTML = "Score: "+ score;
+    //add new links
+    for (i = 1; i < 4; i++){
+      segmentCount++;
+      segment[segmentCount] = [segment[tailLoc][0], segment[tailLoc][0]];
+    }
+    
+    newDot = "False";
+    
+    //create a new dot that is not on the snake
+    while (newDot == "False"){
+      for ( i = 0; i < segmentCount; i++){
+        
+        //give the dot a new random position
+        dot = [(Math.floor(Math.random() * 28)) , (Math.floor(Math.random() * 23)) ];
+        
+        //check if it was placed on the snake
+        if (dot[0] !=  segment[i][0] && dot[1] != segment[i][1]){
+          //no
+          console.log("dot true");
+          newDot = "True";
+        }else{
+          //yes then break and repeat the whole check until every segment says false
+          console.log("dot false");
+          newDot = "False";
+          break;
+        }
+      }
+      
+    }
+    
+    canvas.fillStyle = "red";
+    canvas.fillRect((dot[0] * 21), (dot[1] * 21), 20, 20);
     
   }
 }
