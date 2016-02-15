@@ -1,0 +1,28 @@
+*{
+ margin:0;
+ padding:0;
+}
+html{
+  background:#555;
+}
+
+
+.canvasPositioningFrame{
+  width:1020px;
+  height:560px;
+  padding:0 0 0 0;
+  margin:10px 0 0 0;
+  background:white;
+  
+}
+
+.controlFrame{
+  width:1020px;
+  height:80px;
+  padding:4px;
+  margin:10px 0 0 0;
+  background:tan;
+  border-radius:2px;
+  display: inline-block;
+}
+
