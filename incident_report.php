@@ -134,6 +134,7 @@
 		if ($_POST['jLaptopTaken'] = 1){
 			
 			//check what is wrong with laptop
+			$requirement_id=0; // if it isn't set in the case it should be 0
 			switch($_POST["whatsWrong"]){
 				case 1:
 						$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a broken screen.";
