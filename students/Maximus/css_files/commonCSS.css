@@ -8,10 +8,10 @@ html{
 body {
 	margin:0 10% 10%;
 	padding:0;
-	margin-bottom:0;
 	background-color:black;
 	background-image: url(http://goo.gl/UNuaqd);
 	background-repeat: no-repeat;
+	height:100%;
 	border-radius:0;
 }
 

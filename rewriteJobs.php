@@ -1,5 +1,4 @@
 <?php
-//add the all page to show even ignored jobs and add check boxes for ignoring multiple jobs at once
 
 //get access to proper files
 require_once 'config.php';
@@ -136,6 +135,12 @@ function main(){
  			queryFunc($ignoreJobQuery);
 			$formMessage = "You have Successfully Ignored a Job";
 			
+		}else if($_POST['claimStatButt'] == 5){
+ 			//unignore a job
+ 			$unignoreJobQuery = "DELETE FROM `ignorejobs` WHERE jobid =".$_POST['formIdentifier']." AND studentname =".$_SESSION['loginid'];
+ 			queryFunc($unignoreJobQuery);
+			$formMessage = "You have Successfully Unignored a Job";
+			
 		}
 		
 		$formCheck = "True";
@@ -220,7 +225,20 @@ function main(){
     echo"<style>.myButt{background:white;color:black;}</style>";
 		$_SESSION['jobsection'] = "3";
 		
-  }else{
+	}else if(isset($_POST['showIgnored']) && $_POST['showIgnored'] == 1){
+		//display all jobs with ignored jobs
+    $jobQuery="SELECT * FROM jobs ".$_SESSION['sortby'];
+    echo"<style>.allButt{background:white;color:black;}</style>";
+		$_SESSION['jobsection'] = "1";
+		$_SESSION['showIgnoredJobs'] = "True";
+	
+  }else if(isset($_POST['showIgnored']) && $_POST['showIgnored'] == 2){
+		//display all jobs
+		$jobQuery="SELECT * FROM jobs ".$_SESSION['sortby'];
+    echo"<style>.allButt{background:white;color:black;}</style>";
+		$_SESSION['jobsection'] = "1";
+		$_SESSION['showIgnoredJobs'] = "False";
+	}else{
 		//display all jobs if no button has been selected yet
     $jobQuery="SELECT * FROM jobs WHERE claimedby=".$_SESSION['loginid'];
     echo"<style>.myButt{background:white;color:black;}</style>";
@@ -248,7 +266,7 @@ function main(){
   </div>
   ");
 	//load you dang css
-  //commence query
+  //commence query                <-- wats this????????????
   $jobQueryResult = mysql_query($jobQuery); 
   
   //make a table
@@ -292,6 +310,28 @@ function main(){
 	}
   //finish the table
   echo"</table></center>";
+	
+	if (isset($_SESSION['showIgnoredJobs']) && $_SESSION['showIgnoredJobs'] == "False" && $_SESSION['jobsection'] != "3"){
+		echo("
+	<form name='ignoreShow' method='POST'>
+	<button type='submit' name='showIgnored' value='1'>Show Ignored Jobs</button>
+	</form>
+	");
+	}else if (isset($_SESSION['showIgnoredJobs']) && $_SESSION['showIgnoredJobs'] == "True" && $_SESSION['jobsection'] != "3"){
+		echo("
+		
+	<form name='ignoreShow' method='POST'>
+	<button type='submit' name='showIgnored' value='2'>Hide Ignored Jobs</button>
+	</form>
+	");
+
+	}else if( $_SESSION['jobsection'] != "3"){
+		echo("
+	<form name='ignoreShow' method='POST'>
+	<button type='submit' name='showIgnored' value='1'>Show Ignored Jobs</button>
+	</form>
+	");
+	}
   
 }//end of main function
 

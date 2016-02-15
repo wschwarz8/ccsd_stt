@@ -1,0 +1,40 @@
+<!-- snake Game v1.1 -->
+<!-- February 13, 2016 -->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Snake</title>
+  <link href="css_files/snake.css" rel="stylesheet">
+  <script language="javascript" type="text/javascript" src="javascript_files/snake.js"></script>
+</head>
+
+<body onload="init()">
+
+  <center>
+
+    <div class="canvasPositioningFrame">
+      <canvas id='snakeCanvas' height='482px' width='587px'>If you see this you must still be in 2005!</canvas>
+    </div>
+
+    <div class="controlFrame">
+      <p id="status">
+        Status: Ok
+      </p>
+      <p id="score">
+        Score: 0
+      </p>
+      <p>
+        Press enter to start or pause. Use the arrow keys or WASD keys to move around. PS. its still a work in progress.
+      </p>
+      
+      <button onclick="init()">
+        Reset
+      </button>
+    </div>
+      
+  </center>
+    
+</body>
+
+</html>

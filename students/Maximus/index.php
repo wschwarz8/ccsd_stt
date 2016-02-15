@@ -6,7 +6,6 @@
 	<link href="css_files/commonCSS.css" rel="stylesheet">
 	<link href="css_files/mainPage.css" rel="stylesheet">
 	<script language="javascript" type="text/javascript" src="javascript_files/mainPage.js"></script>
-	<script language="javascript" type="text/javascript" src="javascript_files/commonJS.js"></script>
 
 	<title>Max's Website</title>
 </header>
@@ -35,13 +34,48 @@
 				<a href="phpGamePage.php">
 					<div class="phpsitebutton">
 						<h2>
-						My WIP Game
+						My First Game
+					</h2>
+					</div>
+				</a>
+			</div>
+			<div style="padding-left:50%">
+				<a href="drawing.php">
+					<div class="phpsitebutton">
+						<h2>
+						Paint!
+					</h2>
+					</div>
+				</a>
+			</div>
+			<div style="padding-left:50%">
+				<a href="ticTacToe.php">
+					<div class="phpsitebutton">
+						<h2>
+						Tic Tac Toe
+					</h2>
+					</div>
+				</a>
+			</div>
+			<div style="padding-left:50%">
+				<a href="snake.html">
+					<div class="phpsitebutton">
+						<h2>
+						Snake Game
 					</h2>
 					</div>
 				</a>
 			</div>
 		</div>
-
+		<div style="padding-left:50%">
+				<a href="pacMan.html">
+					<div class="phpsitebutton">
+						<h2>
+						Pac Man
+					</h2>
+					</div>
+				</a>
+			</div>
 		<div class="middlesec">
 
 			<div class="leftbar">
