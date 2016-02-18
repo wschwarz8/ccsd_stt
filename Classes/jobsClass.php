@@ -16,15 +16,17 @@ class jobs{
   public $job_ClaimedBy;
   public $job_Priority;
   public $job_BypassLimit;
+  public $job_skillCategory;
   
   //contruct each property when a object is made
-  function __construct($jid,$jna,$jde,$jca,$jst,$jpo,$jre,$jli,$jcl,$jpr,$jby){
+  function __construct($jid,$jna,$jde,$jca,$jst,$jpo,$jsc,$jre,$jli,$jcl,$jpr,$jby){
     $this->job_Id = $jid;
     $this->job_Name = $jna;
     $this->job_Description = $jde;
     $this->job_Category = $jca;
     $this->job_Status = $jst;
     $this->job_Points = $jpo;
+    $this->job_skillCategory = $jsc;
     $this->job_Repeatable = $jre;
     $this->job_limitOne = $jli;
     $this->job_ClaimedBy = $jcl;
@@ -59,6 +61,7 @@ class jobs{
 					<td style='width:50%;'>". $this->job_Description ."</td>
 					<td style='width:10%;'>". $this->job_Points ."</td>
 					<td style='width:10%;'>". $this->jobCategoryAndNameFunc(1) ."</td>
+					<td style='width:10%;'>". $this->job_skilLCategory ."</td>
 					<td style='width:10%;'><form method='post' name='claimStatForm'>". $this->jobClaimButtsFunc() ."</form></td>
 				</tr>
 			");
