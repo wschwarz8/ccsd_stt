@@ -5,7 +5,7 @@ promptLogin(1);
 
 	makeHeader("Create Jobs","Create a job",2,"create_jobs.php",'<link href="/css_files/create_jobs.css" rel="stylesheet">');
 
-//$_SESSION['loginid']=12;
+$_SESSION['loginid']=12;
 ?>
 
 <center>
@@ -75,9 +75,10 @@ promptLogin(1);
 		<?php
 
 	 if ($_POST){
-		 
+		$jDesc=mysql_real_escape_string($_POST['jDesc']);
+		  
 		 //make query
-		 $queryinsertjob = "INSERT INTO `jobs`( `name`, `description`, `skillcatid`, `status`, `points`, `claimedby`, `priority`) VALUES ('".$_POST['jName']."','".$_POST['jDesc']."', ".$_POST['jSkill'].", ".$_POST['jStatus'].", ".$_POST['jPoints'].", ".$_POST['jClaim'].", ".$_POST['jPriority'].")";
+$queryinsertjob = "INSERT INTO `jobs`( `name`, `description`, `skillcatid`, `status`, `points`, `claimedby`, `priority`) VALUES ('".$_POST['jName']."','".$jDesc."', ".$_POST['jSkill'].", ".$_POST['jStatus'].", ".$_POST['jPoints'].", ".$_POST['jClaim'].", ".$_POST['jPriority'].")";
 
 		 //commence query
 		 $rsp = mysql_query($queryinsertjob);

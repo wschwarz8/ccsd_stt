@@ -52,14 +52,14 @@ function main(){
 				if($jobdata['requirement_id']=='0') { // If they have the skill needed to do the job
 					if ($jobdata['repeatable'] != 1){
 					//make a query to claim a job
-					$claimStatQuery = "UPDATE `jobs` SET `claimedby`=".$_SESSION['loginid']." WHERE id=" . $_POST['formIdentifier'];
+					$claimStatQuery = "UPDATE `jobs` SET `claimedby`=".$_SESSION['loginid']." status=2 WHERE id=" . $_POST['formIdentifier'];
 					queryFunc($claimStatQuery);
 					//give a status message
 					$formMessage = "You have Successfully Claimed a Job";
 						
 					}else{
 					//make the duplicate job if its repeatable
-					$addDupJobQuery = "INSERT INTO `jobs`(`name`, `description`, `skillcatid`, `status`, `points`, `repeatable`, `limitone`, `claimedby`, `priority`, `bypassLimit`) VALUES ('".$jobdata['name']."','".$jobdata['description']."',".$jobdata['skillcatid'].",1 ,".$jobdata['points'].",1 ,".$jobdata['limitone'].",".$_SESSION['loginid'].",".$jobdata['priority'].",".$jobdata['bypassLimit'].")";
+					$addDupJobQuery = "INSERT INTO `jobs`(`name`, `description`, `skillcatid`, `status`, `points`, `repeatable`, `limitone`, `claimedby`, `priority`, `bypassLimit`) VALUES ('".$jobdata['name']."','".$jobdata['description']."',".$jobdata['skillcatid'].",2 ,".$jobdata['points'].",1 ,".$jobdata['limitone'].",".$_SESSION['loginid'].",".$jobdata['priority'].",".$jobdata['bypassLimit'].")";
 					queryFunc($addDupJobQuery);	
 					
 					//ignore the original job so they cant claim it multiple times
@@ -99,7 +99,7 @@ function main(){
 				$formMessage = "You have Successfully Unclaimed a Job";
 			}else{
 				//make a query to unclaim a job
-				$claimStatQuery = "UPDATE `jobs` SET `claimedby`=0 WHERE id=" . $_POST['formIdentifier'];
+				$claimStatQuery = "UPDATE `jobs` SET `claimedby`=0, status=2 WHERE id=" . $_POST['formIdentifier'];
 				queryFunc($claimStatQuery);
 				$formMessage = "You have Successfully Unclaimed a Job";
 			}
@@ -215,7 +215,7 @@ function main(){
 		
   }else if (isset($_POST['jobsToList']) && $_POST['jobsToList'] == 2){
 		//display all unclaimed jobs
-    $jobQuery="SELECT * FROM jobs WHERE claimedby=0" .$_SESSION['sortby'];
+    $jobQuery="SELECT * FROM jobs WHERE status=1" .$_SESSION['sortby'];
     echo"<style>.unclaimedButt{background:white;color:black;}</style>";
 		$_SESSION['jobsection'] = "2";
 

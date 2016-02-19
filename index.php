@@ -60,6 +60,11 @@ if($_SESSION['admin'])
 						Review Completed Jobs
 					</p>
 					</a>
+					<a href="AdminCheatsheet.php">
+					<p>
+						Admin Cheatsheet
+					</p>
+					</a>
 	<?php
 	}
 	?>
