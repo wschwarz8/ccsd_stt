@@ -274,7 +274,8 @@ function main(){
   </div>
   ");
 	//load you dang css
-  //commence query                <-- wats this????????????
+  //commence query
+
   $jobQueryResult = mysql_query($jobQuery); 
   
   //make a table
@@ -294,20 +295,19 @@ function main(){
   //create an object for every job
   while ($jobdata = mysql_fetch_assoc($jobQueryResult)) {
 		$job[$jobdata['id']] = new jobs($jobdata['id'],
-																		$jobdata['name'],
-																		$jobdata['description'],
-																		$jobdata['skillcatid'],
-																		$jobdata['status'],
-																		$jobdata['points'],
-																		$jobdata['repeatable'],
-																		$jobdata['limitone'],
-																		$jobdata['claimedby'],
-																		$jobdata['priority'],
-																		$jobdata['bypassLimit']);
+		$jobdata['name'],
+		$jobdata['description'],
+		$jobdata['skillcatid'],
+		$jobdata['status'],
+		$jobdata['points'],
+		$jobdata['repeatable'],
+		$jobdata['limitone'],
+		$jobdata['claimedby'],
+		$jobdata['priority'],
+		$jobdata['bypassLimit']);
 		$job[$jobdata['id']]->printJob();//print the row for a job
 		echo "<script>jobCount++;</script>";
 	}	
-
 	//print the job count to the screen
 	if ($formCheck == "False"){
 		echo("
@@ -318,7 +318,6 @@ function main(){
 	}
   //finish the table
   echo"</table></center>";
-	
 	if (isset($_SESSION['showIgnoredJobs']) && $_SESSION['showIgnoredJobs'] == "False" && $_SESSION['jobsection'] != "3"){
 		echo("
 	<form name='ignoreShow' method='POST'>
