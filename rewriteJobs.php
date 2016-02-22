@@ -288,6 +288,7 @@ function main(){
 				<td><button class='sortRowButts' type='submit' name='sortButt' value='2'>Job Description</button></td>
 				<td><button class='sortRowButts' type='submit' name='sortButt' value='3'>Job Points</button></td>
 				<td><button class='sortRowButts' type='submit' name='sortButt' value='4'>Job Category</button></td>
+				<td><button class='sortRowButts' type='submit' name='sortButt' value='6'>Required Skill</button></td>
 				<td><button class='sortRowButts' type='submit' name='sortButt' value='5'>Claim Status</button></td>
 			</form>
 		</tr>");
@@ -300,6 +301,7 @@ function main(){
 		$jobdata['skillcatid'],
 		$jobdata['status'],
 		$jobdata['points'],
+		$jobdata['requirement_id'],
 		$jobdata['repeatable'],
 		$jobdata['limitone'],
 		$jobdata['claimedby'],

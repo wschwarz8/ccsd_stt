@@ -61,7 +61,7 @@ class jobs{
 					<td style='width:50%;'>". $this->job_Description ."</td>
 					<td style='width:10%;'>". $this->job_Points ."</td>
 					<td style='width:10%;'>". $this->jobCategoryAndNameFunc(1) ."</td>
-					<td style='width:10%;'>". $this->job_skilLCategory ."</td>
+					<td style='width:10%;'>". $this->job_skillCategory ."</td>
 					<td style='width:10%;'><form method='post' name='claimStatForm'>". $this->jobClaimButtsFunc() ."</form></td>
 				</tr>
 			");
