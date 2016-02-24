@@ -183,6 +183,33 @@ function viewsofpage($uncletony){
 		");
 }
 
+	function CheckModel($serial)
+	{
+
+		
+		//string value < 10 then it is a dell
+		
+		if(strlen($serial) < 8)
+		{
+			return "Dell";
+		}
+		
+				//substring value = "Stuff" it is a samsung
+		if(substr($serial, 0,4) == "HY3A")
+		{
+			return "Samsung";
+		}	
+		
+		//subtring value = "Other Stuff" it is a lenovo
+		
+		if(substr($serial, 0,4) == "LR03")
+		{
+			return "Lenovo";
+		}
+		
+	}
+
+
 	//query function
 	function queryFunc($query){
 		//commence query

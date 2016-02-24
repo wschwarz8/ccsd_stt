@@ -52,10 +52,15 @@ function main(){
 				if($jobdata['requirement_id']=='0') { // If they have the skill needed to do the job
 					if ($jobdata['repeatable'] != 1){
 					//make a query to claim a job
-					$claimStatQuery = "UPDATE `jobs` SET `claimedby`=".$_SESSION['loginid']." status=2 WHERE id=" . $_POST['formIdentifier'];
+					$claimStatQuery = "UPDATE `jobs` SET `claimedby`=".$_SESSION['loginid'].", status=2 WHERE id=" . $_POST['formIdentifier'];
 					queryFunc($claimStatQuery);
 					//give a status message
-					$formMessage = "You have Successfully Claimed a Job";
+					if(true) {
+						$formMessage = "You have Successfully Claimed a Job";
+					}
+					else {
+						$formMessage = "Job claim failed!";
+					}
 						
 					}else{
 					//make the duplicate job if its repeatable
@@ -210,6 +215,7 @@ function main(){
   if (isset($_POST['jobsToList']) && $_POST['jobsToList'] == 1){
 		//display all jobs
     $jobQuery="SELECT * FROM jobs ".$_SESSION['sortby'];
+//echo $jobQuery;die;
     echo"<style>.allButt{background:white;color:black;}</style>";
 		$_SESSION['jobsection'] = "1";
 		
@@ -228,6 +234,7 @@ function main(){
 	}else if(isset($_POST['showIgnored']) && $_POST['showIgnored'] == 1){
 		//display all jobs with ignored jobs
     $jobQuery="SELECT * FROM jobs ".$_SESSION['sortby'];
+//echo $jobQuery;die;
     echo"<style>.allButt{background:white;color:black;}</style>";
 		$_SESSION['jobsection'] = "1";
 		$_SESSION['showIgnoredJobs'] = "True";
@@ -235,6 +242,7 @@ function main(){
   }else if(isset($_POST['showIgnored']) && $_POST['showIgnored'] == 2){
 		//display all jobs
 		$jobQuery="SELECT * FROM jobs ".$_SESSION['sortby'];
+//echo $jobQuery;die;
     echo"<style>.allButt{background:white;color:black;}</style>";
 		$_SESSION['jobsection'] = "1";
 		$_SESSION['showIgnoredJobs'] = "False";
@@ -266,7 +274,8 @@ function main(){
   </div>
   ");
 	//load you dang css
-  //commence query                <-- wats this????????????
+  //commence query
+
   $jobQueryResult = mysql_query($jobQuery); 
   
   //make a table
@@ -279,6 +288,7 @@ function main(){
 				<td><button class='sortRowButts' type='submit' name='sortButt' value='2'>Job Description</button></td>
 				<td><button class='sortRowButts' type='submit' name='sortButt' value='3'>Job Points</button></td>
 				<td><button class='sortRowButts' type='submit' name='sortButt' value='4'>Job Category</button></td>
+				<td><button class='sortRowButts' type='submit' name='sortButt' value='6'>Required Skill</button></td>
 				<td><button class='sortRowButts' type='submit' name='sortButt' value='5'>Claim Status</button></td>
 			</form>
 		</tr>");
@@ -286,20 +296,20 @@ function main(){
   //create an object for every job
   while ($jobdata = mysql_fetch_assoc($jobQueryResult)) {
 		$job[$jobdata['id']] = new jobs($jobdata['id'],
-																		$jobdata['name'],
-																		$jobdata['description'],
-																		$jobdata['skillcatid'],
-																		$jobdata['status'],
-																		$jobdata['points'],
-																		$jobdata['repeatable'],
-																		$jobdata['limitone'],
-																		$jobdata['claimedby'],
-																		$jobdata['priority'],
-																		$jobdata['bypassLimit']);
+		$jobdata['name'],
+		$jobdata['description'],
+		$jobdata['skillcatid'],
+		$jobdata['status'],
+		$jobdata['points'],
+		$jobdata['requirement_id'],
+		$jobdata['repeatable'],
+		$jobdata['limitone'],
+		$jobdata['claimedby'],
+		$jobdata['priority'],
+		$jobdata['bypassLimit']);
 		$job[$jobdata['id']]->printJob();//print the row for a job
 		echo "<script>jobCount++;</script>";
 	}	
-
 	//print the job count to the screen
 	if ($formCheck == "False"){
 		echo("
@@ -310,7 +320,6 @@ function main(){
 	}
   //finish the table
   echo"</table></center>";
-	
 	if (isset($_SESSION['showIgnoredJobs']) && $_SESSION['showIgnoredJobs'] == "False" && $_SESSION['jobsection'] != "3"){
 		echo("
 	<form name='ignoreShow' method='POST'>

@@ -36,7 +36,7 @@ if(isset($_POST["username"]) || isset($_POST["password"])) // Happens if someone
 		 }
 		
 	
-		$query = "SELECT * FROM `students` WHERE username='".$_POST['username']."'";
+		$query = "SELECT * FROM `students` WHERE username='".$_POST['username']."' AND active=1";
 		$result = mysql_query($query);
 		$row = mysql_fetch_assoc($result);	
 		
