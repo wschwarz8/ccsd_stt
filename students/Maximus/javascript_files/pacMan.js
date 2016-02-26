@@ -17,14 +17,18 @@ function init() {
   bottomMouthAngle = 2.0;
   lastTrueDirection = "right";
   eyePosition = 12;
+  pacCheck = "False";
   check = "False";
   score = 0;
-  ghostX = gridSize * 11;
-  ghostY = gridSize * 5;
+  ghostX = gridSize * 19;
+  ghostY = gridSize * 2;
   ghostsDirection = "up";
-  
+  maxScore = 11600;
   moveComplete = "True";
   ghostMoveComplete = "True";
+  ghostSpeed = 6.25;//make this a multible of 50. like 2,5,10,25, and even 50 or if using a decimal make sure it adds up evenly to 50
+  ghostLastTrueDirection = "up";
+  debug = "True";
 
   //color variables
   color = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"];
@@ -136,7 +140,7 @@ canvas.beginPath();
 canvas.arc(pacManx + 25, pacMany + eyePosition, 3, 0, 2 * Math.PI, false);
 canvas.fillStyle = "rgb(0, 0, 0)";
 canvas.fill()
-if (play == "True" && check == "True"){
+if (play == "True" && pacCheck == "True"){
 switch (topMouthAngle) {
   case 1.7:
     topMouthAngle = 1.9;
@@ -151,12 +155,73 @@ switch (topMouthAngle) {
     bottomMouthAngle = 2.2;
     break;
 }
+  
 }
 
 canvas.restore();
 
   //draw the ghost
-  canvas.drawImage(texture[5], ghostX, ghostY, gridSize, gridSize);
+  canvas.drawImage(texture[5], ghostX - 40, ghostY - 30, gridSize + 70, gridSize + 70);
+  
+  
+if (debug == "True" && play == "True"){
+  
+  //leftBox  
+  if (leftBox == 1){
+    colorCycle = 0;
+  }else{
+    colorCycle = 3;
+  }
+  if (ghostTurnDirection1 == "left"){
+    colorCycle = 2;
+  }
+
+  canvas.fillStyle = color[colorCycle];
+  canvas.fillRect((ghostxGridPos - 1) * gridSize,ghostyGridPos * gridSize,gridSize,gridSize);
+  
+  //rightBox
+  if (rightBox == 1){
+    colorCycle = 0;
+  }else{
+    colorCycle = 3;
+  }
+  if (ghostTurnDirection1 == "right"){
+    colorCycle = 2;
+  }
+  
+  canvas.fillStyle = color[colorCycle];
+  canvas.fillRect((ghostxGridPos + 1) * gridSize,ghostyGridPos * gridSize,gridSize,gridSize);
+  
+  //topBox
+  if (topBox == 1){
+    colorCycle = 0;
+  }else{
+    colorCycle = 3;
+  }
+  if (ghostTurnDirection2 == "up"){
+    colorCycle = 2;
+  }
+  
+  canvas.fillStyle = color[colorCycle];
+  canvas.fillRect(ghostxGridPos * gridSize,(ghostyGridPos - 1) * gridSize,gridSize,gridSize);
+  
+  //bottomBox
+  if (bottomBox == 1){
+    colorCycle = 0;
+  }else{
+    colorCycle = 3;
+  }
+  if (ghostTurnDirection2 == "down"){
+    colorCycle = 2;
+  }
+  
+  canvas.fillStyle = color[colorCycle];
+  canvas.fillRect(ghostxGridPos * gridSize,(ghostyGridPos + 1) * gridSize,gridSize,gridSize);
+  
+  
+}
+  
+  
   
 }
 //process key events
@@ -260,7 +325,7 @@ function movePacman() {
 
           checkMove();
 
-          if (check == "False"){
+          if (pacCheck == "False"){
             break;
           }
           
@@ -278,7 +343,7 @@ function movePacman() {
 
           checkMove();
 
-          if (check == "False"){
+          if (pacCheck == "False"){
             break;
           }
           
@@ -296,7 +361,7 @@ function movePacman() {
 
           checkMove();
 
-          if (check == "False"){
+          if (pacCheck == "False"){
             break;
           }
           
@@ -314,7 +379,7 @@ function movePacman() {
 
           checkMove();
           
-          if (check == "False"){
+          if (pacCheck == "False"){
             break;
           }
 
@@ -332,7 +397,7 @@ function movePacman() {
           //this shouldnt happen
       }
     }else if(moveComplete == "False"){
-      console.log("at pac move");
+   
       if (pacManx == newPacManx && pacMany == newPacMany){
         moveComplete ="True";
         movePacman();
@@ -378,27 +443,27 @@ function checkMove(){
         case "up":
 
           if (levelRow[yGridPos - 1][xGridPos] == 1){
-                check = "False";
+                pacCheck = "False";
            }else{
-             check = "True";
+             pacCheck = "True";
            }
       
           break;
         case "down":
 
           if (levelRow[yGridPos + 1][xGridPos] == 1){
-                check = "False";
+                pacCheck = "False";
            }else{
-             check = "True";
+             pacCheck = "True";
            }
       
           break;
         case "left":
 
           if (levelRow[yGridPos][xGridPos - 1] == 1){
-                check = "False";
+                pacCheck = "False";
            }else{
-             check = "True";
+             pacCheck = "True";
            }
 
           break;
@@ -406,9 +471,9 @@ function checkMove(){
       
           
           if (levelRow[yGridPos][xGridPos + 1] == 1){
-               check = "False";
+               pacCheck = "False";
            }else{
-             check = "True";
+             pacCheck = "True";
            }
           
         default:
@@ -421,100 +486,299 @@ function checkMove(){
       levelRowItem[yGridPos][xGridPos] = 0;
     score = score + 100;
     document.getElementById('score').innerHTML = "Score: " + score;
+    
+  }else if(ghostX == pacManx && ghostY == pacMany){
+    play = "Winner";
+    console.log("The Ghost win");
+    
+  }
+  
+  if(score == maxScore){
+    play = "Winner";
+    console.log("The pacman wins");
+    
   }
 
 }
 
 
 
-function moveGhost(){
+function moveGhost(){//messy and probaly could be done very differenty and maybe efficently
   
+  
+  //to fix ai i need to find all possible ways the ghost could move and eliminate the options that walls are in the way.
+  //then i need to choose the path that will let the ghosts move without turning backwards and get it closer if possible but
+  //if i cant it takes a longer path to get closer
   
   if (play == "True"){
     // locate the ghost and pacman
 
-    pacxGridPos = (pacManx/gridSize);
-    pacyGridPos = (pacMany/gridSize);
+    if (ghostMoveComplete == "True"){
+      
+      
+      pacxGridPos = (pacManx/gridSize);
+      pacyGridPos = (pacMany/gridSize);
 
-    ghostxGridPos = (ghostX/gridSize);
-    ghostyGridPos = (ghostY/gridSize);
+      ghostxGridPos = (ghostX/gridSize);
+      ghostyGridPos = (ghostY/gridSize);
+      
+      //assign some varibles
+      leftBox = levelRow[ghostyGridPos][ghostxGridPos - 1];
+      rightBox = levelRow[ghostyGridPos][ghostxGridPos + 1];
+      topBox = levelRow[ghostyGridPos - 1][ghostxGridPos];
+      bottomBox = levelRow[ghostyGridPos + 1][ghostxGridPos];
+      
+      //find the perfered direction///
+      
+      //deterimine if its left or right
+      if (ghostxGridPos > pacxGridPos){
 
-    //find the ghost location compared to the pacman ----- >       up - down        right - left
+        ghostTurnDirection1 = "left";
 
-    //deterimine if its left or right
-    if (ghostxGridPos > pacxGridPos){
+      }else if(ghostxGridPos < pacxGridPos){
 
-      ghostTurnDirection1 = "left";
+        ghostTurnDirection1 = "right";
 
-    }else if(ghostxGridPos < pacxGridPos){
+      }else{
+        ghostTurnDirection1 = "niether";
+      }
 
-      ghostTurnDirection1 = "right";
+      //determine if its up or down
+      if (ghostyGridPos > pacyGridPos){
 
-    }else{
-      ghostTurnDirection1 = "neither";
-    }
+        ghostTurnDirection2 = "up";
 
-    //determine if its up or down
-    if (ghostyGridPos > pacyGridPos){
+      }else if(ghostyGridPos < pacyGridPos){
 
-      ghostTurnDirection2 = "down";
+        ghostTurnDirection2 = "down";
 
-    }else if(ghostyGridPos < pacyGridPos){
-
-      ghostTurnDirection2 = "up";
-
-    }else{
-      ghostTurnDirection2 = "neither";
-    }
-    
-    
-   switch(ghostsDirection){
-       case "up":
-       
+      }else{
+        ghostTurnDirection2 = "niether";
+      }
+      
+      
+      
+      //decide the direction
+      switch(ghostLastTrueDirection){
+        case "up"://ghost is currently going up so it can turn either left, right or stay the same
+          
+          //check what direction is perfered ---- their will be two
           if (ghostTurnDirection1 == "left"){
-            ghostsDirection = "left";
-          }else if (ghostTurnDirection1 == "right"){
-            ghostsDirection = "right";
+            
+            if (leftBox == 1){//check if the direction is eliggible
+              
+              if (topBox == 1){
+                ghostsDirection = "right";
+              }
+              
+              break;//stop checks if you get in here
+              
+            }else{//no obsticle then turn
+              
+              ghostsDirection = "left";
+            }
+            
+          }else if(ghostTurnDirection1 == "right"){
+            
+            if (rightBox == 1){//check if the direction is eliggible
+              
+              if (topBox == 1){
+                ghostsDirection = "left";
+              }
+              
+              break;//stop checks if you get in here
+              
+            }else{//no obsticle then turn
+              
+              ghostsDirection = "right";
+            }
+            
+          }else if(ghostTurnDirection1 == "niether"){
+            //check if the next direction is valid
+            if (topBox == 1){
+              
+             
+                if (rightBox == 1){
+                  ghostsDirection = "left";
+                }else if (leftBox == 1){
+                  ghostsDirection = "right";
+                }
+                
+  
+            }//end of continue check
+            
+            break;//dont change the direction
           }
-       
-       break;
-     case "down":
+          
+          break;
+        case "down":
 
+          
+          //check what direction is perfered ---- their will be two
           if (ghostTurnDirection1 == "left"){
-            ghostsDirection = "left";
-          }else if (ghostTurnDirection1 == "right"){
-            ghostsDirection = "right";
-          }
-       
-       break;
-     case "left":
-       
-          if (ghostTurnDirection2 == "down"){
-            ghostsDirection = "down";
-          }else if (ghostTurnDirection2 == "up"){
-            ghostsDirection = "up";
-          }
-       
-       break;
-     case "right":
-       
-       if (ghostTurnDirection2 == "up"){
-            ghostsDirection = "up";
-          }else if (ghostTurnDirection2 == "down"){
-            ghostsDirection = "down";
-          }
-       
-       break;
-     default:
-       
-   }
+            
+            if (leftBox == 1){//check if the direction is eliggible
+              
+              if (bottomBox == 1){
+                ghostsDirection = "right";
+              }
+              
+              break;//stop checks if you get in here
+              
+            }else{//no obsticle then turn
+              
+              ghostsDirection = "left";
+            }
+            
+          }else if(ghostTurnDirection1 == "right"){
+            
+            if (rightBox == 1){//check if the direction is eliggible
+              
+              if (bottomBox == 1){
+                ghostsDirection = "left";
+              }
+              
+              break;//stop checks if you get in here
+              
+            }else{//no obsticle then turn
+              
+              ghostsDirection = "right";
+            }
+            
+          }else if(ghostTurnDirection1 == "niether"){
+            
+            //check if the next direction is valid
+            if (bottomBox == 1){
+              
+                if (rightBox == 1){
+                  ghostsDirection = "left";
+                }else if (leftBox == 1){
+                  ghostsDirection = "right";
+                }
+                
 
+            }//end of continue check
+            
+            break;//dont change the direction
+          }
+          
+          
+          break;
+        case "left":
+          
+          
+          //check what direction is perfered ---- their will be two
+          if (ghostTurnDirection2 == "up"){
+            
+            if (topBox == 1){//check if the direction is eliggible
+              
+              if (leftBox == 1){
+                ghostsDirection = "down";
+              }
+              
+              break;//stop checks if you get in here
+              
+            }else{//no obsticle then turn
+              
+              ghostsDirection = "up";
+            }
+            
+          }else if(ghostTurnDirection2 == "down"){
+            
+            if (bottomBox == 1){//check if the direction is eligible
+              
+              if (leftBox == 1){
+                ghostsDirection = "right";
+              }
+              
+              break;//stop checks if you get in here
+              
+            }else{//no obsticle then turn
+              
+              ghostsDirection = "down";
+            }
+            
+          }if(ghostTurnDirection2 == "niether"){
+            
+            //check if the next direction is valid
+            if (leftBox == 1){
+              
 
-    //determine what direction he should turn
-    //stuff
+                if (topBox == 1){
+                  ghostsDirection = "down";
+                }else if (bottomBox == 1){
+                  ghostsDirection = "up";
+                }
+                
+ 
+            }//end of continue check
+            
+            break;//dont change the direction
+          }
+          
+          
+          break;
+        case "right":
+          
+          //check what direction is perfered ---- their will be two
+          if (ghostTurnDirection2 == "up"){
+            
+            if (topBox == 1){//check if the direction is eligible
+              
+              if (rightBox == 1){
+                ghostsDirection = "down";
+              }
+              
+              break;//stop checks if you get in here
+              
+            }else{//no obsticle then turn
+              
+              ghostsDirection = "up";
+            }
+            
+          }else if(ghostTurnDirection2 == "down"){
+            
+            if (bottomBox == 1){//check if the direction is eliggible
+              
+              if (rightBox == 1){
+                ghostsDirection = "right";
+              }
+              
+              break;//stop checks if you get in here
+              
+            }else{//no obsticle then turn
+              
+              ghostsDirection = "down";
+            }
+            
+          }if(ghostTurnDirection2 == "niether"){
+            
+            //check if the next direction is valid
+            if (rightBox == 1){
+              
+  
+                if (topBox == 1){
+                  ghostsDirection = "down";
+                }else if (bottomBox == 1){
+                  ghostsDirection = "up";
+                }
+                
+
+            }//end of continue check
+            
+            break;//dont change the direction
+          }
+          
+          break;
+   
+      }
+      
+    }
     
     
-    //move
+    
+    
+    //move the ghost
 
     if (ghostMoveComplete == "True"){
     
@@ -522,58 +786,40 @@ function moveGhost(){
       switch(ghostsDirection){
           case "up":
 
-             checkGhostMove();
-
-             if (check == "False"){
-               break;
-             }
-
 
             //calculate new pack man position
             newGhosty = ghostY - gridSize;
             newGhostx = ghostX;
 
-            ghostY = ghostY - 10;
+            ghostY = ghostY - ghostSpeed;
 
             ghostLastTrueDirection = "up";
 
             ghostMoveComplete = "False";
 
             break;
-          case "down":
-
-             checkGhostMove();
-
-             if (check == "False"){
-               break;
-             }
+        case "down":
 
 
             //calculate new pack man position
             newGhosty = ghostY + gridSize;
             newGhostx = ghostX;
 
-            ghostY = ghostY + 10;
+            ghostY = ghostY + ghostSpeed;
 
             ghostLastTrueDirection = "down";
 
             ghostMoveComplete = "False";
           
             break;
-          case "left":
-          
-             checkGhostMove();
-
-             if (check == "False"){
-               break;
-             }
+        case "left":
 
 
             //calculate new pack man position
             newGhostx = ghostX - gridSize;
             newGhosty = ghostY;
 
-            ghostX = ghostX - 10;
+            ghostX = ghostX - ghostSpeed;
 
             ghostLastTrueDirection = "left";
 
@@ -581,19 +827,12 @@ function moveGhost(){
           
             break;
           case "right":
-          
-             checkGhostMove();
-
-             if (check == "False"){
-               break;
-             }
-
 
             //calculate new pack man position
             newGhostx = ghostX + gridSize;
             newGhosty = ghostY;
 
-            ghostX = ghostX + 10;
+            ghostX = ghostX + ghostSpeed;
 
             ghostLastTrueDirection = "right";
 
@@ -608,7 +847,7 @@ function moveGhost(){
       
       if (ghostX == newGhostx && ghostY == newGhosty){
         
-          console.log("in test");
+         
         
         ghostMoveComplete = "True";
         moveGhost();
@@ -618,21 +857,21 @@ function moveGhost(){
         switch (ghostLastTrueDirection) {
         case "up":
 
-          ghostY = ghostY - 10;
+          ghostY = ghostY - ghostSpeed;
        
           break;
         case "down":
 
-          ghostY = ghostY + 10;
+          ghostY = ghostY + ghostSpeed;
           break;
         case "left":
 
-          ghostX = ghostX - 10;
+          ghostX = ghostX - ghostSpeed;
 
           break;
         case "right":
 
-          ghostX = ghostX + 10;
+          ghostX = ghostX + ghostSpeed;
 
           
         default:
@@ -647,52 +886,5 @@ function moveGhost(){
   
 }//end of function
 
-function checkGhostMove() {
-  
-  
-  //find coordinate position
-  xGridPos = (ghostX/gridSize);
-  yGridPos = (ghostY/gridSize);
-  
-  //check collision
-  switch (ghostsDirection) {
-        case "up":
 
-          if (levelRow[yGridPos - 1][xGridPos] == 1){
-                check = "False";
-           }else{
-             check = "True";
-           }
-      
-          break;
-        case "down":
 
-          if (levelRow[yGridPos + 1][xGridPos] == 1){
-                check = "False";
-           }else{
-             check = "True";
-           }
-      
-          break;
-        case "left":
-
-          if (levelRow[yGridPos][xGridPos - 1] == 1){
-                check = "False";
-           }else{
-             check = "True";
-           }
-
-          break;
-        case "right":
-      
-          
-          if (levelRow[yGridPos][xGridPos + 1] == 1){
-               check = "False";
-           }else{
-             check = "True";
-           }
-          
-        default:
-          //this shouldnt happen
-      }
-}
