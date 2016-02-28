@@ -28,7 +28,12 @@ function init() {
   ghostMoveComplete = "True";
   ghostSpeed = 6.25;//make this a multible of 50. like 2,5,10,25, and even 50 or if using a decimal make sure it adds up evenly to 50
   ghostLastTrueDirection = "up";
-  debug = "True";
+  debug = "False";
+  flashCycle = 0;
+  gradx1 = 0;
+  gradx2 = 0;
+  gradx3 = 1050;
+  gradx4 = 0;
 
   //color variables
   color = ["Red", "Orange", "Yellow", "Green", "Blue", "Purple"];
@@ -67,6 +72,13 @@ function gameLoop() {
 
 function draw(){
   
+  flashCycle++;
+  
+  //gradx1 = gradx1 + 1;
+  //gradx2 = gradx2 + 2;
+  //gradx3 = gradx3 + 3;
+  //gradx4 = gradx4 + 4;
+  
   //draw background
   canvas.fillStyle = "#804000";
   canvas.fillRect(0, 0, 1050, 600);
@@ -82,12 +94,45 @@ function draw(){
 
     for (b = 0; b < 21; b++) {
       
-      //draw background images
-      canvas.drawImage(texture[levelRow[i][b]], x, y,gridSize,gridSize);
 
+      if (levelRow[i][b] == 1){
+        
+        var gradient = canvas.createLinearGradient(gradx1,gradx2,gradx3,gradx4);
+        gradient.addColorStop("0","magenta");
+        gradient.addColorStop("0.5","blue");
+        gradient.addColorStop("1.0","red");
+
+        // Fill with gradient
+        canvas.fillStyle=gradient;
+        
+        canvas.fillRect(x,y,gridSize,gridSize);
+        
+      }else if (levelRow[i][b] == 0){
+        
+        canvas.fillStyle = "black";
+        canvas.fillRect(x,y,gridSize,gridSize);
+        
+      }
+      
       //draw any food or power up dots
-      if (levelRowItem[i][b] == 3 || levelRowItem[i][b] == 4){
-        canvas.drawImage(texture[levelRowItem[i][b]], x, y,gridSize,gridSize);
+      if (levelRowItem[i][b] == 3){
+        
+        canvas.beginPath();
+        canvas.arc(x + (gridSize/2),y + (gridSize/2),3,0,2 * Math.PI);
+        canvas.fillStyle = "tan";
+        canvas.fill();
+        
+      } else if (levelRowItem[i][b] == 4){
+        
+        canvas.beginPath();
+        canvas.arc(x + (gridSize/2),y + (gridSize/2),7,0,2 * Math.PI);
+        
+        if (flashCycle < 4){
+          canvas.fillStyle = "tan";
+          canvas.fill();
+        }
+        
+        
       }
       
       
@@ -138,7 +183,7 @@ canvas.strokeStyle = "Yellow";
 canvas.stroke();
 canvas.beginPath();
 canvas.arc(pacManx + 25, pacMany + eyePosition, 3, 0, 2 * Math.PI, false);
-canvas.fillStyle = "rgb(0, 0, 0)";
+canvas.fillStyle = "black";
 canvas.fill()
 if (play == "True" && pacCheck == "True"){
 switch (topMouthAngle) {
@@ -161,7 +206,108 @@ switch (topMouthAngle) {
 canvas.restore();
 
   //draw the ghost
-  canvas.drawImage(texture[5], ghostX - 40, ghostY - 30, gridSize + 70, gridSize + 70);
+  //canvas.drawImage(texture[5], ghostX - 40, ghostY - 30, gridSize + 70, gridSize + 70);
+  
+  canvas.fillStyle = "red";
+  //main body
+  canvas.fillRect(ghostX + 8,ghostY + 14,gridSize-16,gridSize-26);
+  canvas.beginPath();
+  //head
+  canvas.arc(ghostX + (gridSize/2),ghostY + ((gridSize/2) - 6),17,0,2 * Math.PI);
+  canvas.fill();
+  //tenticals
+  if (flashCycle < 4){
+    canvas.save();
+    
+    canvas.translate(ghostX,ghostY);
+    canvas.rotate(45 * Math.PI/180);
+    
+    //tenticals
+    canvas.fillRect(33,13,8,8);
+    
+    canvas.fillRect(41,5,8,8);
+    
+    canvas.fillRect(49,-3,8,8);
+    
+    canvas.restore();
+  }else{
+    
+    canvas.save();
+    
+    canvas.translate(ghostX,ghostY);
+    canvas.rotate(45 * Math.PI/180);
+    
+    //tenticals
+    canvas.fillRect(29,17,8,8);
+    
+    canvas.fillRect(37,9,8,8);
+    
+    canvas.fillRect(45,1,8,8);
+    
+    canvas.fillRect(53,-7,8,8);
+    
+    canvas.rotate(45 * Math.PI/180);
+    
+    canvas.fillStyle = "black";
+    
+    canvas.fillRect(29,-8,20,8);
+    
+    canvas.fillRect(29,-49,20,7);
+    
+    canvas.restore();
+    
+  }
+  
+  canvas.fillStyle = "White";
+  canvas.beginPath();
+  canvas.arc(ghostX + 18,ghostY + 15,5,0,2*Math.PI);
+  canvas.fill();
+  
+   canvas.beginPath();
+  canvas.arc(ghostX + 31,ghostY + 15,5,0,2*Math.PI);
+  canvas.fill();
+  
+  if (ghostsDirection == "up"){
+    
+    canvas.fillStyle = "Blue";
+    canvas.beginPath();
+    //pupils
+    canvas.arc(ghostX + 18,ghostY + 13,3,0,2*Math.PI);
+    canvas.fill();
+    canvas.arc(ghostX + 31,ghostY + 13,3,0,2*Math.PI);
+    canvas.fill();
+    
+  }else if (ghostsDirection == "down"){
+    
+    canvas.fillStyle = "Blue";
+    canvas.beginPath();
+    //pupils
+    canvas.arc(ghostX + 18,ghostY + 17,3,0,2*Math.PI);
+    canvas.fill();
+    canvas.arc(ghostX + 31,ghostY + 17,3,0,2*Math.PI);
+    canvas.fill();
+    
+  }else if (ghostsDirection == "left"){
+    
+    canvas.fillStyle = "Blue";
+    canvas.beginPath();
+    //pupils
+    canvas.arc(ghostX + 16,ghostY + 15,3,0,2*Math.PI);
+    canvas.fill();
+    canvas.arc(ghostX + 29,ghostY + 15,3,0,2*Math.PI);
+    canvas.fill();
+    
+  }else if (ghostsDirection == "right"){
+    
+    canvas.fillStyle = "Blue";
+    canvas.beginPath();
+    //pupils
+    canvas.arc(ghostX + 20,ghostY + 15,3,0,2*Math.PI);
+    canvas.fill();
+    canvas.arc(ghostX + 33,ghostY + 15,3,0,2*Math.PI);
+    canvas.fill();
+    
+  }
   
   
 if (debug == "True" && play == "True"){
@@ -222,7 +368,9 @@ if (debug == "True" && play == "True"){
 }
   
   
-  
+ if (flashCycle == 6){
+   flashCycle = 0;
+ } 
 }
 //process key events
 function keydownfunc() {
@@ -885,6 +1033,3 @@ function moveGhost(){//messy and probaly could be done very differenty and maybe
   }//endif for play
   
 }//end of function
-
-
-
