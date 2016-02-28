@@ -11,8 +11,8 @@ function init() {
   play = "False";
   direction = "none";
   gridSize = 50;
-  pacManx = gridSize;
-  pacMany = gridSize;
+  pacManx = gridSize * 10;
+  pacMany = gridSize * 7;
   topMouthAngle = 1.7;
   bottomMouthAngle = 2.0;
   lastTrueDirection = "right";
@@ -20,10 +20,10 @@ function init() {
   pacCheck = "False";
   check = "False";
   score = 0;
-  ghostX = gridSize * 19;
-  ghostY = gridSize * 2;
+  ghostX = gridSize * 10;
+  ghostY = gridSize * 5;
   ghostsDirection = "up";
-  maxScore = 11600;
+  maxScore = 12100;
   moveComplete = "True";
   ghostMoveComplete = "True";
   ghostSpeed = 6.25;//make this a multible of 50. like 2,5,10,25, and even 50 or if using a decimal make sure it adds up evenly to 50
@@ -107,7 +107,7 @@ function draw(){
         
         canvas.fillRect(x,y,gridSize,gridSize);
         
-      }else if (levelRow[i][b] == 0){
+      }else if (levelRow[i][b] == 0 || levelRow[i][b] == 3 || levelRow[i][b] == 10){
         
         canvas.fillStyle = "black";
         canvas.fillRect(x,y,gridSize,gridSize);
@@ -115,14 +115,14 @@ function draw(){
       }
       
       //draw any food or power up dots
-      if (levelRowItem[i][b] == 3){
+      if (levelRow[i][b] == 0){
         
         canvas.beginPath();
         canvas.arc(x + (gridSize/2),y + (gridSize/2),3,0,2 * Math.PI);
         canvas.fillStyle = "tan";
         canvas.fill();
         
-      } else if (levelRowItem[i][b] == 4){
+      } else if (levelRow[i][b] == 3){
         
         canvas.beginPath();
         canvas.arc(x + (gridSize/2),y + (gridSize/2),7,0,2 * Math.PI);
@@ -144,6 +144,25 @@ function draw(){
 
   }
 
+  //title and score
+  canvas.font = "50px Georgia";
+  canvas.fillStyle = "Yellow";
+  canvas.fillText("PacMan!", 425,45);
+  
+  if (play == "False" ){
+    canvas.font = "30px Georgia";
+    canvas.fillStyle = "red";
+    canvas.fillText("Press Enter to Play!", 395,185);
+  }else if(play == "pac"){
+    canvas.font = "30px Georgia";
+    canvas.fillStyle = "red";
+    canvas.fillText("You Win!!", 455,185);
+  }else if(play == "ghost"){
+    canvas.font = "30px Georgia";
+    canvas.fillStyle = "red";
+    canvas.fillText("The Ghost Win :(", 410,185);
+  }
+  
 
   canvas.save();
   
@@ -630,19 +649,19 @@ function checkMove(){
   
   
   //check food/powerup
-  if (levelRowItem[yGridPos][xGridPos] == 3 || levelRowItem[yGridPos][xGridPos] == 4){
-      levelRowItem[yGridPos][xGridPos] = 0;
+  if (levelRow[yGridPos][xGridPos] == 0 || levelRow[yGridPos][xGridPos] == 3){
+      levelRow[yGridPos][xGridPos] = 10;
     score = score + 100;
     document.getElementById('score').innerHTML = "Score: " + score;
     
   }else if(ghostX == pacManx && ghostY == pacMany){
-    play = "Winner";
+    play = "ghost";
     console.log("The Ghost win");
     
   }
   
   if(score == maxScore){
-    play = "Winner";
+    play = "pac";
     console.log("The pacman wins");
     
   }
