@@ -31,6 +31,7 @@ function init() {
 
   //timing variables
   flashCycle = 0;
+  frameCount = 0;
 
   //background gradient variables
   gradx1 = 0;
@@ -60,13 +61,14 @@ function startStuff() {
 
 
 function gameLoop() {
-
+if (play == "True"){
+  frameCount++;
   //move pacman
   movePacman();
 
   //move ghost
   moveGhost();
-
+}
   //draw
   draw();
 }
@@ -147,7 +149,7 @@ function keydownfunc() {
 
       if (play == "True") {
         play = "False";
-      } else {
+      } else if (play == "False") {
         play = "True";
       }
 
@@ -332,16 +334,22 @@ function checkMove() {
     levelRow[yGridPos][xGridPos] = 10;
     score = score + 100;
 
-  } else if (ghostX == pacManx && ghostY == pacMany) {
-    play = "ghost";
-    console.log("The Ghost win");
-
   }
 
   if (score == maxScore) {
     play = "pac";
     console.log("The pacman wins");
 
+  }
+  
+  for (i = 0; i < ghostCount; i++){
+    
+    if (Math.abs(ghostX[i] - pacManx) < 25 && Math.abs(ghostY[i] - pacMany) < 25){
+      
+      play = "ghost";
+      
+    }
+    
   }
 
 }
@@ -355,7 +363,7 @@ function moveGhost() { //AI M3
 
     for (i = 0; i < ghostCount; i++) {
 
-      if (ghostMoveComplete[i] == "True") {
+      if (ghostMoveComplete[i] == "True" && frameCount > ghostTimer[i]) {
 
 
         pacxGridPos = (pacManx / gridSize);
@@ -632,7 +640,7 @@ function moveGhost() { //AI M3
 
     //move the ghost
 
-    if (ghostMoveComplete[i] == "True") {
+    if (ghostMoveComplete[i] == "True" && frameCount > ghostTimer[i]) {
 
       //determine the current directine
       switch (ghostsDirection[i]) {
@@ -695,7 +703,7 @@ function moveGhost() { //AI M3
 
       }
 
-    } else if (ghostMoveComplete[i] == "False") {
+    } else if (ghostMoveComplete[i] == "False" && frameCount > ghostTimer[i]) {
 
       if (ghostX[i] == newGhostx[i] && ghostY[i] == newGhosty[i]) {
 

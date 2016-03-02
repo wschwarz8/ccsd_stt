@@ -57,6 +57,8 @@ function lvl1(){
   ghostsDirection = [];
   ghostLastTrueDirection = [];
   ghostSpeed = [];
+  ghostTimer = [];
+  ghostTimer = [0,100,300,400];
   ghost = [0,1,2,3];//this determines different AI Pattern
   ghostX = [(gridSize * 10), (gridSize * 10), (gridSize * 11), (gridSize * 9)];
   ghostY = [(gridSize * 4), (gridSize * 5), (gridSize * 5), (gridSize * 5)];
@@ -64,7 +66,7 @@ function lvl1(){
   ghostLastTrueDirection = ["up","up","left","right"];
   ghostSpeed = [6.25,6.25,6.25,6.25];//make this a multible of 50. like 2,5,10,25, and even 50 or if using a decimal make sure it adds up evenly to 50
   ghostColor = [];
-  ghostColor = ["red","lightblue","green","yellow"];
+  ghostColor = ["red","lightblue","pink","yellow"];
   ghostMoveComplete = [];
   ghostMoveComplete = ["True","True","True","True"];
   newGhostx = [];
