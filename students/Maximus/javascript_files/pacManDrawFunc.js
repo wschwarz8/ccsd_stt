@@ -9,7 +9,7 @@ function draw(){
   //gradx4 = gradx4 + 4;
   
   //draw background
-  canvas.fillStyle = "#804000";
+  canvas.fillStyle = "silver";
   canvas.fillRect(0, 0, 1050, 600);
 
 
@@ -18,11 +18,11 @@ function draw(){
   y = 0;
 
   //loop through each row
-  for (i = 0; i < 12; i++) {
+  for (i = 0; i < 20; i++) {
 
     x = 0;
     //loop through each coulumn
-    for (b = 0; b < 21; b++) {
+    for (b = 0; b < 35; b++) {
       
        //print walls
       if (levelRow[i][b] == 1){
@@ -78,28 +78,28 @@ function draw(){
   }
 
   //title and score
-  canvas.font = "50px Georgia";
+  canvas.font = gridSize + "px Georgia";
   canvas.fillStyle = "Yellow";
-  canvas.fillText("PacMan!", 425,45);
+  canvas.fillText("PacMan!", (gridSize * 16) - (gridSize/2),(gridSize*1) - (gridSize/4));
   
   //print different status messages
   if (play == "False" ){//press enter to play
     
-    canvas.font = "30px Georgia";
+    canvas.font = gridSize + "px Georgia";
     canvas.fillStyle = "red";
-    canvas.fillText("Press Enter to Play!", 395,185);
+    canvas.fillText("Press Enter to Play!", gridSize * 13,(gridSize * 9) - (gridSize/4));
     
   }else if(play == "pac"){//win message
     
     canvas.font = "30px Georgia";
     canvas.fillStyle = "red";
-    canvas.fillText("You Win!!", 455,185);
+    canvas.fillText("You Win!!", gridSize * 13,(gridSize * 9) - (gridSize/4));
     
   }else if(play == "ghost"){//ghost win message
     
-    canvas.font = "30px Georgia";
+    canvas.font = gridSize + "px Georgia";
     canvas.fillStyle = "red";
-    canvas.fillText("The Ghost Win :(", 410,185);
+    canvas.fillText("The Ghosts Win :(", gridSize * 13,(gridSize * 9) - (gridSize/4));
   }
   
 //save canvas due to rotations that may happen
@@ -108,25 +108,25 @@ function draw(){
   //determine which orientation pacman should be printed in
   switch (lastTrueDirection) {
   case "up":
-      canvas.translate(pacManx,pacMany);
-      eyePosition=12;
+      canvas.translate(pacManx,pacMany + gridSize);
+      
       canvas.rotate(-Math.PI / 2);
-      canvas.translate(-pacManx-50,-pacMany);
+
     break;
   case "down":
-      canvas.translate(pacManx,pacMany);
-      eyePosition=12;
+      canvas.translate(pacManx + gridSize,pacMany);
+      
       canvas.rotate(Math.PI / 2);
-      canvas.translate(-pacManx,-pacMany-50);
+
     break;
   case "left":
-      canvas.translate(pacManx,pacMany);
-      eyePosition=39;
+      canvas.translate(pacManx + gridSize,pacMany + gridSize);
+      
       canvas.rotate(-Math.PI);
-      canvas.translate(-pacManx-50,-pacMany-50);
+      
     break;
   case "right":
-      eyePosition=12;
+      canvas.translate(pacManx,pacMany);
     break;
   default:
     //shouldnt happen
@@ -135,31 +135,30 @@ function draw(){
 
 
 //draw pacman
-canvas.beginPath();
-canvas.lineWidth = 19;
-canvas.arc(pacManx + 25, pacMany + 25, 9, Math.PI * bottomMouthAngle, Math.PI * topMouthAngle, false);
-canvas.strokeStyle = "Yellow";
-canvas.stroke();
-canvas.beginPath();
-canvas.arc(pacManx + 25, pacMany + eyePosition, 3, 0, 2 * Math.PI, false);
-canvas.fillStyle = "black";
-canvas.fill()
+  
+canvas.beginPath();//top
+canvas.arc((gridSize/2),(gridSize/2), (gridSize/2) - (gridSize * (1/10)), topMouthAngle, Math.PI * 1.07);
+canvas.fillStyle = "Yellow";
+canvas.fill();
+  
+canvas.beginPath();//bottom
+canvas.arc((gridSize/2),(gridSize/2), (gridSize/2) - (gridSize * (1/10)), -Math.PI * 1.07,-bottomMouthAngle);
+canvas.fillStyle = "Yellow";
+canvas.fill();
+
 
 //decide the mouth angle
 if (play == "True" && pacCheck == "True"){
 switch (topMouthAngle) {
-  case 1.7:
-    topMouthAngle = 1.9;
-    bottomMouthAngle = 2;
+  case 0:
+    topMouthAngle = Math.PI/6;
+    bottomMouthAngle = Math.PI/6;
     break;
-  case 1.9:
-    topMouthAngle = 2;
-    bottomMouthAngle = 2.1;
+  case Math.PI/6:
+    topMouthAngle = 0;
+    bottomMouthAngle = 0;
     break;
-  case 2:
-    topMouthAngle = 1.7;
-    bottomMouthAngle = 2.2;
-    break;
+
 }
   
 }
@@ -170,51 +169,78 @@ canvas.restore();
   //draw the ghost
 
   for (i = 0; i < ghostCount; i++){
+    
   canvas.fillStyle = ghostColor[i];
-  //main body
-  canvas.fillRect(ghostX[i] + 8,ghostY[i] + 14,gridSize-16,gridSize-26);
+    
+  //main body 
+  canvas.fillRect(ghostX[i] + (gridSize * (1.5/10)),ghostY[i] + (gridSize * (3/10)),gridSize - (gridSize * (3/10)),gridSize - (gridSize * (5/10)));
   canvas.beginPath();
   //head
-  canvas.arc(ghostX[i] + (gridSize/2),ghostY[i] + ((gridSize/2) - 6),17,0,2 * Math.PI);
+  canvas.arc(ghostX[i] + (gridSize/2),ghostY[i] + ((gridSize/2) - (gridSize * (1/10))),gridSize/2 - (gridSize * (1.5/10)),0,2 * Math.PI);
   canvas.fill();
   //tenticals
   if (flashCycle < 4){
     canvas.save();
     
-    canvas.translate(ghostX[i],ghostY[i]);
+    canvas.translate(ghostX[i] + (gridSize * (1/20)),ghostY[i]);
     canvas.rotate(45 * Math.PI/180);
     
     //tenticals
-    canvas.fillRect(33,13,8,8);
+    canvas.fillRect(gridSize - (gridSize/gridSize),0,(gridSize/4) - (gridSize/10),(gridSize/4) - (gridSize/10));
     
-    canvas.fillRect(41,5,8,8);
+    canvas.rotate(-45 * Math.PI/180);
+    canvas.translate(-((gridSize/3) - (gridSize/10)),0);
+    canvas.rotate(45 * Math.PI/180);
     
-    canvas.fillRect(49,-3,8,8);
+    canvas.fillRect(gridSize - (gridSize/gridSize),0,(gridSize/4) - (gridSize/10),(gridSize/4) - (gridSize/10));
+   
+    canvas.rotate(-45 * Math.PI/180);
+    canvas.translate(-((gridSize/3) - (gridSize/10)),0);
+    canvas.rotate(45 * Math.PI/180);
     
+    canvas.fillRect(gridSize - (gridSize/gridSize),0,(gridSize/4) - (gridSize/10),(gridSize/4) - (gridSize/10));
+  
     canvas.restore();
   }else{
     
     canvas.save();
     
-    canvas.translate(ghostX[i],ghostY[i]);
+    canvas.translate(ghostX[i] + (gridSize * (3/20)),ghostY[i]);
     canvas.rotate(45 * Math.PI/180);
     
     //tenticals
-    canvas.fillRect(29,17,8,8);
+    canvas.fillRect(gridSize - (gridSize/gridSize),0,(gridSize/4) - (gridSize/10),(gridSize/4) - (gridSize/10));
     
-    canvas.fillRect(37,9,8,8);
-    
-    canvas.fillRect(45,1,8,8);
-    
-    canvas.fillRect(53,-7,8,8);
-    
+    canvas.rotate(-45 * Math.PI/180);
+    canvas.translate(-((gridSize/3) - (gridSize/10)),0);
     canvas.rotate(45 * Math.PI/180);
     
+    canvas.fillRect(gridSize - (gridSize/gridSize),0,(gridSize/4) - (gridSize/10),(gridSize/4) - (gridSize/10));
+   
+    canvas.rotate(-45 * Math.PI/180);
+    canvas.translate(-((gridSize/3) - (gridSize/10)),0);
+    canvas.rotate(45 * Math.PI/180);
+    
+    canvas.fillRect(gridSize - (gridSize/gridSize),0,(gridSize/4) - (gridSize/10),(gridSize/4) - (gridSize/10));
+  
+    canvas.rotate(-45 * Math.PI/180);
+    canvas.translate(-((gridSize/3) - (gridSize/10)),0);
+    canvas.rotate(45 * Math.PI/180);
+    
+    canvas.fillRect(gridSize - (gridSize/gridSize),0,(gridSize/4) - (gridSize/10),(gridSize/4) - (gridSize/10));
+  
+    
+    canvas.restore();
+    canvas.save();
+    
+
+    canvas.translate(ghostX[i] + (gridSize * (1/20)),ghostY[i]);
+
     canvas.fillStyle = "black";
     
-    canvas.fillRect(29,-8,20,8);
+    canvas.fillRect(0 - (gridSize/20),gridSize - (gridSize/3),(gridSize/4) - (gridSize/10),(gridSize/4));
     
-    canvas.fillRect(29,-49,20,7);
+    canvas.fillRect((gridSize * (1/10)) + gridSize - (gridSize * (3/10)),gridSize - (gridSize/3),(gridSize/4) - (gridSize/10),(gridSize/4));
     
     canvas.restore();
     
@@ -222,11 +248,11 @@ canvas.restore();
   
   canvas.fillStyle = "White";
   canvas.beginPath();
-  canvas.arc(ghostX[i] + 18,ghostY[i] + 15,5,0,2*Math.PI);
+  canvas.arc(ghostX[i] + (gridSize * (1/3)),ghostY[i] + (gridSize * (1/3)),(gridSize * (1/8)),0,2*Math.PI);
   canvas.fill();
   
    canvas.beginPath();
-  canvas.arc(ghostX[i] + 31,ghostY[i] + 15,5,0,2*Math.PI);
+  canvas.arc(ghostX[i] + (gridSize * (2/3)),ghostY[i] + (gridSize * (1/3)),(gridSize * (1/8)),0,2*Math.PI);
   canvas.fill();
   
   if (ghostsDirection[i] == "up"){
@@ -234,9 +260,9 @@ canvas.restore();
     canvas.fillStyle = "Blue";
     canvas.beginPath();
     //pupils
-    canvas.arc(ghostX[i] + 18,ghostY[i] + 13,3,0,2*Math.PI);
+    canvas.arc(ghostX[i] + (gridSize * (1/3)),ghostY[i] + (gridSize * (1/3)) - (gridSize * (1/20)),(gridSize * (1/15)),0,2*Math.PI);
     canvas.fill();
-    canvas.arc(ghostX[i] + 31,ghostY[i] + 13,3,0,2*Math.PI);
+    canvas.arc(ghostX[i] + (gridSize * (2/3)),ghostY[i] + (gridSize * (1/3)) - (gridSize * (1/20)),(gridSize * (1/15)),0,2*Math.PI);
     canvas.fill();
     
   }else if (ghostsDirection[i] == "down"){
@@ -244,9 +270,9 @@ canvas.restore();
     canvas.fillStyle = "Blue";
     canvas.beginPath();
     //pupils
-    canvas.arc(ghostX[i] + 18,ghostY[i] + 17,3,0,2*Math.PI);
+       canvas.arc(ghostX[i] + (gridSize * (1/3)),ghostY[i] + (gridSize * (1/3)) + (gridSize * (1/20)),(gridSize * (1/15)),0,2*Math.PI);
     canvas.fill();
-    canvas.arc(ghostX[i] + 31,ghostY[i] + 17,3,0,2*Math.PI);
+    canvas.arc(ghostX[i] + (gridSize * (2/3)),ghostY[i] + (gridSize * (1/3)) + (gridSize * (1/20)),(gridSize * (1/15)),0,2*Math.PI);
     canvas.fill();
     
   }else if (ghostsDirection[i] == "left"){
@@ -254,9 +280,9 @@ canvas.restore();
     canvas.fillStyle = "Blue";
     canvas.beginPath();
     //pupils
-    canvas.arc(ghostX[i] + 16,ghostY[i] + 15,3,0,2*Math.PI);
+    canvas.arc(ghostX[i] + (gridSize * (1/3)) - (gridSize * (1/20)),ghostY[i] + (gridSize * (1/3)),(gridSize * (1/15)),0,2*Math.PI);
     canvas.fill();
-    canvas.arc(ghostX[i] + 29,ghostY[i] + 15,3,0,2*Math.PI);
+    canvas.arc(ghostX[i] + (gridSize * (2/3)) - (gridSize * (1/20)),ghostY[i] + (gridSize * (1/3)),(gridSize * (1/15)),0,2*Math.PI);
     canvas.fill();
     
   }else if (ghostsDirection[i] == "right"){
@@ -264,76 +290,80 @@ canvas.restore();
     canvas.fillStyle = "Blue";
     canvas.beginPath();
     //pupils
-    canvas.arc(ghostX[i] + 20,ghostY[i] + 15,3,0,2*Math.PI);
+    canvas.arc(ghostX[i] + (gridSize * (1/3)) + (gridSize * (1/20)),ghostY[i] + (gridSize * (1/3)),(gridSize * (1/15)),0,2*Math.PI);
     canvas.fill();
-    canvas.arc(ghostX[i] + 33,ghostY[i] + 15,3,0,2*Math.PI);
+    canvas.arc(ghostX[i] + (gridSize * (2/3)) + (gridSize * (1/20)),ghostY[i] + (gridSize * (1/3)),(gridSize * (1/15)),0,2*Math.PI);
     canvas.fill();
     
-  }
+  
 }
  
   
   
   //needs fixed 
 if (debug == "True" && play == "True"){
-  
+
   //leftBox  
-  if (leftBox == 1){
+  if (leftBox[i] == 1){
     colorCycle = 0;
   }else{
     colorCycle = 3;
   }
-  if (ghostTurnDirection1 == "left"){
+  if (ghostTurnDirection1[i] == "left"){
     colorCycle = 2;
   }
 
   canvas.fillStyle = color[colorCycle];
-  canvas.fillRect((ghostxGridPos - 1) * gridSize,ghostyGridPos * gridSize,gridSize,gridSize);
+  canvas.fillRect((ghostxGridPos[i] - 1) * gridSize,ghostyGridPos[i] * gridSize,gridSize,gridSize);
   
   //rightBox
-  if (rightBox == 1){
+  if (rightBox[i] == 1){
     colorCycle = 0;
   }else{
     colorCycle = 3;
   }
-  if (ghostTurnDirection1 == "right"){
+  if (ghostTurnDirection1[i] == "right"){
     colorCycle = 2;
   }
   
   canvas.fillStyle = color[colorCycle];
-  canvas.fillRect((ghostxGridPos + 1) * gridSize,ghostyGridPos * gridSize,gridSize,gridSize);
+  canvas.fillRect((ghostxGridPos[i] + 1) * gridSize,ghostyGridPos[i] * gridSize,gridSize,gridSize);
   
   //topBox
-  if (topBox == 1){
+  if (topBox[i] == 1){
     colorCycle = 0;
   }else{
     colorCycle = 3;
   }
-  if (ghostTurnDirection2 == "up"){
+  if (ghostTurnDirection2[i] == "up"){
     colorCycle = 2;
   }
   
   canvas.fillStyle = color[colorCycle];
-  canvas.fillRect(ghostxGridPos * gridSize,(ghostyGridPos - 1) * gridSize,gridSize,gridSize);
+  canvas.fillRect(ghostxGridPos[i] * gridSize,(ghostyGridPos[i] - 1) * gridSize,gridSize,gridSize);
   
   //bottomBox
-  if (bottomBox == 1){
+  if (bottomBox[i] == 1){
     colorCycle = 0;
   }else{
     colorCycle = 3;
   }
-  if (ghostTurnDirection2 == "down"){
+  if (ghostTurnDirection2[i] == "down"){
     colorCycle = 2;
   }
   
   canvas.fillStyle = color[colorCycle];
-  canvas.fillRect(ghostxGridPos * gridSize,(ghostyGridPos + 1) * gridSize,gridSize,gridSize);
+  canvas.fillRect(ghostxGridPos[i] * gridSize,(ghostyGridPos[i] + 1) * gridSize,gridSize,gridSize);
   
   
 }
   
+  canvas.font = "30px Arial";
+  canvas.fillStyle = "white";
+  canvas.fillText("Score: "+ score,(gridSize * 15) + (gridSize/2),(gridSize * 20) - (gridSize/4));
   
  if (flashCycle == 6){
    flashCycle = 0;
  } 
+}
 }

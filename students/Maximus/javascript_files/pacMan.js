@@ -1,7 +1,7 @@
 function init() {
 
   //grid size of the game
-  gridSize = 50;
+  gridSize = 30;
 
   lvl1();
 
@@ -14,8 +14,8 @@ function init() {
   play = "False";
 
   //pacman mouth angles for start
-  topMouthAngle = 1.7;
-  bottomMouthAngle = 2.0;
+  topMouthAngle = 0;
+  bottomMouthAngle = 0;
 
   //pacman eye heigth
   eyePosition = 12;
@@ -24,6 +24,8 @@ function init() {
   pacCheck = "False";
   check = "False";
   moveComplete = "True";
+  movementMemory = 0;
+  mode = "normal";
 
 
   //debug variables
@@ -32,6 +34,7 @@ function init() {
   //timing variables
   flashCycle = 0;
   frameCount = 0;
+  seconds = 0;
 
   //background gradient variables
   gradx1 = 0;
@@ -62,7 +65,14 @@ function startStuff() {
 
 function gameLoop() {
 if (play == "True"){
+  
   frameCount++;
+  
+  if (frameCount == 15){
+      frameCount = 0;
+      seconds = seconds + 1;
+  }
+  
   //move pacman
   movePacman();
 
@@ -71,6 +81,7 @@ if (play == "True"){
 }
   //draw
   draw();
+
 }
 
 
@@ -361,19 +372,113 @@ function moveGhost() { //AI M3
   if (play == "True") {
     // locate the ghost and pacman
 
+    
+    
     for (i = 0; i < ghostCount; i++) {
-
-      if (ghostMoveComplete[i] == "True" && frameCount > ghostTimer[i]) {
-
-
-        pacxGridPos = (pacManx / gridSize);
-        pacyGridPos = (pacMany / gridSize);
+      
+      if (movementMemory != 0){
+        i = movementMemory;
+        movementMemory = 0;
+      }
+      
+      if (seconds == 7){
+        mode = "scatter";
+        
+        
+        
+      }else if (seconds == 20){
+        mode = "normal";
+      }
+      
+      if (mode == "scatter"){
+        switch (i){
+          case 0:
+            pacxGridPos = -1;
+            pacyGridPos = -1;
+            break;
+          case 1:
+            pacxGridPos = 35;
+            pacyGridPos = -1;
+            break;
+          case 2:
+            pacxGridPos = -1;
+            pacyGridPos = 20;
+            break;
+          case 3:
+            pacxGridPos = 36;
+            pacyGridPos = 22;
+            break;
+        }
+      }
+      
+      if (ghostMoveComplete[i] == "True" && seconds >= ghostTimer[i]) {
 
         ghostxGridPos = [];
         ghostyGridPos = [];
 
         ghostxGridPos[i] = (ghostX[i] / gridSize);
         ghostyGridPos[i] = (ghostY[i] / gridSize);
+        
+
+        if (ghost[i] == 0 && mode == "normal") { //targets directly
+
+          pacxGridPos = (pacManx / gridSize);
+          pacyGridPos = (pacMany / gridSize);
+
+        } else if (ghost[i] == 1 && mode == "normal") { //pinkys targeting 4 ahead of pacman
+          switch (direction) {
+            case "up":
+              pacxGridPos = (pacManx / gridSize);
+              pacyGridPos = (pacMany / gridSize) - 4;
+              break;
+            case "down":
+              pacxGridPos = (pacManx / gridSize);
+              pacyGridPos = (pacMany / gridSize) + 4;
+              break;
+            case "left":
+              pacxGridPos = (pacManx / gridSize) - 4;
+              pacyGridPos = (pacMany / gridSize);
+              break;
+            case "right":
+              pacxGridPos = (pacManx / gridSize) + 4;
+              pacyGridPos = (pacMany / gridSize);
+              break;
+            default:
+              //shouldnt happen
+          }//end switch
+        } else if (ghost[i] == 2 && mode == "normal") {
+
+          //calculate distance
+          x2 = pacManx;
+          y2 = pacMany;
+
+          x1 = ghostX[i];
+          y1 = ghostY[i];
+
+          subX = x2 - x1;
+          subY = y2 - y1;
+
+          xPow = Math.pow(subX, 2);
+
+          yPow = Math.pow(subY, 2);
+
+          squareRoot = xPow + yPow;
+
+          result = Math.sqrt(squareRoot);
+
+          distance = Math.floor(result);
+
+          if (distance > (10 * gridSize)) {
+            pacxGridPos = (pacManx / gridSize);
+            pacyGridPos = (pacMany / gridSize);
+          } else {
+            pacxGridPos = -2;
+            pacyGridPos = 22;
+          }
+
+         }
+      
+
 
         //assign some varibles
         leftBox = [];
@@ -386,261 +491,69 @@ function moveGhost() { //AI M3
         topBox[i] = levelRow[ghostyGridPos[i] - 1][ghostxGridPos[i]];
         bottomBox[i] = levelRow[ghostyGridPos[i] + 1][ghostxGridPos[i]];
 
-        //find the perfered direction///
-
-        ghostTurnDirection1 = [];
-        ghostTurnDirection2 = [];
-
-        //deterimine if its left or right
-        if (ghostxGridPos[i] > pacxGridPos) {
-
-          ghostTurnDirection1[i] = "left";
-
-        } else if (ghostxGridPos[i] < pacxGridPos) {
-
-          ghostTurnDirection1[i] = "right";
-
-        } else {
-          ghostTurnDirection1[i] = "niether";
+        
+        checkDistance = [];
+        
+        //determine direction
+        if (leftBox[i] != 1 && ghostLastTrueDirection[i] != "right"){
+          checkDistance[0] = distanceCalc(pacxGridPos*gridSize,pacyGridPos*gridSize,ghostX[i] - gridSize,ghostY[i]);
+        }else{
+          checkDistance[0] = 10000;
         }
-
-        //determine if its up or down
-        if (ghostyGridPos[i] > pacyGridPos) {
-
-          ghostTurnDirection2[i] = "up";
-
-        } else if (ghostyGridPos[i] < pacyGridPos) {
-
-          ghostTurnDirection2[i] = "down";
-
-        } else {
-          ghostTurnDirection2[i] = "niether";
+        
+        if (rightBox[i] != 1 && ghostLastTrueDirection[i] != "left"){
+          checkDistance[1] = distanceCalc(pacxGridPos*gridSize,pacyGridPos*gridSize,ghostX[i] + gridSize,ghostY[i]);
+        }else{
+          checkDistance[1] = 10000;
         }
-
-
-
-        //decide the direction
-        switch (ghostLastTrueDirection[i]) {
-          case "up": //ghost is currently going up so it can turn either left, right or stay the same
-
-            //check what direction is perfered ---- their will be two
-            if (ghostTurnDirection1[i] == "left") {
-
-              if (leftBox[i] == 1) { //check if the direction is eliggible
-
-                if (topBox[i] == 1) {
-                  ghostsDirection[i] = "right";
-                }
-
-                break; //stop checks if you get in here
-
-              } else { //no obsticle then turn
-
-                ghostsDirection[i] = "left";
-              }
-
-            } else if (ghostTurnDirection1[i] == "right") {
-
-              if (rightBox[i] == 1) { //check if the direction is eliggible
-
-                if (topBox[i] == 1) {
-                  ghostsDirection[i] = "left";
-                }
-
-                break; //stop checks if you get in here
-
-              } else { //no obsticle then turn
-
-                ghostsDirection[i] = "right";
-              }
-
-            } else if (ghostTurnDirection1[i] == "niether") {
-              //check if the next direction is valid
-              if (topBox[i] == 1) {
-
-
-                if (rightBox[i] == 1) {
-                  ghostsDirection[i] = "left";
-                } else if (leftBox[i] == 1) {
-                  ghostsDirection[i] = "right";
-                }
-
-
-              } //end of continue check
-
-              break; //dont change the direction
-            }
-
-            break;
-          case "down":
-
-
-            //check what direction is perfered ---- their will be two
-            if (ghostTurnDirection1[i] == "left") {
-
-              if (leftBox[i] == 1) { //check if the direction is eliggible
-
-                if (bottomBox[i] == 1) {
-                  ghostsDirection[i] = "right";
-                }
-
-                break; //stop checks if you get in here
-
-              } else { //no obsticle then turn
-
-                ghostsDirection[i] = "left";
-              }
-
-            } else if (ghostTurnDirection1[i] == "right") {
-
-              if (rightBox[i] == 1) { //check if the direction is eliggible
-
-                if (bottomBox[i] == 1) {
-                  ghostsDirection[i] = "left";
-                }
-
-                break; //stop checks if you get in here
-
-              } else { //no obsticle then turn
-
-                ghostsDirection[i] = "right";
-              }
-
-            } else if (ghostTurnDirection1[i] == "niether") {
-
-              //check if the next direction is valid
-              if (bottomBox[i] == 1) {
-
-                if (rightBox[i] == 1) {
-                  ghostsDirection[i] = "left";
-                } else if (leftBox[i] == 1) {
-                  ghostsDirection[i] = "right";
-                }
-
-
-              } //end of continue check
-
-              break; //dont change the direction
-            }
-
-
-            break;
-          case "left":
-
-
-            //check what direction is perfered ---- their will be two
-            if (ghostTurnDirection2[i] == "up") {
-
-              if (topBox[i] == 1) { //check if the direction is eliggible
-
-                if (leftBox[i] == 1) {
-                  ghostsDirection[i] = "down";
-                }
-
-                break; //stop checks if you get in here
-
-              } else { //no obsticle then turn
-
-                ghostsDirection[i] = "up";
-              }
-
-            } else if (ghostTurnDirection2[i] == "down") {
-
-              if (bottomBox[i] == 1) { //check if the direction is eligible
-
-                if (leftBox[i] == 1) {
-                  ghostsDirection[i] = "right";
-                }
-
-                break; //stop checks if you get in here
-
-              } else { //no obsticle then turn
-
-                ghostsDirection[i] = "down";
-              }
-
-            }
-            if (ghostTurnDirection2[i] == "niether") {
-
-              //check if the next direction is valid
-              if (leftBox[i] == 1) {
-
-
-                if (topBox[i] == 1) {
-                  ghostsDirection[i] = "down";
-                } else if (bottomBox[i] == 1) {
-                  ghostsDirection[i] = "up";
-                }
-
-
-              } //end of continue check
-
-              break; //dont change the direction
-            }
-
-
-            break;
-          case "right":
-
-            //check what direction is perfered ---- their will be two
-            if (ghostTurnDirection2[i] == "up") {
-
-              if (topBox[i] == 1) { //check if the direction is eligible
-
-                if (rightBox[i] == 1) {
-                  ghostsDirection[i] = "down";
-                }
-
-                break; //stop checks if you get in here
-
-              } else { //no obsticle then turn
-
-                ghostsDirection[i] = "up";
-              }
-
-            } else if (ghostTurnDirection2[i] == "down") {
-
-              if (bottomBox[i] == 1) { //check if the direction is eliggible
-
-                if (rightBox[i] == 1) {
-                  ghostsDirection[i] = "right";
-                }
-
-                break; //stop checks if you get in here
-
-              } else { //no obsticle then turn
-
-                ghostsDirection[i] = "down";
-              }
-
-            }
-            if (ghostTurnDirection2[i] == "niether") {
-
-              //check if the next direction is valid
-              if (rightBox[i] == 1) {
-
-
-                if (topBox[i] == 1) {
-                  ghostsDirection[i] = "down";
-                } else if (bottomBox[i] == 1) {
-                  ghostsDirection[i] = "up";
-                }
-
-
-              } //end of continue check
-
-              break; //dont change the direction
-            }
-
-            break;
-
+        
+        if (topBox[i] != 1 && ghostLastTrueDirection[i] != "down"){
+          checkDistance[2] = distanceCalc(pacxGridPos*gridSize,pacyGridPos*gridSize,ghostX[i],ghostY[i] - gridSize);
+        }else{
+          checkDistance[2] = 10000;
         }
-
+        
+        if (bottomBox[i] != 1 && ghostLastTrueDirection[i] != "up"){
+          checkDistance[3] = distanceCalc(pacxGridPos*gridSize,pacyGridPos*gridSize,ghostX[i],ghostY[i] + gridSize);
+        }else{
+          checkDistance[3] = 10000;
+        }
+        
+        maxDistance = 10000;
+        
+        if (checkDistance[0] < maxDistance){
+          
+          maxDistance = checkDistance[0];
+          ghostsDirection[i] = "left";
+          
+        }
+        
+        if (checkDistance[1] < maxDistance){
+          
+          maxDistance = checkDistance[1];
+          ghostsDirection[i] = "right";
+          
+        }
+        
+        if (checkDistance[2] < maxDistance){
+          
+          maxDistance = checkDistance[2];
+          ghostsDirection[i] = "up";
+          
+        }
+        
+        if (checkDistance[3] < maxDistance){
+          
+          maxDistance = checkDistance[3];
+          ghostsDirection[i] = "down";
+          
+        }
+       
       }
-
-    //move the ghost
-
-    if (ghostMoveComplete[i] == "True" && frameCount > ghostTimer[i]) {
+      
+      
+      
+    if (ghostMoveComplete[i] == "True" && seconds >= ghostTimer[i]) {
 
       //determine the current directine
       switch (ghostsDirection[i]) {
@@ -703,13 +616,15 @@ function moveGhost() { //AI M3
 
       }
 
-    } else if (ghostMoveComplete[i] == "False" && frameCount > ghostTimer[i]) {
+    } else if (ghostMoveComplete[i] == "False" && seconds >= ghostTimer[i]) {
 
       if (ghostX[i] == newGhostx[i] && ghostY[i] == newGhosty[i]) {
 
 
 
         ghostMoveComplete[i] = "True";
+        
+        movementMemory = i;
         moveGhost();
 
       } else {
@@ -738,12 +653,29 @@ function moveGhost() { //AI M3
             //this shouldnt happen
         } //end of switch
 
-      } //endif
-
-    } //endif
+      }
+    
+    }//endif
 
     }//end of for
     
   } //endif for play
 
 } //end of function
+
+function distanceCalc(x1,y1,x2,y2){
+
+  subX = x2 - x1;
+  subY = y2 - y1;
+
+  xPow = Math.pow(subX,2);
+
+  yPow = Math.pow(subY,2);
+
+  squareRoot = xPow + yPow;
+
+  result = Math.sqrt(squareRoot);
+
+  return Math.floor(result);
+  
+}
