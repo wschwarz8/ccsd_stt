@@ -132,49 +132,59 @@
 		
 		//make a job now if needed and add it to devices table
 		if ($_POST['jLaptopTaken'] = 1){
-			
+			$type = CheckModel($_POST['jLaptopNumber']);
 			//check what is wrong with laptop
 			$requirement_id=0; // if it isn't set in the case it should be 0
 			switch($_POST["whatsWrong"]){
 				case 1:
-						$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a broken screen.";
+						$jobMessage = "Fix " . $_POST['jOwner'] . "s $type laptop that is reported to have a broken screen.";
 						$jobPoints = 1;//change these to appropriate points later
 						$jobPriority = 5;//change later maybe
 						$jobSkill = 5;
+					switch($type){
+						case 'Lenovo':
+							$requirement_id=7;
+							break;
+						case 'Dell':
+							$requirement_id=2;
+							break;
+						case 'Samsung':
+							$requirement_id=4;
+							break;
 				break;
 				case 2:
-					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to not turn on.";
+					$jobMessage = "Fix " . $_POST['jOwner'] . "s $type laptop that is reported to not turn on.";
 					$jobPoints = 5;//change these to appropriate points later
 					$jobPriority = 5;//change later maybe
 					$jobSkill = 5;
 					$requirement_id=1;
 					break;
 				case 3:
-					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a not connect to the wifi.";
+					$jobMessage = "Fix " . $_POST['jOwner'] . "s $type laptop that is reported to have a not connect to the wifi.";
 					$jobPoints = 2;//change these to appropriate points later
 					$jobPriority = 5;//change later maybe
 					$jobSkill = 2;
 					break;
 				case 4:
-					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a broken keyboard.";
+					$jobMessage = "Fix " . $_POST['jOwner'] . "s $type laptop that is reported to have a broken keyboard.";
 					$jobPoints = 3;//change these to appropriate points later
 					$jobPriority = 5;//change later maybe
 					$jobSkill = 5;
 					break;
 				case 5:
-					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is reported to have a broken mousepad.";
+					$jobMessage = "Fix " . $_POST['jOwner'] . "s $type laptop that is reported to have a broken mousepad.";
 					$jobPoints = 3;//change these to appropriate points later
 					$jobPriority = 5;//change later maybe
 					$jobSkill = 5;
 					break;
 				case 7:
-					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that has the problem:".$_POST['otherReason'];
+					$jobMessage = "Fix " . $_POST['jOwner'] . "s $type laptop that has the problem:".$_POST['otherReason'];
 					$jobPoints = 5;//change these to appropriate points later
 					$jobPriority = 5;//change later maybe
 					$jobSkill = 1;
 					break;
 				default:
-					$jobMessage = "Fix " . $_POST['jOwner'] . "s laptop that is not known what is wrong with it.";
+					$jobMessage = "Fix " . $_POST['jOwner'] . "s $type laptop that is not known what is wrong with it.";
 					$jobPoints = 5;//change these to appropriate points later
 					$jobPriority = 5;//change later maybe
 					$jobSkill = 1;
