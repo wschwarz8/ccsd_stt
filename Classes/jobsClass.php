@@ -55,13 +55,30 @@ class jobs{
 		}	
 		
 		if ($this->job_Status < 3 && $ignore[$this->job_Id] != $_SESSION['loginid'] || $this->job_Status < 3 && isset($_SESSION['showIgnoredJobs']) && $_SESSION['showIgnoredJobs'] == "True"){
+		
+			
+			if( $this->job_skillCategory == 0)
+			{$Ummm =  "No skill required";}
+			else {
+				$query = "SELECT * FROM `skills` WHERE id=" . $this->job_Id;
+				
+				$result = mysql_query($query);
+		
+				$row = mysql_fetch_assoc($result);
+        	
+						
+				
+				$Ummm=($row["skillName"]);
+				
+			}
+			
 			echo("
 				<tr style='".$this->jobPriorityFunc()."height:45px;'>
 					<td style='width:10%;'>". $this->job_Name ."</td>
 					<td style='width:50%;'>". $this->job_Description ."</td>
 					<td style='width:10%;'>". $this->job_Points ."</td>
 					<td style='width:10%;'>". $this->jobCategoryAndNameFunc(1) ."</td>
-					<td style='width:10%;'>". $this->job_skillCategory ."</td>
+					<td style='width:10%;'>". $Ummm ."</td>
 					<td style='width:10%;'><form method='post' name='claimStatForm'>". $this->jobClaimButtsFunc() ."</form></td>
 				</tr>
 			");
