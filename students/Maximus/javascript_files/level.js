@@ -1,20 +1,20 @@
 //todo feature list
 
-//unique ghost AI per ghost
-//fix ghost going through walls  <-- probably should be done first
+//unique ghost AI per ghost  <-- 3/4 way done
+//fix ghost going through walls  <-- probably should be done first  <--- finsihed
 //make power pellets work... add in proper AI first
 //level system
 //strawberrys/cherrys???
 //teleporting side paths
 //proper ghost realease
-//bigger map 
+//bigger map <-- finished
 //pacman and ghost dynamicaly change size with the gridSize <--- finished
 //reset button
 //stats area
 //make a display screen like in the arcade where it introduces the ghost and pac man
 //after bigger map make dynamic walls
 //fix ghost movement bug    <--- finsihed
-//
+//make a way for ghost to know how to exit ghost house
 
 function lvl1(){
   
@@ -55,15 +55,16 @@ function lvl1(){
   pacMany = gridSize * 12;
   
   //starting pacman direction
-  direction = "right";
-  lastTrueDirection = "right";//this needs set to prevent errors. make sure it is valid
+  direction = "left";
+  lastTrueDirection = "left";//this needs set to prevent errors. make sure it is valid
   
   //score variables
   score = 0;
-  maxScore = 116000;//total amount of pellets times 100
+  maxScore = 3450;//total amount of pellets times 100
   
   //starting ghost varibles 
   ghostCount = 4;
+  endMode = 0;
   ghostId = [];
   ghostX = [];
   ghostY = [];
@@ -84,6 +85,8 @@ function lvl1(){
   ghostMoveComplete = ["True","True","True","True"];
   newGhostx = [];
   newGhosty = [];
+  ghostHouse = [];
+  ghostHouse = [gridSize * 17,gridSize * 10];
   
 }
 

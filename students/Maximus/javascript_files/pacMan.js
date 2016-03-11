@@ -175,9 +175,18 @@ function keydownfunc() {
 function movePacman() {
 
   if (play == "True") {
-
+  
+    
+    
     //move the pacman
     if (moveComplete == "True") {
+      
+      if (pacManx == 0 && direction != "right"){
+        pacManx = 1050;
+      }else if(pacManx == 1050){
+       pacManx = -gridSize;
+      }
+      
       switch (direction) {
         case "up":
 
@@ -341,10 +350,18 @@ function checkMove() {
 
 
   //check food/powerup
-  if (levelRow[yGridPos][xGridPos] == 0 || levelRow[yGridPos][xGridPos] == 3) {
-    levelRow[yGridPos][xGridPos] = 10;
-    score = score + 100;
+  if (levelRow[yGridPos][xGridPos] == 0) {//normal dots 
+    levelRow[yGridPos][xGridPos] = 2;
+    score = score + 10;
 
+  }
+  if (levelRow[yGridPos][xGridPos] == 3){//power pellets
+    levelRow[yGridPos][xGridPos] = 2;
+    score = score + 100;
+    mode = "frightened";
+    endMode = seconds + 10;
+    reverseGhost();
+    //ghostSpeed = [10,10,10,10];//this causes problems currently :(
   }
 
   if (score == maxScore) {
@@ -355,12 +372,20 @@ function checkMove() {
   
   for (i = 0; i < ghostCount; i++){
     
-    if (Math.abs(ghostX[i] - pacManx) < 25 && Math.abs(ghostY[i] - pacMany) < 25){
+    if (Math.abs(ghostX[i] - pacManx) < (gridSize/1.5) && Math.abs(ghostY[i] - pacMany) < (gridSize/1.5)){
+      
+      if (mode == "normal" || mode == "scatter"){
       
       play = "ghost";
       
+      }else if (mode == "frightened"){
+        ghostX[i] = ghostHouse[0];
+        ghostY[i] = ghostHouse[1];
+        ghostMoveComplete[i] = "True";
+        ghostsDirection[i] = "up";
+        
+      }
     }
-    
   }
 
 }
@@ -372,7 +397,11 @@ function moveGhost() { //AI M3
   if (play == "True") {
     // locate the ghost and pacman
 
-    
+    if (endMode == seconds){
+      mode = "normal";
+      ghostSpeed = [5,5,5,5];
+      reverseGhost();
+    }
     
     for (i = 0; i < ghostCount; i++) {
       
@@ -381,15 +410,36 @@ function moveGhost() { //AI M3
         movementMemory = 0;
       }
       
-      if (seconds == 7){
-        mode = "scatter";
-        
-        
-        
-      }else if (seconds == 20){
-        mode = "normal";
+      if (mode == "normal" || mode == "scatter"){
+        if (seconds == 0){//start scatter
+          mode = "normal";
+          reverseGhost();
+        }else if (seconds == 7){//end scatter
+          mode = "scatter";
+          reverseGhost();
+        }else if (seconds == 27){//start scatter
+          mode = "normal";
+          reverseGhost();
+        }else if (seconds == 34){//end scatter
+          mode = "scatter";
+          reverseGhost();
+        }else if (seconds == 54){//start scatter
+          mode = "normal";
+          reverseGhost();
+        }else if (seconds == 59){//end scatter
+          mode = "scatter";
+          reverseGhost();
+        }else if (seconds == 79){//start scatter
+          mode = "normal";
+          reverseGhost();
+        }else if (seconds == 84){//end scatter
+          mode = "scatter";
+          reverseGhost();
+        }else if (seconds == 85){//end scatter
+          mode = "normal";
+          reverseGhost();
+        }
       }
-      
       if (mode == "scatter"){
         switch (i){
           case 0:
@@ -494,6 +544,7 @@ function moveGhost() { //AI M3
         
         checkDistance = [];
         
+        if (mode != "frightened"){
         //determine direction
         if (leftBox[i] != 1 && ghostLastTrueDirection[i] != "right"){
           checkDistance[0] = distanceCalc(pacxGridPos*gridSize,pacyGridPos*gridSize,ghostX[i] - gridSize,ghostY[i]);
@@ -548,6 +599,61 @@ function moveGhost() { //AI M3
           ghostsDirection[i] = "down";
           
         }
+        }else if (mode == "frightened"){
+          if (leftBox[i] != 1 && ghostLastTrueDirection[i] != "right"){
+          checkDistance[0] = Math.floor((Math.random() * 1000) + 1);
+        }else{
+          checkDistance[0] = 10000;
+        }
+        
+        if (rightBox[i] != 1 && ghostLastTrueDirection[i] != "left"){
+          checkDistance[1] = Math.floor((Math.random() * 1000) + 1);
+        }else{
+          checkDistance[1] = 10000;
+        }
+        
+        if (topBox[i] != 1 && ghostLastTrueDirection[i] != "down"){
+          checkDistance[2] = Math.floor((Math.random() * 1000) + 1);
+        }else{
+          checkDistance[2] = 10000;
+        }
+        
+        if (bottomBox[i] != 1 && ghostLastTrueDirection[i] != "up"){
+          checkDistance[3] = Math.floor((Math.random() * 1000) + 1);
+        }else{
+          checkDistance[3] = 10000;
+        }
+        
+        maxDistance = 10000;
+        
+        if (checkDistance[0] < maxDistance){
+          
+          maxDistance = checkDistance[0];
+          ghostsDirection[i] = "left";
+          
+        }
+        
+        if (checkDistance[1] < maxDistance){
+          
+          maxDistance = checkDistance[1];
+          ghostsDirection[i] = "right";
+          
+        }
+        
+        if (checkDistance[2] < maxDistance){
+          
+          maxDistance = checkDistance[2];
+          ghostsDirection[i] = "up";
+          
+        }
+        
+        if (checkDistance[3] < maxDistance){
+          
+          maxDistance = checkDistance[3];
+          ghostsDirection[i] = "down";
+          
+        }
+        }
        
       }
       
@@ -555,6 +661,12 @@ function moveGhost() { //AI M3
       
     if (ghostMoveComplete[i] == "True" && seconds >= ghostTimer[i]) {
 
+      if (ghostX[i] == 0 && direction != "right"){
+        ghostX[i] = 1050;
+      }else if(ghostX[i] == 1050){
+       ghostX[i] = -gridSize;
+      }
+      
       //determine the current directine
       switch (ghostsDirection[i]) {
         case "up":
@@ -677,5 +789,23 @@ function distanceCalc(x1,y1,x2,y2){
   result = Math.sqrt(squareRoot);
 
   return Math.floor(result);
+  
+}
+
+function reverseGhost(){
+  
+  for (i = 0; i < ghostCount; i++) {
+    
+    if (ghostsDirection[i] == "up"){
+      ghostsDirection[i] = "down";
+    }else if (ghostsDirection[i] == "down"){
+      ghostsDirection[i] = "up";
+    }else if (ghostsDirection[i] == "left"){
+      ghostsDirection[i] = "right";
+    }else if (ghostsDirection[i] == "right"){
+      ghostsDirection[i] = "left";
+    }
+    
+  }
   
 }

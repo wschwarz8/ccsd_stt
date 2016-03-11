@@ -170,7 +170,21 @@ canvas.restore();
 
   for (i = 0; i < ghostCount; i++){
     
-  canvas.fillStyle = ghostColor[i];
+    if (mode == "frightened"){
+      if (endMode - seconds < 5){
+        if (flashCycle < 4){
+          canvas.fillStyle = "Blue";
+        }else{
+          canvas.fillStyle = "Grey";
+        }
+      }else{
+      canvas.fillStyle = "Blue";
+      }
+    }else{
+        canvas.fillStyle = ghostColor[i];
+    }
+    
+
     
   //main body 
   canvas.fillRect(ghostX[i] + (gridSize * (1.5/10)),ghostY[i] + (gridSize * (3/10)),gridSize - (gridSize * (3/10)),gridSize - (gridSize * (5/10)));
@@ -270,7 +284,7 @@ canvas.restore();
     canvas.fillStyle = "Blue";
     canvas.beginPath();
     //pupils
-       canvas.arc(ghostX[i] + (gridSize * (1/3)),ghostY[i] + (gridSize * (1/3)) + (gridSize * (1/20)),(gridSize * (1/15)),0,2*Math.PI);
+    canvas.arc(ghostX[i] + (gridSize * (1/3)),ghostY[i] + (gridSize * (1/3)) + (gridSize * (1/20)),(gridSize * (1/15)),0,2*Math.PI);
     canvas.fill();
     canvas.arc(ghostX[i] + (gridSize * (2/3)),ghostY[i] + (gridSize * (1/3)) + (gridSize * (1/20)),(gridSize * (1/15)),0,2*Math.PI);
     canvas.fill();
@@ -358,9 +372,13 @@ if (debug == "True" && play == "True"){
   
 }
   
+  //score
   canvas.font = "30px Arial";
   canvas.fillStyle = "white";
   canvas.fillText("Score: "+ score,(gridSize * 15) + (gridSize/2),(gridSize * 20) - (gridSize/4));
+    
+ //time
+ canvas.fillText("Time: "+ seconds,(gridSize * 5) + (gridSize/2),(gridSize * 20) - (gridSize/4));
   
  if (flashCycle == 6){
    flashCycle = 0;
