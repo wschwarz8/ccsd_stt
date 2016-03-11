@@ -23,9 +23,9 @@ promptLogin();
 
 			<BR>
 
-			<a href='students/Jaydon'>
-				<div class="personBox" id="Jayden">
-					<h2 id="toph2" style="background:orange;">Jayden</h2>
+			<a href='students/Dylan'>
+				<div class="personBox" id="Dylan">
+					<h2 id="toph2" style="background:orange;">Dylan</h2>
 					<ul>
 						<li>
 							<p>add a few words that describe yourself here</p>
