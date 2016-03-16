@@ -51,7 +51,8 @@ promptLogin(1);
 		 $admin="0";
 		 
 		 $bio=" ";
-		 
+		
+		 mysql_select_db('stt', $g_link);
 		 //make query
 		 $CreateStudent = "INSERT INTO `students`(`username`, `password`, `name`, `class`, `active`, `bio`, `admin`) VALUES (
 			'".$username."',
@@ -72,7 +73,7 @@ promptLogin(1);
 		}
 			
 		 
-		 mysql_close($conn);
+		 mysql_close($g_link);
 		 
 		 //clear old variables
 		 $_POST['Username'] = "";
