@@ -53,15 +53,14 @@ promptLogin(1);
 		 $bio=" ";
 		 
 		 //make query
-		 $CreateStudent = "INSERT INTO `students`( `id`, `username`, `password`, `name`, `class`, `active`, `bio`, `admin`) VALUES ('"
-			 .$id."','"
-			 .$username."', "
-			 .$password.", "
-			 .$name.", "
-			 .$GradYear.", "
-			 .$active.", "
-			 .$bio.", "
-			 .$admin.")";
+		 $CreateStudent = "INSERT INTO `students`(`username`, `password`, `name`, `class`, `active`, `bio`, `admin`) VALUES (
+			'".$username."',
+			'".$password."',
+			'".$name.    "', 
+			'".$GradYear."', 
+			'".$active.  "', 
+			'".$bio.     "', 
+			'".$admin.   "')";
 
 		 //commence query
 		 $rsp = mysql_query($CreateStudent);
