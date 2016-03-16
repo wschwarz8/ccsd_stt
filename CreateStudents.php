@@ -36,24 +36,33 @@ promptLogin(1);
   </form>
 		<?php
 	 if ($_POST){
-		$Name=mysql_real_escape_string($_POST['Name']);
-		 $active="1";
 		 $id=$row['id']+"1";
-		 $admin="0";
-		 $bio=" ";
-		 $password=$_POST['Password'];
+		 
 		 $username=$_POST['Username'];
+		 
+		 $password=$_POST['Password'];
+		 
+		 $name=mysql_real_escape_string($_POST['Name']);
+		 
 		 $GradYear=$_POST['GraduationYear'];
+		 
+		 $active="1";
+		 
+		 $admin="0";
+		 
+		 $bio=" ";
+		 
 		 //make query
-$CreateStudent = "INSERT INTO `students`( `id`, `username`, `password`, `name`, `class`, `active`, `admin`, `bio`) VALUES 
-($id,
-$username,
-$password,
-$Name,
-$GradYear,
-$active,
-$admin,
-$bio.)";         //HERE IS THE PROBLEM, FIX LATER
+		 $CreateStudent = "INSERT INTO `students`( `id`, `username`, `password`, `name`, `class`, `active`, `bio`, `admin`) VALUES ('"
+			 .$id."','"
+			 .$username."', "
+			 .$password.", "
+			 .$name.", "
+			 .$GradYear.", "
+			 .$active.", "
+			 .$bio.", "
+			 .$admin.")";
+
 		 //commence query
 		 $rsp = mysql_query($CreateStudent);
 		 
