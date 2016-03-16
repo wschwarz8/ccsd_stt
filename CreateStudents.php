@@ -26,7 +26,9 @@ promptLogin(1);
 			<!-- student username input field -->
 			<tr><td>Student Username</td><td><input type="text" name="Username" placeholder="Student Username"></td></tr>
 			
-			<tr><td>Student Password</td><td><input typw="text" name="Password" placeholder="Student Password"</td></tr>
+			<!-- student password input fields-->
+			<tr><td>Student Password</td><td><input type="text" name="Password" placeholder="Student Password"</td></tr>
+			<tr><td>Please retype password</td><td><input type="text" name="Password2"</td></tr>
 			
 			<!-- Graduation Year input field -->
 			<tr><td>Graduation Year</td><td><input type="number" name="GraduationYear" placeholder="Graduation Year"</td>
@@ -41,7 +43,7 @@ promptLogin(1);
 		 $username=$_POST['Username'];
 		 
 		 $password=$_POST['Password'];
-		 
+		 $password2=$_POST['Password2'];
 		 $name=mysql_real_escape_string($_POST['Name']);
 		 
 		 $GradYear=$_POST['GraduationYear'];
@@ -51,8 +53,19 @@ promptLogin(1);
 		 $admin="0";
 		 
 		 $bio=" ";
-		
-		 mysql_select_db('stt', $g_link);
+		 		$cost = 10;
+	
+		$salt = sprintf("$2a$%02d$", $cost). $salt;
+
+		$hash = crypt($password2, $salt);
+
+		$query2 = "UPDATE `students` SET `password`='$hash'  WHERE username ='$username'";
+
+				if($password !== $password2) {
+					
+					echo "<script>alert('The passwords do not match! Please Re-enter your passwords and try again!');</script>";
+					die;
+				}
 		 //make query
 		 $CreateStudent = "INSERT INTO `students`(`username`, `password`, `name`, `class`, `active`, `bio`, `admin`) VALUES (
 			'".$username."',
