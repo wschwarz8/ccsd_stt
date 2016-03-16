@@ -50,6 +50,11 @@ if($_SESSION['admin'])
 					<p>
 						Create Jobs
 					</p>
+					 <a href="CreateStudents.php">
+						<p>
+							Create a Student
+						</p>
+					</a>
 					<a href="login/AdminDisplayUsers.php">
 					<p>
 						Masquerade
