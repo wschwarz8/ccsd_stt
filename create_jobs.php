@@ -22,12 +22,12 @@ promptLogin(1);
       <tr><td>Job Skill Category</td>
         <td>
           <select name="jSkill">
-            <!-- replace options with a query later -->
-            <option value="1">Unclassified</option>
-            <option value="2">Computer Software</option>
-            <option value="3">Programming</option>
-            <option value="4">Training/Documentation</option>
-            <option value="5">Computer Hardware</option>
+<?php
+	$result = queryFunc("SELECT id, category FROM skillcategories");
+	while($data = mysql_fetch_assoc($result)){
+            echo "<option value='".$data['id']."'>".$data['category']."</option>";
+	}
+?>
           </select>
         </td>
       </tr>
