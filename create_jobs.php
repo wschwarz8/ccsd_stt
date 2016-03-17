@@ -31,6 +31,7 @@ promptLogin(1);
 			<tr><td>Skill required</td>
         <td>
           <select name="jSkillRequired">
+            <option value='0'>NONE</option>";
 	<?php
 	$meh = queryFunc("SELECT id, skillname FROM skills");
 	while($stuff = mysql_fetch_assoc($meh)){
