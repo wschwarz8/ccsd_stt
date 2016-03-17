@@ -60,14 +60,9 @@ class jobs{
 			if( $this->job_skillCategory == 0)
 			{$Ummm =  "No skill required";}
 			else {
-				$query = "SELECT * FROM `skills` WHERE id=" . $this->job_Id;
-				
+				$query = "SELECT * FROM `skills` WHERE id=" . $this->job_skillCategory;
 				$result = mysql_query($query);
-		
 				$row = mysql_fetch_assoc($result);
-        	
-						
-				
 				$Ummm=($row["skillName"]);
 				
 			}
