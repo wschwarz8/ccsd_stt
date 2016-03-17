@@ -86,7 +86,6 @@ $hash = crypt($password, $salt);
 
 
 
-		$query2 = "UPDATE `students` SET `password`=$hash  WHERE username =$username";
 		 //commence query
 	
 		 
