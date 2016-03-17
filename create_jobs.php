@@ -21,11 +21,20 @@ promptLogin(1);
       <!-- job skill category input field -->
       <tr><td>Job Skill Category</td>
         <td>
-          <select name="jSkill">
+          <select name="jSkillCat">
 <?php
 	$result = queryFunc("SELECT id, category FROM skillcategories");
 	while($data = mysql_fetch_assoc($result)){
             echo "<option value='".$data['id']."'>".$data['category']."</option>";
+	}
+?>
+			<tr><td>Skill required</td>
+        <td>
+          <select name="jSkillRequired">
+	<?php
+	$meh = queryFunc("SELECT id, skillname FROM skills");
+	while($stuff = mysql_fetch_assoc($meh)){
+            echo "<option value='".$stuff['id']."'>".$stuff['skillname']."</option>";
 	}
 ?>
           </select>
@@ -77,7 +86,8 @@ promptLogin(1);
 		$jDesc=mysql_real_escape_string($_POST['jDesc']);
 		  
 		 //make query
-$queryinsertjob = "INSERT INTO `jobs`( `name`, `description`, `skillcatid`, `status`, `points`, `claimedby`, `priority`) VALUES ('".$_POST['jName']."','".$jDesc."', ".$_POST['jSkill'].", ".$_POST['jStatus'].", ".$_POST['jPoints'].", ".$_POST['jClaim'].", ".$_POST['jPriority'].")";
+$queryinsertjob = "INSERT INTO `jobs`( `name`, `description`, `skillcatid`, `requirement_id`, `status`, `points`, `claimedby`, `priority`) VALUES 
+('".$_POST['jName']."','".$jDesc."', ".$_POST['jSkillCat'].", ".$_POST['jStatus'].", ".$_POST['jSkillRequired'].", ".$_POST['jPoints'].", ".$_POST['jClaim'].", ".$_POST['jPriority'].")";
 
 		 //commence query
 		 $rsp = mysql_query($queryinsertjob);
@@ -94,7 +104,8 @@ $queryinsertjob = "INSERT INTO `jobs`( `name`, `description`, `skillcatid`, `sta
 		 //clear old variables
 		 $_POST['jName'] = "";
 		 $_POST['jDesc'] = "";
-		 $_POST['jSkill'] = "";
+		 $_POST['jSkillCat'] = "";
+		 $_POST['jSkillRequired'] = "";
 		 $_POST['jStatus'] = "";
 		 $_POST['jPoints'] = "";
 		 $_POST['jClaim'] = "";
