@@ -27,8 +27,8 @@ promptLogin(1);
 			<tr><td>Student Username</td><td><input type="text" name="Username" placeholder="Student Username"></td></tr>
 			
 			<!-- student password input fields-->
-			<tr><td>Student Password</td><td><input type="text" name="Password" placeholder="Student Password"</td></tr>
-			<tr><td>Please retype password</td><td><input type="text" name="Password2"</td></tr>
+			<tr><td>Student Password</td><td><input type="password" name="Password" placeholder="Student Password"</td></tr>
+			<tr><td>Please retype password</td><td><input type="password" name="Password2"</td></tr>
 			
 			<!-- Graduation Year input field -->
 			<tr><td>Graduation Year</td><td><input type="number" name="GraduationYear" placeholder="Graduation Year"</td>
@@ -53,30 +53,46 @@ promptLogin(1);
 		 $admin="0";
 		 
 		 $bio=" ";
-		 		$cost = 10;
-	
-		$salt = sprintf("$2a$%02d$", $cost). $salt;
 
-		$hash = crypt($password2, $salt);
-
-		$query2 = "UPDATE `students` SET `password`='$hash'  WHERE username ='$username'";
 
 				if($password !== $password2) {
 					
 					echo "<script>alert('The passwords do not match! Please Re-enter your passwords and try again!');</script>";
 					die;
 				}
+/*		 $cost = 10;
+
+$salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
+
+$salt = sprintf("$2a$%02d$", $cost) . $salt;
+
+$hash = crypt($password, $salt);
+*/
+		 
+		$cost = 10;
+	
+		$salt = sprintf("$2a$%02d$", $cost). $salt;
+
+		$hash = crypt($password, $salt);
 		 //make query
 		 $CreateStudent = "INSERT INTO `students`(`username`, `password`, `name`, `class`, `active`, `bio`, `admin`) VALUES (
 			'".$username."',
-			'".$password."',
-			'".$name.    "', 
+			'".$hash."',
+			'".$name."', 
 			'".$GradYear."', 
-			'".$active.  "', 
-			'".$bio.     "', 
-			'".$admin.   "')";
+			'".$active."', 
+			'".$bio."', 
+			'".$admin."')";
 
+
+
+		$query2 = "UPDATE `students` SET `password`=$hash  WHERE username =$username";
 		 //commence query
+	
+		 
+		 
+		 
+		 
 		 $rsp = mysql_query($CreateStudent);
 		 
 		 if($rsp) echo"Student Created :)";
