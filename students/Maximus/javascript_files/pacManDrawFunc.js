@@ -28,9 +28,10 @@ function draw(){
       if (levelRow[i][b] == 1){
         
         var gradient = canvas.createLinearGradient(gradx1,gradx2,gradx3,gradx4);
-        gradient.addColorStop("0","magenta");
-        gradient.addColorStop("0.5","blue");
-        gradient.addColorStop("1.0","red");
+        gradient.addColorStop("0","red");
+        gradient.addColorStop("0.33","orange");
+        gradient.addColorStop("0.66","red");
+        gradient.addColorStop("1.0","orange");
 
         // Fill with gradient
         canvas.fillStyle=gradient;
@@ -93,13 +94,13 @@ function draw(){
     
     canvas.font = "30px Georgia";
     canvas.fillStyle = "red";
-    canvas.fillText("You Win!!", gridSize * 13,(gridSize * 9) - (gridSize/4));
+    canvas.fillText("You Win!!", gridSize * 16,(gridSize * 9) - (gridSize/4));
     
   }else if(play == "ghost"){//ghost win message
     
     canvas.font = gridSize + "px Georgia";
     canvas.fillStyle = "red";
-    canvas.fillText("The Ghosts Win :(", gridSize * 13,(gridSize * 9) - (gridSize/4));
+    canvas.fillText("The Ghosts Win :(", (gridSize * 13) - (gridSize/2),(gridSize * 9) - (gridSize/4));
   }
   
 //save canvas due to rotations that may happen

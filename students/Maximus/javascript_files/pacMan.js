@@ -35,6 +35,8 @@ function init() {
   flashCycle = 0;
   frameCount = 0;
   seconds = 0;
+  scheduleTime = 0;
+  schedule = 1;
 
   //background gradient variables
   gradx1 = 0;
@@ -410,36 +412,18 @@ function moveGhost() { //AI M3
         movementMemory = 0;
       }
       
-      if (mode == "normal" || mode == "scatter"){
-        if (seconds == 0){//start scatter
+      
+      
+      if (ghostSchedule[schedule] == scheduleTime){
+        if (mode == "scatter"){
           mode = "normal";
-          reverseGhost();
-        }else if (seconds == 7){//end scatter
+        }else{
           mode = "scatter";
-          reverseGhost();
-        }else if (seconds == 27){//start scatter
-          mode = "normal";
-          reverseGhost();
-        }else if (seconds == 34){//end scatter
-          mode = "scatter";
-          reverseGhost();
-        }else if (seconds == 54){//start scatter
-          mode = "normal";
-          reverseGhost();
-        }else if (seconds == 59){//end scatter
-          mode = "scatter";
-          reverseGhost();
-        }else if (seconds == 79){//start scatter
-          mode = "normal";
-          reverseGhost();
-        }else if (seconds == 84){//end scatter
-          mode = "scatter";
-          reverseGhost();
-        }else if (seconds == 85){//end scatter
-          mode = "normal";
-          reverseGhost();
         }
+        schedule++;
+        scheduleTime = ghostSchedule[schedule] + seconds;
       }
+      
       if (mode == "scatter"){
         switch (i){
           case 0:
@@ -794,18 +778,23 @@ function distanceCalc(x1,y1,x2,y2){
 
 function reverseGhost(){
   
-  for (i = 0; i < ghostCount; i++) {
+//   for (i = 0; i < ghostCount; i++) {
     
-    if (ghostsDirection[i] == "up"){
-      ghostsDirection[i] = "down";
-    }else if (ghostsDirection[i] == "down"){
-      ghostsDirection[i] = "up";
-    }else if (ghostsDirection[i] == "left"){
-      ghostsDirection[i] = "right";
-    }else if (ghostsDirection[i] == "right"){
-      ghostsDirection[i] = "left";
-    }
+//    if (ghostsDirection[i] == "up"){
+//       ghostsDirection[i] = "down";
+//       ghostLastTrueDirection[i] = "down";
+//     }else if (ghostsDirection[i] == "down"){
+//       ghostsDirection[i] = "up";
+//       ghostLastTrueDirection[i] = "up";
+//     }else if (ghostsDirection[i] == "left"){
+//       ghostsDirection[i] = "right";
+//       ghostLastTrueDirection[i] = "right";
+//     }else if (ghostsDirection[i] == "right"){
+//       ghostsDirection[i] = "left";
+//       ghostLastTrueDirection[i] = "left";
+//     }
+
     
-  }
+//   }
   
 }

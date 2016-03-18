@@ -48,8 +48,24 @@ function main(){
 			$claimQuery = "SELECT COUNT(*) as count FROM jobs WHERE STATUS<3 && bypassLimit=0 && claimedby='".$_SESSION['loginid']."'";
 			$claimResult = queryFunc($claimQuery);
 			$numClaimed = mysql_fetch_assoc($claimResult);
+			
+			
+			
+			$skillQuery = "SELECT `skid` FROM `studentsxskills` WHERE stid=".$_SESSION['loginid']." AND skid=".$jobdata['requirement_id'];
+			echo $skillQuery;
+			$skillResult = queryFunc($skillQuery);
+			
+			if (!mysql_num_rows($skillResult)) {
+			 $skill['skid'] = 0;
+			}else{
+				$skill = mysql_fetch_assoc($skillResult);
+			}
+			
+			
 			if($numClaimed['count'] < 3) { // If they haven't claimed too many jobs already
-				if($jobdata['requirement_id']=='0') { // If they have the skill needed to do the job
+				
+				if($jobdata['requirement_id'] == $skill['skid']) { // If they have the skill needed to do the job
+					
 					if ($jobdata['repeatable'] != 1){
 					//make a query to claim a job
 					$claimStatQuery = "UPDATE `jobs` SET `claimedby`=".$_SESSION['loginid'].", status=2 WHERE id=" . $_POST['formIdentifier'];
