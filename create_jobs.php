@@ -87,7 +87,7 @@ promptLogin(1);
 		$jDesc=mysql_real_escape_string($_POST['jDesc']);
 		  
 		 //make query
-$queryinsertjob = "INSERT INTO `jobs`( `name`, `description`, `skillcatid`, `requirement_id`, `status`, `points`, `claimedby`, `priority`) VALUES 
+$queryinsertjob = "INSERT INTO `jobs`( `name`, `description`, `skillcatid`, `status`, `requirement_id`, `points`, `claimedby`, `priority`) VALUES 
 ('".$_POST['jName']."','".$jDesc."', ".$_POST['jSkillCat'].", ".$_POST['jStatus'].", ".$_POST['jSkillRequired'].", ".$_POST['jPoints'].", ".$_POST['jClaim'].", ".$_POST['jPriority'].")";
 
 		 //commence query
