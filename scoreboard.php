@@ -93,6 +93,8 @@ foreach ($scoreboard as $key => $value) {
 	echo "<tr><td><nobr><a href='studentJobs.php?id=$key'>".$names[$key]."</nobr></td><td>$value</td></tr>";
     }
 }
+echo "</td></tr></table>";//not sure why its like this
+echo "</td></tr></table>";
 
-makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black;} #footer p{color:black; text-decoration:underlined;}</style>",0,"true");
+makefooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page <a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black;} #footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 ?>

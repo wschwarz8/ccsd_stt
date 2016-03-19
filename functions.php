@@ -20,10 +20,11 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 				<a href='../index.php'><h1 id='headerTitle'>". $ptitle . "</h1></a>
 			
 				");
-		DisplayName();
-		echo " <a href='studentDetails.php?id=".$_SESSION['loginid']."'>(my points)</a>";
-		echo viewsofpage($fileName);
-	
+		if (isset($_SESSION)){//check to see if someone was logged in so their is not errors
+			DisplayName();
+			echo " <a href='studentDetails.php?id=".isset($_SESSION['loginid'])."'>(my points)</a>";
+		}
+			echo viewsofpage($fileName);
 		echo("<BR><BR>
 		
 				<div class='buttonRow'>
@@ -121,19 +122,21 @@ function promptLogin($isAdmin=0)
 
 function DisplayName()
 {
+	if (isset($_SESSION)){
 		global $g_link, $g_username, $g_password;
 	
 		$g_link = mysql_connect('localhost', $g_username, $g_password); 
 		mysql_select_db('stt', $g_link);//TODO use a persistant database connections
-		$query = "SELECT * FROM `students` WHERE `id` = '". $_SESSION['loginid']."' OR id='".$_SESSION['Masquerade']."'";
+		$query = "SELECT * FROM `students` WHERE `id` = '". isset($_SESSION['loginid'])."' OR id='".isset($_SESSION['Masquerade'])."'";
 		$result = mysql_query($query);
 		while($row = mysql_fetch_assoc($result)){
 			$lookup[$row['id']]=$row['name'];
 		}
 	if(isset($_SESSION['Masquerade'])) {
-		echo $lookup[$_SESSION['Masquerade']] . " pretending to be ";
+		echo $lookup[isset($_SESSION['Masquerade'])] . " pretending to be ";
 	}
-	echo $lookup[$_SESSION['loginid']];
+	echo $lookup[isset($_SESSION['loginid'])];
+	}
 }
 
 

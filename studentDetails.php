@@ -1,14 +1,10 @@
 <?php
 require_once 'config.php';
 require_once "functions.php";
-//promptLogin();
-?>
-<html>
-<head>
-<meta http-equiv="refresh" content="60">
-</head>
-<body>
-<?php
+promptLogin();
+
+makeHeader("Student Profile", "Student Profile", 2, "studentDetails.php");
+
 if(isset($_GET['id'])){
 	
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
@@ -26,7 +22,7 @@ if(isset($stid)) {
 	}
 	$row = mysql_fetch_assoc($result);
 	echo "<h3>Details for ".$row['name']."</h3>";
-	echo "<table>";
+	echo "<table  style='color:white;'>";
 	echo "<tr><td>Class of ".$row['class']."</td>";
 	echo "<tr><td>Points that ".$row['name'] . " has: ";
 	$points=$row['points'];
@@ -34,6 +30,7 @@ if(isset($stid)) {
 		$points= $row['points']+$points;
 	}
 echo $points. "</td>";
+	echo "</table>";
 	}
 	
 	
@@ -42,8 +39,7 @@ else{
    echo "You forgot to tell me which student to show.<BR><BR><img src='http://storage.googleapis.com/chromeos-mgmt/0gjdgxs0jovce3/ChromeOsWallpaper/f5aac6c6-025d-4cc9-b8f5-da49114ca310'>";
 }
 	mysql_close($g_link);
-	echo "</tr>";
-	echo "</table>";
-	echo "</body></html>";
+	
+makeFooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page <a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black;} #footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 
 ?>

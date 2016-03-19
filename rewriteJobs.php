@@ -52,7 +52,7 @@ function main(){
 			
 			
 			$skillQuery = "SELECT `skid` FROM `studentsxskills` WHERE stid=".$_SESSION['loginid']." AND skid=".$jobdata['requirement_id'];
-			echo $skillQuery;
+			
 			$skillResult = queryFunc($skillQuery);
 			
 			if (!mysql_num_rows($skillResult)) {
