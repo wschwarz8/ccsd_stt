@@ -6,7 +6,6 @@
 function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 	if(!$ptitle)$ptitle=$tbtitle;	
 	echo("
-	<!--max devos made this -->
 	<html>
 		<head>
 			<title>". $tbtitle ."</title>
@@ -22,7 +21,7 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 				");
 		if (isset($_SESSION)){//check to see if someone was logged in so their is not errors
 			DisplayName();
-			echo " <a href='studentDetails.php?id=".isset($_SESSION['loginid'])."'>(my points)</a>";
+			echo " <a href='studentDetails.php?id=".$_SESSION['loginid']."'>(my points)</a>";
 		}
 			echo viewsofpage($fileName);
 		echo("<BR><BR>
@@ -127,7 +126,7 @@ function DisplayName()
 	
 		$g_link = mysql_connect('localhost', $g_username, $g_password); 
 		mysql_select_db('stt', $g_link);//TODO use a persistant database connections
-		$query = "SELECT * FROM `students` WHERE `id` = '". isset($_SESSION['loginid'])."' OR id='".isset($_SESSION['Masquerade'])."'";
+		$query = "SELECT * FROM students WHERE id = '". $_SESSION['loginid']."' OR id='".$_SESSION['Masquerade']."'";
 		$result = mysql_query($query);
 		while($row = mysql_fetch_assoc($result)){
 			$lookup[$row['id']]=$row['name'];
@@ -135,7 +134,7 @@ function DisplayName()
 	if(isset($_SESSION['Masquerade'])) {
 		echo $lookup[isset($_SESSION['Masquerade'])] . " pretending to be ";
 	}
-	echo $lookup[isset($_SESSION['loginid'])];
+	echo $lookup[$_SESSION['loginid']];
 	}
 }
 
