@@ -102,7 +102,6 @@ if ($_SESSION['admin']){
   </form>
 
 <?php
-		$PointOverride=$_POST['NewPoints'];
 	//start connection
 	$conn = mysql_connect("localhost", $g_username, $g_password);
 
@@ -154,7 +153,8 @@ if ($_SESSION['admin']){
 						case 'Samsung':
 							$requirement_id=4;
 							break;
-				break;
+					}
+					break;
 				case 2:
 					$jobMessage = "Fix " . $_POST['jOwner'] . "s $type laptop that is reported to not turn on.";
 					$jobPoints = 5;//change these to appropriate points later
@@ -195,10 +195,15 @@ if ($_SESSION['admin']){
 			
 			//all jobs are named laptop repair???? if not add this variable with a specific name to each case above
 			$jobName = "Laptop Repair for ".$_POST['jOwner'];
+
+			if(isset($_POST['NewPoints']))
+				$PointOverride=$_POST['NewPoints'];
+			else
+				$PointOverride=$jobPoints;
 			
 			//make a query to add a job
-			$makeJobQuery = "INSERT INTO `jobs`(`name`, `description`, `skillcatid`, `status`, `points`, `repeatable`, `limitone`, `claimedby`, `priority`, `requirement_id`) VALUES ('".$jobName."','".$jobMessage."',".$jobSkill.",1,".$PointOverride.",0,0,0,".$jobPriority.",".$requirement_id.")";
-			
+			$makeJobQuery = "INSERT INTO `jobs`(`name`, `description`, `skillcatid`, `status`, `points`, `repeatable`, `limitone`, `claimedby`, `priority`, `requirement_id`)
+						VALUES ('".$jobName."','".$jobMessage."',".$jobSkill.",1,'".$PointOverride."',0,0,0,".$jobPriority.",".$requirement_id.")";
 			//commence query if it fails it returns false
 			$result = mysql_query($makeJobQuery);
 			
@@ -206,7 +211,8 @@ if ($_SESSION['admin']){
 			if (!$result){
 				echo "Job Creation Failed<BR><BR>";
 				die('Invalid query: ' . mysql_error());
-			}else{
+			}
+			else{
 				echo "New Job Created!<BR>";
 			}
 
@@ -228,14 +234,14 @@ if ($_SESSION['admin']){
 			if (!$result){
 				echo "Device Failed to be added to devices table<BR><BR>";
 				die('Invalid query: ' . mysql_error());
-			}else{
+			}
+			else{
 				echo "Device added to devices table!<br>";
 			}
 			
-		}	
+		}// end if laptop taken
 		
-	}
-}
+	} // end if post
 
 ?>
 	</div>
@@ -474,10 +480,9 @@ else{
 			}else{
 				echo "Device added to devices table!<br>";
 			}
-			
-		}	
-		
+		}
 	}
+			
 }
 
 ?>
