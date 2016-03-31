@@ -106,16 +106,15 @@ function promptLogin($isAdmin=0)
 	//save the current url address for redirect after login
 		$_SESSION['redirectUrl'] = $_SERVER['REQUEST_URI'];
 	}
+	if ($isAdmin){
+		if (!isset($_SESSION['admin']) || ($_SESSION['admin'] != 1)){
+			header('location:/login/login.php?reason=2');die;
+		}
+	}
 	if(!$_SESSION['loginid'])
 	{
 		// uncomment this to require logins
-		header('location:/login/login.php?reason=1');
-	}
-	
-	if ($isAdmin){
-		if (!isset($_SESSION['admin']) || ($_SESSION['admin'] != 1)){
-					header('location:/login/login.php?reason=2');
-		}
+		header('location:/login/login.php?reason=1');die;
 	}
 }//end of prompt login
 
