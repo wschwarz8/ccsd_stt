@@ -1,7 +1,9 @@
 <?php
 	require_once "config.php";
 	require_once "functions.php";
-	promptLogin();
+	if(!isset($_GET['kiosk'])){
+		promptLogin();
+	}
 
 	makeHeader("Incident Report", "Make an Incident Report", 2,"incident_report.php", '<link href="/css_files/create_jobs.css" rel="stylesheet">');
 if ($_SESSION['admin']){
@@ -109,11 +111,12 @@ if ($_SESSION['admin']){
 	mysql_select_db('stt', $conn);
 
 	if ($_POST){
+		$explanation = str_replace("'","",$_POST['jExplanation']);
 
 		//make query to add an incident
 		$queryinsertincident = "INSERT INTO `incidents`
 			(`date`, `owner`, `status`, `laptopserial`, `chargerserial`, `laptoptaken`, `chargertaken`, `newlaptop`, `newlaptopserial`, `newchargerserial`, `explanation`, `receviedby`) VALUES 
-			('". $_POST['jDate'] ."','". $_POST['jOwner'] ."','". $_POST['jStatus'] ."','". $_POST['jLaptopNumber'] ."','". $_POST['jChargerNumber'] ."', ". $_POST['jLaptopTaken'] .", ". $_POST['jChargerTaken'] .", ". $_POST['jNewLaptop'] .",'". $_POST['jNewNumber'] . "', '". $_POST['jNewNumberCharger'] ."','". $_POST['jExplanation'] ."',' ".$_SESSION['loginid']."')";
+			('". $_POST['jDate'] ."','". $_POST['jOwner'] ."','". $_POST['jStatus'] ."','". $_POST['jLaptopNumber'] ."','". $_POST['jChargerNumber'] ."', ". $_POST['jLaptopTaken'] .", ". $_POST['jChargerTaken'] .", ". $_POST['jNewLaptop'] .",'". $_POST['jNewNumber'] . "', '". $_POST['jNewNumberCharger'] ."','". $explanation ."',' ".$_SESSION['loginid']."')";
 	
 		//commence query to add an incident
 		 $result = mysql_query($queryinsertincident);
@@ -133,7 +136,7 @@ if ($_SESSION['admin']){
 		//
 		
 		//make a job now if needed and add it to devices table
-		if ($_POST['jLaptopTaken'] = 1){
+		if ($_POST['jLaptopTaken'] == 1 && $_POST['jLaptopNumber'] != ''){
 			$type = CheckModel($_POST['jLaptopNumber']);
 			//check what is wrong with laptop
 			$requirement_id=0; // if it isn't set in the case it should be 0
