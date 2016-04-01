@@ -4,7 +4,7 @@ require_once "functions.php";
 
 promptLogin();
 $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a persistant database connections
-$devicequery = "SELECT `id`, `owner`, `assignedto_id`, `received`, `problem`, `resolution`, `notes`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `point_value`, `status_id` FROM `devices`";
+$devicequery = "SELECT * FROM `devices` WHERE status_id < 4";
 mysql_select_db('stt', $g_link);
 
 $categoryquery = "SELECT name, id FROM devicecategories";
