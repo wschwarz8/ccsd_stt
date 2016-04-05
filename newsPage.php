@@ -44,9 +44,10 @@ promptLogin();
 			
 			$queryinfo = "INSERT INTO `news`(`article_id`, `title`, `message`, `image_url`, `date`, `archive`) VALUES (" . $article_array[$article_count][0] . ",'" . $article_array[$article_count][1] . "','" . $article_array[$article_count][2] . "','" . $article_array[$article_count][3] . "','". $article_array[$article_count][4] ."', ". $article_array[$article_count][5] .")";
 			
-			mysql_query($queryinfo);
-			
-
+			$result = mysql_query($queryinfo);
+			if(!$result){
+				die('Invalid query: ' . mysql_error());
+			}
 		} else if ($_POST && $_POST['password'] == 'password2'){//password is password2
 			
 			echo $article_array[$_POST['articleId']][5];
