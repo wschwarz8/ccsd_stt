@@ -95,21 +95,23 @@ if($_SESSION['admin'])
 							//commence query
 							$info = mysql_query($query);
 							//store info from query into an array
+							$count = 0;
 							while($useful_info = mysql_fetch_assoc($info)){
+								$count++;
 								$article_part = 0;
-								$article_array[$useful_info['article_id']][$article_part]=$useful_info['article_id'];
+								$article_array[$count][$article_part]=$count;
 								$article_part = 1;
-								$article_array[$useful_info['article_id']][$article_part]=$useful_info['title'];
+								$article_array[$count][$article_part]=$useful_info['title'];
 								$article_part = 2;
-								$article_array[$useful_info['article_id']][$article_part]=$useful_info['message'];
+								$article_array[$count][$article_part]=$useful_info['message'];
 								$article_part = 3;
-								$article_array[$useful_info['article_id']][$article_part]=$useful_info['image_url'];
+								$article_array[$count][$article_part]=$useful_info['image_url'];
 								$article_part = 4;
-								$article_array[$useful_info['article_id']][$article_part]=$useful_info['date'];
+								$article_array[$count][$article_part]=$useful_info['date'];
 								$article_part = 5;
-								$article_array[$useful_info['article_id']][$article_part]=$useful_info['archive'];
+								$article_array[$count][$article_part]=$useful_info['archive'];
 								//takes on the last articles id giving total amount of articles
-								$article_count = $useful_info['article_id'];
+								$article_count = $count;
 							}
 						/* variables to access the article
 						$article_array[1][0];  --contains article id
