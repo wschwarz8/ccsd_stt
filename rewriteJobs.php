@@ -120,7 +120,7 @@ function main(){
 				$formMessage = "You have Successfully Unclaimed a Job";
 			}else{
 				//make a query to unclaim a job
-				$claimStatQuery = "UPDATE `jobs` SET `claimedby`=0, status=2 WHERE id=" . $_POST['formIdentifier'];
+				$claimStatQuery = "UPDATE `jobs` SET `claimedby`=0, status=1 WHERE id=" . $_POST['formIdentifier'];
 				queryFunc($claimStatQuery);
 				$formMessage = "You have Successfully Unclaimed a Job";
 			}
