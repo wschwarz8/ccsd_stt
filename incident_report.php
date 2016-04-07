@@ -94,9 +94,11 @@
 		
 			<!-- Explanation input field -->
 			<tr><td>Explanation of incident</td><td><textarea name="jExplanation" placeholder="Explanation of incident"></textarea></td></tr>
-<?php if(isset($_SESSION['admin'])) { ?>			
-			<tr><td>Point override</td><td><input type="text" name="NewPoints" placeholder="Admin Point Override"></td></tr>
-<? } ?>
+<?php
+if(isset($_SESSION['admin'])) {
+	echo "<tr><td>Point override</td><td><input type='text' name='NewPoints' placeholder='Admin Point Override'></td></tr>";
+} 
+?>
 
       <tr><td colspan="2" style="text-align:center;"><input type="submit"></td></tr>
     
@@ -136,8 +138,7 @@
 		//
 		
 		//make a job now if needed and add it to devices table
-print_r($_POST);die;
-		if ($_POST['jLaptopTaken'] == 1 && $_POST['jLaptopNumber'] != ''){
+		if ($_POST['jStatus'] != 3 && $_POST['jLaptopTaken'] == 1 && $_POST['jLaptopNumber'] != ''){
 			$type = CheckModel($_POST['jLaptopNumber']);
 			//check what is wrong with laptop
 			$requirement_id=0; // if it isn't set in the case it should be 0
@@ -246,7 +247,6 @@ print_r($_POST);die;
 		}// end if laptop taken
 		
 	} // end if post
-}
 
 ?>
 	</div>
