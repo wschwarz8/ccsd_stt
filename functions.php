@@ -32,7 +32,9 @@ function makeHeader($tbtitle,$ptitle,$pstyle,$fileName, $hhtml=""){
 					<a href='/scoreboard.php?type=all'><div class='buttons'>Scoreboard</div></a>
 					<a href='/team.php'><div class='buttons'>Team Pages</div></a>
 					<a href='/DisplayBroken.php'><div class='buttons'>Broken</div></a>
+					<a href='/DisplayIncidents.php'><div class='buttons'>Incidents</div></a>
 					<a href='/login/login.php?logout=1'><div class='buttons'>Log Out</div></a> 
+				
 				</div>
 		
 			<div class='meat'>
