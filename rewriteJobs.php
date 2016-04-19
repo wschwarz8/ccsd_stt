@@ -141,14 +141,20 @@ function main(){
 			
 			//process query
 			$jobdata = mysql_fetch_assoc($jobInfo);
-				
-			//make points query
-			$addPointsQuery = "INSERT INTO `points`(`job_id`, `student_id`, `points`, `category_id`) VALUES (".$_POST['formIdentifier'].",".$_SESSION['loginid'].",".$jobdata['points'].",".$jobdata['skillcatid'].")";
 			
-			//add points with query
-			queryFunc($addPointsQuery);
-			$formMessage = "You have Successfully Resolved a Job";
+			$PointsInfoQuery = "SELECT count(*) as count FROM  `points` WHERE job_id =".$_POST['formIdentifier']." AND student_id =".$_SESSION['loginid'];
+			$PointsInfo = queryFunc($PointsInfoQuery);
+			$Pointsdata = mysql_fetch_assoc($PontsInfo);
+		
+			if($Pointsdata['count'] <= 0 ){//If you dont already have the points for this job
 			
+				//make points query
+				$addPointsQuery = "INSERT INTO `points`(`job_id`, `student_id`, `points`, `category_id`) VALUES (".$_POST['formIdentifier'].",".$_SESSION['loginid'].",".$jobdata['points'].",".$jobdata['skillcatid'].")";
+
+				//add points with query
+				queryFunc($addPointsQuery);
+				$formMessage = "You have Successfully Resolved a Job";
+			}
 			
  		}else if($_POST['claimStatButt'] == 4){
  			//ignore a job
