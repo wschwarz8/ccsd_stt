@@ -62,7 +62,7 @@ function main(){
 			}
 			
 			
-			if($numClaimed['count'] < 3) { // If they haven't claimed too many jobs already
+			if($numClaimed['count'] < 3 || isset($_SESSION['admin'])) { // If they haven't claimed too many jobs already
 				
 				if($jobdata['requirement_id'] == $skill['skid']) { // If they have the skill needed to do the job
 					
