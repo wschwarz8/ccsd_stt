@@ -64,7 +64,7 @@ function main(){
 			
 			if($numClaimed['count'] < 3 || isset($_SESSION['admin'])) { // If they haven't claimed too many jobs already
 				
-				if($jobdata['requirement_id'] == $skill['skid']) { // If they have the skill needed to do the job
+				if($jobdata['requirement_id'] == $skill['skid'] || isset($_SESSION['admin'])) { // If they have the skill needed to do the job
 					
 					if ($jobdata['repeatable'] != 1){
 					//make a query to claim a job
