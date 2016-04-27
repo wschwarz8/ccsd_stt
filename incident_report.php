@@ -15,6 +15,17 @@
 	</h2>
   <form method="post" name="postIt">
     <table>
+<?php
+if(isset($_GET['kiosk'])){
+	echo "<tr><td>Who should get the points?</td><td><select name='personid'>";
+	$query = "SELECT name, id FROM students WHERE active=1";
+	$resul = mysql_query($query);
+	while ($ro = mysql_fetch_assoc($resul)) {
+		echo "<option value='".$ro['id']."'>".$ro['name']."</option>";
+	}	
+}
+echo "</option>";
+?>
 			<!-- Date Recieved input field -->
       <tr><td>Date Recieved</td><td><input type="date" name="jDate" placeholder="Date" value=></td></tr>
 			
@@ -139,6 +150,10 @@ if(isset($_SESSION['admin'])) {
 		
 		//make a job now if needed and add it to devices table
 		if ($_POST['jStatus'] != 3 && $_POST['jLaptopTaken'] == 1 && $_POST['jLaptopNumber'] != ''){
+			$personid = $_SESSION['loginid'];
+			if(isset($_GET['kiosk'])){
+				$personid = $_POST['personid'];
+			}
 			$type = CheckModel($_POST['jLaptopNumber']);
 			//check what is wrong with laptop
 			$requirement_id=0; // if it isn't set in the case it should be 0
