@@ -129,7 +129,7 @@ if(isset($_SESSION['admin'])) {
 		//make query to add an incident
 		$queryinsertincident = "INSERT INTO `incidents`
 			(`date`, `owner`, `status`, `laptopserial`, `chargerserial`, `laptoptaken`, `chargertaken`, `newlaptop`, `newlaptopserial`, `newchargerserial`, `explanation`, `receviedby`) VALUES 
-			('". $_POST['jDate'] ."','". $_POST['jOwner'] ."','". $_POST['jStatus'] ."','". $_POST['jLaptopNumber'] ."','". $_POST['jChargerNumber'] ."', ". $_POST['jLaptopTaken'] .", ". $_POST['jChargerTaken'] .", ". $_POST['jNewLaptop'] .",'". $_POST['jNewNumber'] . "', '". $_POST['jNewNumberCharger'] ."','". $explanation ."',' ".$_SESSION['loginid']."')";
+			('". $_POST['jDate'] ."','". $_POST['jOwner'] ."','". $_POST['jStatus'] ."','". $_POST['jLaptopNumber'] ."','". $_POST['jChargerNumber'] ."', ". $_POST['jLaptopTaken'] .", ". $_POST['jChargerTaken'] .", ". $_POST['jNewLaptop'] .",'". $_POST['jNewNumber'] . "', '". $_POST['jNewNumberCharger'] ."','". $explanation ."',' ".$personid."')";
 	
 		//commence query to add an incident
 		 $result = mysql_query($queryinsertincident);
@@ -237,7 +237,7 @@ if(isset($_SESSION['admin'])) {
 			}
 
 			// Give the student a point
-			queryFunc("INSERT INTO points (student_id, points, category_id) VALUES ('".$_SESSION['loginid']."', 1, 1)");
+			queryFunc("INSERT INTO points (student_id, points, category_id) VALUES ('".$personid."', 1, 1)");
 			
 			
 			//
@@ -245,7 +245,7 @@ if(isset($_SESSION['admin'])) {
 			//
 			
 			//make query to add to devices table
-			$makeDevicesQuery = "INSERT INTO `devices`(`owner`, `assignedto_id`, `received`, `problem`, `resolution`, `notes`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `status_id`) VALUES ('".$_POST['jOwner']."','','".date('Y-m-d H:i:s')."','".$jobMessage."','','".$notes."','','','','".$_SESSION['loginid']."','".$_POST['jLaptopNumber']."', '1')";
+			$makeDevicesQuery = "INSERT INTO `devices`(`owner`, `assignedto_id`, `received`, `problem`, `resolution`, `notes`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `status_id`) VALUES ('".$_POST['jOwner']."','','".date('Y-m-d H:i:s')."','".$jobMessage."','','".$notes."','','','','".$personid."','".$_POST['jLaptopNumber']."', '1')";
 			
 			//commence query and returns false if query failed
 			$result = mysql_query($makeDevicesQuery);
