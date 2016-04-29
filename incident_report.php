@@ -206,20 +206,7 @@ if(isset($_SESSION['admin'])) {
 			else
 				$PointOverride=$jobPoints;
 			
-			//make a query to add a job
-			$makeJobQuery = "INSERT INTO `jobs`(`name`, `description`, `skillcatid`, `status`, `points`, `repeatable`, `limitone`, `claimedby`, `priority`, `requirement_id`)
-						VALUES ('".$jobName."','".$jobMessage."',".$jobSkill.",1,'".$PointOverride."',0,0,0,".$jobPriority.",".$requirement_id.")";
-			//commence query if it fails it returns false
-			$result = mysql_query($makeJobQuery);
 			
-			//announce whether a job was created and query was successful
-			if (!$result){
-				echo "Job Creation Failed<BR><BR>";
-				die('Invalid query: ' . mysql_error());
-			}
-			else{
-				echo "New Job Created!<BR>";
-			}
 
 			// Give the student a point
 			queryFunc("INSERT INTO points (student_id, points, category_id) VALUES ('".$_SESSION['loginid']."', 1, 1)");
@@ -230,7 +217,7 @@ if(isset($_SESSION['admin'])) {
 			//
 			
 			//make query to add to devices table
-			$makeDevicesQuery = "INSERT INTO `devices`(`owner`, `assignedto_id`, `received`, `problem`, `resolution`, `notes`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `status_id`) VALUES ('".$_POST['jOwner']."','','".date('Y-m-d H:i:s')."','".$jobMessage."','','".$notes."','','','','".$_SESSION['loginid']."','".$_POST['jLaptopNumber']."', '1')";
+			$makeDevicesQuery = "INSERT INTO `devices`(`owner`, `assignedto_id`, `received`, `problem`, `resolution`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `status_id`) VALUES ('".$_POST['jOwner']."','','".date('Y-m-d H:i:s')."','".$jobMessage."','','','','','".$_SESSION['loginid']."','".$_POST['jLaptopNumber']."', '1')";
 			
 			//commence query and returns false if query failed
 			$result = mysql_query($makeDevicesQuery);
@@ -239,9 +226,29 @@ if(isset($_SESSION['admin'])) {
 			if (!$result){
 				echo "Device Failed to be added to devices table<BR><BR>";
 				die('Invalid query: ' . mysql_error());
+				$deviceID = 0;
+			}else{
+				echo "Device added to devices table!<br>";
+				$deviceID = mysql_insert_id();
+			}
+			
+
+			
+			
+			
+			//make a query to add a job
+			$makeJobQuery = "INSERT INTO `jobs`(`name`, `description`, `skillcatid`, `status`, `points`, `repeatable`, `limitone`, `claimedby`, `priority`, `requirement_id`, `device_id`)
+						VALUES ('".$jobName."','".$jobMessage."',".$jobSkill.",1,'".$PointOverride."',0,0,0,".$jobPriority.",".$requirement_id.",'".$deviceID."')";
+			//commence query if it fails it returns false
+			$result = mysql_query($makeJobQuery);
+			
+			//announce whether a job was created and query was successful
+			if (!$result){
+				echo "Job Creation Failed<BR><BR>";
+				die('Invalid query: ' . mysql_error());
 			}
 			else{
-				echo "Device added to devices table!<br>";
+				echo "New Job Created!<BR>";
 			}
 			
 		}// end if laptop taken

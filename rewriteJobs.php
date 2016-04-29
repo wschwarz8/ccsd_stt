@@ -28,6 +28,80 @@ function main(){
 	echo "<script>jobCount = 0;</script>";
 	 $formMessage = "";
 	 $formCheck = "False";
+	 $partsList = "Parts Used: ";
+	 
+	if (isset($_SESSION['showChecklist'])){
+		
+		
+		if (isset($_POST['cancelResolve']) && $_POST['cancelResolve'] == 1){
+			$_SESSION['showChecklist'] = "False";
+		}
+		
+		if (isset($_POST['checkListSubmit']) && $_POST['checkListSubmit'] == 1){
+			
+			//check what was checked on the checklist
+			
+			
+			//=======================samsung parts=========================
+			if (isset($_POST['lcd']) && $_POST['lcd'] == 1){
+				$partsList  = $partsList . " - LCD - ";
+			}
+			if (isset($_POST['glass']) && $_POST['glass'] == 1){
+				$partsList  = $partsList . " - Glass - ";
+			}
+			if (isset($_POST['keyboard']) && $_POST['keyboard'] == 1){
+				$partsList  = $partsList . " - Keyboard - ";
+			}
+			if (isset($_POST['displayCable']) && $_POST['displayCable'] == 1){
+				$partsList  = $partsList . " - Display Cable - ";
+			}
+			if (isset($_POST['motherboard']) && $_POST['motherboard'] == 1){
+				$partsList  = $partsList . " - Motherboard - ";
+			}
+			if (isset($_POST['chargerPort']) && $_POST['chargerPort'] == 1){
+				$partsList  = $partsList . " - Charger Port - ";
+			}
+			
+			if (isset($_POST['other']) && $_POST['other'] != ""){
+				$partsList  = $partsList . " - Other Unlisted parts: " . $_POST['other'];
+			}
+			
+			if (isset($_POST['notes']) && $_POST['notes'] != ""){
+				$notes =  "Notes: " . $_POST['notes'];
+			}
+			
+			//make a query to resolve a job
+			$resolveQuery = "UPDATE `jobs` SET `status`=3 WHERE id=" . $_POST['formIdentifier2'];
+			
+			//send query
+			queryFunc($resolveQuery);
+			
+			//get info for adding points
+			$jobInfoQuery = "SELECT * FROM `jobs` WHERE id=" . $_POST['formIdentifier2'];
+			
+			//send query
+			$jobInfo = queryFunc($jobInfoQuery);
+			
+			//process query
+			$jobdata = mysql_fetch_assoc($jobInfo);
+				
+			//make points query
+			$addPointsQuery = "INSERT INTO `points`(`job_id`, `student_id`, `points`, `category_id`) VALUES (".$_POST['formIdentifier2'].",".$_SESSION['loginid'].",".$jobdata['points'].",".$jobdata['skillcatid'].")";
+			
+			//add points with query
+			queryFunc($addPointsQuery);
+			$formMessage = "You have Successfully Resolved a Job" . $partsList;
+			
+			$updateDeviceQuery = "UPDATE `devices` SET `resolution`='".$partsList."', `repaired`='". date("Y-m-d H:i:s") ."',`notes`='".$notes."' , `status_id`=4 WHERE id=".$jobdata['device_id'];
+			queryFunc($updateDeviceQuery);
+			
+			
+			$_SESSION['showChecklist'] = "False";
+		}
+		
+	}else{
+		$_SESSION['showChecklist'] = "False";
+	}
 	
 	//check if any of the forms were submitted
 	if (isset($_POST['formIdentifier'])){
@@ -62,7 +136,7 @@ function main(){
 			}
 			
 			
-			if($numClaimed['count'] < 3 || isset($_SESSION['admin'])) { // If they haven't claimed too many jobs already
+			if($numClaimed['count'] < 3) { // If they haven't claimed too many jobs already
 				
 				if($jobdata['requirement_id'] == $skill['skid']) { // If they have the skill needed to do the job
 					
@@ -113,6 +187,7 @@ function main(){
 			//process query
 			$jobdata = mysql_fetch_assoc($jobInfo);
 			
+			
 			if ($jobdata['repeatable'] == 1){
 				//make a query to unclaim a job
 				$claimStatQuery = "DELETE FROM `jobs` WHERE id=" . $_POST['formIdentifier'];
@@ -127,6 +202,21 @@ function main(){
 
 		}else if($_POST['claimStatButt'] == 3){
 			
+			$jobInfoQuery = "SELECT * FROM `jobs` WHERE id=" . $_POST['formIdentifier'];
+			
+			//send query
+			$jobInfo = queryFunc($jobInfoQuery);
+			
+			//process query
+			$jobdata = mysql_fetch_assoc($jobInfo);
+			
+			if ($jobdata['device_id'] != 0){
+			
+				$_SESSION['showChecklist'] = "True";
+				
+			}else{
+				
+				$_SESSION['showChecklist'] = "False";
 			//make a query to resolve a job
 			$resolveQuery = "UPDATE `jobs` SET `status`=3 WHERE id=" . $_POST['formIdentifier'];
 			
@@ -149,6 +239,7 @@ function main(){
 			queryFunc($addPointsQuery);
 			$formMessage = "You have Successfully Resolved a Job";
 			
+		}
 			
  		}else if($_POST['claimStatButt'] == 4){
  			//ignore a job
@@ -270,6 +361,7 @@ function main(){
 		
   }
 	
+	if ($_SESSION['showChecklist'] == "False"){
 	
   //add the job display buttons to the screen
   echo("
@@ -356,6 +448,57 @@ function main(){
 	<button type='submit' name='showIgnored' value='1'>Show Ignored Jobs</button>
 	</form>
 	");
+	}
+	}else{
+		
+		echo("
+		
+		<style>
+		.meat{
+			background:none;
+		}
+		</style>
+		
+		<center>
+		<div style='width:50%;background:black;padding:5px;margin-top:10px;border-radius:5px;'>
+		<h2>Please enter all parts you used</h2>
+		
+		<form method='post'>
+		<input type='hidden' name='formIdentifier2' value='".$_POST['formIdentifier']."'>
+			<fieldset>
+				<legend>Laptop Parts Used</legend>
+
+				<input type='checkbox' name='lcd' value='1'>LCD<br>
+				<input type='checkbox' name='glass' value='1'>Glass<br>
+				<input type='checkbox' name='keyboard' value='1'>Keyboard<br>
+				<input type='checkbox' name='displayCable' value='1'>Display cable<br>
+				<input type='checkbox' name='motherboard' value='1'>Motherboard<br>
+				<input type='checkbox' name='chargerPort' value='1'>ChargerPort<br>
+     </fieldset>
+		
+			<fieldset>
+				<legend>Other Parts</legend>
+				
+				<input type='text' name='other' placeholder='Input any unlisted parts here' style='width:200px;'>
+
+			</fieldset>
+			
+			<fieldset>
+				<legend>Notes</legend>
+				
+				<p>Please indicate any issues or if points need corrected or distributed to other students here.</p>
+				<input type='text' name='notes' placeholder='notes' style='width:200px;'>
+
+			</fieldset>
+			
+			<button name='checkListSubmit' type='submit' value='1'>Submit</button>
+			<button name='cancelResolve' type='submit' value='1'>Cancel Resolve</button>
+		</form>
+		</div>
+		</center>
+		
+		");
+		
 	}
   
 }//end of main function
