@@ -7,14 +7,13 @@ $g_link = mysql_connect('localhost', $g_username, $g_password); //TODO use a per
 $devicequery = "SELECT * FROM `incidents`";
 mysql_select_db('stt', $g_link);
 
-$categoryquery = "SELECT name, id FROM devicecatagories ";
-
+$categoryquery = "SELECT name, id FROM students";
 $result2 = mysql_query($categoryquery);
 while ($row = mysql_fetch_assoc($result2)) {
 	$devicearray[$row['id']]=$row['name'];
 }	
-$namequery = "SELECT name, id FROM students";
 
+$namequery = "SELECT name, id FROM students";
 $result3 = mysql_query($namequery);
 while ($row = mysql_fetch_assoc($result3)) {
 	$namearray[$row['id']]=$row['name'];
@@ -41,19 +40,19 @@ while ($row = mysql_fetch_assoc($result))  // TODO format to look better
 		if($row['laptoptaken'] ==1){
 				echo "</td><td>yes";
 				}
-				if($row['laptoptaken'] ==0){
+		else{
 				echo "</td><td>no";
 				}
 		if($row['chargertaken'] ==1){
 				echo "</td><td>yes";
 				}
-				if($row['chargertaken'] ==0){
+		else{
 				echo "</td><td>no";
 				}
 		if($row['newlaptop'] ==1){
 				echo "</td><td>no";
 				}
-				if($row['newlaptop'] ==2){
+		else{
 				echo "</td><td>yes";
 				} 
 			echo"</td><td>".$row['newlaptopserial'].

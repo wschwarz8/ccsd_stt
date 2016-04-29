@@ -15,6 +15,17 @@
 	</h2>
   <form method="post" name="postIt">
     <table>
+<?php
+if(isset($_GET['kiosk'])){
+	echo "<tr><td>Who should get the points?</td><td><select name='personid'>";
+	$query = "SELECT name, id FROM students WHERE active=1";
+	$resul = mysql_query($query);
+	while ($ro = mysql_fetch_assoc($resul)) {
+		echo "<option value='".$ro['id']."'>".$ro['name']."</option>";
+	}	
+}
+echo "</option>";
+?>
 			<!-- Date Recieved input field -->
       <tr><td>Date Recieved</td><td><input type="date" name="jDate" placeholder="Date" value=></td></tr>
 			
@@ -118,7 +129,7 @@ if(isset($_SESSION['admin'])) {
 		//make query to add an incident
 		$queryinsertincident = "INSERT INTO `incidents`
 			(`date`, `owner`, `status`, `laptopserial`, `chargerserial`, `laptoptaken`, `chargertaken`, `newlaptop`, `newlaptopserial`, `newchargerserial`, `explanation`, `receviedby`) VALUES 
-			('". $_POST['jDate'] ."','". $_POST['jOwner'] ."','". $_POST['jStatus'] ."','". $_POST['jLaptopNumber'] ."','". $_POST['jChargerNumber'] ."', ". $_POST['jLaptopTaken'] .", ". $_POST['jChargerTaken'] .", ". $_POST['jNewLaptop'] .",'". $_POST['jNewNumber'] . "', '". $_POST['jNewNumberCharger'] ."','". $explanation ."',' ".$_SESSION['loginid']."')";
+			('". $_POST['jDate'] ."','". $_POST['jOwner'] ."','". $_POST['jStatus'] ."','". $_POST['jLaptopNumber'] ."','". $_POST['jChargerNumber'] ."', ". $_POST['jLaptopTaken'] .", ". $_POST['jChargerTaken'] .", ". $_POST['jNewLaptop'] .",'". $_POST['jNewNumber'] . "', '". $_POST['jNewNumberCharger'] ."','". $explanation ."',' ".$personid."')";
 	
 		//commence query to add an incident
 		 $result = mysql_query($queryinsertincident);
@@ -139,6 +150,10 @@ if(isset($_SESSION['admin'])) {
 		
 		//make a job now if needed and add it to devices table
 		if ($_POST['jStatus'] != 3 && $_POST['jLaptopTaken'] == 1 && $_POST['jLaptopNumber'] != ''){
+			$personid = $_SESSION['loginid'];
+			if(isset($_GET['kiosk'])){
+				$personid = $_POST['personid'];
+			}
 			$type = CheckModel($_POST['jLaptopNumber']);
 			//check what is wrong with laptop
 			$requirement_id=0; // if it isn't set in the case it should be 0
@@ -209,7 +224,7 @@ if(isset($_SESSION['admin'])) {
 			
 
 			// Give the student a point
-			queryFunc("INSERT INTO points (student_id, points, category_id) VALUES ('".$_SESSION['loginid']."', 1, 1)");
+			queryFunc("INSERT INTO points (student_id, points, category_id) VALUES ('".$personid."', 1, 1)");
 			
 			
 			//
@@ -217,7 +232,9 @@ if(isset($_SESSION['admin'])) {
 			//
 			
 			//make query to add to devices table
-			$makeDevicesQuery = "INSERT INTO `devices`(`owner`, `assignedto_id`, `received`, `problem`, `resolution`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `status_id`) VALUES ('".$_POST['jOwner']."','','".date('Y-m-d H:i:s')."','".$jobMessage."','','','','','".$_SESSION['loginid']."','".$_POST['jLaptopNumber']."', '1')";
+
+			$makeDevicesQuery = "INSERT INTO `devices`(`owner`, `assignedto_id`, `received`, `problem`, `resolution`, `notes`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `status_id`) VALUES ('".$_POST['jOwner']."','','".date('Y-m-d H:i:s')."','".$jobMessage."','','".$notes."','','','','".$personid."','".$_POST['jLaptopNumber']."', '1')";
+
 			
 			//commence query and returns false if query failed
 			$result = mysql_query($makeDevicesQuery);
@@ -262,3 +279,4 @@ if(isset($_SESSION['admin'])) {
 <?php
   makeFooter("&#169; Copyright Cherokee Washington Highschool <a href='index.php'> Home Page<a/><a href='' onclick='initIt()'>About us</a> <style>#footer a{color:black; margin-left:3px;}#footer p{color:black; text-decoration:underlined;}</style>",0,"true");
 	mysql_close($conn);
+?>

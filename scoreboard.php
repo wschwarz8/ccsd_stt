@@ -20,7 +20,12 @@ if($_GET['type']=='lastweek'){
 else if($_GET['type']=='all'){
    $type = 'all';
 }
-else{
+else if($_GET['type']=='custom'){
+   $type = 'custom';
+   $weeksago=1;
+   if(isset($_GET['history'])) $weeksago = $_GET['history'];
+}
+else {
    $type = 'thisweek';
 }
 
@@ -44,6 +49,13 @@ else if($type=='lastweek'){ // If this is a weekly score and not a total score
 else if($type=='all'){
     $maxpoints = 100 - floor(100/20 * (weekdiff('05/27/2016', date("m/d/Y"))));
     $label='now';
+}
+else if($type=='custom'){
+    $last_sunday = date('Y-m-d H:i_s', strtotime('-'.$weeksago.' weeks Sunday'));
+    $last_last_sunday = date('Y-m-d H:i_s', strtotime('-'.($weeksago+1).' weeks Sunday'));
+    $label = $last_last_sunday.' to '.$last_sunday;
+    $query .= " AND b.timestamp < '$last_sunday'";
+    $query .= " AND b.timestamp > '$last_last_sunday'";
 }
 else { // This shouldn't happen
     $label='ERROR';
@@ -82,6 +94,12 @@ else echo "<a href='scoreboard.php?type=lastweek'>lastWeek</a>";
 echo " | ";
 if($type=='all') echo "all";
 else echo "<a href='scoreboard.php?type=all'>all</a>";
+echo " | ";
+if($type=='custom'){
+   echo "viewing ".$weeksago. " weeks ago";
+   echo "<a href='scoreboard.php?type=custom&history=".($weeksago+1)."'>(view ".($weeksago+1)." weeks ago)</a>";
+}
+else echo "<a href='scoreboard.php?type=custom'>custom</a>";
 
 echo "<table><tr><td valign=top>";
 if($label=='now') echo '<BR>Top 5<BR>(Out of '.$maxpoints.' points)';

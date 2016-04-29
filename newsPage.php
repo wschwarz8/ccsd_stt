@@ -42,8 +42,8 @@ promptLogin();
 			$article_array[$article_count][4] = $_POST['date'];
 			$article_array[$article_count][5] = 0;
 			
-			$queryinfo = "INSERT INTO `news`(`article_id`, `title`, `message`, `image_url`, `date`, `archive`) VALUES (" . $article_array[$article_count][0] . ",'" . $article_array[$article_count][1] . "','" . $article_array[$article_count][2] . "','" . $article_array[$article_count][3] . "','". $article_array[$article_count][4] ."', ". $article_array[$article_count][5] .")";
-			
+			$queryinfo = "INSERT INTO `news`(`title`, `message`, `image_url`, `date`, `archive`) VALUES ('" . $article_array[$article_count][1] . "','" . $article_array[$article_count][2] . "','" . $article_array[$article_count][3] . "','". $article_array[$article_count][4] ."', ". $article_array[$article_count][5] .")";
+
 			$result = mysql_query($queryinfo);
 			if(!$result){
 				die('Invalid query: ' . mysql_error());
