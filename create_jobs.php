@@ -41,8 +41,6 @@ promptLogin(1);
           </select>
         </td>
       </tr>
-      <!-- job status input field -->
-      <tr><td>Job status</td><td><input type="text" name="jStatus" value="1" placeholder="Status"></td></tr>
       <!-- job Points input field -->
       <tr><td>Job Points</td><td><input type="text" name="jPoints" value="1" placeholder="Points"></td></tr>
       <tr><td>Job Claim</td>
@@ -86,9 +84,16 @@ promptLogin(1);
 	 if ($_POST){
 		$jDesc=mysql_real_escape_string($_POST['jDesc']);
 		  
+		 
+		 if ($_POST['jClaim'] != 0){
+			 $jStatus = 2;
+		 }else{
+			 $jStatus = 1;
+		 }
+		 
 		 //make query
 $queryinsertjob = "INSERT INTO `jobs`( `name`, `description`, `skillcatid`, `status`, `requirement_id`, `points`, `claimedby`, `priority`) VALUES 
-('".$_POST['jName']."','".$jDesc."', ".$_POST['jSkillCat'].", ".$_POST['jStatus'].", ".$_POST['jSkillRequired'].", ".$_POST['jPoints'].", ".$_POST['jClaim'].", ".$_POST['jPriority'].")";
+('".$_POST['jName']."','".$jDesc."', ".$_POST['jSkillCat'].", ".$jStatus.", ".$_POST['jSkillRequired'].", ".$_POST['jPoints'].", ".$_POST['jClaim'].", ".$_POST['jPriority'].")";
 
 		 //commence query
 		 $rsp = mysql_query($queryinsertjob);
