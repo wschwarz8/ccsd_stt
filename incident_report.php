@@ -18,6 +18,7 @@
 <?php
 if(isset($_GET['kiosk'])){
 	echo "<tr><td>Who should get the points?</td><td><select name='personid'>";
+	echo "<option value='14'>-----</option>";
 	$query = "SELECT name, id FROM students WHERE active=1";
 	$resul = mysql_query($query);
 	while ($ro = mysql_fetch_assoc($resul)) {
@@ -27,7 +28,11 @@ if(isset($_GET['kiosk'])){
 echo "</option>";
 ?>
 			<!-- Date Recieved input field -->
-      <tr><td>Date Recieved</td><td><input type="date" name="jDate" placeholder="Date" value=></td></tr>
+      <tr><td>Date Recieved</td><td><input type="date" name="jDate" placeholder="Date"
+value="<?php
+echo date("Y-m-d");
+?>
+"></td></tr>
 			
       <!-- Owner input field -->
       <tr><td>Owner of Laptop</td><td><input type="text" name="jOwner" placeholder="Owner"></td></tr>
@@ -42,54 +47,54 @@ echo "</option>";
             <option value="3">No repair needed</option>
           </select>
 					<br><br>Whats Wrong if it needs repaired?:
-					<select name="whatsWrong">
+					<select name="whatsWrong" onChange="if(this.selectedIndex==6)document.getElementById('other').type='text'">
 						<option value="1">Broken Screen</option>
 						<option value="2">Does not turn on </option>
 						<option value="3">Does not connect to wifi</option>
 						<option value="4">Keyboard does not work</option>
 						<option value="5">Mouse does not work</option>
 						<option value="6">Unknown</option>
-						<option value="7">Other:<br><input type="text" name="otherReason" placeholder="Other"></option>
+						<option value="7">Other:<br><input id='other' type="hidden" name="otherReason" placeholder="Other Reason"></option>
 					</select>
         </td>
       </tr>
 		
+			<!-- Laptop serial input field -->
+ 			<tr><td>Serial Number of Laptop</td><td><textarea name="jLaptopNumber" placeholder="Laptop Serial Number" onChange="this.form.jLaptopTaken.selectedIndex=0"></textarea></td></tr>
+			
 			  <!-- Laptop taken input field -->		 
 			<tr><td>Laptop taken from student?</td>
         <td>
           <select name="jLaptopTaken">
             <!-- replace options with a query later -->
             <option value="1">Yes</option>
-            <option value="2">No</option>
+            <option value="2" selected>No</option>
           </select>
         </td>
       </tr>
 
-			<!-- Laptop serial input field -->
- 			<tr><td>Serial Number of Laptop</td><td><textarea name="jLaptopNumber" placeholder="Laptop Serial Number"></textarea></td></tr>
 			
+		  <!-- Charger serial input field -->
+ 			<tr><td>Serial Number of Charger</td><td><textarea name="jChargerNumber" placeholder="Charger Serial Number" onChange="this.form.jChargerTaken.selectedIndex=0"></textarea></td></tr>
+		
+
+	
 			<!-- Charger taken input field -->		 
 			<tr><td>Charger taken from student?</td>
         <td>
           <select name="jChargerTaken">
             <!-- replace options with a query later -->
             <option value="1">Yes</option>
-            <option value="2" default=1>No</option>
+            <option value="2" selected>No</option>
           </select>
         </td>
       </tr>
-			
-		  <!-- Charger serial input field -->
- 			<tr><td>Serial Number of Charger</td><td><textarea name="jChargerNumber" placeholder="Charger Serial Number"></textarea></td></tr>
-		
-
-	
  
 		
 		  <!-- New Laptop input field -->
-		  <tr><td>Did you give a new laptop to the student?</td>
+		  <tr><td>Did you give a new laptop or charger to the student?</td>
         <td>
-          <select name="jNewLaptop">
+          <select name="jNewLaptop" onChange="document.getElementById('lserialrow').style='display: table-row';document.getElementById('cserialrow').style='display: table-row'">
             <!-- replace options with a query later -->
             <option value="1">No loaner given to student</option>
             <option value="2">Loaner/Replacement given to student</option>
@@ -98,10 +103,10 @@ echo "</option>";
       </tr>
 		
 			<!-- Serial Number input field -->
-			<tr><td>Serial Number of new laptop</td><td><textarea name="jNewNumber" placeholder="New Serial Number"></textarea></td></tr>
+			<tr id=lserialrow style="display:none"><td>Serial Number of new laptop</td><td><textarea name="jNewNumber" placeholder="New Serial Number"></textarea></td></tr>
 		
 		<!-- Serial Number input field -->
-			<tr><td>Serial Number of new laptop Charger</td><td><textarea name="jNewNumberCharger" placeholder="New Charger Serial Number"></textarea></td></tr>
+			<tr id=cserialrow style="display:none"><td>Serial Number of new laptop Charger</td><td><textarea name="jNewNumberCharger" placeholder="New Charger Serial Number"></textarea></td></tr>
 		
 			<!-- Explanation input field -->
 			<tr><td>Explanation of incident</td><td><textarea name="jExplanation" placeholder="Explanation of incident"></textarea></td></tr>
@@ -125,6 +130,7 @@ if(isset($_SESSION['admin'])) {
 
 	if ($_POST){
 		$explanation = str_replace("'","",$_POST['jExplanation']);
+		$otherReason = str_replace("'","",$_POST['otherReason']);
 
 		//make query to add an incident
 		$queryinsertincident = "INSERT INTO `incidents`
@@ -201,7 +207,7 @@ if(isset($_SESSION['admin'])) {
 					$jobSkill = 5;
 					break;
 				case 7:
-					$jobMessage = "Fix " . $_POST['jOwner'] . "s $type laptop that has the problem:".$_POST['otherReason'];
+					$jobMessage = "Fix " . $_POST['jOwner'] . "s $type laptop that has the problem:".$otherReason;
 					$jobPoints = 5;//change these to appropriate points later
 					$jobPriority = 5;//change later maybe
 					$jobSkill = 1;
@@ -235,7 +241,6 @@ if(isset($_SESSION['admin'])) {
 
 			$makeDevicesQuery = "INSERT INTO `devices`(`owner`, `assignedto_id`, `received`, `problem`, `resolution`, `notes`, `repaired`, `returned`, `last_update`, `receivedby_id`, `serial`, `status_id`) VALUES ('".$_POST['jOwner']."','','".date('Y-m-d H:i:s')."','".$jobMessage."','','".$notes."','','','','".$personid."','".$_POST['jLaptopNumber']."', '1')";
 
-			
 			//commence query and returns false if query failed
 			$result = mysql_query($makeDevicesQuery);
 			
