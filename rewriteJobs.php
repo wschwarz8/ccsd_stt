@@ -94,6 +94,9 @@ function main(){
 			
 			$updateDeviceQuery = "UPDATE `devices` SET `resolution`='".$partsList."', `repaired`='". date("Y-m-d H:i:s") ."',`notes`='".$notes."' , `status_id`=4 WHERE id=".$jobdata['device_id'];
 			queryFunc($updateDeviceQuery);
+
+			$updateJobQuery = "UPDATE `jobs` SET `description`='".$jobdata['description']." ".$partsList." ".$notes."' WHERE id=".$_POST['formIdentifier2'];
+			queryFunc($updateJobQuery);
 			
 	
 			$_SESSION['showChecklist'] = "False";
@@ -136,7 +139,7 @@ function main(){
 			}
 			
 			
-			if($numClaimed['count'] < 3) { // If they haven't claimed too many jobs already
+			if(($numClaimed['count'] < 3) || isset($_SESSION['admin'])) { // If they haven't claimed too many jobs already
 				
 				if($jobdata['requirement_id'] == $skill['skid'] || isset($_SESSION['admin'])) { // If they have the skill needed to do the job
 					
