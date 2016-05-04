@@ -29,7 +29,8 @@ if(isset($_POST['Masquerade']))
 		 }
 		
 	
-		$query = "SELECT * FROM `students` WHERE `active` = 1";
+//		$query = "SELECT * FROM `students` WHERE `active` = 1";
+		$query = "SELECT * FROM `students`";
     $result = mysql_query($query);
   
 ?>
