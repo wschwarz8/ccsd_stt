@@ -10,14 +10,15 @@ if(isset($_GET["reason"]))
 {
 	switch($_GET['reason']){
 		case 1:
-			echo"<script>alert('You need to login to view that page!');</script>";
-		break;
+			if(isset($_SESSION['redirectUrl']) && ($_SESSION['redirectUrl'] != "/"))
+				echo"<script>alert('You need to login to view that page!');</script>";
+			break;
 		case 1:
 			echo"<script>alert('You need to be an admin to view that page!');</script>";
-		break;
+			break;
 		default:
 			echo"<script>alert('You don't have access to view that page!');</script>";
-		break;
+			break;
 	}
 }
 
