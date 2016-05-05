@@ -67,6 +67,11 @@
 						Admin Cheatsheet
 					</p>
 					</a>
+					<a href="studentSkillsListing.php">
+					<p>
+						Student Skill Listing
+					</p>
+					</a>
 	<?php
 	}
 	else {

@@ -7,10 +7,48 @@
 
 	makeHeader("Student Skills","Student Skills",2,"studentSkillsListing.php",'<style>td{color:white;border:1px solid white;}</style>');
 
+
+
+
+	//check if the table was submitted for up dates
+	if (isset($_POST)){
+		
+		$studentQuery = queryFunc("SELECT `id`, `name`, `active` FROM `students` WHERE 1");
+		while($studentResults = mysql_fetch_assoc($studentQuery)){//only choose active students
+
+			//cycle throught the skills for each person
+			$skillQuery = queryFunc("SELECT `id`, `skillName`, `skillcatid` FROM `skills` WHERE 1");
+			while($skillResults = mysql_fetch_assoc($skillQuery)){
+
+			$studentSkillQuery = queryFunc("SELECT `skid` From `studentsxskills` WHERE stid=".$studentResults['id']." AND skid=".$skillResults['skillcatid']);
+			$studentSkillResults = mysql_fetch_assoc($studentSkillQuery);
+				
+			if ($skillResults['id'] != $studentSkillResults['skid']){
+				
+				if (isset($_POST[''.$studentResults['id'].$skillResults['skillcatid'].'']) && $_POST[''.$studentResults['id'].$skillResults['skillcatid'].''] == 1){
+					$updateQuery = "INSERT INTO `studentsxskills`(`stid`, `skid`) VALUES (".$studentResults['id'].",".$skillResults['skillcatid'].")";
+					
+					queryFunc($updateQuery);
+				}
+			}
+				
+
+
+			}//end of skill result while
+
+		}//end of student result while
+		
+	}//end of post if
+
+
+
   //print beginning of table
   echo("
   <center>
-    <table>
+	<form name='skillUpdate' method='post'>
+	<fieldset>
+	<legend>Student Skills Listing</legend>
+    <table style='margin:10px;'>
   ");
 
   //print initial row
@@ -34,9 +72,17 @@ $studentQuery = queryFunc("SELECT `id`, `name`, `active` FROM `students` WHERE 1
 		$studentSkillQuery = queryFunc("SELECT `skid` From `studentsxskills` WHERE stid=".$studentResults['id']." AND skid=".$skillResults['skillcatid']);
 		$studentSkillResults = mysql_fetch_assoc($studentSkillQuery);
 			if ($skillResults['id'] == $studentSkillResults['skid']){
-				echo "<td><center>X</center></td>";
+				echo "<td>
+								<center>
+									<input name='".$studentResults['id'].$skillResults['skillcatid']."' type='checkbox' checked='true' value='1'>
+								</center>
+							</td>";
 			}else{
-				echo "<td></td>";
+				echo "<td>
+								<center>
+								<input name='".$studentResults['id'].$skillResults['skillcatid']."' type='checkbox' value='1' >
+								</center>
+							</td>";
 			}
 		}
 	echo "</tr>";
@@ -45,6 +91,9 @@ $studentQuery = queryFunc("SELECT `id`, `name`, `active` FROM `students` WHERE 1
 //print end of table
   echo("
     </table>
+		</fieldset>
+		<button type='submit' name='updateButt' style='margin:10px;background:white;color:black;'>Update Skills</button>
+		</form>
   </center>
   ");
 
