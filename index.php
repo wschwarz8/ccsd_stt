@@ -104,7 +104,7 @@
 			<center>
 				<div class="centeringFrame">
 					<?php
-					if(isset($_SESSION['admin'])) echo '<a href="newsPage.php"><h1>News</h1></a>';
+					if(isset($_SESSION['admin']) && ($_SESSION['admin'])) echo '<a href="newsPage.php"><h1>News</h1></a>';
 					else echo '<h1>News</h1>';
 					?>
 					<div id="viewingFrame">
