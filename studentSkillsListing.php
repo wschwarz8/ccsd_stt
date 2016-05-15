@@ -25,10 +25,15 @@
 				
 			if ($skillResults['id'] != $studentSkillResults['skid']){
 				
-				if (isset($_POST[''.$studentResults['id'].$skillResults['skillcatid'].'']) && $_POST[''.$studentResults['id'].$skillResults['skillcatid'].''] == 1){
+				if (isset($_POST[''.$studentResults['id']."_".$skillResults['skillcatid'].'']) && $_POST[''.$studentResults['id']."_".$skillResults['skillcatid'].''] == 1){
 					$updateQuery = "INSERT INTO `studentsxskills`(`stid`, `skid`) VALUES (".$studentResults['id'].",".$skillResults['skillcatid'].")";
 					
 					queryFunc($updateQuery);
+				}
+			}else{
+				if (isset($_POST[''.$studentResults['id']."_".$skillResults['skillcatid'].'']) && $_POST[''.$studentResults['id']."_".$skillResults['skillcatid'].''] == 2){
+				$deleteQuery = "DELETE FROM `studentsxskills` WHERE stid=".$studentResults['id']." AND skid=".$skillResults['skillcatid'];
+					queryFunc($deleteQuery);
 				}
 			}
 				
@@ -72,15 +77,15 @@ $studentQuery = queryFunc("SELECT `id`, `name`, `active` FROM `students` WHERE 1
 		$studentSkillQuery = queryFunc("SELECT `skid` From `studentsxskills` WHERE stid=".$studentResults['id']." AND skid=".$skillResults['skillcatid']);
 		$studentSkillResults = mysql_fetch_assoc($studentSkillQuery);
 			if ($skillResults['id'] == $studentSkillResults['skid']){
-				echo "<td>
+				echo "<td style='background:green;'>
 								<center>
-									<input name='".$studentResults['id'].$skillResults['skillcatid']."' type='checkbox' checked='true' value='1'>
+									<input name='".$studentResults['id']."_".$skillResults['skillcatid']."' type='checkbox' value='2'>
 								</center>
 							</td>";
 			}else{
-				echo "<td>
+				echo "<td style='background:red;'>
 								<center>
-								<input name='".$studentResults['id'].$skillResults['skillcatid']."' type='checkbox' value='1' >
+								<input name='".$studentResults['id']."_".$skillResults['skillcatid']."' type='checkbox' value='1' >
 								</center>
 							</td>";
 			}
