@@ -102,7 +102,7 @@ makeHeader("PHP Object-oriented Programing Practice", "PHP Object-oriented Progr
 			");
 		}
 		
-		public function dogInfo(){
+		public function dogInfos(){
 			echo "Dogs are mans best friend.";
 		}
 		
@@ -140,7 +140,7 @@ makeHeader("PHP Object-oriented Programing Practice", "PHP Object-oriented Progr
 	echo $newDog->animalName."<br>";
 	
 	echo "(b) Private Property: ";
-	echo $newDog->dogInfo."<br>";
+	echo $newDog->dogInfos()."<br>";
 	
 	echo "(c) Protected Method: ";
 	echo $dog->doStuff()."<br>";
