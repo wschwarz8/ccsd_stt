@@ -7,75 +7,146 @@ makeHeader("PHP Object-oriented Programing Practice", "PHP Object-oriented Progr
 
 <center>
 <h1>
-	PHP OOP Homework 1
+	PHP OOP Homework 2
 </h1>
 
 <div style="background:silver;color:black;width:50%;border-radius:8px;">
 	<?php
-	class student{
+	
+	//animal class
+	class animal{
+		
+		//initialize some properties universal to an animal
+		public $animalGender;
+		public $animalGroup;
+		public $animalName;
+		public $animalScientificName;
 
-		public $firstName;
-		public $lastName;
-		public $phoneNumber;
-		public $lockerNumber;
-		public $grade;
-		public $classs;
-		public $favoriteClass;
-
-		public function test(){
+		//function to test if the object is functioning properly
+		protected function test(){//protected function
 			echo "Testing 1.2.3.4... can you read me????<br><br>";
 		}
 
-		function __construct($f,$l,$p,$n,$g,$c,$fc){
-			$this->firstName = $f;
-			$this->lastName = $l;
-			$this->phoneNumber = $p;
-			$this->lockerNumber = $n;
-			$this->grade = $g;
-			$this->classs = $c;
-			$this->favoriteClass = $fc;
-			echo"Student Created";
+		//construct the inputs of the class into meaningful variables specific to the class
+		function __construct($input_1,$input_2,$input_3,$input_4){
+			
+			$this->animalGender = $input_1;
+			$this->animalGroup = $input_2;
+			$this->animalName = $input_3;
+			$this->animalScientificName = $input_4;
+			echo "<h3>Animal object Created</h3><br>";
+			
 		}
-
+		
+		//print all the desired info about the class
 		function printall(){
-			echo "<h4 style='padding:0;margin:0 0 10px 0;'>Student Data</h4>";
-			echo "Firstname: " . $this->firstName . "<br>";
-			echo "Lastname: " . $this->lastName . "<br>";
-			echo "Phone Number:  " . $this->phoneNumber . "<br>";
-			echo "Locker Number: " . $this->lockerNumber . "<br>";
-			echo "Grade: " . $this->grade . "<br>";
-			echo "Class: " . $this->classs . "<br>";
-			echo "Favorite Class: " . $this->favoriteClass . "<br><br>";
+			echo ("
+			<fieldset>
+				<legend> <h3>Animal object printall Func</h3> </legend>
+				
+				<p>
+				Animal Name: ". $this->animalName ."<br>
+				Scientific Name: ". $this->animalScientificName ."<br>
+				Animal Group: ". $this->animalGroup ."<br>
+				Animal Gender: ". $this->animalGender ."<br>
+				</p>
+				
+			</fieldset>
+			<br>
+			");
 		}
 
-		//do anything when object is shutdown/deleted
+		public function doStuff(){
+			$this->test();
+		}
+		
+		//do anything when object is shutdown/deleted or when code reaches end of execution
 		function __destruct(){
-			echo $this->firstName ." has been obliterated<br><br>";
+			//echo "animal object has been obliterated<br><br>";
 		}
 
-		//this is a fail safe to prevent a error if it is printed i think
+		//this is a fail safe to prevent a error if it is printed
 		function __toString(){
-			return"This is the student object not some text to be just printed<br><br>";
+			return"This is the animal object not some text to be just printed<br><br>";
 		}
+				
+	}
+	
+	class dog extends animal{
+		
+		private $dogInfo;//privite property
+		static $dogCount;//static property
+		
+		function __construct($input_1,$input_2,$input_3,$input_4,$input_5){//overwrite the animal constructor
+			
+			$this->animalGender = $input_1;
+			$this->animalGroup = $input_2;
+			$this->animalName = $input_3;
+			$this->animalScientificName = $input_4;
+			$this->dogInfo = $input_5;
+			$this->dogCount = "1 Dog";
+			echo "<h3>Dog object Created from extended animal class</h3><br>";
+			
+		}
+		
+		function printall(){
+			
+			parent::printall();
+			echo ("
+			<fieldset>
+				<legend> <h3>Dog Object printall Func</h3> </legend>
+				<p>".$this->dogInfo."</p>
+				
+			</fieldset>
+			<br>
+			");
+		}
+		
+		public function dogInfos(){
+			echo "Dogs are mans best friend.";
+		}
+		
 	}
 
-	echo "<h2>Create a new object from the student class</h2><br>";
-	$cat = new student("Max","DeVos","867-5309",348,11,2017,"Chemistry");
-
-	echo "<h2>Run a test method</h2><br>";
-	$cat->test();
-
-	echo "<h2>Run a printall method for a student</h2><br>";
-	$cat->printall();
-
-	echo "<h2>Try to print the student object as text</h2><br>";
-	echo $cat;
-
-	echo "<h2>Activate the destruct function by giving the object the text value of 'dog'</h2><br>";
-	$cat = "dog"
-
-
-
+	//print some stuff to display that it works
+	
+	//question 1
+	echo "<h1>1. Init two objects from the same class.</h1>";
+	
+	//init a cat
+	$cat = new animal("Male", "Mammal", "Cat", "Felis catus");
+	//init a dog
+	$dog = new animal("Female", "Mammal", "dog", "Canis lupus familiaris");
+	
+	//question 2
+	echo "<h1>2. Use class inheritance to extend a class.</h1>";
+	
+	$newDog = new dog("Female", "Mammal", "dog", "Canis lupus familiaris","dogs are mans best friend.");
+	
+	//question 3
+	echo "<h1>3. In the extended class overwrite properties and methods</h1>";//already did that
+	
+	echo "<p>construct method is overwritten.</p>";
+	
+	//question 4
+	echo "<h1>4. overwrite a method but preserve the original method</h1>";
+	
+	$newDog->printall();
+	
+	//question 5
+	echo "<h1>5. Correctly declare and access at least one of each type: public, private, protected, and static.</h1>";
+	
+	echo "(a) Public Property: ";
+	echo $newDog->animalName."<br>";
+	
+	echo "(b) Private Property: ";
+	echo $newDog->dogInfos()."<br>";
+	
+	echo "(c) Protected Method: ";
+	echo $dog->doStuff()."<br>";
+	
+	echo "(d) static Property: ";
+	echo $newDog->dogCount."<br>";
 	?>
 </div>
 </center>

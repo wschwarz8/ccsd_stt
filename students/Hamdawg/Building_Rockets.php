@@ -1,4 +1,5 @@
 <?php 
+//All lines through 58 are the lines used for the parent function
 require_once 'PersonalUseFunctions.php';
 makeHeader("OOP Programming", "OOP Programming", 2, "Building_Rockets");
 ?>
@@ -17,9 +18,9 @@ class RocketShip
   public $fuel_tankB;
   public $payload;
   public $engines;
-  public $spacestation;
+  static $spacestation;
   
- public function ToMars()
+ private function ToMars() // Use a private function to prevent overwriting of this ship
   {
     echo "Alright Men it's time we prepare ourselves for a mission to Mars, first we need to CONSTRUCT a rocket to launch into low earth orbit and DESTRUCT an old Space Station for parts!<pr></pr> Then When you get back, dont get TOSTRING-y with me, you need to then record all of your results.";
   }
@@ -50,17 +51,44 @@ class RocketShip
 		echo $this->spacestation . " Has been Completely Destroyed!";
 	}
 	
-	function __toString()
+protected	function __toString() // protect this function to prevent the original function from being converted to a string.
 	{
 		return"Commander! You Can't print a rocketship, try again!<br><br>";
 	}
 }
 	
+	class SpaceBalls extends Rocketship // Thia is the new class extending the original class
+	{
+		public $RaspberryJam; // new objects
+		public $DarkHelmet;
+		public $StarDestroyer;
+		public $TheSchwartz;
+		
+		function __construct($R, $D, $S, $T) // here I overwrite the old construct function
+		{
+		$this->RaspberryJam = $R;
+    $this->DarkHelmet = $D;
+    $this->StarDestroyer = $S;
+    $this->TheSchwartz = $T;
+    
+		echo "This vessel has been jammed by Lone Star!";
+		}
+		
+		function printall() // here I overwrite but preserve the parent function
+		{
+			parent:: printall();
+			echo "Part 1:  " . $this->RaspberryJam . "<br>";
+			echo "Part 2: " .  $this->DarkHelmet . "<br>";
+			echo "Part 3: " . $this->StarDestroyer . "<br>";
+			echo "Part 4: " . $this->TheSchwartz . "<br>";
+			echo "Don't worry captain this is okay!";
+		}
+		
+	}
 	
- 	$build = new RocketShip("Apollo", "Saturn V", "Mercury", "Nuke", "F1", "Old ISS");
-	
+
+	$build = new SpaceBalls("Raspberry","Ludicrous Speed", "stuff", "Totally not a reference");
 	echo "<h2> Mission Objective!</h2><br>";
-	$build->ToMars();
 	
   echo "<h2>Lets See what we have to work with on parts here then!</h2><br>";
   $build->printall();
