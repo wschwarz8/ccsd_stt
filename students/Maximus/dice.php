@@ -1,6 +1,6 @@
 <?php
   require_once "../../functions.php";
-  require_once '../../config.php';
+  require_once "../../config.php";
 
   makeHeader("Dice Roller", "Dice Roller", 2, "dice.php");
 
@@ -61,7 +61,8 @@
 
   function rollADice(diceNumber){
     randomNumber = Math.floor((Math.random() * 6) + 1);
-    document.getElementById(diceNumber).innerHTML = randomNumber;
+    document.getElementById(diceNumber).innerHTML = "<div style='border-radius:5px;background:red;margin:0;padding-top:3px;padding-left:3px;height:50px;width:50px;'><img height='47px' width='47px'  style='margin:0;padding:0;' src='./Textures/diceImages/" + randomNumber + "Side.png'></div>";
+    calculateStuff();
   }
 
 </script>
