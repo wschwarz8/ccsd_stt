@@ -2,7 +2,7 @@
   require_once "config.php";
 require_once "functions.php";
 
-promptLogin();
+promptLogin(1);
 	makeHeader("News","News Page",2,"newsPage.php" ,"<link href='css_files/newsPage.css' rel='stylesheet'>");
 	
 	$article_count = 0;
@@ -133,12 +133,6 @@ promptLogin();
 								<input type="date" name="date" style="width:200px;">
 							</td>
 						</tr>
-						<tr>
-							<td>Authorization Code:</td>
-							<td>
-								<input type="password" name="password" placeholder="password1">
-							</td>
-						</tr>
 					</table>
 					<input type="Submit" value="Submit" style="margin:5px;">
 				</form>
@@ -152,7 +146,6 @@ promptLogin();
 			<form method="post" name="deleteArticle">
 				<table>
 					<tr><td>Article Id to Change:  </td><td><input type="text" name="articleId" placeholder="Article Id"></td></tr>
-					<tr><td>Authorization code: </td><td><input type="password" name="password" placeholder="password2"></td></tr>
 				</table>
 				<input type="Submit" value="Submit">
 			</form>
